@@ -2,7 +2,7 @@
 🌟 ***Title should follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/#summary)***
 ------
 
-1. **What kind of change does this PR introduce?**✅
+1. **What kind of change does this PR introduce?** ✅
   + New feature
   + Bug fix
   + Docs update
