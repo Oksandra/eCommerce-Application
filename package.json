@@ -53,8 +53,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.1",
     "prettier": "^3.0.1",
-    "sass": "^1.64.2",
-    "typescript": "^5.1.6"
+    "sass": "^1.64.2"
   },
   "ignorePatterns": [
     "tsconfig.json"
