@@ -21,6 +21,7 @@
         "@typescript-eslint",
         "prettier"
     ],
+    "root": true,
     "rules": {
     }
 }
