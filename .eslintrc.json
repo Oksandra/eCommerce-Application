@@ -23,5 +23,7 @@
     ],
     "root": true,
     "rules": {
-    }
+        "prettier/prettier": "error"
+    },
+    "ignorePatterns": ["tsconfig.json"]
 }
