@@ -2,15 +2,7 @@ import React from 'react';
 import './App.scss';
 
 function App(): JSX.Element {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
-    </div>
-  );
+  return <div className="App"> </div>;
 }
 
 export default App;
