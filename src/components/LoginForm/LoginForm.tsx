@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import './_loginForm.scss';
+import { checkLogin } from './checkLogin';
 
 interface ILoginForm {
   login: string;
@@ -14,6 +15,7 @@ const loginFormInit: ILoginForm = {
 export const LoginForm: FC = () => {
   const [loginForm, setLoginForm] = useState<ILoginForm>(loginFormInit);
   const [typePassword, setTypePassword] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string>('');
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     const { name, value } = e.target;
@@ -21,6 +23,10 @@ export const LoginForm: FC = () => {
       ...loginForm,
       [name]: value,
     });
+
+    if (name === 'login') {
+      setLoginError(checkLogin(value));
+    }
   }
 
   return (
@@ -34,6 +40,7 @@ export const LoginForm: FC = () => {
         value={loginForm.login}
         onChange={handleChange}
       />
+      {!!loginError && <span className="login-form__error">{loginError}</span>}
       <span className="login-form__title">Pasword:</span>
       <div className="login-form__password-wrap">
         <input
@@ -56,7 +63,7 @@ export const LoginForm: FC = () => {
         className="login-form__submit-btn"
         type="submit"
         onClick={(event: FormEvent<HTMLButtonElement>): void =>
-          event?.preventDefault()
+          event.preventDefault()
         }
       >
         Log in
