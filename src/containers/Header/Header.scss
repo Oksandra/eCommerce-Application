@@ -3,12 +3,13 @@
 .header {
   background-color: black;
   &__wrapper {
-    padding-top: 12px;
+    padding: 12px 10px 0;
     max-width: 1110px;
     margin: 0 auto;
   }
   &__logo {
     display: flex;
+    padding-bottom: 10px;
     justify-content: space-between;
     align-items: center;
   }
