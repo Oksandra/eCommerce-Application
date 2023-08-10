@@ -2,11 +2,7 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import './_loginForm.scss';
 import { checkLogin } from './checkLogin';
 import { checkPassword } from './checkPassword';
-
-interface ILoginForm {
-  login: string;
-  password: string;
-}
+import { ILoginForm, checkSubmit } from './checkSubmit';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -33,6 +29,24 @@ export const LoginForm: FC = () => {
     }
   }
 
+  function handleSubmit(e: FormEvent<HTMLButtonElement>): void {
+    e.preventDefault();
+
+    if (
+      checkSubmit(
+        loginError,
+        passwordError,
+        loginForm,
+        setLoginError,
+        setPasswordError
+      )
+    )
+      return;
+
+    // TO DO: add API Authentication
+    console.log(loginForm);
+  }
+
   return (
     <form className="login-form">
       <span className="login-form__title">Login:</span>
@@ -45,7 +59,7 @@ export const LoginForm: FC = () => {
         onChange={handleChange}
       />
       {!!loginError && <span className="login-form__error">{loginError}</span>}
-      <span className="login-form__title">Pasword:</span>
+      <span className="login-form__title">Password:</span>
       <div className="login-form__password-wrap">
         <input
           name="password"
@@ -69,9 +83,7 @@ export const LoginForm: FC = () => {
       <button
         className="login-form__submit-btn"
         type="submit"
-        onClick={(event: FormEvent<HTMLButtonElement>): void =>
-          event.preventDefault()
-        }
+        onClick={handleSubmit}
       >
         Log in
       </button>
