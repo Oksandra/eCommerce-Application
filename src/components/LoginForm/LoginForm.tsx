@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import './_loginForm.scss';
 
 interface ILoginForm {
   login: string;
@@ -34,21 +35,25 @@ export const LoginForm: FC = () => {
         onChange={handleChange}
       />
       <span className="login-form__title">Pasword:</span>
-      <input
-        name="password"
-        type={typePassword ? 'text' : 'password'}
-        className="login-form__input"
-        placeholder="Enter your password"
-        value={loginForm.password}
-        onChange={handleChange}
-      />
+      <div className="login-form__password-wrap">
+        <input
+          name="password"
+          type={typePassword ? 'text' : 'password'}
+          className="login-form__input"
+          placeholder="Enter your password"
+          value={loginForm.password}
+          onChange={handleChange}
+        />
+        <button
+          className="login-form__password-btn"
+          type="button"
+          onClick={(): void => setTypePassword(!typePassword)}
+        >
+          {typePassword ? 'Hide' : 'Show'} Password
+        </button>
+      </div>
       <button
-        type="button"
-        onClick={(): void => setTypePassword(!typePassword)}
-      >
-        Show Password
-      </button>
-      <button
+        className="login-form__submit-btn"
         type="submit"
         onClick={(event: FormEvent<HTMLButtonElement>): void =>
           event?.preventDefault()
