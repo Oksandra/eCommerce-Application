@@ -17,15 +17,13 @@
     margin-right: 12px;
     cursor: pointer;
     &:last-child {
-      margin-right: 0; 
+      margin-right: 0;
     }
     & img {
-      transition: all .3s ease-out; 
+      transition: all 0.3s ease-out;
       &:hover {
-       transform: scale(1.1);
+        transform: scale(1.1);
       }
     }
   }
 }
-
-

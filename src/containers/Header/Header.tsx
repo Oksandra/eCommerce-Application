@@ -11,8 +11,8 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="header__wrapper">
         <div className="header__logo">
-          <Link className="logo" to="/">
-            <img className="logo__image" src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
           </Link>
           <div className="header__icons">
             <Link className="header__links" to="/login">
@@ -26,7 +26,6 @@ const Header: React.FC = () => {
             </Link>
           </div>
         </div>
-        <nav className="header__navigation">KKKK</nav>
       </div>
     </header>
   );
