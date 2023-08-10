@@ -1,5 +1,5 @@
-@import "../../styles/abstracts/constants";
-@import "../../styles/abstracts/extends";
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
 
 .login-form {
   display: flex;
@@ -12,7 +12,7 @@
   border: $border-dark;
 
   &__title {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
   &__input {
     margin-bottom: 2rem;
@@ -25,12 +25,13 @@
   &__error {
     margin-top: -2rem;
     margin-bottom: 1.2rem;
-    font-size: .8rem;
+    font-size: 0.8rem;
     color: red;
   }
 
   &__password-wrap {
     display: flex;
+    height: 1.68rem;
     align-items: flex-start;
     gap: 1rem;
     margin-bottom: 2rem;
@@ -38,8 +39,8 @@
 
   &__password-btn {
     width: 26%;
-    border-radius: .3rem;
-    transition: all .3s;
+    border-radius: 0.3rem;
+    transition: all 0.3s;
 
     &:hover {
       background-color: $muted-color;
@@ -56,7 +57,7 @@
     padding: 1rem 2rem;
     background-color: $background-color;
     color: $light-color;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:hover {
       background-color: $dark-color;
@@ -66,6 +67,4 @@
       @extend %click-btn;
     }
   }
-
-  
 }
