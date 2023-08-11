@@ -1,5 +1,21 @@
 import React from 'react';
-import './registration-form.scss';
+import './RegistrationForm.scss';
+
+interface MyForm {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  address: Address;
+}
+
+interface Address {
+  street: string;
+  city: string;
+  postcode: string;
+  country: string;
+}
 
 function RegistrationForm(): JSX.Element {
   return (

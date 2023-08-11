@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import RegistrationForm from './components/registration-form/registration-form';
+import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 
 /* interface MyForm {
   firstName: string;

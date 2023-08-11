@@ -2,47 +2,52 @@
 .registration-page {
     width: 40%;
     margin: 0 auto;
+    background-color: $light-color;
     .registration-form {
         width: 100%;
         padding: 1rem;
         border: $border-dark;
         &__title {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 2rem;
             margin-left: 1rem;
         }
-        &__customer-info {
-            label {
-                font-size: 1.5rem;
-            }
-        }
         &__address {
-            width: 70%;
+            width: 90%;
             margin: 0 auto;
             margin-bottom: 2rem;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1rem;
         }
         label {
             display: block;
-            width: 70%;
+            width: 90%;
             margin: 0 auto;
             margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            .star {
+                color: red;
+            }
             input {
                 width: 100%;
-                padding: 0.8rem 1rem;
-                margin: 0.8rem 0;
+                padding: 0.5rem 1rem;
+                margin: 0.2rem 0;
                 box-sizing: border-box;
                 border-bottom: $border-dark;
+                &:focus {
+                    border: $border-dark;
+                }
+            }
+        }
+        &__customer-info {
+            label {
+                font-size: 1rem;
             }
         }
         &__button {
-            width: 170px;
+            width: 30%;
             display: block;
-            padding: 1rem;
+            padding: 1rem 2rem;
             margin: 0 auto;
             background-color: $background-color;
             color: $light-color;
