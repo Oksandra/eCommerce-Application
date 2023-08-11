@@ -9,7 +9,7 @@ import RegistrationForm from './components/registration-form/registration-form';
 
 function App(): JSX.Element {
   return (
-    <div>
+    <div className="registration-page">
       <RegistrationForm />
     </div>
   );

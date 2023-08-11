@@ -3,9 +3,9 @@ import './registration-form.scss';
 
 function RegistrationForm(): JSX.Element {
   return (
-    <form className="form__registration">
-      <h2 className="form__registration-title">Registration:</h2>
-      <div className="customer__info">
+    <form className="registration-form">
+      <h2 className="registration-form__title">Registration:</h2>
+      <div className="registration-form__customer-info">
         <label htmlFor="email">
           Email
           <input type="email" id="email-field" />
@@ -27,7 +27,7 @@ function RegistrationForm(): JSX.Element {
           <input type="date" id="date-birth" />
         </label>
       </div>
-      <div className="address__title">Address:</div>
+      <div className="registration-form__address">Address:</div>
       <label htmlFor="street">
         Street
         <input type="text" id="street" />
@@ -44,7 +44,7 @@ function RegistrationForm(): JSX.Element {
         Country
         <input type="text" id="country" />
       </label>
-      <button className="registration__button" type="button">
+      <button className="registration-form__button" type="button">
         Register
       </button>
     </form>

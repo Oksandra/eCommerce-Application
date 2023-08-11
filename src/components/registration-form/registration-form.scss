@@ -1,49 +1,58 @@
 @import '../../styles/abstracts/constants';
-
-.form__registration {
+.registration-page {
     width: 40%;
-    padding: 10px;
     margin: 0 auto;
-    border: $border-dark;
-    &-title {
-        font-size: 20px;
-        font-weight: 700;
-        margin-bottom: 20px;
-        margin-left: 10px;
-    }
-    .customer__info {
+    .registration-form {
+        width: 100%;
+        padding: 1rem;
+        border: $border-dark;
+        &__title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            margin-left: 1rem;
+        }
+        &__customer-info {
+            label {
+                font-size: 1.5rem;
+            }
+        }
+        &__address {
+            width: 70%;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
         label {
-            font-size: 16px;
+            display: block;
+            width: 70%;
+            margin: 0 auto;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            input {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                margin: 0.8rem 0;
+                box-sizing: border-box;
+                border-bottom: $border-dark;
+            }
         }
-    }
-    .address__title {
-        width: 70%;
-        margin: 0 auto;
-        margin-bottom: 20px;
-        font-size: 16px;
-        font-weight: 700;
-    }
-    label {
-        display: block;
-        width: 70%;
-        margin: 0 auto;
-        margin-bottom: 5px;
-        font-size: 14px;
-        font-weight: 700;
-        input {
-            width: 100%;
-            padding: 8px 10px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border-bottom: $border-dark;
+        &__button {
+            width: 170px;
+            display: block;
+            padding: 1rem;
+            margin: 0 auto;
+            background-color: $background-color;
+            color: $light-color;
+            transition: all 0.3s;
+            &:hover {
+                background-color: $dark-color;
+            }
+            /*&:active {
+                @extend %click-btn;
+            }*/
         }
-    }
-    .registration__button {
-        width: 170px;
-        display: block;
-        padding: 10px;
-        margin: 0 auto;
-        background-color: $add-dark-color;
-        color: $light-color;
     }
 }
