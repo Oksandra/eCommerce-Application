@@ -1,20 +1,20 @@
 @import '../../styles/abstracts/constants';
 
 .header {
-  background-color: black;
+  background-color: $background-color;
   &__wrapper {
-    padding: 12px 10px 0;
-    max-width: 1110px;
+    padding: 1.2rem 1rem 0;
+    max-width: 111rem;
     margin: 0 auto;
   }
   &__logo {
     display: flex;
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
     justify-content: space-between;
     align-items: center;
   }
   &__links {
-    margin-right: 12px;
+    margin-right: 1.2rem;
     cursor: pointer;
     &:last-child {
       margin-right: 0;
