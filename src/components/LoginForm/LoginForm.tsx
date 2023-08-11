@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import './_loginForm.scss';
-import { checkLogin } from './checkLogin';
-import { checkPassword } from './checkPassword';
-import { ILoginForm, checkSubmit } from './checkSubmit';
+import { checkLogin } from '../../helpers/checkLogin';
+import { checkPassword } from '../../helpers/checkPassword';
+import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
 
 const loginFormInit: ILoginForm = {
   login: '',
