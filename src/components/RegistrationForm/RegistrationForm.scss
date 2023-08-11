@@ -45,7 +45,7 @@
             }
         }
         &__button {
-            width: 30%;
+            width: 170px;
             display: block;
             padding: 1rem 2rem;
             margin: 0 auto;
@@ -58,6 +58,10 @@
             /*&:active {
                 @extend %click-btn;
             }*/
+        }
+        .input-error {
+            color: red;
+            font-size: 0.5rem;
         }
     }
 }
