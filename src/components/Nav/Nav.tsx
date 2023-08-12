@@ -7,7 +7,7 @@ export const Nav: React.FC = () => {
     <nav className="nav">
       <ul className="nav__list">
         <li className="nav__item">
-          <NavLink className="nav__link" to="/home">
+          <NavLink className="nav__link" to="/">
             HOME
           </NavLink>
         </li>
@@ -22,8 +22,8 @@ export const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li className="nav__item">
-          <NavLink className="nav__link" to="/cart">
-            CART
+          <NavLink className="nav__link" to="/login">
+            LOG IN | SIGN UP
           </NavLink>
         </li>
       </ul>
