@@ -2,7 +2,17 @@
   scale: 95%;
 }
 
+%flex {
+  display: flex;
+}
+
 %flex-j-cont {
   display: flex;
   justify-content: space-between;
 }
+
+%flex-center-cont {
+  display: flex;
+  justify-content: center;
+}
+
