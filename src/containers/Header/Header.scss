@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
 
 .header {
   background-color: $background-color;
@@ -8,9 +9,8 @@
     margin: 0 auto;
   }
   &__logo {
-    display: flex;
+    @extend %flex-j-cont;
     padding-bottom: 1rem;
-    justify-content: space-between;
     align-items: center;
   }
   &__links {
