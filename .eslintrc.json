@@ -34,15 +34,16 @@
         2,
         { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
         ],
-        "react/function-component-definition": [
-            2,
-            {
-              "namedComponents": ["arrow-function", "function-declaration"],
-              "unnamedComponents": "arrow-function"
-            }
-          ],
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/explicit-function-return-type": "error",
+        "import/prefer-default-export": "off",
+        "react/function-component-definition": [
+          2,
+          {
+            "namedComponents": ["arrow-function", "function-declaration"],
+            "unnamedComponents": "arrow-function"
+          }
+        ],
         "import/no-extraneous-dependencies": "off"
     },
     "ignorePatterns": ["tsconfig.json", "build/"]
