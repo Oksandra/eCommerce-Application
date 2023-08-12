@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx eslint .
+npm run pret:check
+npm run pret:fix
+npm run lint
+npm run lint:fix
