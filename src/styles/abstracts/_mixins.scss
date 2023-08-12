@@ -1,0 +1,14 @@
+@import "./constants";
+@import "./extends";
+
+@mixin button($color) {
+  @extend %transition;
+
+  &:active {
+    @extend %click-btn;
+  };
+
+  &:hover {
+    background-color: $color;
+  }
+}

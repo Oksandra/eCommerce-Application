@@ -1,0 +1,9 @@
+@import "../../styles/abstracts/constants";
+@import "../../styles/abstracts/mixins";
+
+.button {
+  background-color: $add-dark-color;
+  color: $light-color;
+
+  @include button($dark-color);
+}
