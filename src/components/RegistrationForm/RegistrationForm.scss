@@ -1,67 +1,74 @@
 @import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
 .registration-page {
-    width: 40%;
-    margin: 0 auto;
-    background-color: $light-color;
-    .registration-form {
-        width: 100%;
-        padding: 1rem;
-        border: $border-dark;
-        &__title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            margin-left: 1rem;
-        }
-        &__address {
-            width: 90%;
-            margin: 0 auto;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-        label {
-            display: block;
-            width: 90%;
-            margin: 0 auto;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-            .star {
-                color: red;
-            }
-            input {
-                width: 100%;
-                padding: 0.5rem 1rem;
-                margin: 0.2rem 0;
-                box-sizing: border-box;
-                border-bottom: $border-dark;
-                &:focus {
-                    border: $border-dark;
-                }
-            }
-        }
-        &__customer-info {
-            label {
-                font-size: 1rem;
-            }
-        }
-        &__button {
-            width: 170px;
-            display: block;
-            padding: 1rem 2rem;
-            margin: 0 auto;
-            background-color: $background-color;
-            color: $light-color;
-            transition: all 0.3s;
-            &:hover {
-                background-color: $dark-color;
-            }
-            /*&:active {
-                @extend %click-btn;
-            }*/
-        }
-        .input-error {
-            color: red;
-            font-size: 0.5rem;
-        }
+  width: 40%;
+  margin: 0 auto;
+  background-color: $light-color;
+  .registration-form {
+    width: 100%;
+    padding: 1rem;
+    border: $border-dark;
+    &__title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      margin-left: 1rem;
     }
+    &__address {
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    label {
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      .star {
+        color: red;
+      }
+      input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        margin: 0.2rem 0;
+        box-sizing: border-box;
+        border-bottom: $border-dark;
+        &:focus {
+          border: $border-dark;
+        }
+      }
+    }
+    &__customer-info {
+      label {
+        font-size: 1rem;
+      }
+    }
+    &__button {
+      width: 170px;
+      display: block;
+      padding: 1rem 2rem;
+      margin: 0 auto;
+      background-color: $background-color;
+      color: $light-color;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $dark-color;
+      }
+      &:disabled {
+        background-color: $muted-color;
+      }
+      &:active {
+        @extend %click-btn;
+      }
+    }
+    .input-error {
+      width: 90%;
+      color: red;
+      font-size: 0.8rem;
+      margin: 0.1rem auto;
+      margin-bottom: 0.8rem;
+    }
+  }
 }

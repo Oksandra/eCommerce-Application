@@ -1,4 +1,4 @@
-export function checkLogin(value: string): string {
+export default function checkLogin(value: string): string {
   if (value.length < 5) return 'Email is too small';
   if (value !== value.trim())
     return 'Email address must not contain leading or trailing whitespace.';
