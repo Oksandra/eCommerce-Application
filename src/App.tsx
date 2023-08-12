@@ -1,12 +1,17 @@
 import React from 'react';
 import './App.scss';
-import Header from './containers/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import { LayoutPage } from './containers/LayoutPage/LayoutPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 function App(): JSX.Element {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <Routes>
+      <Route path="/" element={<LayoutPage />}>
+        {/* <Route index element={<Main />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }
 

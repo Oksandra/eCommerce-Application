@@ -1,0 +1,39 @@
+@import "../../styles/abstracts/constants";
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 2rem;
+  padding-top: 8rem;
+
+  &__title {
+    font-size: 30rem;
+  }
+
+  &__subtitle {
+    margin-bottom: 4rem;
+    font-size: 4rem;
+    font-weight: normal;
+  }
+
+  &__underline {
+    width: 26rem;
+    margin-bottom: 5rem;
+    border-bottom: $border-dark;
+  }
+
+  &__text {
+    width: 35rem;
+    margin-bottom: 5rem;
+    text-align: center;
+    font-size: 2rem;
+    color: $border-color;
+  }
+
+  &__button {
+    padding: 1.5rem 3.5rem;
+    font-size: 2rem;
+  }
+}
