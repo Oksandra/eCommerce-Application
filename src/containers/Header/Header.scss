@@ -1,0 +1,29 @@
+@import '../../styles/abstracts/constants';
+
+.header {
+  background-color: $background-color;
+  &__wrapper {
+    padding: 1.2rem 1rem 0;
+    max-width: 111rem;
+    margin: 0 auto;
+  }
+  &__logo {
+    display: flex;
+    padding-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__links {
+    margin-right: 1.2rem;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+    & img {
+      transition: all 0.3s ease-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
