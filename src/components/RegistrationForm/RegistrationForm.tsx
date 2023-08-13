@@ -1,23 +1,8 @@
 import React from 'react';
 import './RegistrationForm.scss';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-/* import checkLogin from '../../helpers/checkLogin'; */
-
-interface MyForm {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: string;
-  address: Address;
-}
-
-interface Address {
-  street: string;
-  city: string;
-  postcode: string;
-  country: string;
-}
+import checkDateBirth from '../../helpers/checkDateBirth';
+import { MyForm } from '../../interfaces/interfaces';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -143,13 +128,7 @@ function RegistrationForm(): JSX.Element {
                 value: true,
                 message: 'The field is required!',
               },
-              validate: (data): boolean => {
-                const userDate = new Date(data).getTime();
-                const currentDate = new Date().getTime();
-                const msInYear = 1000 * 60 * 60 * 24 * 365;
-                const age = Math.floor((currentDate - userDate) / msInYear);
-                return age >= 18;
-              },
+              validate: checkDateBirth,
             })}
           />
         </label>
@@ -169,18 +148,38 @@ function RegistrationForm(): JSX.Element {
           type="text"
           id="street"
           aria-invalid={errors.address?.street ? 'true' : 'false'}
-          {...register('address.street', { required: true })}
+          {...register('address.street', { required: true, minLength: 1 })}
         />
       </label>
+      <div className="input-error">
+        {errors.address?.street && (
+          <p>The field is required and must contain at least one character!</p>
+        )}
+      </div>
       <label htmlFor="city">
         City <span className="star">*</span>
         <input
           type="text"
           id="city"
           aria-invalid={errors.address?.city ? 'true' : 'false'}
-          {...register('address.city', { required: true })}
+          {...register('address.city', {
+            required: {
+              value: true,
+              message:
+                'The field is required and must contain at least one character!',
+            },
+            pattern: /^[A-z][a-z]*$/g,
+          })}
         />
       </label>
+      <div className="input-error">
+        {errors.address?.city && (
+          <p>
+            {errors.address.city.message ||
+              'Last name must not contain special characters or numbers!'}
+          </p>
+        )}
+      </div>
       <label htmlFor="postal-code">
         Postal code <span className="star">*</span>
         <input
