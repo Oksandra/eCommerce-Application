@@ -20,7 +20,8 @@
       margin-bottom: 2rem;
       font-size: 1rem;
     }
-    label {
+    label,
+    .address__country {
       display: block;
       width: 90%;
       margin: 0 auto;
@@ -28,6 +29,10 @@
       font-size: 0.8rem;
       .star {
         color: red;
+      }
+      .address__select {
+        width: 100%;
+        margin-top: 0.5rem;
       }
       input {
         width: 100%;

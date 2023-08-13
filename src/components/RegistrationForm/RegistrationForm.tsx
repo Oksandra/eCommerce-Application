@@ -3,6 +3,7 @@ import './RegistrationForm.scss';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import { MyForm } from '../../interfaces/interfaces';
+import SelectCountries from '../LoginForm/SelectCountries/SelectCountries';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -189,15 +190,15 @@ function RegistrationForm(): JSX.Element {
           {...register('address.postcode', { required: true })}
         />
       </label>
-      <label htmlFor="country">
+      <div className="address__country">
         Country <span className="star">*</span>
-        <input
-          type="text"
-          id="country"
+        <div
           aria-invalid={errors.address?.country ? 'true' : 'false'}
           {...register('address.country', { required: true })}
-        />
-      </label>
+        >
+          <SelectCountries />
+        </div>
+      </div>
       <button
         className="registration-form__button"
         type="submit"
