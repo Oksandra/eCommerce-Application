@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
-import './_notFound.scss';
+import './NotFound.scss';
 
 export const NotFoundPage: FC = () => {
   return (

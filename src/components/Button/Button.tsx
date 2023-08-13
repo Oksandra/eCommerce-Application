@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ButtonOptions } from '../../interfaces/interfaces';
-import './_button.scss';
+import './Button.scss';
 
 export const Button: FC<ButtonOptions> = ({
   className,
