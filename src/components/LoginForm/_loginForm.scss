@@ -27,13 +27,14 @@
     margin-bottom: 1.2rem;
     font-size: 0.8rem;
     color: red;
+    max-width: 18rem;
   }
 
   &__password-wrap {
     display: flex;
     height: 1.68rem;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 2.5rem;
     margin-bottom: 2rem;
   }
 
