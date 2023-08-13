@@ -7,15 +7,17 @@
 
   margin: 0 auto;
   padding: 2rem;
-  width: 30rem;
+  width: 45rem;
 
   border: $border-dark;
 
+  font-size: 1.8rem;
   &__title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
   &__input {
-    margin-bottom: 2rem;
+    width: 60%;
+    margin-bottom: 3rem;
 
     &:focus {
       border-bottom: $border-dark;
@@ -23,25 +25,26 @@
   }
 
   &__error {
-    margin-top: -2rem;
-    margin-bottom: 1.2rem;
-    font-size: 0.8rem;
+    margin-top: -3rem;
+    margin-bottom: 1.9rem;
+    font-size: 1.2rem;
     color: red;
-    max-width: 18rem;
+    max-width: 22rem;
   }
 
   &__password-wrap {
     display: flex;
-    height: 1.68rem;
+    height: 2.48rem;
     align-items: flex-start;
-    gap: 2.5rem;
-    margin-bottom: 2rem;
+    gap: 2.0rem;
+    margin-bottom: 3rem;
   }
 
   &__password-btn {
     width: 26%;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
     transition: all 0.3s;
+    padding: 0.8rem;
 
     &:hover {
       background-color: $muted-color;
@@ -55,7 +58,7 @@
   &__submit-btn {
     width: 30%;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.5rem 3rem;
     background-color: $background-color;
     color: $light-color;
     transition: all 0.3s;
@@ -70,16 +73,17 @@
   }
 
   &__text {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
   }
 
   &__link {
+    font-size: 1.5rem;
     color: $dark-color;
-    padding: 0.5rem;
-    margin-left: 0.8rem;
+    padding: 0.8rem;
+    margin-left: 1.82rem;
     cursor: pointer;
     background-color: $text-selection;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
     @extend %transition;
     &:hover {
       background-color: $muted-color;
