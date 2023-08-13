@@ -1,9 +1,11 @@
 import React from 'react';
 import './RegistrationForm.scss';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
+import { postcodeValidator } from 'postcode-validator';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import { MyForm } from '../../interfaces/interfaces';
 import SelectCountries from '../LoginForm/SelectCountries/SelectCountries';
+import { countries } from './countries';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -181,15 +183,6 @@ function RegistrationForm(): JSX.Element {
           </p>
         )}
       </div>
-      <label htmlFor="postal-code">
-        Postal code <span className="star">*</span>
-        <input
-          type="text"
-          id="postal-code"
-          aria-invalid={errors.address?.postcode ? 'true' : 'false'}
-          {...register('address.postcode', { required: true })}
-        />
-      </label>
       <div className="address__country">
         Country <span className="star">*</span>
         <div
@@ -198,6 +191,31 @@ function RegistrationForm(): JSX.Element {
         >
           <SelectCountries />
         </div>
+      </div>
+      <label htmlFor="postal-code">
+        Postal code <span className="star">*</span>
+        <input
+          type="text"
+          id="postal-code"
+          aria-invalid={errors.address?.postcode ? 'true' : 'false'}
+          {...register('address.postcode', {
+            required: {
+              value: true,
+              message: 'The field is required!',
+            },
+            validate: (data: string): boolean => {
+              const country = document.querySelector('.selected')?.textContent;
+              const code = countries.find((el) => el.country === country)
+                ?.code as string;
+              return postcodeValidator(data, code);
+            },
+          })}
+        />
+      </label>
+      <div className="input-error">
+        {errors.address?.country && (
+          <p>{errors.address.country.message || 'Incorrect postal code!'}</p>
+        )}
       </div>
       <button
         className="registration-form__button"

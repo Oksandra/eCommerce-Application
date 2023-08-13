@@ -300,7 +300,7 @@ export const countries = [
     country: 'Moldova',
   },
   {
-    code: 'MD',
+    code: 'ME',
     country: 'Montenegro',
   },
   {
@@ -386,10 +386,6 @@ export const countries = [
   {
     code: 'PF',
     country: 'French Polynesia',
-  },
-  {
-    code: 'PF',
-    country: 'Papua New Guinea',
   },
   {
     code: 'PH',

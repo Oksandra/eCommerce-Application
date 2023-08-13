@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { countries } from '../../RegistrationForm/countries';
 
-export default function SelectCountries(): JSX.Element {
-  const arr = [];
-  for (let i = 1; i < countries.length; i += 1) {
-    arr.push(<option>{countries[i].country}</option>);
-  }
-  return <select className="address__select">{arr}</select>;
-}
+const SelectCountries: React.FC = () => {
+  const [codeAlpha, setCodeAlpha] = useState<string>('');
+
+  const getCountryCode = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    const selectedCountry = event.target.value;
+    const selectedCountryObject = countries.find(
+      (country) => country.country === selectedCountry
+    );
+    if (selectedCountryObject) {
+      setCodeAlpha(selectedCountryObject.code);
+    }
+  };
+
+  return (
+    <select onChange={getCountryCode}>
+      {countries.map((country) => (
+        <option key={codeAlpha}>{country.country}</option>
+      ))}
+    </select>
+  );
+};
+
+export default SelectCountries;
