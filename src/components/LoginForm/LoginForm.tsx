@@ -88,10 +88,10 @@ export const LoginForm: FC = () => {
       >
         Log in
       </button>
-      <p>
+      <p className="login-form__text">
         Don❜t have an account?
         <Link className="login-form__link" to="/registration">
-          Sign UP
+          Sign Up
         </Link>
       </p>
     </form>

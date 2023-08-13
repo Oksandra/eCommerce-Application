@@ -67,4 +67,22 @@
       @extend %click-btn;
     }
   }
+
+  &__text {
+    margin-top: 1.5rem;
+  }
+
+  &__link {
+    color: $dark-color;
+    padding: 0.5rem;
+    margin-left: 0.8rem;
+    cursor: pointer;
+    background-color: $text-selection;
+    border-radius: 0.3rem;
+    @extend %transition;
+    &:hover {
+      background-color: $muted-color;
+    }
+  }
 }
+
