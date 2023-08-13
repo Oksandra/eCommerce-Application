@@ -2,6 +2,20 @@
   scale: 95%;
 }
 
+%flex {
+  display: flex;
+}
+
+%flex-j-cont {
+  display: flex;
+  justify-content: space-between;
+}
+
+%flex-center-cont {
+  display: flex;
+  justify-content: center;
+}
+
 %transition {
   transition: all 0.3s ease;
 }

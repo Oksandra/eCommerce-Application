@@ -1,0 +1,33 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.nav {
+  &__list {
+    width: 100%;
+    height: 6rem;
+    @extend %flex-j-cont;
+    border-top: $border-light;
+    border-bottom: $border-light;
+  }
+  &__item {
+    height: 6rem;
+    width: 100%;
+    @extend %flex-center-cont;
+    align-items: center;
+    border-left: $border-light;
+    &:first-child {
+      border-left: none;
+    }
+  }
+  &__link {
+    font-size: 14px;
+    color: $light-color;
+    transition: all 0.3s ease;
+    &:hover {
+      text-shadow: $link-hover;
+    }
+    &.active {
+      text-shadow: $link-hover;
+    }
+  }
+}

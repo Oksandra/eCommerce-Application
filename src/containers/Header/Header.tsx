@@ -5,6 +5,7 @@ import logo from '../../assets/svg/logo.svg';
 import user from '../../assets/svg/avatar.svg';
 import heart from '../../assets/svg/heart.svg';
 import cart from '../../assets/svg/shopping.svg';
+import { Nav } from '../../components/Nav/Nav';
 
 const Header: React.FC = () => {
   return (
@@ -15,7 +16,7 @@ const Header: React.FC = () => {
             <img src={logo} alt="logo" />
           </Link>
           <div className="header__icons">
-            <Link className="header__links" to="/login">
+            <Link className="header__links" to="/profile">
               <img src={user} alt="User" />
             </Link>
             <Link className="header__links" to="/favorites">
@@ -26,6 +27,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
         </div>
+        <Nav />
       </div>
     </header>
   );
