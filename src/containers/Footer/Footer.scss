@@ -1,0 +1,29 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.footer {
+  @extend %flex-center-cont;
+  align-items: center;
+  margin-top: 10rem;
+  gap: 10%;
+  padding: 2rem 3rem;
+  color: $light-color;
+  background-color: $background-color;
+
+  &__logo,
+  &__team,
+  &__year {
+    width: 15rem;
+  }
+
+  &__team {
+    color: inherit;
+
+    &:hover {
+      text-shadow: $link-hover;
+    }
+    &.active {
+      text-shadow: $link-hover;
+    }
+  }
+}
