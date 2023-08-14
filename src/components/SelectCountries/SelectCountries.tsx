@@ -1,5 +1,5 @@
 import React from 'react';
-import { countries } from '../../RegistrationForm/countries';
+import { countries } from './countries';
 
 const SelectCountries: React.FC = () => {
   const selectCountry = (event: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -14,7 +14,7 @@ const SelectCountries: React.FC = () => {
   };
 
   return (
-    <select onChange={selectCountry}>
+    <select className="address__country-select" onChange={selectCountry}>
       {countries.map((country) => (
         <option key={country.code}>{country.country}</option>
       ))}
