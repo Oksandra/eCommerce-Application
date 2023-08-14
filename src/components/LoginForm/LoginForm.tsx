@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
-import './_loginForm.scss';
+import './LoginForm.scss';
 import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';

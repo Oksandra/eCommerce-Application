@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.scss';
-import RegistrationForm from './components/RegistrationForm/RegistrationForm';
-
-/* interface MyForm {
-  firstName: string;
-  lastName: string;
-} */
+import { Route, Routes } from 'react-router-dom';
+import { LayoutPage } from './containers/LayoutPage/LayoutPage';
+import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 
 function App(): JSX.Element {
   return (
-    <div className="registration-page">
-      <RegistrationForm />
-    </div>
+    <Routes>
+      <Route path="/" element={<LayoutPage />}>
+        {/* <Route index element={<Main />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }
 

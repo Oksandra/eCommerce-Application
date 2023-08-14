@@ -1,0 +1,29 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.header {
+  background-color: $background-color;
+  &__wrapper {
+    padding: 1.2rem 1rem 0;
+    max-width: 111rem;
+    margin: 0 auto;
+  }
+  &__logo {
+    @extend %flex-j-cont;
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+  &__links {
+    margin-right: 1.2rem;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+    & img {
+      transition: all 0.3s ease-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
