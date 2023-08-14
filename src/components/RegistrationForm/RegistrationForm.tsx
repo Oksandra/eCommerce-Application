@@ -1,11 +1,10 @@
 import React from 'react';
 import './RegistrationForm.scss';
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form';
-import { postcodeValidator } from 'postcode-validator';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import { MyForm } from '../../interfaces/interfaces';
 import SelectCountries from '../LoginForm/SelectCountries/SelectCountries';
-import { countries } from './countries';
+import checkPostalCode from '../../helpers/checkPostalCode';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -203,13 +202,7 @@ function RegistrationForm(): JSX.Element {
               value: true,
               message: 'The field is required!',
             },
-            validate: (data: string): boolean => {
-              const country =
-                document.querySelector('option.selected')?.textContent;
-              const code = countries.find((el) => el.country === country)
-                ?.code as string;
-              return postcodeValidator(data, code);
-            },
+            validate: checkPostalCode,
           })}
         />
       </label>
