@@ -11,7 +11,8 @@ export interface MyForm {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  address: Address;
+  shipping: Address;
+  billing: Address;
 }
 
 export interface Address {
