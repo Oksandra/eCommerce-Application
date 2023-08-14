@@ -1,7 +1,7 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
 .registration-form__wrapper {
-  width: 40%;
+  width: 35%;
   margin: 0 auto;
   background-color: $light-color;
   .registration-form {
@@ -9,24 +9,21 @@
     padding: 1rem;
     border: $border-dark;
     &__title {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       margin-bottom: 2rem;
-      margin-left: 1rem;
     }
     &__address {
       width: 90%;
-      margin: 0 auto;
-      margin-bottom: 2rem;
-      font-size: 1rem;
+      margin-top: 1 rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
     }
-    label,
     .address__country {
       display: block;
-      width: 90%;
-      margin: 0 auto;
+      width: 100%;
       margin-bottom: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 1.4rem;
       .star {
         color: red;
       }
@@ -34,20 +31,20 @@
         width: 100%;
         margin-top: 0.5rem;
       }
-      input {
-        width: 100%;
-        padding: 0.5rem 1rem;
-        margin: 0.2rem 0;
-        box-sizing: border-box;
-        border-bottom: $border-dark;
-        &:focus {
-          border: $border-dark;
-        }
+      }
+    input {
+      width: 100%;
+      padding: 0.5rem 0;
+      margin: 0.2rem 0;
+      box-sizing: border-box;
+      border-bottom: $border-dark;
+      &:focus {
+        border: $border-dark;
       }
     }
     &__customer-info {
       label {
-        font-size: 1rem;
+        font-size: 1.4rem;
       }
     }
     &__button {

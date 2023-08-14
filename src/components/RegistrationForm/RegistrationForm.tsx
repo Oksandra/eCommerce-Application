@@ -26,42 +26,38 @@ function RegistrationForm(): JSX.Element {
       <form className="registration-form" onSubmit={handleSubmit(submit)}>
         <h2 className="registration-form__title">Creat your account:</h2>
         <div className="registration-form__customer-info">
-          <label htmlFor="email">
-            Email <span className="star">*</span>
-            <input
-              type="email"
-              id="email-field"
-              aria-invalid={errors.email ? 'true' : 'false'}
-              {...register('email', {
-                required: {
-                  value: true,
-                  message: 'The field is required',
-                },
-                pattern: /^(.+)@(.+)\.(.+)$/,
-              })}
-            />
-          </label>
+          <input
+            type="email"
+            id="email-field"
+            placeholder="Email *"
+            aria-invalid={errors.email ? 'true' : 'false'}
+            {...register('email', {
+              required: {
+                value: true,
+                message: 'The field is required',
+              },
+              pattern: /^(.+)@(.+)\.(.+)$/,
+            })}
+          />
           <div className="input-error">
             {errors.email && (
               <p>{errors.email.message || 'Incorrect email!'}</p>
             )}
           </div>
-          <label htmlFor="password">
-            Password <span className="star">*</span>
-            <input
-              type="password"
-              id="password"
-              aria-invalid={errors.password ? 'true' : 'false'}
-              {...register('password', {
-                required: true,
-                minLength: {
-                  value: 8,
-                  message: 'Minimum 8 characters!',
-                },
-                pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/g,
-              })}
-            />
-          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Password *"
+            aria-invalid={errors.password ? 'true' : 'false'}
+            {...register('password', {
+              required: true,
+              minLength: {
+                value: 8,
+                message: 'Minimum 8 characters!',
+              },
+              pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/g,
+            })}
+          />
           <div className="input-error">
             {errors.password && (
               <p>
@@ -70,22 +66,20 @@ function RegistrationForm(): JSX.Element {
               </p>
             )}
           </div>
-          <label htmlFor="first-name">
-            First name <span className="star">*</span>
-            <input
-              type="text"
-              id="first-name"
-              aria-invalid={errors.firstName ? 'true' : 'false'}
-              {...register('firstName', {
-                required: {
-                  value: true,
-                  message:
-                    'The field is required and must contain at least one character!',
-                },
-                pattern: /^[A-z][a-z]*$/g,
-              })}
-            />
-          </label>
+          <input
+            type="text"
+            id="first-name"
+            placeholder="First name *"
+            aria-invalid={errors.firstName ? 'true' : 'false'}
+            {...register('firstName', {
+              required: {
+                value: true,
+                message:
+                  'The field is required and must contain at least one character!',
+              },
+              pattern: /^[A-z][a-z]*$/g,
+            })}
+          />
           <div className="input-error">
             {errors.firstName && (
               <p>
@@ -94,22 +88,20 @@ function RegistrationForm(): JSX.Element {
               </p>
             )}
           </div>
-          <label htmlFor="last-name">
-            Last name <span className="star">*</span>
-            <input
-              type="text"
-              id="last-name"
-              aria-invalid={errors.lastName ? 'true' : 'false'}
-              {...register('lastName', {
-                required: {
-                  value: true,
-                  message:
-                    'The field is required and must contain at least one character!',
-                },
-                pattern: /^[A-z][a-z]*$/g,
-              })}
-            />
-          </label>
+          <input
+            type="text"
+            id="last-name"
+            placeholder="Last name *"
+            aria-invalid={errors.lastName ? 'true' : 'false'}
+            {...register('lastName', {
+              required: {
+                value: true,
+                message:
+                  'The field is required and must contain at least one character!',
+              },
+              pattern: /^[A-z][a-z]*$/g,
+            })}
+          />
           <div className="input-error">
             {errors.lastName && (
               <p>
@@ -142,16 +134,16 @@ function RegistrationForm(): JSX.Element {
             )}
           </div>
         </div>
-        <div className="registration-form__address">Address:</div>
-        <label htmlFor="street">
-          Street <span className="star">*</span>
-          <input
-            type="text"
-            id="street"
-            aria-invalid={errors.address?.street ? 'true' : 'false'}
-            {...register('address.street', { required: true, minLength: 1 })}
-          />
-        </label>
+        <div className="registration-form__address">
+          Shipping address: <span>*</span>
+        </div>
+        <input
+          type="text"
+          id="street"
+          placeholder="Street *"
+          aria-invalid={errors.address?.street ? 'true' : 'false'}
+          {...register('address.street', { required: true, minLength: 1 })}
+        />
         <div className="input-error">
           {errors.address?.street && (
             <p>
@@ -159,22 +151,20 @@ function RegistrationForm(): JSX.Element {
             </p>
           )}
         </div>
-        <label htmlFor="city">
-          City <span className="star">*</span>
-          <input
-            type="text"
-            id="city"
-            aria-invalid={errors.address?.city ? 'true' : 'false'}
-            {...register('address.city', {
-              required: {
-                value: true,
-                message:
-                  'The field is required and must contain at least one character!',
-              },
-              pattern: /^[A-z][a-z]*$/g,
-            })}
-          />
-        </label>
+        <input
+          type="text"
+          id="city"
+          placeholder="City *"
+          aria-invalid={errors.address?.city ? 'true' : 'false'}
+          {...register('address.city', {
+            required: {
+              value: true,
+              message:
+                'The field is required and must contain at least one character!',
+            },
+            pattern: /^[A-z][a-z]*$/g,
+          })}
+        />
         <div className="input-error">
           {errors.address?.city && (
             <p>
@@ -192,21 +182,19 @@ function RegistrationForm(): JSX.Element {
             <SelectCountries />
           </div>
         </div>
-        <label htmlFor="postal-code">
-          Postal code <span className="star">*</span>
-          <input
-            type="text"
-            id="postal-code"
-            aria-invalid={errors.address?.postcode ? 'true' : 'false'}
-            {...register('address.postcode', {
-              required: {
-                value: true,
-                message: 'The field is required!',
-              },
-              validate: checkPostalCode,
-            })}
-          />
-        </label>
+        <input
+          type="text"
+          id="postal-code"
+          placeholder="Postal code *"
+          aria-invalid={errors.address?.postcode ? 'true' : 'false'}
+          {...register('address.postcode', {
+            required: {
+              value: true,
+              message: 'The field is required!',
+            },
+            validate: checkPostalCode,
+          })}
+        />{' '}
         <div className="input-error">
           {errors.address?.postcode && (
             <p>{errors.address.postcode.message || 'Incorrect postal code!'}</p>
