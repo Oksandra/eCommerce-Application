@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { countries } from '../../RegistrationForm/countries';
 
 const SelectCountries: React.FC = () => {
-  const [codeAlpha, setCodeAlpha] = useState<string>('');
-
-  const getCountryCode = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ): void => {
-    const selectedCountry = event.target.value;
-    const selectedCountryObject = countries.find(
-      (country) => country.country === selectedCountry
-    );
-    if (selectedCountryObject) {
-      setCodeAlpha(selectedCountryObject.code);
+  const selectCountry = (event: React.ChangeEvent<HTMLSelectElement>): void => {
+    const optionsArr = event.target.options;
+    for (let i = 0; i < optionsArr.length; i += 1) {
+      if (optionsArr[i].selected) {
+        optionsArr[i].classList.add('selected');
+      } else {
+        optionsArr[i].classList.remove('selected');
+      }
     }
   };
 
   return (
-    <select onChange={getCountryCode}>
+    <select onChange={selectCountry}>
       {countries.map((country) => (
-        <option key={codeAlpha}>{country.country}</option>
+        <option key={country.code}>{country.country}</option>
       ))}
     </select>
   );

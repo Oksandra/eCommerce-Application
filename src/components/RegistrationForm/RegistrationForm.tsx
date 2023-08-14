@@ -204,7 +204,8 @@ function RegistrationForm(): JSX.Element {
               message: 'The field is required!',
             },
             validate: (data: string): boolean => {
-              const country = document.querySelector('.selected')?.textContent;
+              const country =
+                document.querySelector('option.selected')?.textContent;
               const code = countries.find((el) => el.country === country)
                 ?.code as string;
               return postcodeValidator(data, code);
@@ -213,8 +214,8 @@ function RegistrationForm(): JSX.Element {
         />
       </label>
       <div className="input-error">
-        {errors.address?.country && (
-          <p>{errors.address.country.message || 'Incorrect postal code!'}</p>
+        {errors.address?.postcode && (
+          <p>{errors.address.postcode.message || 'Incorrect postal code!'}</p>
         )}
       </div>
       <button
