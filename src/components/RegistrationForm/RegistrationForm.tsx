@@ -3,8 +3,7 @@ import './RegistrationForm.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import { MyForm } from '../../interfaces/interfaces';
-import SelectCountries from '../SelectCountries/SelectCountries';
-import checkPostalCode from '../../helpers/checkPostalCode';
+import Addresses from '../Addresses/Adressess';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -134,72 +133,7 @@ function RegistrationForm(): JSX.Element {
             )}
           </div>
         </div>
-        <div className="registration-form__address">
-          Shipping address: <span>*</span>
-        </div>
-        <input
-          type="text"
-          id="street"
-          placeholder="Street *"
-          aria-invalid={errors.address?.street ? 'true' : 'false'}
-          {...register('address.street', { required: true, minLength: 1 })}
-        />
-        <div className="input-error">
-          {errors.address?.street && (
-            <p>
-              The field is required and must contain at least one character!
-            </p>
-          )}
-        </div>
-        <input
-          type="text"
-          id="city"
-          placeholder="City *"
-          aria-invalid={errors.address?.city ? 'true' : 'false'}
-          {...register('address.city', {
-            required: {
-              value: true,
-              message:
-                'The field is required and must contain at least one character!',
-            },
-            pattern: /^[A-z][a-z]*$/g,
-          })}
-        />
-        <div className="input-error">
-          {errors.address?.city && (
-            <p>
-              {errors.address.city.message ||
-                'Last name must not contain special characters or numbers!'}
-            </p>
-          )}
-        </div>
-        <div className="address__country">
-          Country <span className="star">*</span>
-          <div
-            aria-invalid={errors.address?.country ? 'true' : 'false'}
-            {...register('address.country', { required: true })}
-          >
-            <SelectCountries />
-          </div>
-        </div>
-        <input
-          type="text"
-          id="postal-code"
-          placeholder="Postal code *"
-          aria-invalid={errors.address?.postcode ? 'true' : 'false'}
-          {...register('address.postcode', {
-            required: {
-              value: true,
-              message: 'The field is required!',
-            },
-            validate: checkPostalCode,
-          })}
-        />{' '}
-        <div className="input-error">
-          {errors.address?.postcode && (
-            <p>{errors.address.postcode.message || 'Incorrect postal code!'}</p>
-          )}
-        </div>
+        <Addresses />
         <button
           className="registration-form__button"
           type="submit"
