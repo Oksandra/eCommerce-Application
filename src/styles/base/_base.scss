@@ -1,7 +1,16 @@
+@import '../abstracts/extends';
+
 body {
   font-family: 'Marcellus', Georgia, serif;
 }
 
 html {
   font-size: 10px;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  @extend %flex-j-cont;
+  flex-direction: column;
 }
