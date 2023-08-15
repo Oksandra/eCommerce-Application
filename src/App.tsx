@@ -10,7 +10,12 @@ function App(): JSX.Element {
     <Routes>
       <Route path="/" element={<LayoutPage />}>
         <Route path="login" element={<LoginForm />} />
-        {/* <Route index element={<Main />} /> */}
+        <Route path="catalog" element={<div>Here is the catalog!</div>} />
+        <Route path="about" element={<div>About Us!</div>} />
+        <Route path="profile" element={<div>Profile Page!</div>} />
+        <Route path="favorites" element={<div>Favorites products</div>} />
+        <Route path="cart" element={<div>My cart!</div>} />
+        <Route index element={<div>Home Page!</div>} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
