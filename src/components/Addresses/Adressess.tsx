@@ -15,7 +15,12 @@ export default function Addresses(): JSX.Element {
 
   const [value, setValue] = useState(false);
 
-  const street = watch('shipping.street');
+  const watchValues = watch([
+    'shipping.street',
+    'shipping.city',
+    'shipping.country',
+    'shipping.postcode',
+  ]);
 
   const chooseAddress = (e: ChangeEvent): void => {
     const addressInput = e.target as HTMLInputElement;
@@ -146,7 +151,7 @@ export default function Addresses(): JSX.Element {
         <section className="registration-form__tab-content">
           <input
             type="text"
-            value={value ? street : ''}
+            value={value ? watchValues[0] : ''}
             placeholder="Street"
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
             {...register('billing.street', { required: true, minLength: 1 })}
@@ -161,6 +166,7 @@ export default function Addresses(): JSX.Element {
           <input
             type="text"
             placeholder="City"
+            value={value ? watchValues[1] : ''}
             aria-invalid={errors.billing?.city ? 'true' : 'false'}
             {...register('billing.city', {
               required: {
@@ -191,6 +197,7 @@ export default function Addresses(): JSX.Element {
           <input
             type="text"
             placeholder="Postal code"
+            value={value ? watchValues[3] : ''}
             aria-invalid={errors.billing?.postcode ? 'true' : 'false'}
             {...register('billing.postcode', {
               required: {
