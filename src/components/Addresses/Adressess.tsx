@@ -22,6 +22,8 @@ export default function Addresses(): JSX.Element {
     'shipping.postcode',
   ]);
 
+  console.log(watchValues);
+
   const chooseAddress = (e: ChangeEvent): void => {
     const addressInput = e.target as HTMLInputElement;
     setValue(addressInput.checked);
@@ -197,7 +199,7 @@ export default function Addresses(): JSX.Element {
           <input
             type="text"
             placeholder="Postal code"
-            value={value ? watchValues[3] : ''}
+            value={value ? watchValues[2] : ''}
             aria-invalid={errors.billing?.postcode ? 'true' : 'false'}
             {...register('billing.postcode', {
               required: {
