@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import SelectCountries from '../SelectCountries/SelectCountries';
 import checkPostalCode from '../../helpers/checkPostalCode';
@@ -8,11 +8,21 @@ export default function Addresses(): JSX.Element {
   const {
     register,
     formState: { errors },
+    watch,
   } = useForm<MyForm>({
     mode: 'all',
   });
 
-  function clickButton(event: React.MouseEvent): void {
+  const [value, setValue] = useState(false);
+
+  const street = watch('shipping.street');
+
+  const chooseAddress = (e: ChangeEvent): void => {
+    const addressInput = e.target as HTMLInputElement;
+    setValue(addressInput.checked);
+  };
+
+  const clickButton = (event: React.MouseEvent): void => {
     const tabButtons = document.querySelectorAll(
       '.registration-form__tab-button'
     );
@@ -28,7 +38,7 @@ export default function Addresses(): JSX.Element {
     });
     tabContents[tabIndex].classList.add('open');
     tabButtons[tabIndex].classList.add('active');
-  }
+  };
 
   return (
     <div>
@@ -114,12 +124,29 @@ export default function Addresses(): JSX.Element {
               </p>
             )}
           </div>
+          <label
+            htmlFor="check-shipping"
+            className="registration-form__check-address"
+          >
+            <input id="check-shipping" type="checkbox" />
+            Save as default address
+          </label>
+          <label htmlFor="check" className="registration-form__check-address">
+            <input
+              id="check"
+              type="checkbox"
+              className="compare-address"
+              onChange={chooseAddress}
+            />
+            Set as address for shipping and billing
+          </label>
         </section>
       </div>
       <div className="registration-form__tab">
         <section className="registration-form__tab-content">
           <input
             type="text"
+            value={value ? street : ''}
             placeholder="Street"
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
             {...register('billing.street', { required: true, minLength: 1 })}
@@ -180,12 +207,15 @@ export default function Addresses(): JSX.Element {
               </p>
             )}
           </div>
+          <label
+            htmlFor="check-billing"
+            className="registration-form__check-address"
+          >
+            <input id="check-billing" type="checkbox" />
+            Save as default address
+          </label>
         </section>
       </div>
-      <label htmlFor="check" className="registration-form__check-address">
-        <input id="check" type="checkbox" />
-        Set as address for billing and shipping
-      </label>
     </div>
   );
 }
