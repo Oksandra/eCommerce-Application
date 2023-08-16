@@ -37,6 +37,12 @@ export default function Addresses(): JSX.Element {
     'shipping.postcode',
   ]);
 
+  const [valueBillingStreet, setBillingStreet] = useState('');
+
+  const [valueBillingCity, setBillingCity] = useState('');
+
+  const [valueBillingPostalCode, setBillingPostalCode] = useState('');
+
   const chooseAddress = (e: ChangeEvent): void => {
     const addressInput = e.target as HTMLInputElement;
     setValue(addressInput.checked);
@@ -152,7 +158,7 @@ export default function Addresses(): JSX.Element {
               },
               validate: checkPostalCodeShipping,
             })}
-          />{' '}
+          />
           <div className="input-error">
             {errors.shipping?.postcode && (
               <p>
@@ -179,13 +185,15 @@ export default function Addresses(): JSX.Element {
         </section>
       </div>
       <div className="registration-form__tab">
-        <section className="registration-form__tab-content">
+        <section className="registration-form__tab-content tab-second">
           <input
             type="text"
-            value={value ? watchValues[0] : ''}
+            value={value ? watchValues[0] : valueBillingStreet}
             placeholder="Street"
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
             {...register('billing.street', { required: true, minLength: 1 })}
+            onChange={(e): void => setBillingStreet(e.target.value)}
+            disabled={value}
           />
           <div className="input-error">
             {errors.billing?.street && (
@@ -197,7 +205,7 @@ export default function Addresses(): JSX.Element {
           <input
             type="text"
             placeholder="City"
-            value={value ? watchValues[1] : ''}
+            value={value ? watchValues[1] : valueBillingCity}
             aria-invalid={errors.billing?.city ? 'true' : 'false'}
             {...register('billing.city', {
               required: {
@@ -207,6 +215,8 @@ export default function Addresses(): JSX.Element {
               },
               pattern: /^[A-z][a-z]*$/g,
             })}
+            onChange={(e): void => setBillingCity(e.target.value)}
+            disabled={value}
           />
           <div className="input-error">
             {errors.billing?.city && (
@@ -236,6 +246,7 @@ export default function Addresses(): JSX.Element {
               onChange={(option: Option | null): void => {
                 setSelectedCountry({ selectedOption: option });
               }}
+              isDisabled={value}
             />
           </div>
           <div className="input-error">
@@ -244,7 +255,7 @@ export default function Addresses(): JSX.Element {
           <input
             type="text"
             placeholder="Postal code"
-            value={value ? watchValues[2] : ''}
+            value={value ? watchValues[2] : valueBillingPostalCode}
             aria-invalid={errors.billing?.postcode ? 'true' : 'false'}
             {...register('billing.postcode', {
               required: {
@@ -253,6 +264,8 @@ export default function Addresses(): JSX.Element {
               },
               validate: checkPostalCodeBilling,
             })}
+            onChange={(e): void => setBillingPostalCode(e.target.value)}
+            disabled={value}
           />{' '}
           <div className="input-error">
             {errors.billing?.postcode && (
