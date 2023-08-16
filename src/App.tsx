@@ -22,13 +22,19 @@ function App(): JSX.Element {
               </AccessLimitAuth>
             }
           />
-          <Route path="catalog" element={<div>Here is the catalog!</div>} />
-          <Route path="about" element={<div>About Us!</div>} />
+          <Route
+            path="catalog"
+            element={<div className="center-align">Here is the catalog!</div>}
+          />
+          <Route
+            path="about"
+            element={<div className="center-align">About Us!</div>}
+          />
           <Route
             path="profile"
             element={
               <RequireAuth>
-                <div>Profile Page!</div>
+                <div className="center-align">Profile Page!</div>
               </RequireAuth>
             }
           />
@@ -40,9 +46,18 @@ function App(): JSX.Element {
               </RequireAuth>
             }
           />
-          <Route path="favorites" element={<div>Favorites products</div>} />
-          <Route path="cart" element={<div>My cart!</div>} />
-          <Route index element={<div>Home Page!</div>} />
+          <Route
+            path="favorites"
+            element={<div className="center-align">Favorites products</div>}
+          />
+          <Route
+            path="cart"
+            element={<div className="center-align">My cart!</div>}
+          />
+          <Route
+            index
+            element={<div className="center-align">Home Page!</div>}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
