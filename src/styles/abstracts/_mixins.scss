@@ -14,6 +14,7 @@
 }
 
 @mixin media-small-tablet {
-  @media screen and (max-width: $tablet-small-width) { @content; }
-} 
-
+  @media screen and (max-width: $tablet-small-width) {
+    @content;
+  }
+}

@@ -2,7 +2,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
 
-
 .logout {
   display: flex;
   align-items: center;
@@ -21,9 +20,9 @@
     @include media-small-tablet {
       padding: 1rem;
       font-size: 1.4rem;
-  }
+    }
   }
   @include media-small-tablet {
     font-size: 2rem;
-}
+  }
 }
