@@ -12,7 +12,10 @@ const LogOutPage: React.FC = () => {
       <button
         className="logout__button"
         type="button"
-        onClick={(): void => signout(() => navigate('/', { replace: true }))}
+        onClick={(): void => {
+          signout(() => navigate('/', { replace: true }));
+          localStorage.removeItem('user');
+        }}
       >
         Log Out
       </button>
