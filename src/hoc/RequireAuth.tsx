@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import { AuthContext } from './AuthProvider';
 
 const RequireAuth = ({
   children,
 }: {
   children: React.ReactElement;
 }): JSX.Element => {
-  const auth = false;
+  const { user } = useContext(AuthContext);
 
-  if (!auth) {
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 

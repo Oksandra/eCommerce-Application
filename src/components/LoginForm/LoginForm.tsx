@@ -1,9 +1,10 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import { checkLogin } from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
+import { AuthContext } from '../../hoc/AuthProvider';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -15,6 +16,8 @@ export const LoginForm: FC = () => {
   const [typePassword, setTypePassword] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+  const { signin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     const { name, value } = e.target;
@@ -45,7 +48,10 @@ export const LoginForm: FC = () => {
       return;
 
     // TO DO: add API Authentication
-    console.log(loginForm);
+    console.log(loginForm.login);
+    const user: string = loginForm.login;
+    signin(user, () => navigate('/', { replace: true }));
+    localStorage.setItem('user', user);
   }
 
   return (
