@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './LoginForm.scss';
 import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
@@ -87,6 +88,12 @@ export const LoginForm: FC = () => {
       >
         Log in
       </button>
+      <p className="login-form__text">
+        Don❜t have an account?
+        <Link className="login-form__link" to="/registration">
+          Sign Up
+        </Link>
+      </p>
     </form>
   );
 };

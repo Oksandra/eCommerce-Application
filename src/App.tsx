@@ -10,8 +10,8 @@ function App(): JSX.Element {
   return (
     <Routes>
       <Route path="/" element={<LayoutPage />}>
-        <Route path="/" element={<LoginForm />} />
-        <Route path="/" element={<RegistrationForm />} />
+        <Route path="login" element={<LoginForm />} />
+        <Route path="registration" element={<RegistrationForm />} />
         {/* <Route index element={<Main />} /> */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
