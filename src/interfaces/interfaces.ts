@@ -21,3 +21,12 @@ export interface Address {
   postcode: string;
   country: string;
 }
+
+export interface Option {
+  value: string;
+  label: string;
+}
+
+export interface ArrayObjectSelectState {
+  selectedOption: Option | null;
+}

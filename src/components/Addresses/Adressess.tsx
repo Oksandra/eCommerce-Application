@@ -1,8 +1,14 @@
 import React, { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import SelectCountries from '../SelectCountries/SelectCountries';
-import checkPostalCode from '../../helpers/checkPostalCode';
-import { MyForm } from '../../interfaces/interfaces';
+import Select from 'react-select';
+import { postcodeValidator } from 'postcode-validator';
+import {
+  MyForm,
+  ArrayObjectSelectState,
+  Option,
+} from '../../interfaces/interfaces';
+import { countries } from './countries';
+import options from './options';
 
 export default function Addresses(): JSX.Element {
   const {
@@ -15,14 +21,20 @@ export default function Addresses(): JSX.Element {
 
   const [value, setValue] = useState(false);
 
+  const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
+    selectedOption: null,
+  });
+
+  const [selectedCountry, setSelectedCountry] =
+    useState<ArrayObjectSelectState>({
+      selectedOption: null,
+    });
+
   const watchValues = watch([
     'shipping.street',
     'shipping.city',
-    'shipping.country',
     'shipping.postcode',
   ]);
-
-  console.log(watchValues);
 
   const chooseAddress = (e: ChangeEvent): void => {
     const addressInput = e.target as HTMLInputElement;
@@ -46,6 +58,26 @@ export default function Addresses(): JSX.Element {
     tabContents[tabIndex].classList.add('open');
     tabButtons[tabIndex].classList.add('active');
   };
+
+  function checkPostalCodeShipping(data: string): boolean {
+    const selected = selectedOption.selectedOption?.value;
+    const code = countries.find((el) => el.country === selected)
+      ?.code as string;
+    if (!selectedOption.selectedOption) {
+      return false;
+    }
+    return postcodeValidator(data, code);
+  }
+
+  function checkPostalCodeBilling(data: string): boolean {
+    const selected = selectedCountry.selectedOption?.value;
+    const code = countries.find((el) => el.country === selected)
+      ?.code as string;
+    if (!selectedCountry.selectedOption) {
+      return false;
+    }
+    return postcodeValidator(data, code);
+  }
 
   return (
     <div>
@@ -105,11 +137,25 @@ export default function Addresses(): JSX.Element {
           </div>
           <div className="address__country">
             Country <span className="star">*</span>
-            <div
+            <Select
+              className="address__country-select"
               aria-invalid={errors.shipping?.country ? 'true' : 'false'}
-              {...register('shipping.country', { required: true })}
-            >
-              <SelectCountries />
+              {...register('shipping.country', {
+                required: {
+                  value: true,
+                  message: 'The field is required!',
+                },
+              })}
+              value={selectedOption.selectedOption}
+              options={options}
+              onChange={(option: Option | null): void => {
+                setSelectedOption({ selectedOption: option });
+              }}
+            />
+            <div className="input-error">
+              {errors.shipping?.country && (
+                <p>{errors.shipping.country.message}</p>
+              )}
             </div>
           </div>
           <input
@@ -121,7 +167,7 @@ export default function Addresses(): JSX.Element {
                 value: true,
                 message: 'The field is required!',
               },
-              validate: checkPostalCode,
+              validate: checkPostalCodeShipping,
             })}
           />{' '}
           <div className="input-error">
@@ -189,12 +235,28 @@ export default function Addresses(): JSX.Element {
           </div>
           <div className="address__country">
             Country
-            <div
+            <Select
+              className="address__country-select"
               aria-invalid={errors.billing?.country ? 'true' : 'false'}
-              {...register('billing.country', { required: true })}
-            >
-              <SelectCountries />
-            </div>
+              {...register('billing.country', {
+                required: {
+                  value: true,
+                  message: 'The field is required!',
+                },
+              })}
+              value={
+                value
+                  ? selectedOption.selectedOption
+                  : selectedCountry.selectedOption
+              }
+              options={options}
+              onChange={(option: Option | null): void => {
+                setSelectedCountry({ selectedOption: option });
+              }}
+            />
+          </div>
+          <div className="input-error">
+            {errors.billing?.country && <p>{errors.billing.country.message}</p>}
           </div>
           <input
             type="text"
@@ -206,7 +268,7 @@ export default function Addresses(): JSX.Element {
                 value: true,
                 message: 'The field is required!',
               },
-              validate: checkPostalCode,
+              validate: checkPostalCodeBilling,
             })}
           />{' '}
           <div className="input-error">
