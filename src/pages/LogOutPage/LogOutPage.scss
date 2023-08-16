@@ -1,0 +1,22 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+
+.logout {
+  display: flex;
+  align-items: center;
+  font-size: 2.8rem;
+  margin: 0 auto;
+  width: 60rem;
+  &__title {
+    margin-right: 1rem;
+  }
+  &__button {
+    height: 4rem;
+    width: 20%;
+    color: $light-color;
+    background-color: $background-color;
+    @include button($dark-color);
+  }
+}

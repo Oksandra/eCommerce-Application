@@ -7,6 +7,7 @@ import { LoginForm } from './components/LoginForm/LoginForm';
 import RequireAuth from './hoc/RequireAuth';
 import { AuthProvider } from './hoc/AuthProvider';
 import AccessLimitAuth from './hoc/AccessLimitAuth';
+import LogOutPage from './pages/LogOutPage/LogOutPage';
 
 function App(): JSX.Element {
   return (
@@ -35,7 +36,7 @@ function App(): JSX.Element {
             path="logout"
             element={
               <RequireAuth>
-                <div>Logout Page!</div>
+                <LogOutPage />
               </RequireAuth>
             }
           />
