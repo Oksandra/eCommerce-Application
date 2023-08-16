@@ -19,7 +19,23 @@
       margin-bottom: 0.5rem;
       font-size: 1.4rem;
     }
-    .address__country {
+    .star {
+      color: red;
+    }
+    &__tab-button {
+      width: 50%;
+      padding: 0.5rem;
+      border-bottom: 1px solid $add-dark-color;
+      background-color: $light-color;
+      text-align: left;
+      font-weight: 700;
+      &.active {
+        background-color: $add-dark-color;
+        color: $light-color;
+        transition: all 0.3s;
+      }
+    }
+    &__tab {
       display: block;
       width: 100%;
       &-content {
@@ -35,11 +51,17 @@
           width: 100%;
         }
       }
-      &-select {
+      .address__country {
+        display: block;
         width: 100%;
-        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        &-select {
+          width: 100%;
+          margin-top: 0.5rem;
+        }
       }
-      }
+    }
     input {
       width: 100%;
       padding: 0.5rem 0;
