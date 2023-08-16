@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LogOutPage.scss';
-import { AuthContext } from '../../hoc/AuthProvider';
+import { useAuth } from '../../hooks/useAuth';
 
 const LogOutPage: React.FC = () => {
-  const { signout } = useContext(AuthContext);
+  const { signout } = useAuth();
   const navigate = useNavigate();
   return (
     <div className="logout">

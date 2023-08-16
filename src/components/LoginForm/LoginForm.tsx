@@ -1,10 +1,10 @@
-import React, { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import { checkLogin } from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
-import { AuthContext } from '../../hoc/AuthProvider';
+import { useAuth } from '../../hooks/useAuth';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -16,7 +16,7 @@ export const LoginForm: FC = () => {
   const [typePassword, setTypePassword] = useState<boolean>(false);
   const [loginError, setLoginError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
-  const { signin } = useContext(AuthContext);
+  const { signin } = useAuth();
   const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {

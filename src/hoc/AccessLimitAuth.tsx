@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from './AuthProvider';
+import { useAuth } from '../hooks/useAuth';
 
 const AccessLimitAuth = ({
   children,
 }: {
   children: React.ReactElement;
 }): JSX.Element => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   if (user) {
     return <Navigate to="/" />;

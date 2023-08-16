@@ -1,12 +1,5 @@
 import React, { useState, createContext, useMemo, ReactNode } from 'react';
-
-interface AuthContextProps {
-  user: User;
-  signin: (newUser: User, cb: () => void) => void;
-  signout: (cb: () => void) => void;
-}
-
-type User = string | null;
+import { AuthContextProps, User } from '../interfaces/interfaces';
 
 type AuthProviderProps = {
   children: ReactNode;

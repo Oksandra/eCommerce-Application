@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import './Nav.scss';
 import { NavLink } from 'react-router-dom';
-import { AuthContext } from '../../hoc/AuthProvider';
+import { useAuth } from '../../hooks/useAuth';
 
 export const Nav: React.FC = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const logLink = user ? '/logout' : '/login';
 
   return (
