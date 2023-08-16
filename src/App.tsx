@@ -6,13 +6,21 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginForm } from './components/LoginForm/LoginForm';
 import RequireAuth from './hoc/RequireAuth';
 import { AuthProvider } from './hoc/AuthProvider';
+import AccessLimitAuth from './hoc/AccessLimitAuth';
 
 function App(): JSX.Element {
   return (
     <AuthProvider>
       <Routes>
         <Route path="/" element={<LayoutPage />}>
-          <Route path="login" element={<LoginForm />} />
+          <Route
+            path="login"
+            element={
+              <AccessLimitAuth>
+                <LoginForm />
+              </AccessLimitAuth>
+            }
+          />
           <Route path="catalog" element={<div>Here is the catalog!</div>} />
           <Route path="about" element={<div>About Us!</div>} />
           <Route
@@ -20,6 +28,14 @@ function App(): JSX.Element {
             element={
               <RequireAuth>
                 <div>Profile Page!</div>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="logout"
+            element={
+              <RequireAuth>
+                <div>Logout Page!</div>
               </RequireAuth>
             }
           />

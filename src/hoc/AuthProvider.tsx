@@ -19,7 +19,9 @@ export const AuthContext = createContext<AuthContextProps>({
 });
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User>(null);
+  const [user, setUser] = useState<User>(
+    localStorage.getItem('user') ? localStorage.getItem('user') : null
+  );
 
   const signin = (newUser: User, cb: () => void): void => {
     setUser(newUser);
