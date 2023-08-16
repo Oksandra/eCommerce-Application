@@ -9,6 +9,7 @@ import {
 } from '../../interfaces/interfaces';
 import { countries } from './countries';
 import options from './options';
+import clickButtonAddress from '../../helpers/clickButtonAddress';
 
 export default function Addresses(): JSX.Element {
   const {
@@ -41,24 +42,6 @@ export default function Addresses(): JSX.Element {
     setValue(addressInput.checked);
   };
 
-  const clickButton = (event: React.MouseEvent): void => {
-    const tabButtons = document.querySelectorAll(
-      '.registration-form__tab-button'
-    );
-    const tabContents = document.querySelectorAll(
-      '.registration-form__tab-content'
-    );
-    const tabIndex = Number((event.target as HTMLButtonElement).id);
-    tabContents.forEach((tabContent) => {
-      tabContent.classList.remove('open');
-    });
-    tabButtons.forEach((tabButton) => {
-      tabButton.classList.remove('active');
-    });
-    tabContents[tabIndex].classList.add('open');
-    tabButtons[tabIndex].classList.add('active');
-  };
-
   function checkPostalCodeShipping(data: string): boolean {
     const selected = selectedOption.selectedOption?.value;
     const code = countries.find((el) => el.country === selected)
@@ -86,7 +69,7 @@ export default function Addresses(): JSX.Element {
         type="button"
         id="0"
         aria-label="Tab"
-        onClick={clickButton}
+        onClick={clickButtonAddress}
       >
         Shipping address: <span className="star">*</span>
       </button>
@@ -95,7 +78,7 @@ export default function Addresses(): JSX.Element {
         type="button"
         id="1"
         aria-label="Tab"
-        onClick={clickButton}
+        onClick={clickButtonAddress}
       >
         Billing address:
       </button>
