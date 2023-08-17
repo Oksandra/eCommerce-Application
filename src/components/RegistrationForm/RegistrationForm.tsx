@@ -1,9 +1,15 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import React from 'react';
 import './RegistrationForm.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import checkDateBirth from '../../helpers/checkDateBirth';
-import { MyForm } from '../../interfaces/interfaces';
+import { MyForm, Customer } from '../../interfaces/interfaces';
 import Addresses from '../Addresses/Adressess';
+import createCustomer from '../../api/createCustomer';
+import { countries } from '../Addresses/countries';
+
+const keyShipping = 'shippingAddress';
+const keyBilling = 'billingAddress';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -16,7 +22,39 @@ function RegistrationForm(): JSX.Element {
   });
 
   const submit: SubmitHandler<MyForm> = (data) => {
-    console.log(data);
+    const countryCodeShipping = countries.find(
+      (country) => country.country === data.shipping.country
+    )?.code as string;
+    const countryCodeBilling = countries.find(
+      (country) => country.country === data.billing.country
+    )?.code as string;
+    const body: Customer = {
+      id: '200',
+      email: data.email,
+      password: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      dateOfBirth: data.dateOfBirth,
+      addresses: [
+        {
+          key: keyShipping,
+          country: countryCodeShipping,
+          city: data.shipping.city,
+          streetName: data.shipping.street,
+          postalCode: data.shipping.postcode,
+        },
+        {
+          key: keyBilling,
+          country: countryCodeBilling,
+          city: data.shipping.city,
+          streetName: data.shipping.street,
+          postalCode: data.shipping.postcode,
+        },
+      ],
+      defaultBillingAddress: 0,
+      defaultShippingAddress: 0,
+    };
+    createCustomer(body).then((resp) => console.log(resp));
     reset();
   };
 

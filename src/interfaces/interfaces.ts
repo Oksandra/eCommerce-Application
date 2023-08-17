@@ -1,3 +1,5 @@
+import { BaseAddress } from '@commercetools/platform-sdk';
+
 export interface ButtonOptions {
   className: string;
   textContent: string;
@@ -45,21 +47,8 @@ export interface Customer {
   password: string;
   firstName: string;
   lastName: string;
-  dateBirth: string;
-  address: BaseAddress;
+  dateOfBirth: string;
+  addresses: BaseAddress[];
   defaultBillingAddress: number;
   defaultShippingAddress: number;
-}
-
-export interface BaseAddress {
-  shipping: CustomerAddress;
-  billing: CustomerAddress;
-}
-
-interface CustomerAddress {
-  key: string;
-  country: string;
-  city: string;
-  street: string;
-  postalCode: string;
 }
