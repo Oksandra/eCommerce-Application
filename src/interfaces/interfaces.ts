@@ -12,3 +12,29 @@ export interface AuthContextProps {
 }
 
 export type User = string | null;
+
+export interface MyForm {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  shipping: Address;
+  billing: Address;
+}
+
+export interface Address {
+  street: string;
+  city: string;
+  postcode: string;
+  country: string;
+}
+
+export interface Option {
+  value: string;
+  label: string;
+}
+
+export interface ArrayObjectSelectState {
+  selectedOption: Option | null;
+}

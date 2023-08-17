@@ -8,6 +8,7 @@ import RequireAuth from './hoc/RequireAuth';
 import { AuthProvider } from './hoc/AuthProvider';
 import AccessLimitAuth from './hoc/AccessLimitAuth';
 import LogOutPage from './pages/LogOutPage/LogOutPage';
+import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 
 function App(): JSX.Element {
   return (
@@ -22,6 +23,7 @@ function App(): JSX.Element {
               </AccessLimitAuth>
             }
           />
+          <Route path="registration" element={<RegistrationForm />} />
           <Route
             path="catalog"
             element={<div className="center-align">Here is the catalog!</div>}
