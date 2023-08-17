@@ -1,4 +1,4 @@
-import { checkLogin } from './checkLogin';
+import checkLogin from './checkLogin';
 
 describe('checkLogin function', () => {
   test('returns empty string for valid email', () => {
