@@ -11,7 +11,8 @@ export interface MyForm {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  address: Address;
+  shipping: Address;
+  billing: Address;
 }
 
 export interface Address {
@@ -19,4 +20,13 @@ export interface Address {
   city: string;
   postcode: string;
   country: string;
+}
+
+export interface Option {
+  value: string;
+  label: string;
+}
+
+export interface ArrayObjectSelectState {
+  selectedOption: Option | null;
 }
