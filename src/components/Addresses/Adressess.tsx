@@ -15,6 +15,7 @@ export default function Addresses(): JSX.Element {
   const {
     register,
     formState: { errors },
+    clearErrors,
     watch,
   } = useForm<MyForm>({
     mode: 'all',
@@ -46,6 +47,12 @@ export default function Addresses(): JSX.Element {
   const chooseAddress = (e: ChangeEvent): void => {
     const addressInput = e.target as HTMLInputElement;
     setValue(addressInput.checked);
+    clearErrors([
+      'billing.street',
+      'billing.city',
+      'billing.country',
+      'billing.postcode',
+    ]);
   };
 
   function checkPostalCodeShipping(data: string): boolean {
