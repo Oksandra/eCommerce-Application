@@ -5,6 +5,14 @@ export interface ButtonOptions {
   onClick?: () => void;
 }
 
+export interface AuthContextProps {
+  user: User;
+  signin: (newUser: User, cb: () => void) => void;
+  signout: (cb: () => void) => void;
+}
+
+export type User = string | null;
+
 export interface MyForm {
   email: string;
   password: string;

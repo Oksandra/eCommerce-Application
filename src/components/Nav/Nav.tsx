@@ -1,8 +1,12 @@
 import React from 'react';
 import './Nav.scss';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 export const Nav: React.FC = () => {
+  const { user } = useAuth();
+  const logLink = user ? '/logout' : '/login';
+
   return (
     <nav className="nav">
       <ul className="nav__list">
@@ -22,8 +26,8 @@ export const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li className="nav__item">
-          <NavLink className="nav__link" to="/login">
-            LOG IN | SIGN UP
+          <NavLink className="nav__link" to={logLink}>
+            {user ? 'LOG OUT' : 'LOG IN | SIGN UP'}
           </NavLink>
         </li>
       </ul>

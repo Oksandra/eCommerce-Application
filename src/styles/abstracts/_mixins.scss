@@ -12,3 +12,9 @@
     background-color: $color;
   }
 }
+
+@mixin media-small-tablet {
+  @media screen and (max-width: $tablet-small-width) {
+    @content;
+  }
+}
