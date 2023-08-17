@@ -38,3 +38,28 @@ export interface Option {
 export interface ArrayObjectSelectState {
   selectedOption: Option | null;
 }
+
+export interface Customer {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  dateBirth: string;
+  address: BaseAddress;
+  defaultBillingAddress: number;
+  defaultShippingAddress: number;
+}
+
+export interface BaseAddress {
+  shipping: CustomerAddress;
+  billing: CustomerAddress;
+}
+
+interface CustomerAddress {
+  key: string;
+  country: string;
+  city: string;
+  street: string;
+  postalCode: string;
+}
