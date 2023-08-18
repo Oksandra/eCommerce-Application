@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { ChangeEvent, useState, Dispatch, SetStateAction } from 'react';
+import { useForm, UseFormRegister, FieldErrors } from 'react-hook-form';
 import Select from 'react-select';
 import { postcodeValidator } from 'postcode-validator';
 import {
@@ -11,26 +11,30 @@ import { countries } from './countries';
 import options from './options';
 import clickButtonAddress from '../../helpers/clickButtonAddress';
 
-export default function Addresses(): JSX.Element {
-  const {
-    register,
-    formState: { errors },
-    clearErrors,
-    watch,
-  } = useForm<MyForm>({
+interface AddressesProps {
+  register: UseFormRegister<MyForm>;
+  errors: FieldErrors<MyForm>;
+  isValid: boolean;
+  setSelectedOption: Dispatch<SetStateAction<ArrayObjectSelectState>>;
+  selectedOption: ArrayObjectSelectState;
+  selectedCountry: ArrayObjectSelectState;
+  setSelectedCountry: Dispatch<SetStateAction<ArrayObjectSelectState>>;
+}
+
+const Addresses: React.FC<AddressesProps> = ({
+  register,
+  errors,
+  isValid,
+  setSelectedOption,
+  selectedOption,
+  selectedCountry,
+  setSelectedCountry,
+}): JSX.Element => {
+  const { clearErrors, watch } = useForm<MyForm>({
     mode: 'all',
   });
 
   const [value, setValue] = useState(false);
-
-  const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
-    selectedOption: null,
-  });
-
-  const [selectedCountry, setSelectedCountry] =
-    useState<ArrayObjectSelectState>({
-      selectedOption: null,
-    });
 
   const watchValues = watch([
     'shipping.street',
@@ -135,13 +139,7 @@ export default function Addresses(): JSX.Element {
             Country <span className="star">*</span>
             <Select
               className="address__country-select"
-              aria-invalid={errors.shipping?.country ? 'true' : 'false'}
-              {...register('shipping.country', {
-                required: {
-                  value: true,
-                  message: 'The field is required!',
-                },
-              })}
+              {...register('shipping.country')}
               value={selectedOption.selectedOption}
               options={options}
               onChange={(option: Option | null): void => {
@@ -185,6 +183,7 @@ export default function Addresses(): JSX.Element {
               id="check"
               type="checkbox"
               className="compare-address"
+              checked={value}
               onChange={chooseAddress}
             />
             Set as address for shipping and billing
@@ -237,13 +236,7 @@ export default function Addresses(): JSX.Element {
             Country
             <Select
               className="address__country-select"
-              aria-invalid={errors.billing?.country ? 'true' : 'false'}
-              {...register('billing.country', {
-                required: {
-                  value: true,
-                  message: 'The field is required!',
-                },
-              })}
+              {...register('shipping.country')}
               value={
                 value
                   ? selectedOption.selectedOption
@@ -290,6 +283,15 @@ export default function Addresses(): JSX.Element {
           </label>
         </section>
       </div>
+      <button
+        className="registration-form__button"
+        type="submit"
+        disabled={!isValid}
+      >
+        Register
+      </button>
     </div>
   );
-}
+};
+
+export default Addresses;

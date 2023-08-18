@@ -1,9 +1,12 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import React from 'react';
+import React, { useState } from 'react';
 import './RegistrationForm.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import checkDateBirth from '../../helpers/checkDateBirth';
-import { MyForm, Customer } from '../../interfaces/interfaces';
+import {
+  MyForm,
+  Customer,
+  ArrayObjectSelectState,
+} from '../../interfaces/interfaces';
 import Addresses from '../Addresses/Adressess';
 import createCustomer from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
@@ -21,12 +24,22 @@ function RegistrationForm(): JSX.Element {
     mode: 'all',
   });
 
+  const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
+    selectedOption: null,
+  });
+
+  const [selectedCountry, setSelectedCountry] =
+    useState<ArrayObjectSelectState>({
+      selectedOption: null,
+    });
+
   const submit: SubmitHandler<MyForm> = (data) => {
+    console.log(data.shipping.country);
     const countryCodeShipping = countries.find(
-      (country) => country.country === data.shipping.country
+      (country) => country.country === selectedOption.selectedOption?.value
     )?.code as string;
     const countryCodeBilling = countries.find(
-      (country) => country.country === data.billing.country
+      (country) => country.country === selectedCountry.selectedOption?.value
     )?.code as string;
     const body: Customer = {
       id: '200',
@@ -171,14 +184,15 @@ function RegistrationForm(): JSX.Element {
             )}
           </div>
         </div>
-        <Addresses />
-        <button
-          className="registration-form__button"
-          type="submit"
-          disabled={!isValid}
-        >
-          Register
-        </button>
+        <Addresses
+          register={register}
+          errors={errors}
+          isValid={isValid}
+          setSelectedOption={setSelectedOption}
+          selectedOption={selectedOption}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
       </form>
     </div>
   );
