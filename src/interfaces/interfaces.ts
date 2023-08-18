@@ -42,13 +42,14 @@ export interface ArrayObjectSelectState {
 }
 
 export interface Customer {
-  id: string;
   email: string;
   password: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
   addresses: BaseAddress[];
-  defaultBillingAddress: number;
-  defaultShippingAddress: number;
+  shippingAddresses: number[];
+  billingAddresses: number[];
+  defaultBillingAddress?: number;
+  defaultShippingAddress?: number;
 }

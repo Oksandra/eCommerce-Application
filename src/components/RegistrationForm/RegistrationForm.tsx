@@ -11,8 +11,8 @@ import Addresses from '../Addresses/Adressess';
 import createCustomer from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
 
-const keyShipping = 'shippingAddress';
-const keyBilling = 'billingAddress';
+const keyShipping = 'shipping';
+const keyBilling = 'billing';
 
 function RegistrationForm(): JSX.Element {
   const {
@@ -34,7 +34,6 @@ function RegistrationForm(): JSX.Element {
     });
 
   const submit: SubmitHandler<MyForm> = (data) => {
-    console.log(data.shipping.country);
     const countryCodeShipping = countries.find(
       (country) => country.country === selectedOption.selectedOption?.value
     )?.code as string;
@@ -42,7 +41,6 @@ function RegistrationForm(): JSX.Element {
       (country) => country.country === selectedCountry.selectedOption?.value
     )?.code as string;
     const body: Customer = {
-      id: '200',
       email: data.email,
       password: data.password,
       firstName: data.firstName,
@@ -59,13 +57,13 @@ function RegistrationForm(): JSX.Element {
         {
           key: keyBilling,
           country: countryCodeBilling,
-          city: data.shipping.city,
-          streetName: data.shipping.street,
-          postalCode: data.shipping.postcode,
+          city: data.billing.city,
+          streetName: data.billing.street,
+          postalCode: data.billing.postcode,
         },
       ],
-      defaultBillingAddress: 0,
-      defaultShippingAddress: 0,
+      shippingAddresses: [0],
+      billingAddresses: [1],
     };
     createCustomer(body).then((resp) => console.log(resp));
     reset();
