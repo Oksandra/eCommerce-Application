@@ -1,6 +1,12 @@
 import SdkAuth from '@commercetools/sdk-auth';
 import fetch from 'node-fetch';
+import { TokenInfo } from '@commercetools/sdk-client-v2';
 import { projectKeyApi } from './BuildClient';
+import { UserLogin } from '../interfaces/interfaces';
+
+interface DisableToken {
+  disableRefreshToken: boolean;
+}
 
 const authClient = new SdkAuth({
   host: 'https://auth.commercetools.com',
@@ -14,4 +20,11 @@ const authClient = new SdkAuth({
   fetch,
 });
 
-const token = authClient.clientCredentialsFlow();
+const loginCustomer = async (
+  user: UserLogin,
+  disableToken: DisableToken
+): Promise<TokenInfo> => {
+  return authClient.customerPasswordFlow(user, disableToken);
+};
+
+export default loginCustomer;
