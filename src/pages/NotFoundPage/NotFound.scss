@@ -1,4 +1,5 @@
 @import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/mixins';
 
 .not-found {
   display: flex;
@@ -10,18 +11,28 @@
 
   &__title {
     font-size: 30rem;
+    @include media-small-tablet {
+      font-size: 20rem;
+    }
   }
 
   &__subtitle {
     margin-bottom: 4rem;
     font-size: 4rem;
     font-weight: normal;
+    @include media-small-tablet {
+      font-size: 2rem;
+      argin-bottom: 3rem;
+    }
   }
 
   &__underline {
     width: 26rem;
     margin-bottom: 5rem;
     border-bottom: $border-dark;
+    @include media-small-tablet {
+      width: 20rem;
+    }
   }
 
   &__text {
@@ -30,10 +41,17 @@
     text-align: center;
     font-size: 2rem;
     color: $border-color;
+    @include media-small-tablet {
+      width: 20rem;
+    }
   }
 
   &__button {
     padding: 1.5rem 3.5rem;
     font-size: 2rem;
+    @include media-small-tablet {
+      font-size: 1.5rem;
+      padding: 1rem 2.5rem;
+    }
   }
 }
