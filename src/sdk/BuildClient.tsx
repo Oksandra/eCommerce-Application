@@ -4,7 +4,9 @@ import {
 
   // Import middlewares
   type AuthMiddlewareOptions, // Required for auth
-  type HttpMiddlewareOptions, // Required for sending HTTP requests
+  type HttpMiddlewareOptions,
+  PasswordAuthMiddlewareOptions,
+  Client,
 } from '@commercetools/sdk-client-v2';
 
 const oauthUri = 'https://auth.europe-west1.gcp.commercetools.com';
@@ -41,4 +43,27 @@ const ctpClient = new ClientBuilder() // .withProjectKey() is not required if th
   .withLoggerMiddleware() // Include middleware for logging
   .build();
 
-export { ctpClient, projectKeyApi };
+const loginRequest = (userLogin: string, userPassword: string): Client => {
+  const passwordOptions: PasswordAuthMiddlewareOptions = {
+    host: oauthUri,
+    projectKey: projectKeyApi,
+    credentials: {
+      clientId: credentials.clientId,
+      clientSecret: credentials.clientSecret,
+      user: {
+        username: userLogin,
+        password: userPassword,
+      },
+    },
+    scopes,
+    fetch,
+  };
+
+  return new ClientBuilder()
+    .withPasswordFlow(passwordOptions)
+    .withHttpMiddleware(httpMiddlewareOptions)
+    .withLoggerMiddleware() // Include middleware for logging
+    .build();
+};
+
+export { ctpClient, projectKeyApi, loginRequest };

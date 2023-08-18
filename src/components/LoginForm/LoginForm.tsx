@@ -5,6 +5,7 @@ import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
 import { useAuth } from '../../hooks/useAuth';
+import loginCustomer from '../../sdk/loginCustomer';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -48,7 +49,10 @@ export const LoginForm: FC = () => {
       return;
 
     // TO DO: add API Authentication
-    console.log(loginForm.login);
+    loginCustomer(loginForm.login, loginForm.password).then((resp) =>
+      console.log(resp)
+    );
+
     const user: string = loginForm.login;
     signin(user, () => navigate('/', { replace: true }));
     localStorage.setItem('user', user);
