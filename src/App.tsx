@@ -23,7 +23,14 @@ function App(): JSX.Element {
               </AccessLimitAuth>
             }
           />
-          <Route path="registration" element={<RegistrationForm />} />
+          <Route
+            path="registration"
+            element={
+              <AccessLimitAuth>
+                <RegistrationForm />
+              </AccessLimitAuth>
+            }
+          />
           <Route
             path="catalog"
             element={<div className="center-align">Here is the catalog!</div>}
