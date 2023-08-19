@@ -13,7 +13,7 @@
   &__logo,
   &__team,
   &__year {
-    width: 15rem;
+    width: 150px;
   }
 
   &__team {
@@ -24,6 +24,15 @@
     }
     &.active {
       text-shadow: $link-hover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    gap: 7%;
+
+    &__year {
+      text-align: center;
     }
   }
 }
