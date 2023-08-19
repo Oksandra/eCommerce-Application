@@ -33,6 +33,8 @@ function RegistrationForm(): JSX.Element {
       selectedOption: null,
     });
 
+  const [isBillingAddressSame, setIsBillingAddressSame] = useState(false);
+
   const submit: SubmitHandler<MyForm> = (data) => {
     const countryCodeShipping = countries.find(
       (country) => country.country === selectedOption.selectedOption?.value
@@ -190,6 +192,8 @@ function RegistrationForm(): JSX.Element {
           selectedOption={selectedOption}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
+          isBillingAddressSame={isBillingAddressSame}
+          setIsBillingAddressSame={setIsBillingAddressSame}
         />
       </form>
     </div>
