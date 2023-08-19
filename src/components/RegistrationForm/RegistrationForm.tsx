@@ -126,7 +126,8 @@ function RegistrationForm(): JSX.Element {
                 value: 8,
                 message: 'Minimum 8 characters!',
               },
-              pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/g,
+              pattern:
+                /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g,
             })}
           />
           <div className="input-error">
