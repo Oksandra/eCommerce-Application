@@ -13,6 +13,7 @@
   &__logo,
   &__team,
   &__year {
+    font-size: 1.5rem;
     width: 150px;
   }
 
@@ -30,6 +31,13 @@
   @media (max-width: 768px) {
     padding: 2rem 1rem;
     gap: 7%;
+
+    &__logo,
+    &__team,
+    &__year {
+      font-size: 1.9rem;
+      width: 130px;
+    }
 
     &__year {
       text-align: center;
