@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './RegistrationForm.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import {
   MyForm,
@@ -35,6 +36,10 @@ function RegistrationForm(): JSX.Element {
 
   const [isBillingAddressSame, setIsBillingAddressSame] = useState(false);
 
+  const [isShippingAddressDefault, setShippingAddressDefault] = useState(false);
+
+  const [isBillingAddressDefault, setBillingAddressDefault] = useState(false);
+
   const submit: SubmitHandler<MyForm> = (data) => {
     const countryCodeShipping = countries.find(
       (country) => country.country === selectedOption.selectedOption?.value
@@ -42,31 +47,47 @@ function RegistrationForm(): JSX.Element {
     const countryCodeBilling = countries.find(
       (country) => country.country === selectedCountry.selectedOption?.value
     )?.code as string;
+    const shippingAddress: BaseAddress = {
+      key: keyShipping,
+      country: countryCodeShipping,
+      city: data.shipping.city,
+      streetName: data.shipping.street,
+      postalCode: data.shipping.postcode,
+    };
+    const billingAddress: BaseAddress = {
+      key: keyBilling,
+      country: countryCodeBilling,
+      city: data.billing.city,
+      streetName: data.billing.street,
+      postalCode: data.billing.postcode,
+    };
+    const addressRequest: BaseAddress[] = [];
     const body: Customer = {
       email: data.email,
       password: data.password,
       firstName: data.firstName,
       lastName: data.lastName,
       dateOfBirth: data.dateOfBirth,
-      addresses: [
-        {
-          key: keyShipping,
-          country: countryCodeShipping,
-          city: data.shipping.city,
-          streetName: data.shipping.street,
-          postalCode: data.shipping.postcode,
-        },
-        {
-          key: keyBilling,
-          country: countryCodeBilling,
-          city: data.billing.city,
-          streetName: data.billing.street,
-          postalCode: data.billing.postcode,
-        },
-      ],
+      addresses: addressRequest,
       shippingAddresses: [0],
-      billingAddresses: [1],
     };
+    addressRequest.push(shippingAddress);
+    if (isBillingAddressSame) {
+      body.billingAddresses = [0];
+    } else if (!isBillingAddressSame) {
+      addressRequest.push(billingAddress);
+      body.billingAddresses = [1];
+    }
+    if (isBillingAddressSame && isShippingAddressDefault) {
+      body.defaultShippingAddress = 0;
+      body.billingAddresses = [0];
+    }
+    if (isShippingAddressDefault) {
+      body.defaultShippingAddress = 0;
+    }
+    if (isBillingAddressDefault) {
+      body.defaultBillingAddress = 1;
+    }
     createCustomer(body).then((resp) => console.log(resp));
     reset();
   };
@@ -194,6 +215,8 @@ function RegistrationForm(): JSX.Element {
           setSelectedCountry={setSelectedCountry}
           isBillingAddressSame={isBillingAddressSame}
           setIsBillingAddressSame={setIsBillingAddressSame}
+          setShippingAddressDefault={setShippingAddressDefault}
+          setBillingAddressDefault={setBillingAddressDefault}
         />
       </form>
     </div>

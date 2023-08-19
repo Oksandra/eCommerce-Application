@@ -21,6 +21,8 @@ interface AddressesProps {
   setSelectedCountry: Dispatch<SetStateAction<ArrayObjectSelectState>>;
   isBillingAddressSame: boolean;
   setIsBillingAddressSame: Dispatch<SetStateAction<boolean>>;
+  setShippingAddressDefault: Dispatch<SetStateAction<boolean>>;
+  setBillingAddressDefault: Dispatch<SetStateAction<boolean>>;
 }
 
 const Addresses: React.FC<AddressesProps> = ({
@@ -32,6 +34,8 @@ const Addresses: React.FC<AddressesProps> = ({
   setSelectedCountry,
   isBillingAddressSame,
   setIsBillingAddressSame,
+  setShippingAddressDefault,
+  setBillingAddressDefault,
 }): JSX.Element => {
   const { clearErrors, setFocus } = useForm<MyForm>({
     mode: 'all',
@@ -57,7 +61,15 @@ const Addresses: React.FC<AddressesProps> = ({
     clearErrors('billing.postcode');
   };
 
-  console.log(errors);
+  const chooseShippingAddressDefault = (e: ChangeEvent): void => {
+    const addressInput = e.target as HTMLInputElement;
+    setShippingAddressDefault(addressInput.checked);
+  };
+
+  const chooseBillingAddressDefault = (e: ChangeEvent): void => {
+    const addressInput = e.target as HTMLInputElement;
+    setBillingAddressDefault(addressInput.checked);
+  };
 
   function checkPostalCodeShipping(data: string): boolean {
     const selected = selectedOption.selectedOption?.value;
@@ -189,7 +201,11 @@ const Addresses: React.FC<AddressesProps> = ({
             htmlFor="check-shipping"
             className="registration-form__check-address"
           >
-            <input id="check-shipping" type="checkbox" />
+            <input
+              id="check-shipping"
+              type="checkbox"
+              onChange={chooseShippingAddressDefault}
+            />
             Save as default address
           </label>
           <label htmlFor="check" className="registration-form__check-address">
@@ -303,7 +319,12 @@ const Addresses: React.FC<AddressesProps> = ({
             htmlFor="check-billing"
             className="registration-form__check-address"
           >
-            <input id="check-billing" type="checkbox" />
+            <input
+              id="check-billing"
+              type="checkbox"
+              onChange={chooseBillingAddressDefault}
+              disabled={isBillingAddressSame}
+            />
             Save as default address
           </label>
         </section>

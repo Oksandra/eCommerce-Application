@@ -49,7 +49,7 @@ export interface Customer {
   dateOfBirth: string;
   addresses: BaseAddress[];
   shippingAddresses: number[];
-  billingAddresses: number[];
+  billingAddresses?: number[];
   defaultBillingAddress?: number;
   defaultShippingAddress?: number;
 }
