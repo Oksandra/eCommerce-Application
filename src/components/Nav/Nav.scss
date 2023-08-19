@@ -37,6 +37,8 @@
   }
 
   @media (max-width: 768px) {
-    font-size: 10px
+    &__link {
+      font-size: 12px;
+    }
   }
 }
