@@ -1,5 +1,6 @@
 import React from 'react';
 import './RegistrationForm.scss';
+import { Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import { MyForm } from '../../interfaces/interfaces';
@@ -141,6 +142,12 @@ function RegistrationForm(): JSX.Element {
         >
           Register
         </button>
+        <p className="registration-form__text">
+          Already have an account?
+          <Link className="registration-form__link" to="/login">
+            Log In
+          </Link>
+        </p>
       </form>
     </div>
   );
