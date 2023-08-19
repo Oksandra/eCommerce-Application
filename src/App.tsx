@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import { LayoutPage } from './containers/LayoutPage/LayoutPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginForm } from './components/LoginForm/LoginForm';
@@ -65,7 +65,25 @@ function App(): JSX.Element {
           />
           <Route
             index
-            element={<div className="center-align">Home Page!</div>}
+            element={
+              <div className="center-align">
+                Home Page!
+                <p style={{ marginTop: '2rem' }}>
+                  {'Ссылки на '}
+                  <Link to="/login" style={{ textDecoration: 'underline' }}>
+                    Log in
+                  </Link>
+                  {' и '}
+                  <Link
+                    to="/registration"
+                    style={{ textDecoration: 'underline' }}
+                  >
+                    Sign up
+                  </Link>
+                  {' для кросс-чека'}
+                </p>
+              </div>
+            }
           />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

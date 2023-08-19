@@ -8,7 +8,6 @@
     height: 6rem;
     @extend %flex-j-cont;
     border-top: $border-light;
-    border-bottom: $border-light;
   }
   &__item {
     height: 6rem;
@@ -34,6 +33,12 @@
       @include media-small-tablet {
         margin-left: 0.7rem;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__link {
+      font-size: 12px;
     }
   }
 }
