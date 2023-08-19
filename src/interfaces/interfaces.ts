@@ -38,3 +38,8 @@ export interface Option {
 export interface ArrayObjectSelectState {
   selectedOption: Option | null;
 }
+
+export interface UserLogin {
+  username: string;
+  password: string;
+}
