@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .nav {
   &__list {
@@ -27,6 +28,11 @@
     }
     &.active {
       text-shadow: $link-hover;
+    }
+    &:last-child {
+      @include media-small-tablet {
+        margin-left: 0.7rem;
+      }
     }
   }
 
