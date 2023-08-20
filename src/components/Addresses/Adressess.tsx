@@ -330,7 +330,7 @@ const Addresses: React.FC<AddressesProps> = ({
         </section>
       </div>
       <button className="registration-form__button" type="submit">
-        Register
+        Sign in
       </button>
     </div>
   );
