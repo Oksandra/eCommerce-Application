@@ -38,20 +38,20 @@
     }
     &[data-type='error'],
     &[data-type='error-server'] {
-      background-color: #fb6542;
+      background-color: $color-error;
       animation: shake 0.54s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
       &:after {
-        border-left: 3px solid #fb6542;
-        border-bottom: 5px solid #fb6542;
-        background: #fb6542;
+        border-left: 3px solid $color-error;
+        border-bottom: 5px solid $color-error;
+        background: $color-error;
       }
     }
     &[data-type='success'] {
-      background-color: #3f681c;
+      background-color: $color-success;
       &:after {
-        border-left: 3px solid #3f681c;
-        border-bottom: 5px solid #3f681c;
-        background: #3f681c;
+        border-left: 3px solid $color-success;
+        border-bottom: 5px solid $color-success;
+        background: $color-success;
       }
     }
   }
