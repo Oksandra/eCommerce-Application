@@ -2,7 +2,7 @@
 .modal {
   width: 100vw;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
@@ -15,7 +15,7 @@
   }
   &__content {
     max-height: 12em;
-    margin: 5em auto 1em auto;
+    margin: 10em auto 1em auto;
     padding: 1.5rem 1.5rem;
     background-color: $light-color;
     backface-visibility: hidden;
