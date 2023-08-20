@@ -1,0 +1,79 @@
+@import '../../styles/abstracts/constants';
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  margin: 0 auto;
+  transition: height 0.45s ease-in-out;
+  display: none;
+  z-index: 5;
+  &.active {
+    display: block;
+  }
+  &__content {
+    max-height: 12em;
+    margin: 5em auto 1em auto;
+    padding: 1.5rem 1.5rem;
+    background-color: $light-color;
+    backface-visibility: hidden;
+    width: 35vw;
+    border-radius: 4px;
+    transform: translateZ(0);
+    z-index: 10;
+    transition: all 0.2s linear;
+    color: $light-color;
+    box-sizing: border-box;
+    &:after {
+        content: '';
+        width: 10px;
+        height: 15px;
+        position: absolute;
+        bottom: -7px;
+        left: 20px;
+        transform: skewX(-30deg) skewY(-48deg);
+        z-index: 5;
+    }
+    &[data-type='error'],
+    &[data-type='error-server'] {
+      background-color: #fb6542;
+      animation: shake 0.54s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      &:after {
+        border-left: 3px solid #fb6542;
+        border-bottom: 5px solid #fb6542;
+        background: #fb6542;
+      }
+    }
+    &[data-type='success'] {
+      background-color: #3f681c;
+      &:after {
+        border-left: 3px solid #3f681c;
+        border-bottom: 5px solid #3f681c;
+        background: #3f681c;
+      }
+    }
+    
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RegistrationForm.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { BaseAddress } from '@commercetools/platform-sdk';
+import { BaseAddress, ErrorResponse } from '@commercetools/platform-sdk';
 import checkDateBirth from '../../helpers/checkDateBirth';
 import {
   MyForm,
@@ -11,6 +11,7 @@ import {
 import Addresses from '../Addresses/Adressess';
 import createCustomer from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
+import Modal from '../Modal/Modal';
 
 const keyShipping = 'shipping';
 const keyBilling = 'billing';
@@ -28,6 +29,9 @@ function RegistrationForm(): JSX.Element {
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
+
+  const [modalActive, setModalActive] = useState(false);
+  const [resultType, setResultType] = useState('');
 
   const [selectedCountry, setSelectedCountry] =
     useState<ArrayObjectSelectState>({
@@ -89,7 +93,25 @@ function RegistrationForm(): JSX.Element {
     if (isBillingAddressDefault) {
       body.defaultBillingAddress = 1;
     }
-    createCustomer(body).then((resp) => console.log(resp));
+    createCustomer(body)
+      .then(() => {
+        setResultType('success');
+        setModalActive(true);
+        setTimeout(() => {
+          setModalActive(false);
+        }, 5000);
+      })
+      .catch((error: ErrorResponse) => {
+        if (error.statusCode === 400) {
+          setResultType('error');
+        } else if (error.statusCode === 503) {
+          setResultType('error-server');
+        }
+        setModalActive(true);
+        setTimeout(() => {
+          setModalActive(false);
+        }, 5000);
+      });
     reset();
   };
 
@@ -221,6 +243,7 @@ function RegistrationForm(): JSX.Element {
           setBillingAddressDefault={setBillingAddressDefault}
         />
       </form>
+      <Modal active={modalActive} resultType={resultType} />
     </div>
   );
 }

@@ -5,6 +5,8 @@
   margin: 0 auto;
   background-color: $light-color;
   margin-top: 5rem;
+  position: relative;
+  z-index: 1;
   .registration-form {
     width: 100%;
     padding: 1rem;
