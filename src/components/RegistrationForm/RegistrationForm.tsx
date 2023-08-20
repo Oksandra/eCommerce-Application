@@ -45,6 +45,13 @@ function RegistrationForm(): JSX.Element {
 
   const [isBillingAddressDefault, setBillingAddressDefault] = useState(false);
 
+  const openModal = (): void => {
+    setModalActive(true);
+    setTimeout(() => {
+      setModalActive(false);
+    }, 5000);
+  };
+
   const submit: SubmitHandler<MyForm> = (data) => {
     const countryCodeShipping = countries.find(
       (country) => country.country === selectedOption.selectedOption?.value
@@ -97,10 +104,7 @@ function RegistrationForm(): JSX.Element {
     createCustomer(body)
       .then(() => {
         setResultType('success');
-        setModalActive(true);
-        setTimeout(() => {
-          setModalActive(false);
-        }, 5000);
+        openModal();
       })
       .catch((error: ErrorResponse) => {
         if (error.statusCode === 400) {
@@ -108,10 +112,7 @@ function RegistrationForm(): JSX.Element {
         } else if (error.statusCode === 503) {
           setResultType('error-server');
         }
-        setModalActive(true);
-        setTimeout(() => {
-          setModalActive(false);
-        }, 5000);
+        openModal();
       });
     reset();
   };

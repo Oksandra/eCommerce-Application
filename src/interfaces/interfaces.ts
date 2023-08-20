@@ -43,7 +43,7 @@ export interface ArrayObjectSelectState {
 
 export interface Customer {
   email: string;
-  password: string;
+  password: string | undefined;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
