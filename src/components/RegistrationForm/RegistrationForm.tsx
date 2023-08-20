@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RegistrationForm.scss';
+import { Link } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BaseAddress, ErrorResponse } from '@commercetools/platform-sdk';
 import checkDateBirth from '../../helpers/checkDateBirth';
@@ -242,6 +243,12 @@ function RegistrationForm(): JSX.Element {
           setShippingAddressDefault={setShippingAddressDefault}
           setBillingAddressDefault={setBillingAddressDefault}
         />
+        <p className="registration-form__text">
+          Already have an account?
+          <Link className="registration-form__link" to="/login">
+            Log In
+          </Link>
+        </p>
       </form>
       <Modal active={modalActive} resultType={resultType} />
     </div>

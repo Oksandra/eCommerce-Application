@@ -90,4 +90,14 @@
       background-color: $muted-color;
     }
   }
+
+  @media (max-width: 768px) {
+    &__error {
+      margin-top: -2.5rem;
+    }
+
+    &__password-btn {
+      width: 36%;
+    }
+  }
 }

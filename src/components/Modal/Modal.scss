@@ -27,14 +27,14 @@
     color: $light-color;
     box-sizing: border-box;
     &:after {
-        content: '';
-        width: 10px;
-        height: 15px;
-        position: absolute;
-        bottom: -7px;
-        left: 20px;
-        transform: skewX(-30deg) skewY(-48deg);
-        z-index: 5;
+      content: '';
+      width: 10px;
+      height: 15px;
+      position: absolute;
+      bottom: -7px;
+      left: 20px;
+      transform: skewX(-30deg) skewY(-48deg);
+      z-index: 5;
     }
     &[data-type='error'],
     &[data-type='error-server'] {
@@ -54,7 +54,6 @@
         background: #3f681c;
       }
     }
-    
   }
 }
 

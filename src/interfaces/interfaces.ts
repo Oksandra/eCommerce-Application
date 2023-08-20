@@ -53,3 +53,7 @@ export interface Customer {
   defaultBillingAddress?: number;
   defaultShippingAddress?: number;
 }
+export interface UserLogin {
+  username: string;
+  password: string;
+}

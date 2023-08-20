@@ -4,7 +4,7 @@
 .footer {
   @extend %flex-center-cont;
   align-items: center;
-  margin-top: 10rem;
+  margin-top: 5rem;
   gap: 10%;
   padding: 2rem 3rem;
   color: $light-color;
@@ -13,7 +13,8 @@
   &__logo,
   &__team,
   &__year {
-    width: 15rem;
+    font-size: 1.5rem;
+    width: 150px;
   }
 
   &__team {
@@ -24,6 +25,22 @@
     }
     &.active {
       text-shadow: $link-hover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    gap: 7%;
+
+    &__logo,
+    &__team,
+    &__year {
+      font-size: 1.9rem;
+      width: 130px;
+    }
+
+    &__year {
+      text-align: center;
     }
   }
 }

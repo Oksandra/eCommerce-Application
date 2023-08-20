@@ -5,6 +5,7 @@ import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
 import { useAuth } from '../../hooks/useAuth';
+import loginCustomer from '../../sdk/loginCustomer';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -18,8 +19,10 @@ export const LoginForm: FC = () => {
   const [passwordError, setPasswordError] = useState<string>('');
   const { signin } = useAuth();
   const navigate = useNavigate();
+  const [submitError, setSubmitError] = useState<boolean>(false);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    setSubmitError(false);
     const { name, value } = e.target;
     setLoginForm({
       ...loginForm,
@@ -47,11 +50,16 @@ export const LoginForm: FC = () => {
     )
       return;
 
-    // TO DO: add API Authentication
-    console.log(loginForm.login);
-    const user: string = loginForm.login;
-    signin(user, () => navigate('/', { replace: true }));
-    localStorage.setItem('user', user);
+    loginCustomer(loginForm.login, loginForm.password)
+      .then((resp) => {
+        const user: string = resp.body.customer.id;
+        signin(user, () => navigate('/', { replace: true }));
+        localStorage.setItem('user', user);
+      })
+      .catch((err) => {
+        setSubmitError(true);
+        console.log(err);
+      });
   }
 
   return (
@@ -94,6 +102,14 @@ export const LoginForm: FC = () => {
       >
         Log in
       </button>
+      {submitError && (
+        <span
+          className="login-form__error"
+          style={{ margin: '0 auto', paddingTop: '1rem' }}
+        >
+          Login or password is incorrect
+        </span>
+      )}
       <p className="login-form__text">
         Don❜t have an account?
         <Link className="login-form__link" to="/registration">

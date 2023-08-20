@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .nav {
   &__list {
@@ -7,7 +8,6 @@
     height: 6rem;
     @extend %flex-j-cont;
     border-top: $border-light;
-    border-bottom: $border-light;
   }
   &__item {
     height: 6rem;
@@ -28,6 +28,17 @@
     }
     &.active {
       text-shadow: $link-hover;
+    }
+    &:last-child {
+      @include media-small-tablet {
+        margin-left: 0.7rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__link {
+      font-size: 12px;
     }
   }
 }
