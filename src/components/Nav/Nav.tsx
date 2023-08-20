@@ -8,9 +8,19 @@ export const Nav: React.FC = () => {
   const { user } = useAuth();
   const logLink = user ? '/logout' : '/login';
   const headerContext = useContext(HeaderContext) === 'true';
+  const burger: HTMLButtonElement | null = document.querySelector('.burger');
+  function clickLink(): void {
+    if (burger !== null) {
+      burger.click();
+    }
+  }
 
   return (
-    <nav className={`nav ${headerContext ? 'nav_active' : ''}`}>
+    <nav
+      className={`nav ${headerContext ? 'nav_active' : ''}`}
+      onClick={(): void => clickLink()}
+      aria-hidden="true"
+    >
       <ul className="nav__list">
         <li className="nav__item">
           <NavLink className="nav__link" to="/">
