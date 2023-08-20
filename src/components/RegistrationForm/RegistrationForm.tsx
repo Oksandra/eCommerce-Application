@@ -81,6 +81,7 @@ function RegistrationForm(): JSX.Element {
     if (isBillingAddressSame && isShippingAddressDefault) {
       body.defaultShippingAddress = 0;
       body.billingAddresses = [0];
+      body.defaultBillingAddress = 0;
     }
     if (isShippingAddressDefault) {
       body.defaultShippingAddress = 0;
