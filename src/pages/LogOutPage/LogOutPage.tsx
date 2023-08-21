@@ -14,7 +14,7 @@ const LogOutPage: React.FC = () => {
         type="button"
         onClick={(): void => {
           signout(() => navigate('/', { replace: true }));
-          localStorage.removeItem('user');
+          localStorage.removeItem('userWin4ik');
         }}
       >
         Log Out
