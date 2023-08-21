@@ -121,6 +121,8 @@ function RegistrationForm(): JSX.Element {
           setResultType('error-server');
         }
         openModal();
+        setShippingAddressDefault(false);
+        setBillingAddressDefault(false);
       });
     reset();
   };
