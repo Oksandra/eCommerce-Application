@@ -3,6 +3,7 @@
 @import '../../styles/abstracts/mixins';
 
 .nav {
+  @extend %transition;
   &__list {
     width: 100%;
     height: 6rem;
@@ -41,4 +42,36 @@
       font-size: 12px;
     }
   }
+
+  @media (max-width: 455px) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: $background-color;
+    opacity: 0.9;
+    z-index: 1;
+    transform: translateX(100%);
+
+    &__list {
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      border: none;
+    }
+
+    &__item {
+      border: none;
+      margin-bottom: 2rem;
+    }
+
+    &__link {
+      font-size: 4rem;
+    }
+  }
+}
+
+.nav_active {
+  transform: translateX(0%);
 }
