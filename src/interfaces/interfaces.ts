@@ -1,3 +1,5 @@
+import { BaseAddress } from '@commercetools/platform-sdk';
+
 export interface ButtonOptions {
   className: string;
   textContent: string;
@@ -39,6 +41,18 @@ export interface ArrayObjectSelectState {
   selectedOption: Option | null;
 }
 
+export interface Customer {
+  email: string;
+  password: string | undefined;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  addresses: BaseAddress[];
+  shippingAddresses: number[];
+  billingAddresses?: number[];
+  defaultBillingAddress?: number;
+  defaultShippingAddress?: number;
+}
 export interface UserLogin {
   username: string;
   password: string;
