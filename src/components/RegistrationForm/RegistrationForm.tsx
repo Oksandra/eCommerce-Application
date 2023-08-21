@@ -112,7 +112,7 @@ function RegistrationForm(): JSX.Element {
         setResultType('success');
         const user: string = resp.body.customer.id;
         openModal(user);
-        localStorage.setItem('user', user);
+        localStorage.setItem('userWin4ik', user);
       })
       .catch((error: ErrorResponse) => {
         if (error.statusCode === 400) {

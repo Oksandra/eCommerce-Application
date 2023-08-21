@@ -54,7 +54,7 @@ export const LoginForm: FC = () => {
       .then((resp) => {
         const user: string = resp.body.customer.id;
         signin(user, () => navigate('/', { replace: true }));
-        localStorage.setItem('user', user);
+        localStorage.setItem('userWin4ik', user);
       })
       .catch(() => {
         setSubmitError(true);
