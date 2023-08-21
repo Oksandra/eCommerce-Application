@@ -244,7 +244,7 @@ const Addresses: React.FC<AddressesProps> = ({
             disabled={isBillingAddressSame}
           />
           <div className="input-error">
-            {errors.billing?.street && !isBillingAddressSame && (
+            {errors.billing?.street && (
               <p id="billing-street-error">
                 Billing street is required and must contain at least one
                 character!
@@ -269,7 +269,7 @@ const Addresses: React.FC<AddressesProps> = ({
             disabled={isBillingAddressSame}
           />
           <div className="input-error">
-            {errors.billing?.city && !isBillingAddressSame && (
+            {errors.billing?.city && (
               <p id="billing-city-error">
                 {errors.billing.city.message ||
                   'Billing city must not contain special characters or numbers!'}
@@ -318,7 +318,7 @@ const Addresses: React.FC<AddressesProps> = ({
             disabled={isBillingAddressSame}
           />{' '}
           <div className="input-error">
-            {errors.billing?.postcode && !isBillingAddressSame && (
+            {errors.billing?.postcode && (
               <p id="billing-code-error">
                 {errors.billing.postcode.message || 'Incorrect postal code!'}
               </p>
