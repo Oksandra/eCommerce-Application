@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './RegistrationForm.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { BaseAddress, ErrorResponse } from '@commercetools/platform-sdk';
 import checkDateBirth from '../../helpers/checkDateBirth';
@@ -13,11 +13,14 @@ import Addresses from '../Addresses/Adressess';
 import createCustomer from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
 import Modal from '../Modal/Modal';
+import { useAuth } from '../../hooks/useAuth';
 
 const keyShipping = 'shipping';
 const keyBilling = 'billing';
 
 function RegistrationForm(): JSX.Element {
+  const { signin } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -45,11 +48,14 @@ function RegistrationForm(): JSX.Element {
 
   const [isBillingAddressDefault, setBillingAddressDefault] = useState(false);
 
-  const openModal = (): void => {
+  const openModal = (user?: string): void => {
     setModalActive(true);
     setTimeout(() => {
       setModalActive(false);
-    }, 5000);
+      if (user) {
+        signin(user, () => navigate('/', { replace: true }));
+      }
+    }, 4000);
   };
 
   const submit: SubmitHandler<MyForm> = (data) => {
@@ -102,9 +108,11 @@ function RegistrationForm(): JSX.Element {
       body.defaultBillingAddress = 1;
     }
     createCustomer(body)
-      .then(() => {
+      .then((resp) => {
         setResultType('success');
-        openModal();
+        const user: string = resp.body.customer.id;
+        openModal(user);
+        localStorage.setItem('userWin4ik', user);
       })
       .catch((error: ErrorResponse) => {
         if (error.statusCode === 400) {
