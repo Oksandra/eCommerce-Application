@@ -6,16 +6,20 @@ interface BurgerProps {
 }
 
 export const Burger: FC<BurgerProps> = ({ state }) => {
-  const [isBurgerActive, setIsBurgerActive] = useState<boolean>(false);
-  state(isBurgerActive);
+  const [isBurgerActive, setIsBurgerActive] = useState<boolean>(true);
   function clickBurger(): void {
     setIsBurgerActive(!isBurgerActive);
     state(isBurgerActive);
   }
+
+  window.addEventListener('resize', () => {
+    const nav: HTMLElement | null = document.querySelector('.nav_active');
+    if (nav !== null) setIsBurgerActive(false);
+  });
   return (
     <button
       type="button"
-      className={`burger ${isBurgerActive ? 'burger_active' : ''}`}
+      className={`burger ${isBurgerActive ? '' : 'burger_active'}`}
       onClick={(): void => clickBurger()}
     >
       <span className="burger__line-1" />
