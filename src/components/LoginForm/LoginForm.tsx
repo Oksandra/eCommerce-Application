@@ -56,9 +56,8 @@ export const LoginForm: FC = () => {
         signin(user, () => navigate('/', { replace: true }));
         localStorage.setItem('user', user);
       })
-      .catch((err) => {
+      .catch(() => {
         setSubmitError(true);
-        console.log(err);
       });
   }
 
