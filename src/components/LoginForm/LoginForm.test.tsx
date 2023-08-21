@@ -1,10 +1,15 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { LoginForm } from './LoginForm';
 
 describe('LoginForm', () => {
   test('renders login form correctly', () => {
-    render(<LoginForm />);
+    render(
+      <BrowserRouter>
+        <LoginForm />
+      </BrowserRouter>
+    );
 
     expect(screen.getByText('Login:')).toBeInTheDocument();
     expect(screen.getByText('Password:')).toBeInTheDocument();
@@ -12,7 +17,11 @@ describe('LoginForm', () => {
   });
 
   test('validates login and password fields', () => {
-    render(<LoginForm />);
+    render(
+      <BrowserRouter>
+        <LoginForm />
+      </BrowserRouter>
+    );
 
     fireEvent.click(screen.getByRole('button', { name: 'Log in' }));
     expect(screen.getByText('Please enter email.')).toBeInTheDocument();
