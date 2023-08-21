@@ -121,6 +121,8 @@ function RegistrationForm(): JSX.Element {
           setResultType('error-server');
         }
         openModal();
+        setShippingAddressDefault(false);
+        setBillingAddressDefault(false);
       });
     reset();
   };
@@ -146,7 +148,10 @@ function RegistrationForm(): JSX.Element {
             />
             <div className="input-error">
               {errors.email && (
-                <p>{errors.email.message || 'Incorrect email!'}</p>
+                <p>
+                  {errors.email.message ||
+                    'Email address must contain a domain name and @ and not contain leading or trailing whitespace!'}
+                </p>
               )}
             </div>
             <input

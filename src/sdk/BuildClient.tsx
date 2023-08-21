@@ -1,9 +1,7 @@
 import fetch from 'node-fetch';
 import {
   ClientBuilder,
-
-  // Import middlewares
-  type AuthMiddlewareOptions, // Required for auth
+  type AuthMiddlewareOptions,
   type HttpMiddlewareOptions,
   PasswordAuthMiddlewareOptions,
   Client,
@@ -18,7 +16,6 @@ const credentials = {
 const projectKeyApi = 'ecommerce-application3';
 const scopes = ['manage_project:ecommerce-application3'];
 
-// Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: oauthUri,
   projectKey: projectKeyApi,
@@ -30,17 +27,15 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
   fetch,
 };
 
-// Configure httpMiddlewareOptions
 const httpMiddlewareOptions: HttpMiddlewareOptions = {
   host: baseUri,
   fetch,
 };
 
-// Export the ClientBuilder
-const ctpClient = new ClientBuilder() // .withProjectKey() is not required if the projectKey is included in authMiddlewareOptions
+const ctpClient = new ClientBuilder()
   .withClientCredentialsFlow(authMiddlewareOptions)
   .withHttpMiddleware(httpMiddlewareOptions)
-  .withLoggerMiddleware() // Include middleware for logging
+  .withLoggerMiddleware()
   .build();
 
 const loginRequest = (userLogin: string, userPassword: string): Client => {
@@ -62,7 +57,7 @@ const loginRequest = (userLogin: string, userPassword: string): Client => {
   return new ClientBuilder()
     .withPasswordFlow(passwordOptions)
     .withHttpMiddleware(httpMiddlewareOptions)
-    .withLoggerMiddleware() // Include middleware for logging
+    .withLoggerMiddleware()
     .build();
 };
 

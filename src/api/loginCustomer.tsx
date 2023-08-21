@@ -2,7 +2,7 @@ import {
   createApiBuilderFromCtpClient,
   ClientResponse,
 } from '@commercetools/platform-sdk';
-import { loginRequest, projectKeyApi } from './BuildClient';
+import { loginRequest, projectKeyApi } from '../sdk/BuildClient';
 
 const loginCustomer = async (
   userEmail: string,
