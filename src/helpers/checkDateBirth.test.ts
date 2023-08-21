@@ -14,6 +14,8 @@ describe('checkDateBirth function', () => {
   });
 
   test('returns false for date of birth in several days', () => {
-    expect(checkDateBirth('2006-08-18')).toBe(false);
+    const tomorrow = new Date().setDate(new Date().getDate() + 2);
+    const tomorrowString = tomorrow.toString().slice(0, 10);
+    expect(checkDateBirth(tomorrowString)).toBe(false);
   });
 });
