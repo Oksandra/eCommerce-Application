@@ -55,7 +55,7 @@ function RegistrationForm(): JSX.Element {
       if (user) {
         signin(user, () => navigate('/', { replace: true }));
       }
-    }, 5000);
+    }, 4000);
   };
 
   const submit: SubmitHandler<MyForm> = (data) => {
