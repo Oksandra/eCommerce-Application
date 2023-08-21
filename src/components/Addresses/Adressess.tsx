@@ -37,7 +37,7 @@ const Addresses: React.FC<AddressesProps> = ({
   setShippingAddressDefault,
   setBillingAddressDefault,
 }): JSX.Element => {
-  const { clearErrors } = useForm<MyForm>({
+  const { clearErrors, setFocus } = useForm<MyForm>({
     mode: 'all',
   });
 
@@ -122,9 +122,7 @@ const Addresses: React.FC<AddressesProps> = ({
             placeholder="Street *"
             aria-invalid={errors.shipping?.street ? 'true' : 'false'}
             {...register('shipping.street', { required: true, minLength: 1 })}
-            onInput={(e): void => {
-              setShippingStreet((e.target as HTMLInputElement).value);
-            }}
+            onChange={(e): void => setShippingStreet(e.target.value)}
             aria-describedby="shipping-street-error"
           />
           <div className="input-error">
@@ -147,13 +145,12 @@ const Addresses: React.FC<AddressesProps> = ({
               },
               pattern: /^[A-z][a-z]*$/g,
             })}
-            onInput={(e): void => {
-              setShippingCity((e.target as HTMLInputElement).value);
-            }}
+            onChange={(e): void => setShippingCity(e.target.value)}
+            aria-describedby="shipping-city-error"
           />
           <div className="input-error">
             {errors.shipping?.city && (
-              <p>
+              <p id="shipping-city-error">
                 {errors.shipping.city.message ||
                   'Shipping city must not contain special characters or numbers!'}
               </p>
@@ -187,8 +184,9 @@ const Addresses: React.FC<AddressesProps> = ({
               },
               validate: checkPostalCodeShipping,
             })}
-            onInput={(e): void => {
-              setShippingPostalCode((e.target as HTMLInputElement).value);
+            onChange={(e): void => {
+              setShippingPostalCode(e.target.value);
+              setFocus('billing.postcode');
             }}
             aria-describedby="shipping-code-error"
           />
@@ -237,14 +235,12 @@ const Addresses: React.FC<AddressesProps> = ({
                 : 'Billing street is required',
               minLength: 1,
             })}
-            onInput={(e): void => {
-              setBillingStreet((e.target as HTMLInputElement).value);
-            }}
+            onChange={(e): void => setBillingStreet(e.target.value)}
             aria-describedby="billing-street-error"
             disabled={isBillingAddressSame}
           />
           <div className="input-error">
-            {errors.billing?.street && !isBillingAddressSame && (
+            {errors.billing?.street && (
               <p id="billing-street-error">
                 Billing street is required and must contain at least one
                 character!
@@ -262,14 +258,12 @@ const Addresses: React.FC<AddressesProps> = ({
                 : 'Billing city is required and must contain at least one character!',
               pattern: /^[A-z][a-z]*$/g,
             })}
-            onInput={(e): void => {
-              setBillingCity((e.target as HTMLInputElement).value);
-            }}
+            onChange={(e): void => setBillingCity(e.target.value)}
             aria-describedby="billing-city-error"
             disabled={isBillingAddressSame}
           />
           <div className="input-error">
-            {errors.billing?.city && !isBillingAddressSame && (
+            {errors.billing?.city && (
               <p id="billing-city-error">
                 {errors.billing.city.message ||
                   'Billing city must not contain special characters or numbers!'}
@@ -305,20 +299,17 @@ const Addresses: React.FC<AddressesProps> = ({
             }
             aria-invalid={errors.billing?.postcode ? 'true' : 'false'}
             {...register('billing.postcode', {
-              required: {
-                value: true,
-                message: 'Billing postal code is required!',
-              },
+              required: isBillingAddressSame
+                ? false
+                : 'Billing postal code is required!',
               validate: checkPostalCodeBilling,
             })}
-            onInput={(e): void => {
-              setBillingPostalCode((e.target as HTMLInputElement).value);
-            }}
+            onChange={(e): void => setBillingPostalCode(e.target.value)}
             aria-describedby="billing-code-error"
             disabled={isBillingAddressSame}
           />{' '}
           <div className="input-error">
-            {errors.billing?.postcode && !isBillingAddressSame && (
+            {errors.billing?.postcode && (
               <p id="billing-code-error">
                 {errors.billing.postcode.message || 'Incorrect postal code!'}
               </p>
