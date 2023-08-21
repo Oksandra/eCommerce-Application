@@ -5,7 +5,6 @@ import Message from '../Message/Message';
 interface ModalProps {
   active: boolean;
   resultType: string;
-  /* setActive: Dispatch<SetStateAction<boolean>>; */
 }
 
 const Modal: React.FC<ModalProps> = ({ active, resultType }): JSX.Element => {

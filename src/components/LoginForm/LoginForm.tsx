@@ -5,7 +5,7 @@ import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
 import { useAuth } from '../../hooks/useAuth';
-import loginCustomer from '../../sdk/loginCustomer';
+import loginCustomer from '../../api/loginCustomer';
 
 const loginFormInit: ILoginForm = {
   login: '',
