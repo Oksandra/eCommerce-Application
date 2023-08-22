@@ -51,7 +51,7 @@
     height: 100vh;
     background-color: $background-color;
     opacity: 0.9;
-    z-index: 1;
+    z-index: 9;
     transform: translateX(100%);
 
     &__list {
