@@ -1,0 +1,52 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.burger {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  background-color: inherit;
+
+  &__line-1,
+  &__line-2,
+  &__line-3 {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    height: 2px;
+    background-color: $light-color;
+    @extend %transition;
+  }
+
+  &__line-1 {
+    top: 1px;
+  }
+  &__line-2 {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &__line-3 {
+    bottom: 1px;
+  }
+}
+
+.burger_active {
+  .burger {
+    &__line-1,
+    &__line-3 {
+      top: 50%;
+    }
+
+    &__line-1 {
+      transform: rotate(-45deg);
+    }
+    &__line-2 {
+      display: none;
+    }
+    &__line-3 {
+      transform: rotate(45deg);
+    }
+  }
+}

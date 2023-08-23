@@ -3,16 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@commercetools/history-sdk": "^3.5.0",
+    "@commercetools/importapi-sdk": "^4.6.2",
+    "@commercetools/ml-sdk": "^3.4.1",
+    "@commercetools/platform-sdk": "^5.0.0",
+    "@commercetools/sdk-auth": "^4.0.1",
+    "@commercetools/sdk-client-v2": "^2.2.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.39",
+    "@types/node-fetch": "^2.6.4",
+    "@types/react-select": "^5.0.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.10.0",
+    "node-fetch": "^2.6.12",
+    "postcode-validator": "^3.8.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
+    "react-select": "^5.7.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.6.4",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -57,9 +71,9 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.1",
+    "husky": "^8.0.0",
     "prettier": "^3.0.1",
     "sass": "^1.64.2",
-    "typescript": "^4.9.5",
-    "husky": "^8.0.0"
+    "typescript": "^4.9.5"
   }
 }

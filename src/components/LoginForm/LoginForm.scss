@@ -1,0 +1,103 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 auto;
+  padding: 2rem;
+  width: 45rem;
+
+  border: $border-dark;
+
+  font-size: 1.8rem;
+  &__title {
+    margin-bottom: 0.75rem;
+  }
+  &__input {
+    width: 60%;
+    margin-bottom: 3rem;
+
+    &:focus {
+      border-bottom: $border-dark;
+    }
+  }
+
+  &__error {
+    margin-top: -3rem;
+    margin-bottom: 1.9rem;
+    font-size: 1.2rem;
+    color: red;
+    max-width: 22rem;
+  }
+
+  &__password-wrap {
+    display: flex;
+    height: 2.48rem;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  &__password-btn {
+    width: 26%;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    padding: 0.8rem;
+
+    &:hover {
+      background-color: $muted-color;
+    }
+
+    &:active {
+      @extend %click-btn;
+    }
+  }
+
+  &__submit-btn {
+    width: 30%;
+    margin: 0 auto;
+    padding: 1.3rem 2.8rem;
+    font-size: 1.6rem;
+    background-color: $background-color;
+    color: $light-color;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $dark-color;
+    }
+
+    &:active {
+      @extend %click-btn;
+    }
+  }
+
+  &__text {
+    margin-top: 2.5rem;
+  }
+
+  &__link {
+    font-size: 1.5rem;
+    color: $dark-color;
+    padding: 0.8rem;
+    margin-left: 1.82rem;
+    cursor: pointer;
+    background-color: $text-selection;
+    border-radius: 0.5rem;
+    @extend %transition;
+    &:hover {
+      background-color: $muted-color;
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__error {
+      margin-top: -2.5rem;
+    }
+
+    &__password-btn {
+      width: 36%;
+    }
+  }
+}

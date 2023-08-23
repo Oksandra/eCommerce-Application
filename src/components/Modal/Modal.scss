@@ -1,0 +1,88 @@
+@import '../../styles/abstracts/constants';
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  margin: 0 auto;
+  transition: height 0.45s ease-in-out;
+  display: none;
+  z-index: 5;
+  &.active {
+    display: block;
+  }
+  &__content {
+    max-height: 12em;
+    margin: 10em auto 1em auto;
+    padding: 1.5rem 1.5rem;
+    background-color: $light-color;
+    backface-visibility: hidden;
+    width: 35vw;
+    border-radius: 4px;
+    transform: translateZ(0);
+    z-index: 6;
+    transition: all 0.2s linear;
+    color: $light-color;
+    box-sizing: border-box;
+    @media (max-width: 1100px) {
+      width: 50%;
+    }
+    @media (max-width: 768px) {
+      width: 70%;
+    }
+    @media (max-width: 455px) {
+      width: 90%;
+      margin: 3em auto 1em auto;
+    }
+    &:after {
+      content: '';
+      width: 10px;
+      height: 15px;
+      position: absolute;
+      bottom: -7px;
+      left: 20px;
+      transform: skewX(-30deg) skewY(-48deg);
+      z-index: 5;
+    }
+    &[data-type='error'],
+    &[data-type='error-server'] {
+      background-color: $color-error;
+      animation: shake 0.54s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      &:after {
+        border-left: 3px solid $color-error;
+        border-bottom: 5px solid $color-error;
+        background: $color-error;
+      }
+    }
+    &[data-type='success'] {
+      background-color: $color-success;
+      &:after {
+        border-left: 3px solid $color-success;
+        border-bottom: 5px solid $color-success;
+        background: $color-success;
+      }
+    }
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 0 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}

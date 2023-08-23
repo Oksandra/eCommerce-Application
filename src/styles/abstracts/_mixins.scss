@@ -1,0 +1,20 @@
+@import './constants';
+@import './extends';
+
+@mixin button($color) {
+  @extend %transition;
+
+  &:active {
+    @extend %click-btn;
+  }
+
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin media-small-tablet {
+  @media screen and (max-width: $tablet-small-width) {
+    @content;
+  }
+}

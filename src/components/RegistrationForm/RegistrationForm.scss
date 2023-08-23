@@ -1,0 +1,147 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+.registration-form__wrapper {
+  width: 35%;
+  margin: 0 auto;
+  background-color: $light-color;
+  margin-top: 5rem;
+  position: relative;
+  z-index: 1;
+  .registration-form {
+    width: 100%;
+    padding: 1rem;
+    border: $border-dark;
+    &__title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    &__address {
+      width: 90%;
+      margin-top: 1 rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+    .star {
+      color: red;
+    }
+    &__tab-button {
+      width: 50%;
+      padding: 0.5rem;
+      border-bottom: 1px solid $add-dark-color;
+      background-color: $light-color;
+      text-align: left;
+      font-weight: 700;
+      &.active {
+        background-color: $add-dark-color;
+        color: $light-color;
+        transition: all 0.3s;
+      }
+    }
+    &__tab {
+      display: block;
+      width: 100%;
+      &-content {
+        display: none;
+        width: calc(100% - 20px);
+        position: relative;
+        border: 1px solid $add-dark-color;
+        border-top: none;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        &.open {
+          display: block;
+          width: 100%;
+        }
+      }
+      .address__country {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.5rem;
+        font-size: 1.4rem;
+        &-select {
+          width: 100%;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem 0;
+      margin: 0.2rem 0;
+      box-sizing: border-box;
+      border-bottom: $border-dark;
+      &:focus {
+        border: $border-dark;
+      }
+    }
+    &__customer-info {
+      label {
+        font-size: 1.4rem;
+      }
+    }
+    &__check-address {
+      display: block;
+      margin: 0;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      & input {
+        width: 5%;
+        display: inline;
+        margin: 0;
+      }
+    }
+    &__button {
+      width: 170px;
+      display: block;
+      padding: 1rem 2rem;
+      margin: 0 auto;
+      background-color: $background-color;
+      color: $light-color;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $dark-color;
+      }
+      &:disabled {
+        background-color: $muted-color;
+      }
+      &:active {
+        @extend %click-btn;
+      }
+    }
+    .input-error {
+      width: 90%;
+      color: red;
+      font-size: 1rem;
+      margin: 0.2rem 0 0.8rem 0;
+    }
+    &__text {
+      margin: 2.5rem 0 1rem 0.8rem;
+    }
+    &__link {
+      font-size: 1.5rem;
+      color: #000000;
+      padding: 0.8rem;
+      margin-left: 1.82rem;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      border-radius: 0.5rem;
+      @extend %transition;
+      &:hover {
+        background-color: $muted-color;
+      }
+    }
+  }
+
+  @media (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
+
+  @media (max-width: 455px) {
+    width: 90%;
+  }
+}

@@ -1,0 +1,56 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.footer {
+  @extend %flex-center-cont;
+  align-items: center;
+  margin-top: 5rem;
+  gap: 10%;
+  padding: 2rem 3rem;
+  color: $light-color;
+  background-color: $background-color;
+
+  &__logo,
+  &__team,
+  &__year {
+    font-size: 1.5rem;
+    width: 150px;
+  }
+
+  &__team {
+    color: inherit;
+
+    &:hover {
+      text-shadow: $link-hover;
+    }
+    &.active {
+      text-shadow: $link-hover;
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    gap: 7%;
+
+    &__logo,
+    &__team,
+    &__year {
+      font-size: 1.9rem;
+      width: 130px;
+    }
+
+    &__team,
+    &__year {
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 455px) {
+    &__logo,
+    &__team,
+    &__year {
+      font-size: 1.2rem;
+      width: 100px;
+    }
+  }
+}
