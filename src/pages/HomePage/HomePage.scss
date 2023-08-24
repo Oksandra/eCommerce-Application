@@ -1,0 +1,16 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.things {
+  height: 90rem;
+  background: url(../../assets/images/things_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  &__title {
+    max-width: 420px;
+  }
+  @include media-big-laptop {
+    background-size: contain;
+  }
+}

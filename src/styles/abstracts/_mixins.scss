@@ -13,6 +13,12 @@
   }
 }
 
+@mixin media-big-laptop {
+  @media screen and (max-width: $laptop-big-width) {
+    @content;
+  }
+}
+
 @mixin media-small-tablet {
   @media screen and (max-width: $tablet-small-width) {
     @content;
