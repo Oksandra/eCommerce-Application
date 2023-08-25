@@ -7,8 +7,7 @@ body {
 
 html {
   font-size: 10px;
-
-  @media (max-width: 768px) {
+  @include media-tablet {
     font-size: 7px;
   }
 }
@@ -29,7 +28,7 @@ h1 {
   @include media-small-laptop {
     font-size: 6rem;
   }
-  @include media-mobile {
+  @include media-big-mobile {
     font-size: 3rem;
   }
 }

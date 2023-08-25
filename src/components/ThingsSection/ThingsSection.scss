@@ -17,19 +17,36 @@
   }
   &__title {
     max-width: 70rem;
-    line-height: 150%;
+    line-height: 140%;
     text-align: right;
-    margin: 6rem 0 4rem 0;
+    margin: 20rem 0 4rem 0;
+    @include media-big-laptop {
+      margin: 10rem 0 4rem 0;
+    }
     @include media-laptop {
-      margin: 4rem 0 3rem 0;
+      margin: 10rem 0 3rem 0;
+      line-height: 130%;
     }
     @include media-small-laptop {
+      margin: 12rem 0 1rem 0;
       max-width: 60rem;
       line-height: 120%;
     }
+    @include media-big-tablet {
+      margin: 10rem 0 1rem 0;
+    }
+    @include media-tablet {
+      margin: 12rem 0 1rem 0;
+    }
+    @include media-small-tablet {
+      margin: 11rem 0 1rem 0;
+    }
     @include media-big-mobile {
       max-width: 50rem;
-      margin: 3rem 0 1rem 0;
+      margin: 12rem 0 1rem 0;
+    }
+    @include media-mobile {
+      margin: 8rem 0 1rem 0;
     }
   }
   &__text {
@@ -37,8 +54,11 @@
     color: $muted-color;
     text-align: right;
     width: 70rem;
+    @include media-laptop {
+      font-size: 2.8rem;
+    }
     @include media-small-laptop {
-      font-size: 2.5rem;
+      font-size: 2.3rem;
       width: 60rem;
     }
     @include media-big-mobile {
@@ -54,9 +74,13 @@
     color: $light-color;
     background-color: $button-color;
     @include button($button-hover-color);
-    @include media-small-laptop {
+    @include media-laptop {
       width: 18rem;
       height: 5rem;
+    }
+    @include media-small-laptop {
+      width: 17rem;
+      height: 4.5rem;
     }
     @include media-big-mobile {
       width: 15rem;
@@ -67,9 +91,12 @@
     @extend %flex-j-cont;
     max-width: 57rem;
     width: 100%;
-    margin-top: 7rem;
+    margin-top: 6rem;
     @include media-laptop {
-      margin-top: 4rem;
+      margin-top: 3rem;
+    }
+    @include media-small-laptop {
+      margin-top: 1.5rem;
     }
     @include media-big-mobile {
       max-width: 40rem;

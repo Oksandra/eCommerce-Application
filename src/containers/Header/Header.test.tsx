@@ -7,7 +7,7 @@ describe('Header', () => {
   test('renders correctly', () => {
     render(
       <MemoryRouter>
-        <Header />
+        <Header value="header" />
       </MemoryRouter>
     );
 

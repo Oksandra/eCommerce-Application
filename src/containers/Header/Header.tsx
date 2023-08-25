@@ -9,7 +9,11 @@ import { Nav } from '../../components/Nav/Nav';
 import { HeaderContext } from './HeaderContext';
 import { Burger } from '../../components/Burger/Burger';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  value: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ value }) => {
   const [screenWidth, setScreenWidth] = useState<number>(
     window.screen.availWidth
   );
@@ -19,7 +23,7 @@ const Header: React.FC = () => {
   const [isBurgerActive, setIsBurgerActive] = useState<boolean>(false);
   return (
     <HeaderContext.Provider value={String(isBurgerActive)}>
-      <header className="header">
+      <header className={value}>
         <div className="header__wrapper">
           <div className="header__logo">
             <Link to="/">
