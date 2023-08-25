@@ -18,3 +18,8 @@ html {
   @extend %flex-j-cont;
   flex-direction: column;
 }
+
+h1 {
+  font-size: 9.6rem;
+  color: $light-color;
+}

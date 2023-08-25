@@ -1,0 +1,48 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.things {
+  height: 90rem;
+  background: url(../../assets/images/things_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  &__wrapper {
+    @extend %flex-center-cont;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.2rem 1rem 0;
+    max-width: $wrapper-width;
+    margin: 0 auto;
+  }
+  &__title {
+    max-width: 70rem;
+    line-height: 150%;
+    text-align: right;
+    margin: 6rem 0 4rem 0;
+  }
+  &__text {
+    font-size: 3.2rem;
+    color: $muted-color;
+    text-align: right;
+    width: 70rem;
+  }
+  &__button {
+    font-size: 1.6rem;
+    font-family: 'Montserrat', Georgia, serif;
+    width: 20rem;
+    height: 6rem;
+    color: $light-color;
+    background-color: $button-color;
+    @include button($button-hover-color);
+  }
+  &__buttons {
+    @extend %flex-j-cont;
+    max-width: 57rem;
+    width: 100%;
+    margin-top: 7rem;
+  }
+  @include media-big-laptop {
+    background-size: contain;
+  }
+}

@@ -3,7 +3,7 @@
 @import '../../styles/abstracts/extends';
 
 .logout {
-  display: flex;
+  @extend %flex-center-cont;
   align-items: center;
   font-size: 2.8rem;
   margin: 0 auto;
