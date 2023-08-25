@@ -20,12 +20,31 @@
     line-height: 150%;
     text-align: right;
     margin: 6rem 0 4rem 0;
+    @include media-laptop {
+      margin: 4rem 0 3rem 0;
+    }
+    @include media-small-laptop {
+      max-width: 60rem;
+      line-height: 120%;
+    }
+    @include media-big-mobile {
+      max-width: 50rem;
+      margin: 3rem 0 1rem 0;
+    }
   }
   &__text {
     font-size: 3.2rem;
     color: $muted-color;
     text-align: right;
     width: 70rem;
+    @include media-small-laptop {
+      font-size: 2.5rem;
+      width: 60rem;
+    }
+    @include media-big-mobile {
+      font-size: 2rem;
+      width: auto;
+    }
   }
   &__button {
     font-size: 1.6rem;
@@ -35,12 +54,30 @@
     color: $light-color;
     background-color: $button-color;
     @include button($button-hover-color);
+    @include media-small-laptop {
+      width: 18rem;
+      height: 5rem;
+    }
+    @include media-big-mobile {
+      width: 15rem;
+      height: 4rem;
+    }
   }
   &__buttons {
     @extend %flex-j-cont;
     max-width: 57rem;
     width: 100%;
     margin-top: 7rem;
+    @include media-laptop {
+      margin-top: 4rem;
+    }
+    @include media-big-mobile {
+      max-width: 40rem;
+      margin-top: 2rem;
+    }
+    @include media-mobile {
+      margin-top: 4rem;
+    }
   }
   @include media-big-laptop {
     background-size: contain;

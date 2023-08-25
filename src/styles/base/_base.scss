@@ -1,4 +1,6 @@
 @import '../abstracts/extends';
+@import '../../styles/abstracts/mixins';
+
 
 body {
   font-family: 'Marcellus', Georgia, serif;
@@ -22,4 +24,13 @@ html {
 h1 {
   font-size: 9.6rem;
   color: $light-color;
+  @include media-laptop {
+    font-size: 8rem;
+  }
+  @include media-small-laptop {
+    font-size: 6rem;
+  }
+  @include media-mobile {
+    font-size: 3rem;
+  }
 }
