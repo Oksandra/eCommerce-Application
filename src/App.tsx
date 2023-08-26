@@ -10,6 +10,7 @@ import AccessLimitAuth from './hoc/AccessLimitAuth';
 import LogOutPage from './pages/LogOutPage/LogOutPage';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import HomePage from './pages/HomePage/HomePage';
+import Profile from './components/Profile/Profile';
 
 function App(): JSX.Element {
   return (
@@ -44,7 +45,7 @@ function App(): JSX.Element {
             path="profile"
             element={
               <RequireAuth>
-                <div className="center-align">Profile Page!</div>
+                <Profile />
               </RequireAuth>
             }
           />
