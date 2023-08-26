@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { LayoutPage } from './containers/LayoutPage/LayoutPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { LoginForm } from './components/LoginForm/LoginForm';
@@ -9,6 +9,7 @@ import { AuthProvider } from './hoc/AuthProvider';
 import AccessLimitAuth from './hoc/AccessLimitAuth';
 import LogOutPage from './pages/LogOutPage/LogOutPage';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
+import HomePage from './pages/HomePage/HomePage';
 
 function App(): JSX.Element {
   return (
@@ -63,28 +64,7 @@ function App(): JSX.Element {
             path="cart"
             element={<div className="center-align">My cart!</div>}
           />
-          <Route
-            index
-            element={
-              <div className="center-align">
-                Home Page!
-                <p style={{ marginTop: '2rem' }}>
-                  {'Ссылки на '}
-                  <Link to="/login" style={{ textDecoration: 'underline' }}>
-                    Log in
-                  </Link>
-                  {' и '}
-                  <Link
-                    to="/registration"
-                    style={{ textDecoration: 'underline' }}
-                  >
-                    Sign up
-                  </Link>
-                  {' для кросс-чека'}
-                </p>
-              </div>
-            }
-          />
+          <Route index element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

@@ -9,6 +9,7 @@
     height: 6rem;
     @extend %flex-j-cont;
     border-top: $border-light;
+    border-bottom: $border-light;
   }
   &__item {
     height: 6rem;
