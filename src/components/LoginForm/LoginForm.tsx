@@ -55,6 +55,8 @@ export const LoginForm: FC = () => {
         const user: string = resp.body.customer.id;
         signin(user, () => navigate('/', { replace: true }));
         localStorage.setItem('userWin4ik', user);
+        process.env.REACT_APP_USER_LOGIN = resp.body.customer.email;
+        console.log(process.env.USER_LOGIN);
       })
       .catch(() => {
         setSubmitError(true);
