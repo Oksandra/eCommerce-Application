@@ -1,0 +1,28 @@
+@import '../../styles/abstracts/constants';
+
+.profile-field {
+  width: 100%;
+  margin: 0 auto;
+  &__label {
+    width: 100%;
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  &__input {
+    display: inline;
+    width: 80%;
+    margin-top: 0.5rem;
+  }
+  .button {
+    display: inline;
+    padding: 5px 15px;
+    &-edit {
+      background-color: $muted-color;
+      margin-right: 5px;
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+  }
+}

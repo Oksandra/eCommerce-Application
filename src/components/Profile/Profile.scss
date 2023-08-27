@@ -1,0 +1,51 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+.profile {
+  width: 65%;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 2rem;
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+  }
+  &__address-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  .button-change {
+    padding: 10px 25px;
+  }
+  &__change-password {
+    display: none;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    @extend %transition;
+    &.open {
+      display: block;
+      @extend %transition;
+    }
+    .profile-field__label {
+      font-size: 1.5rem;
+      display: block;
+    }
+    .profile-field__input {
+      width: 20%;
+      font-size: 1.5rem;
+      display: block;
+      border: $border-dark;
+      margin-bottom: 1rem;
+      padding: 3px 0;
+    }
+    .button-save__password {
+      padding: 10px 35px;
+      background-color: $muted-color;
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+  }
+}

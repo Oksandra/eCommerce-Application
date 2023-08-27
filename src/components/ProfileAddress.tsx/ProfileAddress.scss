@@ -1,0 +1,20 @@
+@import '../../styles/abstracts/constants';
+
+.profile__address-container {
+  margin-top: 1rem;
+  .profile-field__input {
+    display: block;
+  }
+  .button {
+    padding: 5px 15px;
+    margin-bottom: 1rem;
+    &-edit {
+      background-color: $muted-color;
+      margin-right: 5px;
+      margin-left: 80%;
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+  }
+}
