@@ -1,18 +1,9 @@
-import {
-  createApiBuilderFromCtpClient,
-  ClientResponse,
-} from '@commercetools/platform-sdk';
-import { loginRequest, projectKeyApi } from '../sdk/BuildClient';
+import { ClientResponse } from '@commercetools/platform-sdk';
+import apiRoot from '../sdk/client';
 
-const getCustomer = async (
-  userEmail: string,
-  userPassword: string
-): Promise<ClientResponse> => {
-  const client = loginRequest(userEmail, userPassword);
-  const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
-    projectKey: projectKeyApi,
-  });
-  return apiRoot.me().get().execute();
+const getCustomer = async (): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot.customers().withId({ ID: id }).get().execute();
 };
 
 export default getCustomer;
