@@ -10,6 +10,21 @@
   flex-direction: column;
   align-items: center;
   background-color: #f9f9f9;
+  cursor: pointer;
+  @extend %transition;
+
+  &:hover {
+    box-shadow: 0px 1rem 2rem rgba(0, 0, 0, 0.3);
+    transform: scale(105%);
+  }
+
+  &:hover &__title {
+    font-size: 2.2rem;
+  }
+
+  &:hover &__price {
+    background-color: $border-color;
+  }
 
   &__image-wrap {
     width: 100%;
@@ -39,6 +54,7 @@
   &__title {
     font-size: 2rem;
     text-align: center;
+    @extend %transition;
   }
 
   &__price {
@@ -47,5 +63,6 @@
     font-size: 1.8rem;
     background-color: $add-dark-color;
     color: $light-color;
+    @extend %transition;
   }
 }
