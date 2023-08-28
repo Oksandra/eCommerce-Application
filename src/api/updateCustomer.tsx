@@ -89,9 +89,42 @@ const updateCustomerDateBirth = async (
     .execute();
 };
 
+const updateCustomerAddress = async (
+  code: string,
+  customerCountry: string,
+  customerCity: string,
+  customerStreet: string,
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'changeAddress',
+            addressId: idAddress,
+            address: {
+              streetName: customerStreet,
+              city: customerCity,
+              country: customerCountry,
+              postalCode: code,
+            },
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
 export {
   updateCustomerName,
   updateCustomerLastName,
   updateCustomerDateBirth,
   updateCustomerEmail,
+  updateCustomerAddress,
 };
