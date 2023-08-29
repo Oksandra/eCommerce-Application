@@ -8,9 +8,9 @@
   .button {
     padding: 5px 15px;
     margin-bottom: 1rem;
+    margin-right: 5px;
     &-edit {
       background-color: $muted-color;
-      margin-right: 5px;
       margin-left: 80%;
       &:hover {
         background-color: $border-color;

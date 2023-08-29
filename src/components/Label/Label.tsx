@@ -25,7 +25,7 @@ const Label: React.FC<LabelProps> = ({
       <input
         className="profile-field__input"
         id={id}
-        type={type === 'text' ? 'text' : 'password'}
+        type={type}
         value={value}
         disabled={isDisabled}
         onChange={(event): void => setRequestInfo(event.target.value)}

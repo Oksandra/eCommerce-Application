@@ -11,6 +11,7 @@ interface ProfileFieldProps {
   value: string;
   setRequestInfo: Dispatch<SetStateAction<string>>;
   clickSave: () => void;
+  type: string;
 }
 
 const ProfileField: React.FC<ProfileFieldProps> = ({
@@ -21,6 +22,7 @@ const ProfileField: React.FC<ProfileFieldProps> = ({
   setDisabled,
   setRequestInfo,
   clickSave,
+  type,
 }): JSX.Element => {
   const clickButtonEdit = (): void => {
     setDisabled(false);
@@ -37,7 +39,7 @@ const ProfileField: React.FC<ProfileFieldProps> = ({
         text={text}
         id={id}
         isDisabled={isDisabled}
-        type="text"
+        type={type}
         value={value}
         setRequestInfo={setRequestInfo}
       />

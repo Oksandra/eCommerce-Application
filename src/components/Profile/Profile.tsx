@@ -11,6 +11,8 @@ import {
   updateCustomerLastName,
   updateCustomerDateBirth,
 } from '../../api/updateCustomer';
+import { countries } from '../Addresses/countries';
+import changePassword from '../../api/changePassword';
 
 const Profile = (): JSX.Element => {
   const [isDisabledFirstName, setDisabledFirstName] = useState(true);
@@ -33,6 +35,8 @@ const Profile = (): JSX.Element => {
   const [customerBillingCity, setCustomerBillingCity] = useState('');
   const [customerBillingStreet, setCustomerBillingStreet] = useState('');
   const [version, setVersion] = useState(1);
+  const [addressIdShipping, setAddressIdShipping] = useState('');
+  const [addressIdBilling, setAddressIdBilling] = useState('');
 
   const clickChangePassword = (): void => {
     setOpen(!isOpen);
@@ -44,17 +48,39 @@ const Profile = (): JSX.Element => {
       setCustomerFirstName(obj.body.firstName as string);
       setCustomerLastName(obj.body.lastName as string);
       setCustomerDateBirth(obj.body.dateOfBirth as string);
-      setCustomerShippingCode(obj.body.addresses[0].postalCode as string);
-      setCustomerShippingCountry(obj.body.addresses[0].country as string);
-      setCustomerShippingCity(obj.body.addresses[0].city as string);
-      setCustomerShippingCity(obj.body.addresses[0].streetName as string);
+      let countryName: string | undefined;
+      if (obj.body.addresses[0]) {
+        countryName = countries.find(
+          (country) => country.code === obj.body.addresses[0].country
+        )?.country;
+        setCustomerShippingCode(obj.body.addresses[0].postalCode as string);
+        setCustomerShippingCountry(countryName as string);
+        setCustomerShippingCity(obj.body.addresses[0].city as string);
+        setCustomerShippingStreet(obj.body.addresses[0].streetName as string);
+      }
       if (obj.body.addresses[1]) {
+        const countryBillingName = countries.find(
+          (country) => country.code === obj.body.addresses[1].country
+        )?.country;
         setCustomerBillingCode(obj.body.addresses[0].postalCode as string);
-        setCustomerBillingCountry(obj.body.addresses[0].country as string);
+        setCustomerBillingCountry(countryBillingName as string);
+        setCustomerBillingCity(obj.body.addresses[1].city as string);
+        setCustomerBillingStreet(obj.body.addresses[1].streetName as string);
+        setAddressIdBilling(obj.body.billingAddressIds[1] as string);
+      }
+      setAddressIdShipping(obj.body.shippingAddressIds[0] as string);
+      if (
+        addressIdBilling === addressIdShipping &&
+        addressIdBilling.length !== 0
+      ) {
+        setCustomerBillingCode(obj.body.addresses[0].postalCode as string);
+        setCustomerBillingCountry(countryName as string);
         setCustomerBillingCity(obj.body.addresses[0].city as string);
-        setCustomerBillingCity(obj.body.addresses[0].streetName as string);
+        setCustomerBillingStreet(obj.body.addresses[0].streetName as string);
+        setAddressIdBilling(obj.body.billingAddressIds[0] as string);
       }
       setVersion(obj.body.version);
+      console.log(version);
     });
   }, []);
 
@@ -95,6 +121,14 @@ const Profile = (): JSX.Element => {
     });
   };
 
+  const changeCustomerPassword = (): void => {
+    changePassword(version, customerCurrentPasword, customerNewPassword).then(
+      (obj) => {
+        setVersion(obj.body.version);
+      }
+    );
+  };
+
   return (
     <div className="profile">
       <h2 className="profile__title">Profile</h2>
@@ -106,6 +140,7 @@ const Profile = (): JSX.Element => {
         setDisabled={setDisabledEmail}
         clickSave={setNewEmail}
         setRequestInfo={setCustomerEmail}
+        type="text"
       />
       <ProfileField
         text="First name"
@@ -115,6 +150,7 @@ const Profile = (): JSX.Element => {
         setDisabled={setDisabledFirstName}
         setRequestInfo={setCustomerFirstName}
         clickSave={setNewFirstName}
+        type="text"
       />
       <ProfileField
         text="Last name"
@@ -124,6 +160,7 @@ const Profile = (): JSX.Element => {
         setDisabled={setDisabledLastName}
         setRequestInfo={setCustomerLastName}
         clickSave={setNewLastName}
+        type="text"
       />
       <ProfileField
         text="Date of birth"
@@ -133,6 +170,7 @@ const Profile = (): JSX.Element => {
         setDisabled={setDisabledDateBirth}
         setRequestInfo={setCustomerDateBirth}
         clickSave={setNewDate}
+        type="date"
       />
       <h3 className="profile__address-title">Shipping address</h3>
       <ProfileAddress
@@ -145,6 +183,10 @@ const Profile = (): JSX.Element => {
         customerCity={customerShippingCity}
         customerCountry={customerShippingCountry}
         customerStreet={customerShippingStreet}
+        idAddress={addressIdShipping}
+        version={version}
+        setIdAddress={setAddressIdShipping}
+        setVersion={setVersion}
       />
       <h3 className="profile__address-title">Billing address</h3>
       <ProfileAddress
@@ -157,6 +199,10 @@ const Profile = (): JSX.Element => {
         customerCity={customerBillingCity}
         customerCountry={customerBillingCountry}
         customerStreet={customerBillingStreet}
+        idAddress={addressIdBilling}
+        version={version}
+        setIdAddress={setAddressIdShipping}
+        setVersion={setVersion}
       />
       <Button
         className="button-change"
@@ -189,6 +235,7 @@ const Profile = (): JSX.Element => {
           className="button-save__password"
           textContent="Save password"
           type="button"
+          onClick={changeCustomerPassword}
         />
       </div>
     </div>
