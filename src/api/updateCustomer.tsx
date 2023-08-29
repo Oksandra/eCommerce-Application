@@ -110,10 +110,108 @@ const updateCustomerAddress = async (
             addressId: idAddress,
             address: {
               streetName: customerStreet,
+              postalCode: code,
               city: customerCity,
               country: customerCountry,
-              postalCode: code,
             },
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const deleteCustomerAddress = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'removeAddress',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const addCustomerAddress = async (
+  code: string,
+  customerCountry: string,
+  customerCity: string,
+  customerStreet: string,
+  versionNumber: number,
+  keyAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'addAddress',
+            address: {
+              key: keyAddress,
+              streetName: customerStreet,
+              postalCode: code,
+              city: customerCity,
+              country: customerCountry,
+            },
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const addShippingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'addShippingAddressId',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const addBillingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'addBillingAddressId',
+            addressId: idAddress,
           },
         ],
       },
@@ -127,4 +225,8 @@ export {
   updateCustomerDateBirth,
   updateCustomerEmail,
   updateCustomerAddress,
+  deleteCustomerAddress,
+  addCustomerAddress,
+  addShippingAddressId,
+  addBillingAddressId,
 };
