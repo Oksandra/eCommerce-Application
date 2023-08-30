@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductData } from '@commercetools/platform-sdk';
 import getProduct from '../../api/getProduct';
+import './ProductPage.scss';
+import Loader from '../../components/Loader/Loader';
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = React.useState<ProductData | null>(null);
+  const [isLoading, setIsloading] = useState<boolean>(true);
+  const [product, setProduct] = useState<ProductData | null>(null);
   React.useEffect(() => {
     getProduct(`${id}`)
-      .then((data) => setProduct(data.body.masterData.current))
+      .then((data) => {
+        setProduct(data.body.masterData.current);
+        setIsloading(false);
+      })
       .catch(() => navigate('/*'));
   }, [id]);
 
   return (
-    <div>
-      <div>{product && product.name['en-US']}</div>
+    <div className="product-card">
+      {isLoading ? <Loader /> : product && product.name['en-US']}
     </div>
   );
 };
