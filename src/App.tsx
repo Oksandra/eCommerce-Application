@@ -11,6 +11,7 @@ import LogOutPage from './pages/LogOutPage/LogOutPage';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import HomePage from './pages/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
+import ProductPage from './pages/ProductPage/ProductPage';
 
 function App(): JSX.Element {
   return (
@@ -37,6 +38,7 @@ function App(): JSX.Element {
             path="catalog"
             element={<div className="center-align">Here is the catalog!</div>}
           />
+          <Route path="catalog/:id" element={<ProductPage />} />
           <Route
             path="about"
             element={<div className="center-align">About Us!</div>}
