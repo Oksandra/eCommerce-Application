@@ -26,6 +26,7 @@ const Profile = (): JSX.Element => {
   const [customerDateBirth, setCustomerDateBirth] = useState('');
   const [customerCurrentPasword, setCustomerCurrentPassword] = useState('');
   const [customerNewPassword, setCustomerNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [customerShippingCode, setCustomerShippingCode] = useState('');
   const [customerShippingCountry, setCustomerShippingCountry] = useState('');
   const [customerShippingCity, setCustomerShippingCity] = useState('');
@@ -129,6 +130,10 @@ const Profile = (): JSX.Element => {
     );
   };
 
+  const clickCancel = (): void => {
+    setOpen(!isOpen);
+  };
+
   return (
     <div className="profile">
       <h2 className="profile__title">Profile</h2>
@@ -210,7 +215,7 @@ const Profile = (): JSX.Element => {
         type="button"
         onClick={clickChangePassword}
       />
-      <div
+      <form
         className={
           isOpen ? 'profile__change-password' : 'profile__change-password open'
         }
@@ -231,13 +236,31 @@ const Profile = (): JSX.Element => {
           type="password"
           setRequestInfo={setCustomerNewPassword}
         />
+        <Label
+          text="Confirm new password"
+          id="cofirm-password"
+          value={confirmNewPassword}
+          isDisabled={false}
+          type="password"
+          setRequestInfo={setConfirmNewPassword}
+        />
+        <Button
+          className="button-cancel"
+          textContent="Cancel"
+          type="button"
+          onClick={clickCancel}
+        />
         <Button
           className="button-save__password"
-          textContent="Save password"
+          textContent="Save"
           type="button"
           onClick={changeCustomerPassword}
         />
-      </div>
+      </form>
+      <div
+        className={isOpen ? 'modal-overlay' : 'modal-overlay open'}
+        id="modal-overlay"
+      />
     </div>
   );
 };
