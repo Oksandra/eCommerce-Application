@@ -3,5 +3,27 @@
 @import '../../styles/abstracts/extends';
 
 .product-card {
-@extend %flex-center-cont;
+  @extend %flex-center-cont;
+  &__img {
+    height: 30rem;
+  }
+}
+
+.images {
+  @extend %flex-center-cont;
+  flex-direction: column;
+  &__main {
+    text-align: center;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+  &__card {
+    height: 12rem;
+    max-width: 12rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
