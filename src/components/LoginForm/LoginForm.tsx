@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState, FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import checkLogin from '../../helpers/checkLogin';

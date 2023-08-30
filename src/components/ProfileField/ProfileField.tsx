@@ -8,13 +8,21 @@ interface ProfileFieldProps {
   isDisabled: boolean;
   id: string;
   setDisabled: Dispatch<SetStateAction<boolean>>;
+  value: string;
+  setRequestInfo: Dispatch<SetStateAction<string>>;
+  clickSave: () => void;
+  type: string;
 }
 
 const ProfileField: React.FC<ProfileFieldProps> = ({
   text,
   isDisabled,
   id,
+  value,
   setDisabled,
+  setRequestInfo,
+  clickSave,
+  type,
 }): JSX.Element => {
   const clickButtonEdit = (): void => {
     setDisabled(false);
@@ -22,11 +30,19 @@ const ProfileField: React.FC<ProfileFieldProps> = ({
 
   const clickButtonSave = (): void => {
     setDisabled(true);
+    clickSave();
   };
 
   return (
     <div className="profile-field">
-      <Label text={text} id={id} isDisabled={isDisabled} type="text" />
+      <Label
+        text={text}
+        id={id}
+        isDisabled={isDisabled}
+        type={type}
+        value={value}
+        setRequestInfo={setRequestInfo}
+      />
       <Button
         className="button-edit"
         textContent="Edit"
