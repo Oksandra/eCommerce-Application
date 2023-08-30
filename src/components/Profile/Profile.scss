@@ -34,7 +34,7 @@
     @extend %transition;
     &.open {
       display: block;
-      z-index: 20;
+      z-index: 5;
       @extend %transition;
     }
     .profile-field__label {
