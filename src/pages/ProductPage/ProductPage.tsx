@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductData } from '@commercetools/platform-sdk';
 import getProduct from '../../api/getProduct';
 import './ProductPage.scss';
@@ -15,7 +15,7 @@ interface Image {
 
 const ProductPage: React.FC = () => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [product, setProduct] = useState<ProductData | null>(null);
   const [images, setImages] = useState<Image[] | undefined>();
@@ -27,7 +27,7 @@ const ProductPage: React.FC = () => {
         setImages(data.body.masterData.current.masterVariant.images);
         setIsloading(false);
       })
-      .catch((e) => console.log(e));
+      .catch(() => navigate('/*'));
   }, [id]);
 
   return (
@@ -63,7 +63,17 @@ const ProductPage: React.FC = () => {
                 />
               </div>
             </div>
-            <p>{product && product.name['en-US']}</p>
+            <div className="product-card__info">
+              <h3 className="product-card__title">
+                {product && product.name['en-US']}
+              </h3>
+              <p className="product-card__desc">
+                {product && product.description && product.description['en-US']}
+              </p>
+              <button className="product-card__button" type="button">
+                Buy NOW
+              </button>
+            </div>
           </div>
         </div>
       )}

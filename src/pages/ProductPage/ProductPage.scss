@@ -3,9 +3,42 @@
 @import '../../styles/abstracts/extends';
 
 .product-card {
-  @extend %flex-center-cont;
+  &__wrapper {
+    @extend %flex-center-cont;
+  }
   &__img {
     height: 30rem;
+  }
+  &__title {
+    @extend %flex-center-cont;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    max-width: 90%;
+    border-bottom: $border-light;
+  }
+  &__info {
+    margin-left: 1.5rem;
+    @extend %flex;
+    flex-direction: column;
+    max-width: 60rem;
+    border: $border-light;
+    align-items: center;
+    padding-top: 2rem;
+  }
+  &__desc {
+    max-width: 90%;
+    font-size: 2rem;
+    color: $add-dark-color;
+    line-height: 150%;
+  }
+  &__button {
+    width: 90%;
+    font-size: 1.6rem;
+    padding: 1.5rem 2.8rem;
+    color: $light-color;
+    background-color: $background-color;
+    @include button($dark-color);
+    margin: auto 0 1rem 0;
   }
 }
 
@@ -14,14 +47,17 @@
   flex-direction: column;
   &__main {
     text-align: center;
+    padding: 1rem 0 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
+    border: $border-light;
   }
   &__card {
     height: 12rem;
-    max-width: 12rem;
+    max-width: 14rem;
     margin-right: 1rem;
     cursor: pointer;
+    border: $border-light;
     &:last-child {
       margin-right: 0;
     }
