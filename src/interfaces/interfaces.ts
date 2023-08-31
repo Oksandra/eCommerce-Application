@@ -57,3 +57,9 @@ export interface UserLogin {
   username: string;
   password: string;
 }
+
+export interface ChangePassword {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
