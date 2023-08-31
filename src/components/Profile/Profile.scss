@@ -20,6 +20,14 @@
   .button-change {
     padding: 10px 25px;
   }
+  .input-error {
+    display: block;
+    width: 100%;
+    color: red;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0.2rem auto 0.8rem auto;
+  }
   &__change-password {
     width: 34rem;
     position: fixed;
@@ -67,13 +75,9 @@
       margin-right: 5px;
       margin-left: 23%;
     }
-    .input-error {
-      display: block;
+    & > .input-error {
       width: 53%;
-      color: red;
-      font-size: 1rem;
       text-align: center;
-      margin: 0.2rem auto 0.8rem auto;
     }
   }
   .modal-overlay {
@@ -88,13 +92,5 @@
       background-color: rgb(0, 0, 0, 0.8);
       z-index: 2;
     }
-  }
-  .input-error {
-    display: block;
-    width: 100%;
-    color: red;
-    font-size: 1rem;
-    text-align: left;
-    margin: 0.2rem auto 0.8rem auto;
   }
 }
