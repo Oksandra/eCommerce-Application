@@ -46,21 +46,15 @@ const ProductPage: React.FC = () => {
                 />
               </div>
               <div className="images__additional">
-                <img
-                  src={images ? images[0].url : ''}
-                  className="images__card"
-                  alt="a lot of wine"
-                />
-                <img
-                  src={images ? images[1].url : ''}
-                  className="images__card"
-                  alt="a lot of wine"
-                />
-                <img
-                  src={images ? images[2].url : ''}
-                  className="images__card"
-                  alt="a lot of wine"
-                />
+                {images &&
+                  images.map((image, index) => (
+                    <img
+                      src={images[index].url}
+                      className="images__card"
+                      alt="a lot of wine"
+                      key={images[index].url}
+                    />
+                  ))}
               </div>
             </div>
             <div className="product-card__info">
