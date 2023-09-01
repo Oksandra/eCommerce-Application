@@ -1,5 +1,6 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React, { useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { postcodeValidator } from 'postcode-validator';
+import { BaseAddress } from '@commercetools/platform-sdk';
 import { Button } from '../Button/Button';
 import './ProfileAddress.scss';
 import Label from '../Label/Label';
@@ -16,54 +17,50 @@ import checkStreet from '../../helpers/checkStreet';
 import { checkSubmitAddress } from '../../helpers/checkSubmitAddress';
 
 interface ProfileAddressProps {
-  typeAddress: string;
-  setCode: Dispatch<SetStateAction<string>>;
-  setCity: Dispatch<SetStateAction<string>>;
-  setCountry: Dispatch<SetStateAction<string>>;
-  setStreet: Dispatch<SetStateAction<string>>;
-  customerCode: string;
-  customerCountry: string;
-  customerCity: string;
-  customerStreet: string;
-  idAddress: string;
+  address: BaseAddress;
   version: number;
-  setIdAddress: Dispatch<SetStateAction<string>>;
   setVersion: Dispatch<SetStateAction<number>>;
 }
 
 const ProfileAddress: React.FC<ProfileAddressProps> = ({
-  typeAddress,
-  setCode,
-  setCity,
-  setCountry,
-  setStreet,
-  customerCode,
-  customerCountry,
-  customerCity,
-  customerStreet,
-  idAddress,
+  address,
   version,
-  setIdAddress,
   setVersion,
 }): JSX.Element => {
+  const { id, key, postalCode, country, city, streetName } = address;
   const [isDisabbleField, setDisaebledField] = useState(true);
   const [codeError, setCodeError] = useState('');
   const [countryError, setCountryError] = useState('');
   const [cityError, setCityError] = useState('');
   const [streetError, setStreetError] = useState('');
+  const [code, setCode] = useState('');
+  const [countryUser, setCountry] = useState('');
+  const [cityUser, setCity] = useState('');
+  const [street, setStreet] = useState('');
+  const [idAddress, setIdAddress] = useState('');
+
+  useEffect(() => {
+    setCode(postalCode as string);
+    const countryCustomer = countries.find((el) => el.code === country)
+      ?.country;
+    setCountry(countryCustomer as string);
+    setCity(city as string);
+    setStreet(streetName as string);
+    setIdAddress(id as string);
+  }, []);
 
   const updateAddress = (): void => {
     const countryCode = countries.find(
-      (country) => country.country === customerCountry
+      (countrySelected) => countrySelected.country === countryUser
     )?.code as string;
     if (idAddress === undefined || idAddress === '') {
       addCustomerAddress(
-        customerCode,
+        code,
         countryCode,
-        customerCity,
-        customerStreet,
+        cityUser,
+        street,
         version,
-        typeAddress
+        key as string
       ).then((obj) => {
         if (obj.body.addresses[0].key === 'shipping') {
           addShippingAddressId(obj.body.version, obj.body.addresses[0].id).then(
@@ -87,10 +84,10 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       });
     } else {
       updateCustomerAddress(
-        customerCode,
-        countryCode,
-        customerCity,
-        customerStreet,
+        code,
+        countryUser,
+        cityUser,
+        street,
         version,
         idAddress
       ).then((obj) => {
@@ -110,10 +107,10 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
         countryError,
         cityError,
         streetError,
-        customerCode,
-        customerCountry,
-        customerCity,
-        customerStreet,
+        code,
+        countryUser,
+        cityUser,
+        street,
         setCodeError,
         setCountryError,
         setCityError,
@@ -137,37 +134,37 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   };
 
   const checkPostalCode = (data: string): string => {
-    const selected = customerCountry;
-    const code = countries.find((el) => el.country === selected)
+    const selected = countryUser;
+    const codeUser = countries.find((el) => el.country === selected)
       ?.code as string;
-    if (!customerCountry) {
+    if (!countryUser) {
       return 'Please enter country!';
     }
-    if (!postcodeValidator(data, code)) return 'Incorrect postal code';
+    if (!postcodeValidator(data, codeUser)) return 'Incorrect postal code';
     return '';
   };
 
   const checkCountry = (data: string): string => {
-    const country = countries.find((el) => el.country === data)
+    const countrySelected = countries.find((el) => el.country === data)
       ?.country as string;
-    if (!country) {
+    if (!countrySelected) {
       return 'Please enter correct name of country!';
     }
-    if (country) {
-      const countryCode = countries.find((el) => el.country === country)
+    if (countrySelected) {
+      const countryCode = countries.find((el) => el.country === countrySelected)
         ?.code as string;
-      if (!postcodeValidator(customerCode, countryCode))
-        return 'Incorrect postal code';
+      if (!postcodeValidator(code, countryCode)) return 'Incorrect postal code';
     }
     return '';
   };
 
   return (
     <div className="profile__address-container">
+      <h3 className="profile__address-title">{key} address</h3>
       <Label
         text="Postal code"
-        id={`${typeAddress}-code`}
-        value={customerCode}
+        id={`${key}-code`}
+        value={code}
         isDisabled={isDisabbleField}
         type="text"
         setRequestInfo={setCode}
@@ -177,8 +174,8 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       {!!codeError && <span className="input-error">{codeError}</span>}
       <Label
         text="Country"
-        id={`${typeAddress}-country`}
-        value={customerCountry}
+        id={`${key}-country`}
+        value={countryUser}
         isDisabled={isDisabbleField}
         type="text"
         setRequestInfo={setCountry}
@@ -188,8 +185,8 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       {!!countryError && <span className="input-error">{countryError}</span>}
       <Label
         text="City"
-        id={`${typeAddress}-city`}
-        value={customerCity}
+        id={`${key}-city`}
+        value={cityUser}
         isDisabled={isDisabbleField}
         type="text"
         setRequestInfo={setCity}
@@ -199,8 +196,8 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       {!!cityError && <span className="input-error">{cityError}</span>}
       <Label
         text="Street"
-        id={`${typeAddress}-street`}
-        value={customerStreet}
+        id={`${key}-street`}
+        value={street}
         isDisabled={isDisabbleField}
         type="text"
         setRequestInfo={setStreet}

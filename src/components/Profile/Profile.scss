@@ -64,9 +64,6 @@
     .button-save__password {
       width: 8.8rem;
       padding: 5px 0;
-      &:hover {
-        background-color: $border-color;
-      }
     }
     .button-cancel {
       width: 8.8rem;
@@ -74,11 +71,19 @@
       background-color: $muted-color;
       margin-right: 5px;
       margin-left: 23%;
+      &:hover {
+        background-color: $border-color;
+      }
     }
     & > .input-error {
       width: 53%;
       text-align: center;
     }
+  }
+  .button__add-address {
+    display: block;
+    padding: 5px 22px;
+    margin-bottom: 1rem;
   }
   .modal-overlay {
     display: none;
