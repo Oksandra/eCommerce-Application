@@ -12,6 +12,8 @@ interface ProfileFieldProps {
   setRequestInfo: Dispatch<SetStateAction<string>>;
   clickSave: () => void;
   type: string;
+  handleChange: (value: string) => string;
+  setError: Dispatch<SetStateAction<string>>;
 }
 
 const ProfileField: React.FC<ProfileFieldProps> = ({
@@ -23,6 +25,8 @@ const ProfileField: React.FC<ProfileFieldProps> = ({
   setRequestInfo,
   clickSave,
   type,
+  handleChange,
+  setError,
 }): JSX.Element => {
   const clickButtonEdit = (): void => {
     setDisabled(false);
@@ -42,6 +46,8 @@ const ProfileField: React.FC<ProfileFieldProps> = ({
         type={type}
         value={value}
         setRequestInfo={setRequestInfo}
+        handleChange={handleChange}
+        setError={setError}
       />
       <Button
         className="button-edit"

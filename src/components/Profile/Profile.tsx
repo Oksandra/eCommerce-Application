@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import ProfileField from '../ProfileField/ProfileField';
 import './Profile.scss';
 import ProfileAddress from '../ProfileAddress.tsx/ProfileAddress';
-import { Button } from '../Button/Button';
-import Label from '../Label/Label';
 import getCustomer from '../../api/getCustomer';
 import {
   updateCustomerEmail,
@@ -12,7 +10,11 @@ import {
   updateCustomerDateBirth,
 } from '../../api/updateCustomer';
 import { countries } from '../Addresses/countries';
-import changePassword from '../../api/changePassword';
+import ModalChangePassword from '../ModalChangePassword/ModalChangePassword';
+import checkLogin from '../../helpers/checkLogin';
+import { checkSubmitField } from '../../helpers/checkSubmitField';
+import checkSimpleField from '../../helpers/checkSimpleField';
+import checkDateBirthForProfile from '../../helpers/checkDateBirthForProfile';
 
 const Profile = (): JSX.Element => {
   const [isDisabledFirstName, setDisabledFirstName] = useState(true);
@@ -38,10 +40,10 @@ const Profile = (): JSX.Element => {
   const [version, setVersion] = useState(1);
   const [addressIdShipping, setAddressIdShipping] = useState('');
   const [addressIdBilling, setAddressIdBilling] = useState('');
-
-  const clickChangePassword = (): void => {
-    setOpen(!isOpen);
-  };
+  const [loginError, setLoginError] = useState('');
+  const [fistNameError, setFirstNameError] = useState('');
+  const [lastNameError, setLastNameError] = useState('');
+  const [birthError, setBirthError] = useState('');
 
   useEffect(() => {
     getCustomer().then((obj) => {
@@ -86,6 +88,8 @@ const Profile = (): JSX.Element => {
   }, []);
 
   const setNewFirstName = (): void => {
+    if (checkSubmitField(fistNameError, customerFirstName, setFirstNameError))
+      return;
     if (customerFirstName.length === 0) {
       setCustomerFirstName(customerFirstName);
     }
@@ -95,6 +99,8 @@ const Profile = (): JSX.Element => {
     });
   };
   const setNewLastName = (): void => {
+    if (checkSubmitField(lastNameError, customerLastName, setLastNameError))
+      return;
     if (customerLastName.length === 0) {
       setCustomerLastName(customerLastName);
     }
@@ -104,6 +110,7 @@ const Profile = (): JSX.Element => {
     });
   };
   const setNewEmail = (): void => {
+    if (checkSubmitField(loginError, customerEmail, setLoginError)) return;
     if (customerEmail.length === 0) {
       setCustomerEmail(customerEmail);
     }
@@ -113,6 +120,7 @@ const Profile = (): JSX.Element => {
     });
   };
   const setNewDate = (): void => {
+    if (checkSubmitField(birthError, customerDateBirth, setBirthError)) return;
     if (customerDateBirth.length === 0) {
       setCustomerDateBirth(customerDateBirth);
     }
@@ -120,18 +128,6 @@ const Profile = (): JSX.Element => {
       setCustomerDateBirth(resp.body.dateOfBirth);
       setVersion(resp.body.version);
     });
-  };
-
-  const changeCustomerPassword = (): void => {
-    changePassword(version, customerCurrentPasword, customerNewPassword).then(
-      (obj) => {
-        setVersion(obj.body.version);
-      }
-    );
-  };
-
-  const clickCancel = (): void => {
-    setOpen(!isOpen);
   };
 
   return (
@@ -146,7 +142,10 @@ const Profile = (): JSX.Element => {
         clickSave={setNewEmail}
         setRequestInfo={setCustomerEmail}
         type="text"
+        handleChange={checkLogin}
+        setError={setLoginError}
       />
+      {!!loginError && <span className="input-error">{loginError}</span>}
       <ProfileField
         text="First name"
         id="first-name"
@@ -156,7 +155,10 @@ const Profile = (): JSX.Element => {
         setRequestInfo={setCustomerFirstName}
         clickSave={setNewFirstName}
         type="text"
+        handleChange={checkSimpleField}
+        setError={setFirstNameError}
       />
+      {!!fistNameError && <span className="input-error">{fistNameError}</span>}
       <ProfileField
         text="Last name"
         id="last-name"
@@ -166,7 +168,10 @@ const Profile = (): JSX.Element => {
         setRequestInfo={setCustomerLastName}
         clickSave={setNewLastName}
         type="text"
+        handleChange={checkSimpleField}
+        setError={setLastNameError}
       />
+      {!!lastNameError && <span className="input-error">{lastNameError}</span>}
       <ProfileField
         text="Date of birth"
         id="date-birth"
@@ -176,7 +181,10 @@ const Profile = (): JSX.Element => {
         setRequestInfo={setCustomerDateBirth}
         clickSave={setNewDate}
         type="date"
+        handleChange={checkDateBirthForProfile}
+        setError={setBirthError}
       />
+      {!!birthError && <span className="input-error">{birthError}</span>}
       <h3 className="profile__address-title">Shipping address</h3>
       <ProfileAddress
         typeAddress="shipping"
@@ -209,54 +217,18 @@ const Profile = (): JSX.Element => {
         setIdAddress={setAddressIdShipping}
         setVersion={setVersion}
       />
-      <Button
-        className="button-change"
-        textContent="Change password"
-        type="button"
-        onClick={clickChangePassword}
+      <ModalChangePassword
+        customerCurrentPassword={customerCurrentPasword}
+        isOpen={isOpen}
+        setCustomerCurrentPassword={setCustomerCurrentPassword}
+        customerNewPassword={customerNewPassword}
+        setCustomerNewPassword={setCustomerNewPassword}
+        confirmNewPassword={confirmNewPassword}
+        setConfirmNewPassword={setConfirmNewPassword}
+        setVersion={setVersion}
+        version={version}
+        setOpen={setOpen}
       />
-      <form
-        className={
-          isOpen ? 'profile__change-password' : 'profile__change-password open'
-        }
-      >
-        <Label
-          text="Current password"
-          id="current-password"
-          value={customerCurrentPasword}
-          isDisabled={false}
-          type="password"
-          setRequestInfo={setCustomerCurrentPassword}
-        />
-        <Label
-          text="New password"
-          id="new-password"
-          value={customerNewPassword}
-          isDisabled={false}
-          type="password"
-          setRequestInfo={setCustomerNewPassword}
-        />
-        <Label
-          text="Confirm new password"
-          id="cofirm-password"
-          value={confirmNewPassword}
-          isDisabled={false}
-          type="password"
-          setRequestInfo={setConfirmNewPassword}
-        />
-        <Button
-          className="button-cancel"
-          textContent="Cancel"
-          type="button"
-          onClick={clickCancel}
-        />
-        <Button
-          className="button-save__password"
-          textContent="Save"
-          type="button"
-          onClick={changeCustomerPassword}
-        />
-      </form>
       <div
         className={isOpen ? 'modal-overlay' : 'modal-overlay open'}
         id="modal-overlay"

@@ -7,6 +7,8 @@ interface LabelProps {
   type: string;
   value: string;
   setRequestInfo: Dispatch<SetStateAction<string>>;
+  handleChange: (value: string) => string;
+  setError: Dispatch<SetStateAction<string>>;
 }
 
 const Label: React.FC<LabelProps> = ({
@@ -16,6 +18,8 @@ const Label: React.FC<LabelProps> = ({
   type,
   value,
   setRequestInfo,
+  handleChange,
+  setError,
 }): JSX.Element => {
   return (
     <>
@@ -28,7 +32,10 @@ const Label: React.FC<LabelProps> = ({
         type={type}
         value={value}
         disabled={isDisabled}
-        onChange={(event): void => setRequestInfo(event.target.value)}
+        onChange={(event): void => {
+          setRequestInfo(event.target.value);
+          setError(handleChange(event.target.value));
+        }}
       />
     </>
   );

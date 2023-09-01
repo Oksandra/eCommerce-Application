@@ -20,6 +20,14 @@
   .button-change {
     padding: 10px 25px;
   }
+  .input-error {
+    display: block;
+    width: 100%;
+    color: red;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0.2rem auto 0.8rem auto;
+  }
   &__change-password {
     width: 34rem;
     position: fixed;
@@ -66,6 +74,10 @@
       background-color: $muted-color;
       margin-right: 5px;
       margin-left: 23%;
+    }
+    & > .input-error {
+      width: 53%;
+      text-align: center;
     }
   }
   .modal-overlay {
