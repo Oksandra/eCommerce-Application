@@ -5,11 +5,17 @@
 .catalog {
   &__wrapper {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
     max-width: 111rem;
     margin: 0 auto;
     grid-gap: 1rem;
     padding: 1rem 0;
+
+    &.empty {
+      display: flex;
+      @extend %flex-center-cont;
+    }
   }
 }
