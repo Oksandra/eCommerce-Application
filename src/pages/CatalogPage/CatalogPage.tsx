@@ -41,7 +41,14 @@ const CatalogPage: React.FC = () => {
                   ? product.masterData.current.metaDescription['en-US']
                   : ''
               }
-              price="100"
+              price={
+                product.masterData.current.masterVariant.prices
+                  ? (
+                      product.masterData.current.masterVariant.prices[0].value
+                        .centAmount / 100
+                    ).toFixed(2)
+                  : ''
+              }
               key={product.id}
               onClick={(): void => navigate(`/catalog/${product.id}`)}
             />

@@ -24,7 +24,7 @@ const ProductPage: React.FC = () => {
     getProduct(`${id}`)
       .then((data) => {
         setProduct(data.body.masterData.current);
-        console.log(data.body.masterData.current);
+        console.log(data.body.masterData.current.masterVariant);
         setImages(data.body.masterData.current.masterVariant.images);
         setIsloading(false);
       })
@@ -62,6 +62,14 @@ const ProductPage: React.FC = () => {
               <h3 className="products-card__title">
                 {product && product.name['en-US']}
               </h3>
+              <p className="products-card__price">
+                $
+                {product &&
+                  product.masterVariant.prices &&
+                  (
+                    product.masterVariant.prices[0].value.centAmount / 100
+                  ).toFixed(2)}
+              </p>
               <p className="products-card__desc">
                 {product && product.description && product.description['en-US']}
               </p>

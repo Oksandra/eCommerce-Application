@@ -31,11 +31,7 @@ export const ProductCard: FC<ProductCardProps> = ({
         <button className="product-card__icon" type="button">
           <img className="icon__image" src={cart} alt="icon cart" />
         </button>
-        <button
-          onClick={(): void => console.log('111')}
-          className="product-card__icon"
-          type="button"
-        >
+        <button className="product-card__icon" type="button">
           <img className="icon__image" src={heart} alt="icon heart" />
         </button>
       </div>
