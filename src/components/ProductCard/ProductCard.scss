@@ -4,7 +4,6 @@
 .product-card {
   position: relative;
   max-width: 28rem;
-  max-height: 36rem;
   border: $border-dark;
   @extend %flex-j-cont;
   flex-direction: column;
@@ -35,6 +34,14 @@
   &__image {
     height: 22rem;
     @extend %transition;
+  }
+
+  &__description {
+    padding: 0 1rem 1rem;
+    font-size: 1.5rem;
+    line-height: 120%;
+    font-style: italic;
+    text-align: center;
   }
 
   &__icons {

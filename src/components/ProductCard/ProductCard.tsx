@@ -6,10 +6,16 @@ import './ProductCard.scss';
 interface ProductCardProps {
   image: string;
   title: string;
+  desc: string;
   price: string;
 }
 
-export const ProductCard: FC<ProductCardProps> = ({ image, title, price }) => {
+export const ProductCard: FC<ProductCardProps> = ({
+  image,
+  title,
+  desc,
+  price,
+}) => {
   return (
     <div className="product-card">
       <div className="product-card__image-wrap">
@@ -24,7 +30,8 @@ export const ProductCard: FC<ProductCardProps> = ({ image, title, price }) => {
         </button>
       </div>
       <h2 className="product-card__title">{title}</h2>
-      <div className="product-card__price">{price} ₽</div>
+      <p className="product-card__description">{desc}</p>
+      <div className="product-card__price">{price} $</div>
     </div>
   );
 };

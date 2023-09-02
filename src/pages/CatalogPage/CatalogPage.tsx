@@ -26,6 +26,11 @@ const CatalogPage: React.FC = () => {
                 ? product.masterData.current.masterVariant.images[0].url
                 : ''
             }
+            desc={
+              product.masterData.current.metaDescription
+                ? product.masterData.current.metaDescription['en-US']
+                : ''
+            }
             price="100"
             key={product.id}
           />
