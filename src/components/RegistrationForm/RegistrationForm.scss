@@ -23,7 +23,7 @@
       font-size: 1.4rem;
     }
     .star {
-      color: red;
+      color: $color-sale;
     }
     &__tab-button {
       width: 50%;
@@ -111,7 +111,7 @@
     }
     .input-error {
       width: 90%;
-      color: red;
+      color: $color-sale;
       font-size: 1rem;
       margin: 0.2rem 0 0.8rem 0;
     }

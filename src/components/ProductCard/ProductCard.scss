@@ -21,7 +21,7 @@
   }
 
   &:hover &__image {
-    transform: scale(1.07);
+    transform: scale(1.05);
   }
 
   &__image-wrap {
@@ -72,5 +72,13 @@
     background-color: $add-dark-color;
     color: $light-color;
     @extend %transition;
+  }
+
+  &__sale {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 3rem;
+    height: 3rem;
   }
 }

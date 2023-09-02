@@ -40,9 +40,14 @@ h3 {
 }
 
 .sale-price {
-  color: red;
+  color: $color-sale;
   font-size: 3.5rem;
   margin-left: 3rem;
+  &_card {
+    font-size: 2.2rem;
+    margin-left: 2rem;
+    color: $color-sale;
+  }
 }
 
 .crossed {

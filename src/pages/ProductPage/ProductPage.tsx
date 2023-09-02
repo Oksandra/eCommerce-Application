@@ -18,7 +18,6 @@ const ProductPage: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
-  // const [onSale, setOnSale] = useState<boolean>(false);
   const [product, setProduct] = useState<ProductData | null>(null);
   const [images, setImages] = useState<Image[] | undefined>();
   const [prices, setPrices] = useState<Price[] | undefined>();
