@@ -3,7 +3,7 @@
 
 .product-card {
   position: relative;
-  max-width: 28rem;
+  max-width: 30rem;
   border: $border-dark;
   @extend %flex-j-cont;
   flex-direction: column;

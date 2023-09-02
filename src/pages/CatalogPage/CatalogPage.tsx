@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CatalogPage.scss';
 import { Product } from '@commercetools/platform-sdk';
 import getAllProducts from '../../api/getAllProducts';
@@ -6,7 +7,7 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 
 const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
-
+  const navigate = useNavigate();
   React.useEffect(() => {
     getAllProducts(1)
       .then((data) => {
@@ -33,6 +34,7 @@ const CatalogPage: React.FC = () => {
             }
             price="100"
             key={product.id}
+            onClick={(): void => navigate(`/catalog/${product.id}`)}
           />
         ))}
       </div>

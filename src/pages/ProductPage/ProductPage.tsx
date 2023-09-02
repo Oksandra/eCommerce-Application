@@ -20,6 +20,7 @@ const ProductPage: React.FC = () => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [images, setImages] = useState<Image[] | undefined>();
   React.useEffect(() => {
+    setIsloading(true);
     getProduct(`${id}`)
       .then((data) => {
         setProduct(data.body.masterData.current);
@@ -35,13 +36,13 @@ const ProductPage: React.FC = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="product-card">
-          <div className="product-card__wrapper">
+        <div className="products-card">
+          <div className="products-card__wrapper">
             <div className="images">
               <div className="images__main">
                 <img
                   src={images ? images[0].url : ''}
-                  className="product-card__img"
+                  className="products-card__img"
                   alt="bottle of wine"
                 />
               </div>
@@ -57,14 +58,14 @@ const ProductPage: React.FC = () => {
                   ))}
               </div>
             </div>
-            <div className="product-card__info">
-              <h3 className="product-card__title">
+            <div className="products-card__info">
+              <h3 className="products-card__title">
                 {product && product.name['en-US']}
               </h3>
-              <p className="product-card__desc">
+              <p className="products-card__desc">
                 {product && product.description && product.description['en-US']}
               </p>
-              <button className="product-card__button" type="button">
+              <button className="products-card__button" type="button">
                 Buy NOW
               </button>
             </div>

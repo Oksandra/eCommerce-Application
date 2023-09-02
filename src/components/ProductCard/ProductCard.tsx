@@ -8,6 +8,7 @@ interface ProductCardProps {
   title: string;
   desc: string;
   price: string;
+  onClick: () => void;
 }
 
 export const ProductCard: FC<ProductCardProps> = ({
@@ -15,9 +16,14 @@ export const ProductCard: FC<ProductCardProps> = ({
   title,
   desc,
   price,
+  onClick,
 }) => {
   return (
-    <div className="product-card">
+    <div
+      onClick={(): void => onClick()}
+      aria-hidden="true"
+      className="product-card"
+    >
       <div className="product-card__image-wrap">
         <img src={image} alt="bottle" className="product-card__image" />
       </div>
@@ -25,7 +31,11 @@ export const ProductCard: FC<ProductCardProps> = ({
         <button className="product-card__icon" type="button">
           <img className="icon__image" src={cart} alt="icon cart" />
         </button>
-        <button className="product-card__icon" type="button">
+        <button
+          onClick={(): void => console.log('111')}
+          className="product-card__icon"
+          type="button"
+        >
           <img className="icon__image" src={heart} alt="icon heart" />
         </button>
       </div>
