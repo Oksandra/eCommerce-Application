@@ -3,8 +3,8 @@
 
 .product-card {
   position: relative;
-  width: 28rem;
-  height: 36rem;
+  max-width: 28rem;
+  max-height: 36rem;
   border: $border-dark;
   @extend %flex-j-cont;
   flex-direction: column;
@@ -15,25 +15,26 @@
 
   &:hover {
     box-shadow: 0px 1rem 2rem rgba(0, 0, 0, 0.3);
-    transform: scale(105%);
-  }
-
-  &:hover &__title {
-    font-size: 2.2rem;
   }
 
   &:hover &__price {
     background-color: $border-color;
   }
 
+  &:hover &__image {
+    transform: scale(1.07);
+  }
+
   &__image-wrap {
     width: 100%;
     text-align: center;
     background-color: $light-color;
+    overflow: hidden;
   }
 
   &__image {
     height: 22rem;
+    @extend %transition;
   }
 
   &__icons {
