@@ -59,7 +59,11 @@ function App(): JSX.Element {
           />
           <Route
             path="favorites"
-            element={<div className="center-align">Favorites products</div>}
+            element={
+              <RequireAuth>
+                <div className="center-align">My favorites products</div>
+              </RequireAuth>
+            }
           />
           <Route
             path="cart"
