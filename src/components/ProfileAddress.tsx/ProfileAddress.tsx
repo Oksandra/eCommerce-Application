@@ -168,7 +168,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       <h3 className="profile__address-title">{key} address</h3>
       <span
         className={
-          defaultBillingAddress === key || defaultShippingAddress === key
+          defaultBillingAddress === id || defaultShippingAddress === id
             ? 'profile__address-default show'
             : 'profile__address-default'
         }

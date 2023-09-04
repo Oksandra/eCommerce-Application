@@ -52,11 +52,12 @@ const Profile = (): JSX.Element => {
       setAddresses(obj.body.addresses);
       setVersion(obj.body.version);
       setLoading(false);
-      if (obj.body.defaultShippingAddress) {
-        setDefaultShippingAddress(obj.body.defaultShippingAddress[0]);
+      if (obj.body.defaultShippingAddressId) {
+        setDefaultShippingAddress(obj.body.defaultShippingAddressId);
       }
-      if (obj.body.defaultBillingAddress) {
-        setDefaultBillingAddress(obj.body.defaultBillingAddress[0]);
+      if (obj.body.defaultBillingAddressId) {
+        setDefaultBillingAddress(obj.body.defaultBillingAddressId);
+        console.log(obj.body.defaultBillingAddressId);
       }
     });
   }, []);
