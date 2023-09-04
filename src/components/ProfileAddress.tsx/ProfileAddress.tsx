@@ -25,6 +25,8 @@ interface ProfileAddressProps {
   setVersion: Dispatch<SetStateAction<number>>;
   defaultShippingAddress: string;
   defaultBillingAddress: string;
+  setDefaultShippingAddress: Dispatch<SetStateAction<string>>;
+  setDefaultBillingAddress: Dispatch<SetStateAction<string>>;
 }
 
 const ProfileAddress: React.FC<ProfileAddressProps> = ({
@@ -33,6 +35,8 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   setVersion,
   defaultShippingAddress,
   defaultBillingAddress,
+  setDefaultBillingAddress,
+  setDefaultShippingAddress,
 }): JSX.Element => {
   const { id, key, postalCode, country, city, streetName } = address;
   const [isDisabbleField, setDisaebledField] = useState(true);
@@ -58,7 +62,6 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
     if (defaultBillingAddress === id || defaultShippingAddress === id) {
       setDefaultAddressChecked(true);
     }
-    console.log(key);
   }, []);
 
   const updateAddress = (): void => {
@@ -143,6 +146,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       return;
     setDisaebledField(true);
     updateAddress();
+    window.location.reload();
   };
 
   const clickButtonDelete = (): void => {
@@ -154,6 +158,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       setCountry('');
       setIdAddress('');
       setVersion(obj.body.version);
+      window.location.reload();
     });
   };
 
@@ -246,6 +251,12 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
           checked={defaultAddressChecked}
           onChange={(event): void => {
             setDefaultAddressChecked(event.target.checked);
+            if (key === 'Billing') {
+              setDefaultBillingAddress(idAddress);
+            }
+            if (key === 'Shipping') {
+              setDefaultShippingAddress(idAddress);
+            }
           }}
         />
         Set as default address

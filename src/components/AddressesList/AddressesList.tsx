@@ -8,6 +8,8 @@ interface AddressesListProps {
   setVersion: Dispatch<SetStateAction<number>>;
   defaultShippingAddress: string;
   defaultBillingAddress: string;
+  setDefaultShippingAddress: Dispatch<SetStateAction<string>>;
+  setDefaultBillingAddress: Dispatch<SetStateAction<string>>;
 }
 
 const AddressesList: React.FC<AddressesListProps> = ({
@@ -16,6 +18,8 @@ const AddressesList: React.FC<AddressesListProps> = ({
   setVersion,
   defaultShippingAddress,
   defaultBillingAddress,
+  setDefaultShippingAddress,
+  setDefaultBillingAddress,
 }): JSX.Element => {
   return (
     <div className="items">
@@ -27,6 +31,8 @@ const AddressesList: React.FC<AddressesListProps> = ({
           setVersion={setVersion}
           defaultShippingAddress={defaultShippingAddress}
           defaultBillingAddress={defaultBillingAddress}
+          setDefaultBillingAddress={setDefaultBillingAddress}
+          setDefaultShippingAddress={setDefaultShippingAddress}
         />
       ))}
     </div>

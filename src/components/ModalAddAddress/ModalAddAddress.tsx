@@ -83,6 +83,7 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
 
   const clickCancel = (): void => {
     setIsOpen(true);
+    window.location.reload();
   };
 
   const clickSave = (): void => {

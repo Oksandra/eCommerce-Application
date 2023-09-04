@@ -57,7 +57,6 @@ const Profile = (): JSX.Element => {
       }
       if (obj.body.defaultBillingAddressId) {
         setDefaultBillingAddress(obj.body.defaultBillingAddressId);
-        console.log(obj.body.defaultBillingAddressId);
       }
     });
   }, []);
@@ -178,6 +177,8 @@ const Profile = (): JSX.Element => {
             setVersion={setVersion}
             defaultShippingAddress={defaultShippingAddress}
             defaultBillingAddress={defaultBillingAddress}
+            setDefaultBillingAddress={setDefaultBillingAddress}
+            setDefaultShippingAddress={setDefaultShippingAddress}
           />
           <Button
             className="button__add-address"
