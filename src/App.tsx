@@ -12,6 +12,7 @@ import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import HomePage from './pages/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
 import ProductPage from './pages/ProductPage/ProductPage';
+import CatalogPage from './pages/CatalogPage/CatalogPage';
 
 function App(): JSX.Element {
   return (
@@ -34,10 +35,7 @@ function App(): JSX.Element {
               </AccessLimitAuth>
             }
           />
-          <Route
-            path="catalog"
-            element={<div className="center-align">Here is the catalog!</div>}
-          />
+          <Route path="catalog" element={<CatalogPage />} />
           <Route path="catalog/:id" element={<ProductPage />} />
           <Route
             path="about"
@@ -61,7 +59,11 @@ function App(): JSX.Element {
           />
           <Route
             path="favorites"
-            element={<div className="center-align">Favorites products</div>}
+            element={
+              <RequireAuth>
+                <div className="center-align">My favorites products</div>
+              </RequireAuth>
+            }
           />
           <Route
             path="cart"

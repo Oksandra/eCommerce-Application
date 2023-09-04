@@ -2,7 +2,7 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
 
-.product-card {
+.products-card {
   &__wrapper {
     @extend %flex-center-cont;
   }
@@ -11,7 +11,8 @@
   }
   &__title {
     @extend %flex-center-cont;
-    margin-bottom: 3rem;
+    position: relative;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
     max-width: 90%;
     border-bottom: $border-light;
@@ -39,6 +40,19 @@
     background-color: $background-color;
     @include button($dark-color);
     margin: auto 0 1rem 0;
+  }
+  &__price {
+    margin: 0 auto 1rem 0;
+    font-size: 3.2rem;
+    color: #333333;
+    padding-left: 10%;
+  }
+  &__sale {
+    position: absolute;
+    bottom: -6rem;
+    right: 0;
+    width: 5rem;
+    height: 5rem;
   }
 }
 
