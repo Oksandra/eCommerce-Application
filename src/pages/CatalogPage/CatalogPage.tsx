@@ -17,7 +17,7 @@ const CatalogPage: React.FC = () => {
         setAllProducts(data.body.results);
         setIsloading(false);
       })
-      .catch((e) => console.log(e));
+      .catch(() => setIsloading(true));
   }, []);
 
   return (

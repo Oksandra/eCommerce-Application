@@ -8,6 +8,15 @@
   }
   &__img {
     height: 30rem;
+    &_big {
+      height: 50rem;
+      @include media-big-mobile {
+        height: 40rem;
+      }
+      @include media-mobile {
+        height: 35rem;
+      }
+    }
   }
   &__title {
     @extend %flex-center-cont;
