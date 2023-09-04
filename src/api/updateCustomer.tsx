@@ -95,7 +95,8 @@ const updateCustomerAddress = async (
   customerCity: string,
   customerStreet: string,
   versionNumber: number,
-  idAddress: string
+  idAddress: string,
+  typeAddress: string
 ): Promise<ClientResponse> => {
   const id = localStorage.getItem('userWin4ik') as string;
   return apiRoot
@@ -109,6 +110,7 @@ const updateCustomerAddress = async (
             action: 'changeAddress',
             addressId: idAddress,
             address: {
+              key: typeAddress,
               streetName: customerStreet,
               postalCode: code,
               city: customerCity,
@@ -219,6 +221,94 @@ const addBillingAddressId = async (
     .execute();
 };
 
+const addDefaultBillingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'setDefaultBillingAddress',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const addDefaultShippingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'setDefaultShippingAddress',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const removeDefaultBillingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'removeBillingAddressId',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+const removeDefaultShippingAddressId = async (
+  versionNumber: number,
+  idAddress: string
+): Promise<ClientResponse> => {
+  const id = localStorage.getItem('userWin4ik') as string;
+  return apiRoot
+    .customers()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'removeShippingAddressId',
+            addressId: idAddress,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
 export {
   updateCustomerName,
   updateCustomerLastName,
@@ -229,4 +319,8 @@ export {
   addCustomerAddress,
   addShippingAddressId,
   addBillingAddressId,
+  addDefaultBillingAddressId,
+  addDefaultShippingAddressId,
+  removeDefaultBillingAddressId,
+  removeDefaultShippingAddressId,
 };

@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
+import { _ErrorResponse } from '@commercetools/platform-sdk';
 import Label from '../Label/Label';
 import changePassword from '../../api/changePassword';
 import { Button } from '../Button/Button';
@@ -16,6 +17,9 @@ interface ModalChangePasswordProps {
   setVersion: Dispatch<SetStateAction<number>>;
   version: number;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  openModal: () => void;
+  setTypeError: Dispatch<SetStateAction<string>>;
 }
 
 const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
@@ -29,10 +33,14 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
   setVersion,
   version,
   setOpen,
+  setMessage,
+  openModal,
+  setTypeError,
 }): JSX.Element => {
   const [passwordCurrentError, setCurrentPasswordError] = useState('');
   const [passwordNewError, setNewPasswordError] = useState('');
   const [confirmNewPasswordError, setCorfimNewPasswordError] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   const clickChangePassword = (): void => {
     setOpen(!isOpen);
@@ -42,6 +50,7 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
     setCurrentPasswordError('');
     setNewPasswordError('');
     setCorfimNewPasswordError('');
+    setErrorSubmit('');
   };
 
   const changeCustomerPassword = (): void => {
@@ -58,11 +67,16 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
       )
     )
       return;
-    changePassword(version, customerCurrentPassword, customerNewPassword).then(
-      (obj) => {
+    changePassword(version, customerCurrentPassword, customerNewPassword)
+      .then((obj) => {
         setVersion(obj.body.version);
-      }
-    );
+        setMessage(`Password changed successfully`);
+        setTypeError('success');
+        openModal();
+      })
+      .catch((error: _ErrorResponse) => {
+        setErrorSubmit(error.message);
+      });
   };
 
   const checkConfirmPassword = (value: string): string => {
@@ -140,6 +154,7 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
           type="button"
           onClick={changeCustomerPassword}
         />
+        {!!errorSubmit && <span className="input-error">{errorSubmit}</span>}
       </form>
     </>
   );

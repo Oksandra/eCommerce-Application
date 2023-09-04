@@ -15,8 +15,8 @@ import { countries } from '../Addresses/countries';
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../hooks/useAuth';
 
-const keyShipping = 'shipping';
-const keyBilling = 'billing';
+const keyShipping = 'Shipping';
+const keyBilling = 'Billing';
 
 function RegistrationForm(): JSX.Element {
   const { signin } = useAuth();
@@ -36,6 +36,7 @@ function RegistrationForm(): JSX.Element {
 
   const [modalActive, setModalActive] = useState(false);
   const [resultType, setResultType] = useState('');
+  const [message, setMessage] = useState('');
 
   const [selectedCountry, setSelectedCountry] =
     useState<ArrayObjectSelectState>({
@@ -111,14 +112,17 @@ function RegistrationForm(): JSX.Element {
       .then((resp) => {
         setResultType('success');
         const user: string = resp.body.customer.id;
+        setMessage('You have successfully registered!');
         openModal(user);
         localStorage.setItem('userWin4ik', user);
       })
       .catch((error: ErrorResponse) => {
         if (error.statusCode === 400) {
           setResultType('error');
+          setMessage(error.message);
         } else if (error.statusCode === 503) {
           setResultType('error-server');
+          setMessage('Oops, something went wrong! Try again later!');
         }
         openModal();
         setShippingAddressDefault(false);
@@ -266,7 +270,7 @@ function RegistrationForm(): JSX.Element {
           </p>
         </form>
       </div>
-      <Modal active={modalActive} resultType={resultType} />
+      <Modal active={modalActive} resultType={resultType} message={message} />
     </>
   );
 }
