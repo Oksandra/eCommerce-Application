@@ -15,8 +15,8 @@ import { countries } from '../Addresses/countries';
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../hooks/useAuth';
 
-const keyShipping = 'shipping';
-const keyBilling = 'billing';
+const keyShipping = 'Shipping';
+const keyBilling = 'Billing';
 
 function RegistrationForm(): JSX.Element {
   const { signin } = useAuth();
