@@ -5,10 +5,13 @@ import { Button } from '../Button/Button';
 import './ProfileAddress.scss';
 import Label from '../Label/Label';
 import {
-  addCustomerAddress,
-  addShippingAddressId,
   deleteCustomerAddress,
   updateCustomerAddress,
+  addDefaultShippingAddressId,
+  addDefaultBillingAddressId,
+  removeDefaultBillingAddressId,
+  removeDefaultShippingAddressId,
+  addShippingAddressId,
   addBillingAddressId,
 } from '../../api/updateCustomer';
 import { countries } from '../Addresses/countries';
@@ -42,6 +45,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   const [cityUser, setCity] = useState('');
   const [street, setStreet] = useState('');
   const [idAddress, setIdAddress] = useState('');
+  const [defaultAddressChecked, setDefaultAddressChecked] = useState(false);
 
   useEffect(() => {
     setCode(postalCode as string);
@@ -51,53 +55,68 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
     setCity(city as string);
     setStreet(streetName as string);
     setIdAddress(id as string);
+    if (defaultBillingAddress === id || defaultShippingAddress === id) {
+      setDefaultAddressChecked(true);
+    }
+    console.log(key);
   }, []);
 
   const updateAddress = (): void => {
     const countryCode = countries.find(
       (countrySelected) => countrySelected.country === countryUser
     )?.code as string;
-    if (idAddress === undefined || idAddress === '') {
-      addCustomerAddress(
-        code,
-        countryCode,
-        cityUser,
-        street,
-        version,
-        key as string
-      ).then((obj) => {
-        if (obj.body.addresses[0].key === 'shipping') {
-          addShippingAddressId(obj.body.version, obj.body.addresses[0].id).then(
+    updateCustomerAddress(
+      code,
+      countryCode,
+      cityUser,
+      street,
+      version,
+      idAddress,
+      key as string
+    ).then((obj) => {
+      setVersion(obj.body.version);
+      if (defaultAddressChecked) {
+        if (key === 'Shipping') {
+          addDefaultShippingAddressId(obj.body.version, id as string).then(
             (resp) => {
               setVersion(resp.body.version);
             }
           );
-        } else if (obj.body.addresses[0].key === 'billing') {
-          addBillingAddressId(obj.body.version, obj.body.addresses[0].id).then(
+        }
+        if (key === 'Billing') {
+          addDefaultBillingAddressId(obj.body.version, id as string).then(
             (response) => {
               setVersion(response.body.version);
             }
           );
-        } else if (obj.body.addresses[1].key === 'billing') {
-          addBillingAddressId(obj.body.version, obj.body.addresses[1].id).then(
-            (object) => {
-              setVersion(object.body.version);
+        }
+      } else {
+        if (key === 'Shipping') {
+          removeDefaultShippingAddressId(obj.body.version, id as string).then(
+            (resp) => {
+              setVersion(resp.body.version);
+              addShippingAddressId(resp.body.version, id as string).then(
+                (object) => {
+                  setVersion(object.body.version);
+                }
+              );
             }
           );
         }
-      });
-    } else {
-      updateCustomerAddress(
-        code,
-        countryUser,
-        cityUser,
-        street,
-        version,
-        idAddress
-      ).then((obj) => {
-        setVersion(obj.body.version);
-      });
-    }
+        if (key === 'Billing') {
+          removeDefaultBillingAddressId(obj.body.version, id as string).then(
+            (response) => {
+              setVersion(response.body.version);
+              addBillingAddressId(response.body.version, id as string).then(
+                (object) => {
+                  setVersion(object.body.version);
+                }
+              );
+            }
+          );
+        }
+      }
+    });
   };
 
   const clickButtonEdit = (): void => {
@@ -219,6 +238,18 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
         setError={setStreetError}
       />
       {!!streetError && <span className="input-error">{streetError}</span>}
+      <label htmlFor="add-default" className="modal-address__default">
+        <input
+          id="add-default"
+          type="checkbox"
+          disabled={isDisabbleField}
+          checked={defaultAddressChecked}
+          onChange={(event): void => {
+            setDefaultAddressChecked(event.target.checked);
+          }}
+        />
+        Set as default address
+      </label>
       <Button
         className="button-edit"
         textContent="Edit"
