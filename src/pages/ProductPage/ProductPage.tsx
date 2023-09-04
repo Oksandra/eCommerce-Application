@@ -31,7 +31,6 @@ const ProductPage: React.FC = () => {
       .then((data) => {
         setProduct(data.body.masterData.current);
         setPrices(data.body.masterData.current.masterVariant.prices);
-        console.log(data.body.masterData.current);
         setImages(data.body.masterData.current.masterVariant.images);
         setIsloading(false);
       })

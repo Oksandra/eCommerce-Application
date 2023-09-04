@@ -83,7 +83,6 @@ const Profile = (): JSX.Element => {
         setAddressIdBilling(obj.body.billingAddressIds[0] as string);
       }
       setVersion(obj.body.version);
-      console.log(version);
     });
   }, []);
 
