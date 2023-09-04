@@ -13,6 +13,8 @@ import {
   addCustomerAddress,
   addShippingAddressId,
   addBillingAddressId,
+  addDefaultShippingAddressId,
+  addDefaultBillingAddressId,
 } from '../../api/updateCustomer';
 
 const options = [
@@ -51,6 +53,7 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
   const [cityError, setCityError] = useState('');
   const [streetError, setStreetError] = useState('');
   const [errorAdding, setErrorAdding] = useState('');
+  const [defaultAddress, setDefaultAddress] = useState(false);
 
   const checkPostalCode = (data: string): string => {
     const selected = country;
@@ -95,7 +98,6 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
       .then((obj) => {
         const shippingIds: string[] = obj.body.shippingAddressIds;
         const billingIds: string[] = obj.body.billingAddressIds;
-        console.log(obj.body.version);
         (obj.body.addresses as BaseAddress[]).forEach(
           (element: BaseAddress) => {
             if (
@@ -105,6 +107,14 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
               addShippingAddressId(obj.body.version, element.id as string).then(
                 (resp) => {
                   setVersion(resp.body.version);
+                  if (defaultAddress) {
+                    addDefaultShippingAddressId(
+                      resp.body.version,
+                      element.id as string
+                    ).then((response) => {
+                      setVersion(response.body.version);
+                    });
+                  }
                 }
               );
             }
@@ -115,6 +125,14 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
               addBillingAddressId(obj.body.version, element.id as string).then(
                 (resp) => {
                   setVersion(resp.body.version);
+                  if (defaultAddress) {
+                    addDefaultBillingAddressId(
+                      resp.body.version,
+                      element.id as string
+                    ).then((response) => {
+                      setVersion(response.body.version);
+                    });
+                  }
                 }
               );
             }
@@ -182,7 +200,11 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
       />
       {!!streetError && <span className="input-error">{streetError}</span>}
       <label htmlFor="add-default" className="modal-address__default">
-        <input id="add-default" type="checkbox" />
+        <input
+          id="add-default"
+          type="checkbox"
+          onChange={(event): void => setDefaultAddress(event.target.checked)}
+        />
         Save as default address
       </label>
       <Button
