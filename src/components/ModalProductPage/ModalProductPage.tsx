@@ -29,7 +29,7 @@ const ModalProductPage: React.FC<ModalProductPageProps> = ({
         <span
           aria-hidden="true"
           onClick={(): void => setActive(false)}
-          className="closebtn"
+          className="close-btn"
         >
           &times;
         </span>

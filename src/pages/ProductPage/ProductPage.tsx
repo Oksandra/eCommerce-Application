@@ -23,6 +23,7 @@ const ProductPage: React.FC = () => {
   const [images, setImages] = useState<Image[] | undefined>();
   const [prices, setPrices] = useState<Price[] | undefined>();
   const [modalActive, setModalActive] = useState<boolean>(false);
+  const [imgPath, setImgPath] = useState<string | undefined>();
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -47,7 +48,17 @@ const ProductPage: React.FC = () => {
             <div className="images">
               <div
                 aria-hidden="true"
-                onClick={(): void => setModalActive(true)}
+                onClick={(e): void => {
+                  setModalActive(true);
+                  if (
+                    e.currentTarget instanceof Element &&
+                    e.currentTarget.children[0].getAttribute('src')
+                  ) {
+                    setImgPath(
+                      e.currentTarget.children[0].getAttribute('src') as string
+                    );
+                  }
+                }}
                 className="images__main"
               >
                 <img
@@ -64,6 +75,13 @@ const ProductPage: React.FC = () => {
                       className="images__card"
                       alt="a lot of wine"
                       key={images[index].url}
+                      aria-hidden="true"
+                      onClick={(e): void => {
+                        setModalActive(true);
+                        setImgPath(
+                          e.currentTarget.getAttribute('src') as string
+                        );
+                      }}
                     />
                   ))}
               </div>
@@ -121,9 +139,9 @@ const ProductPage: React.FC = () => {
           </div>
           <ModalProductPage active={modalActive} setActive={setModalActive}>
             <img
-              src={images ? images[0].url : ''}
+              src={imgPath}
               className="products-card__img_big"
-              alt="bottle of wine"
+              alt="all wine"
             />
           </ModalProductPage>
         </div>
