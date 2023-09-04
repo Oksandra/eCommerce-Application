@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
+import { _ErrorResponse } from '@commercetools/platform-sdk';
 import Label from '../Label/Label';
 import changePassword from '../../api/changePassword';
 import { Button } from '../Button/Button';
@@ -33,6 +34,7 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
   const [passwordCurrentError, setCurrentPasswordError] = useState('');
   const [passwordNewError, setNewPasswordError] = useState('');
   const [confirmNewPasswordError, setCorfimNewPasswordError] = useState('');
+  const [errorSubmit, setErrorSubmit] = useState('');
 
   const clickChangePassword = (): void => {
     setOpen(!isOpen);
@@ -58,11 +60,13 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
       )
     )
       return;
-    changePassword(version, customerCurrentPassword, customerNewPassword).then(
-      (obj) => {
+    changePassword(version, customerCurrentPassword, customerNewPassword)
+      .then((obj) => {
         setVersion(obj.body.version);
-      }
-    );
+      })
+      .catch((error: _ErrorResponse) => {
+        setErrorSubmit(error.message);
+      });
   };
 
   const checkConfirmPassword = (value: string): string => {
@@ -140,6 +144,7 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
           type="button"
           onClick={changeCustomerPassword}
         />
+        {!!errorSubmit && <span className="input-error">{errorSubmit}</span>}
       </form>
     </>
   );
