@@ -27,6 +27,9 @@ interface ProfileAddressProps {
   defaultBillingAddress: string;
   setDefaultShippingAddress: Dispatch<SetStateAction<string>>;
   setDefaultBillingAddress: Dispatch<SetStateAction<string>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  openModal: () => void;
+  setTypeError: Dispatch<SetStateAction<string>>;
 }
 
 const ProfileAddress: React.FC<ProfileAddressProps> = ({
@@ -37,6 +40,9 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   defaultBillingAddress,
   setDefaultBillingAddress,
   setDefaultShippingAddress,
+  setMessage,
+  openModal,
+  setTypeError,
 }): JSX.Element => {
   const { id, key, postalCode, country, city, streetName } = address;
   const [isDisabbleField, setDisaebledField] = useState(true);
@@ -119,6 +125,9 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
           );
         }
       }
+      setMessage(`${key} address changed successfully`);
+      setTypeError('success');
+      openModal();
     });
   };
 

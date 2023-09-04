@@ -10,6 +10,9 @@ interface AddressesListProps {
   defaultBillingAddress: string;
   setDefaultShippingAddress: Dispatch<SetStateAction<string>>;
   setDefaultBillingAddress: Dispatch<SetStateAction<string>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  openModal: () => void;
+  setTypeError: Dispatch<SetStateAction<string>>;
 }
 
 const AddressesList: React.FC<AddressesListProps> = ({
@@ -20,6 +23,9 @@ const AddressesList: React.FC<AddressesListProps> = ({
   defaultBillingAddress,
   setDefaultShippingAddress,
   setDefaultBillingAddress,
+  setMessage,
+  openModal,
+  setTypeError,
 }): JSX.Element => {
   return (
     <div className="items">
@@ -33,6 +39,9 @@ const AddressesList: React.FC<AddressesListProps> = ({
           defaultBillingAddress={defaultBillingAddress}
           setDefaultBillingAddress={setDefaultBillingAddress}
           setDefaultShippingAddress={setDefaultShippingAddress}
+          setMessage={setMessage}
+          openModal={openModal}
+          setTypeError={setTypeError}
         />
       ))}
     </div>

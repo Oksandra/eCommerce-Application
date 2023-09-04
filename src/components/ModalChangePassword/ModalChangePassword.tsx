@@ -17,6 +17,9 @@ interface ModalChangePasswordProps {
   setVersion: Dispatch<SetStateAction<number>>;
   version: number;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  openModal: () => void;
+  setTypeError: Dispatch<SetStateAction<string>>;
 }
 
 const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
@@ -30,6 +33,9 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
   setVersion,
   version,
   setOpen,
+  setMessage,
+  openModal,
+  setTypeError,
 }): JSX.Element => {
   const [passwordCurrentError, setCurrentPasswordError] = useState('');
   const [passwordNewError, setNewPasswordError] = useState('');
@@ -44,6 +50,7 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
     setCurrentPasswordError('');
     setNewPasswordError('');
     setCorfimNewPasswordError('');
+    setErrorSubmit('');
   };
 
   const changeCustomerPassword = (): void => {
@@ -63,6 +70,9 @@ const ModalChangePassword: React.FC<ModalChangePasswordProps> = ({
     changePassword(version, customerCurrentPassword, customerNewPassword)
       .then((obj) => {
         setVersion(obj.body.version);
+        setMessage(`Password changed successfully`);
+        setTypeError('success');
+        openModal();
       })
       .catch((error: _ErrorResponse) => {
         setErrorSubmit(error.message);

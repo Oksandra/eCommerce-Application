@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BaseAddress } from '@commercetools/platform-sdk';
+import { BaseAddress, ErrorResponse } from '@commercetools/platform-sdk';
 import ProfileField from '../ProfileField/ProfileField';
 import './Profile.scss';
 import getCustomer from '../../api/getCustomer';
@@ -18,6 +18,9 @@ import { Button } from '../Button/Button';
 import AddressesList from '../AddressesList/AddressesList';
 import Loader from '../Loader/Loader';
 import ModalAddAddress from '../ModalAddAddress/ModalAddAddress';
+import Modal from '../Modal/Modal';
+
+const messageSuccess = 'changed successfully!';
 
 const Profile = (): JSX.Element => {
   const [isDisabledFirstName, setDisabledFirstName] = useState(true);
@@ -42,6 +45,9 @@ const Profile = (): JSX.Element => {
   const [defaultShippingAddress, setDefaultShippingAddress] = useState('');
   const [defaultBillingAddress, setDefaultBillingAddress] = useState('');
   const [showModalAddress, setShowModalAddress] = useState(true);
+  const [modalActive, setModalActive] = useState(false);
+  const [resultType, setResultType] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     getCustomer().then((obj) => {
@@ -61,16 +67,32 @@ const Profile = (): JSX.Element => {
     });
   }, []);
 
+  const openModalMessage = (): void => {
+    setModalActive(true);
+    setTimeout(() => {
+      setModalActive(false);
+    }, 4000);
+  };
+
   const setNewFirstName = (): void => {
     if (checkSubmitField(fistNameError, customerFirstName, setFirstNameError))
       return;
     if (customerFirstName.length === 0) {
       setCustomerFirstName(customerFirstName);
     }
-    updateCustomerName(customerFirstName, version).then((resp) => {
-      setCustomerFirstName(resp.body.firstName);
-      setVersion(resp.body.version);
-    });
+    updateCustomerName(customerFirstName, version)
+      .then((resp) => {
+        setCustomerFirstName(resp.body.firstName);
+        setVersion(resp.body.version);
+        setMessage(`Name ${messageSuccess}`);
+        setResultType('success');
+        openModalMessage();
+      })
+      .catch((error: ErrorResponse) => {
+        setMessage(error.message);
+        setResultType('error');
+        openModalMessage();
+      });
   };
   const setNewLastName = (): void => {
     if (checkSubmitField(lastNameError, customerLastName, setLastNameError))
@@ -78,30 +100,57 @@ const Profile = (): JSX.Element => {
     if (customerLastName.length === 0) {
       setCustomerLastName(customerLastName);
     }
-    updateCustomerLastName(customerLastName, version).then((resp) => {
-      setCustomerLastName(resp.body.lastName);
-      setVersion(resp.body.version);
-    });
+    updateCustomerLastName(customerLastName, version)
+      .then((resp) => {
+        setCustomerLastName(resp.body.lastName);
+        setVersion(resp.body.version);
+        setMessage(`Last name ${messageSuccess}`);
+        setResultType('success');
+        openModalMessage();
+      })
+      .catch((error: ErrorResponse) => {
+        setMessage(error.message);
+        setResultType('error');
+        openModalMessage();
+      });
   };
   const setNewEmail = (): void => {
     if (checkSubmitField(loginError, customerEmail, setLoginError)) return;
     if (customerEmail.length === 0) {
       setCustomerEmail(customerEmail);
     }
-    updateCustomerEmail(customerEmail, version).then((resp) => {
-      setCustomerEmail(resp.body.email);
-      setVersion(resp.body.version);
-    });
+    updateCustomerEmail(customerEmail, version)
+      .then((resp) => {
+        setCustomerEmail(resp.body.email);
+        setVersion(resp.body.version);
+        setMessage(`Email ${messageSuccess}`);
+        setResultType('success');
+        openModalMessage();
+      })
+      .catch((error) => {
+        setMessage(error.message);
+        setResultType('error');
+        openModalMessage();
+      });
   };
   const setNewDate = (): void => {
     if (checkSubmitField(birthError, customerDateBirth, setBirthError)) return;
     if (customerDateBirth.length === 0) {
       setCustomerDateBirth(customerDateBirth);
     }
-    updateCustomerDateBirth(customerDateBirth, version).then((resp) => {
-      setCustomerDateBirth(resp.body.dateOfBirth);
-      setVersion(resp.body.version);
-    });
+    updateCustomerDateBirth(customerDateBirth, version)
+      .then((resp) => {
+        setCustomerDateBirth(resp.body.dateOfBirth);
+        setVersion(resp.body.version);
+        setMessage(`Date of birth ${messageSuccess}`);
+        setResultType('success');
+        openModalMessage();
+      })
+      .catch((error) => {
+        setMessage(error.message);
+        setResultType('error');
+        openModalMessage();
+      });
   };
 
   const openModalAddAddress = (): void => {
@@ -179,6 +228,9 @@ const Profile = (): JSX.Element => {
             defaultBillingAddress={defaultBillingAddress}
             setDefaultBillingAddress={setDefaultBillingAddress}
             setDefaultShippingAddress={setDefaultShippingAddress}
+            setMessage={setMessage}
+            openModal={openModalMessage}
+            setTypeError={setResultType}
           />
           <Button
             className="button__add-address"
@@ -197,12 +249,23 @@ const Profile = (): JSX.Element => {
             setVersion={setVersion}
             version={version}
             setOpen={setOpen}
+            setMessage={setMessage}
+            openModal={openModalMessage}
+            setTypeError={setResultType}
           />
           <ModalAddAddress
             isOpen={showModalAddress}
             setIsOpen={setShowModalAddress}
             version={version}
             setVersion={setVersion}
+            setMessage={setMessage}
+            openModal={openModalMessage}
+            setTypeError={setResultType}
+          />
+          <Modal
+            active={modalActive}
+            resultType={resultType}
+            message={message}
           />
           <div
             className={isOpen ? 'modal-overlay' : 'modal-overlay open'}

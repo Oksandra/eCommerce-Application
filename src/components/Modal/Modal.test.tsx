@@ -4,7 +4,13 @@ import Modal from './Modal';
 
 describe('Modal', () => {
   test('renders is correctly', () => {
-    render(<Modal resultType="error" active />);
+    render(
+      <Modal
+        resultType="error"
+        message="User with such email is already exist! Please go to page Log in ."
+        active
+      />
+    );
 
     expect(
       screen.getByText(

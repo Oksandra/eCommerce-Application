@@ -34,6 +34,9 @@ interface ModalAddressProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   version: number;
   setVersion: Dispatch<SetStateAction<number>>;
+  setMessage: Dispatch<SetStateAction<string>>;
+  openModal: () => void;
+  setTypeError: Dispatch<SetStateAction<string>>;
 }
 
 const ModalAddAddress: React.FC<ModalAddressProps> = ({
@@ -41,6 +44,9 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
   setIsOpen,
   version,
   setVersion,
+  setMessage,
+  openModal,
+  setTypeError,
 }): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
@@ -157,6 +163,11 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
             }
           }
         );
+        setMessage(
+          `${selectedOption.selectedOption?.value} address successfully added`
+        );
+        setTypeError('success');
+        openModal();
       })
       .catch((errorMes: ErrorResponse) => {
         setErrorAdding(errorMes.message);
