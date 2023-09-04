@@ -5,9 +5,23 @@
 .products-card {
   &__wrapper {
     @extend %flex-center-cont;
+
+    @include media-small-laptop {
+      flex-direction: column;
+      padding: 0 2rem;
+    }
   }
   &__img {
     height: 30rem;
+    &_big {
+      height: 50rem;
+      @include media-big-mobile {
+        height: 40rem;
+      }
+      @include media-mobile {
+        height: 35rem;
+      }
+    }
   }
   &__title {
     @extend %flex-center-cont;
@@ -25,12 +39,20 @@
     border: $border-light;
     align-items: center;
     padding-top: 2rem;
+
+    @include media-small-laptop {
+      margin: 2rem auto;
+    }
   }
   &__desc {
     max-width: 90%;
     font-size: 2rem;
     color: $add-dark-color;
     line-height: 150%;
+
+    @include media-small-laptop {
+      margin-bottom: 2rem;
+    }
   }
   &__button {
     width: 90%;
@@ -59,12 +81,36 @@
 .images {
   @extend %flex-center-cont;
   flex-direction: column;
+
+  @include media-small-laptop {
+    flex-direction: row;
+    gap: 2rem;
+    margin: 2rem auto;
+
+    .images__additional {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @include media-mobile {
+    flex-direction: column;
+    .images__additional {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
   &__main {
     text-align: center;
     padding: 1rem 0 2rem;
     margin-bottom: 2rem;
     cursor: pointer;
     border: $border-light;
+
+    @include media-small-laptop {
+      margin: 0;
+    }
   }
   &__card {
     height: 12rem;
@@ -74,6 +120,11 @@
     border: $border-light;
     &:last-child {
       margin-right: 0;
+    }
+
+    @include media-small-laptop {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
     }
   }
 }
