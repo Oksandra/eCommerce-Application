@@ -16,6 +16,7 @@ import {
   addDefaultShippingAddressId,
   addDefaultBillingAddressId,
 } from '../../api/updateCustomer';
+import { checkSubmitAddress } from '../../helpers/checkSubmitAddress';
 
 const options = [
   {
@@ -85,6 +86,23 @@ const ModalAddAddress: React.FC<ModalAddressProps> = ({
   };
 
   const clickSave = (): void => {
+    if (
+      checkSubmitAddress(
+        codeError,
+        countryError,
+        cityError,
+        streetError,
+        code,
+        country,
+        city,
+        street,
+        setCodeError,
+        setCountryError,
+        setCityError,
+        setStreetError
+      )
+    )
+      return;
     const countryRequest = countries.find((el) => el.country === country)
       ?.code as string;
     addCustomerAddress(
