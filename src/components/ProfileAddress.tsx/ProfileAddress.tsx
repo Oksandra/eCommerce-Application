@@ -146,7 +146,6 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       return;
     setDisaebledField(true);
     updateAddress();
-    window.location.reload();
   };
 
   const clickButtonDelete = (): void => {
