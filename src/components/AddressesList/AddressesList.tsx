@@ -6,12 +6,16 @@ interface AddressesListProps {
   addresses: BaseAddress[];
   version: number;
   setVersion: Dispatch<SetStateAction<number>>;
+  defaultShippingAddress: string;
+  defaultBillingAddress: string;
 }
 
 const AddressesList: React.FC<AddressesListProps> = ({
   addresses,
   version,
   setVersion,
+  defaultShippingAddress,
+  defaultBillingAddress,
 }): JSX.Element => {
   return (
     <div className="items">
@@ -21,6 +25,8 @@ const AddressesList: React.FC<AddressesListProps> = ({
           address={{ ...item }}
           version={version}
           setVersion={setVersion}
+          defaultShippingAddress={defaultShippingAddress}
+          defaultBillingAddress={defaultBillingAddress}
         />
       ))}
     </div>

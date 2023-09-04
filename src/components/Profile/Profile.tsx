@@ -17,6 +17,7 @@ import checkDateBirthForProfile from '../../helpers/checkDateBirthForProfile';
 import { Button } from '../Button/Button';
 import AddressesList from '../AddressesList/AddressesList';
 import Loader from '../Loader/Loader';
+import ModalAddAddress from '../ModalAddAddress/ModalAddAddress';
 
 const Profile = (): JSX.Element => {
   const [isDisabledFirstName, setDisabledFirstName] = useState(true);
@@ -38,6 +39,9 @@ const Profile = (): JSX.Element => {
   const [birthError, setBirthError] = useState('');
   const [addresses, setAddresses] = useState<BaseAddress[]>([]);
   const [loading, setLoading] = useState(true);
+  const [defaultShippingAddress, setDefaultShippingAddress] = useState('');
+  const [defaultBillingAddress, setDefaultBillingAddress] = useState('');
+  const [showModalAddress, setShowModalAddress] = useState(true);
 
   useEffect(() => {
     getCustomer().then((obj) => {
@@ -48,6 +52,12 @@ const Profile = (): JSX.Element => {
       setAddresses(obj.body.addresses);
       setVersion(obj.body.version);
       setLoading(false);
+      if (obj.body.defaultShippingAddress) {
+        setDefaultShippingAddress(obj.body.defaultShippingAddress[0]);
+      }
+      if (obj.body.defaultBillingAddress) {
+        setDefaultBillingAddress(obj.body.defaultBillingAddress[0]);
+      }
     });
   }, []);
 
@@ -92,6 +102,10 @@ const Profile = (): JSX.Element => {
       setCustomerDateBirth(resp.body.dateOfBirth);
       setVersion(resp.body.version);
     });
+  };
+
+  const openModalAddAddress = (): void => {
+    setShowModalAddress(!showModalAddress);
   };
 
   return (
@@ -161,11 +175,14 @@ const Profile = (): JSX.Element => {
             addresses={addresses}
             version={version}
             setVersion={setVersion}
+            defaultShippingAddress={defaultShippingAddress}
+            defaultBillingAddress={defaultBillingAddress}
           />
           <Button
             className="button__add-address"
             textContent="Add address"
             type="button"
+            onClick={openModalAddAddress}
           />
           <ModalChangePassword
             customerCurrentPassword={customerCurrentPasword}
@@ -179,8 +196,20 @@ const Profile = (): JSX.Element => {
             version={version}
             setOpen={setOpen}
           />
+          <ModalAddAddress
+            isOpen={showModalAddress}
+            setIsOpen={setShowModalAddress}
+            version={version}
+            setVersion={setVersion}
+          />
           <div
             className={isOpen ? 'modal-overlay' : 'modal-overlay open'}
+            id="modal-overlay"
+          />
+          <div
+            className={
+              showModalAddress ? 'modal-overlay' : 'modal-overlay open'
+            }
             id="modal-overlay"
           />
         </>

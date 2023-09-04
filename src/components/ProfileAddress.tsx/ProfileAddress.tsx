@@ -20,12 +20,16 @@ interface ProfileAddressProps {
   address: BaseAddress;
   version: number;
   setVersion: Dispatch<SetStateAction<number>>;
+  defaultShippingAddress: string;
+  defaultBillingAddress: string;
 }
 
 const ProfileAddress: React.FC<ProfileAddressProps> = ({
   address,
   version,
   setVersion,
+  defaultShippingAddress,
+  defaultBillingAddress,
 }): JSX.Element => {
   const { id, key, postalCode, country, city, streetName } = address;
   const [isDisabbleField, setDisaebledField] = useState(true);
@@ -123,6 +127,7 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   };
 
   const clickButtonDelete = (): void => {
+    if (!idAddress) return;
     deleteCustomerAddress(version, idAddress).then((obj) => {
       setCode('');
       setCity('');
@@ -161,6 +166,15 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
   return (
     <div className="profile__address-container">
       <h3 className="profile__address-title">{key} address</h3>
+      <span
+        className={
+          defaultBillingAddress === key || defaultShippingAddress === key
+            ? 'profile__address-default show'
+            : 'profile__address-default'
+        }
+      >
+        Defaul address
+      </span>
       <Label
         text="Postal code"
         id={`${key}-code`}

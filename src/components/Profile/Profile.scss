@@ -11,6 +11,14 @@
     font-weight: 700;
     margin-bottom: 2.5rem;
   }
+  &__address-default {
+    display: none;
+    background-color: $color-error;
+    margin-left: 5px;
+    &.show {
+      display: inline-block;
+    }
+  }
   &__address-title {
     font-size: 2rem;
     font-weight: 700;
