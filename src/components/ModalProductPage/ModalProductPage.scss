@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .modal-page {
   width: 100vw;
@@ -31,6 +32,9 @@
     &.active {
       transform: scale(1);
     }
+    @include media-big-mobile {
+      padding: 1rem;
+    }
   }
 }
 
@@ -45,5 +49,12 @@
   @extend %transition;
   &:hover {
     color: $dark-color;
+  }
+  @include media-tablet {
+    font-size: 26px;
+  }
+  @include media-big-mobile {
+    top: -2.7rem;
+    right: -1.7rem;
   }
 }
