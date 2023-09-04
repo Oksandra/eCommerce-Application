@@ -8,6 +8,9 @@
   }
   &__img {
     height: 30rem;
+    &_big {
+      height: 50rem;
+    }
   }
   &__title {
     @extend %flex-center-cont;

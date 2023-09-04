@@ -5,6 +5,7 @@ import getProduct from '../../api/getProduct';
 import './ProductPage.scss';
 import Loader from '../../components/Loader/Loader';
 import sale from '../../assets/images/sale-icon.png';
+import ModalProductPage from '../../components/ModalProductPage/ModalProductPage';
 
 interface Image {
   url: string;
@@ -21,6 +22,7 @@ const ProductPage: React.FC = () => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [images, setImages] = useState<Image[] | undefined>();
   const [prices, setPrices] = useState<Price[] | undefined>();
+  const [modalActive, setModalActive] = useState<boolean>(false);
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -43,7 +45,11 @@ const ProductPage: React.FC = () => {
         <div className="products-card">
           <div className="products-card__wrapper">
             <div className="images">
-              <div className="images__main">
+              <div
+                aria-hidden="true"
+                onClick={(): void => setModalActive(true)}
+                className="images__main"
+              >
                 <img
                   src={images ? images[0].url : ''}
                   className="products-card__img"
@@ -113,6 +119,13 @@ const ProductPage: React.FC = () => {
               </button>
             </div>
           </div>
+          <ModalProductPage active={modalActive} setActive={setModalActive}>
+            <img
+              src={images ? images[0].url : ''}
+              className="products-card__img_big"
+              alt="bottle of wine"
+            />
+          </ModalProductPage>
         </div>
       )}
     </div>
