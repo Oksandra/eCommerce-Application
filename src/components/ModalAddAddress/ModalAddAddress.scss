@@ -53,7 +53,7 @@
     width: 100%;
     border-bottom: $border-dark;
   }
-  .input-error {
+  &__button-save ~ .input-error {
     text-align: center;
     margin-top: 2rem;
   }
