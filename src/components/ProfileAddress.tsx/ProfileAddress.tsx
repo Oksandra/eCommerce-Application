@@ -166,6 +166,9 @@ const ProfileAddress: React.FC<ProfileAddressProps> = ({
       setCountry('');
       setIdAddress('');
       setVersion(obj.body.version);
+      setMessage(`${key} address deleted successfully`);
+      setTypeError('success');
+      openModal();
       window.location.reload();
     });
   };
