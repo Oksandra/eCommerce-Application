@@ -23,9 +23,11 @@ const CatalogPage: React.FC = () => {
 
   return (
     <div className="catalog">
-      <div className="search-wrapper">
-        <Search />
-      </div>
+      {!isLoading && (
+        <div className="search-wrapper">
+          <Search />
+        </div>
+      )}
       <div
         className={isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'}
       >
