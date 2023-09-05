@@ -28,6 +28,7 @@
     "rules": {
         "prettier/prettier": "error",
         "no-console": 0,
+        "no-alert": 0,
         "import/extensions": "off",
         "react/jsx-props-no-spreading": "off",
         "react/jsx-filename-extension": [
