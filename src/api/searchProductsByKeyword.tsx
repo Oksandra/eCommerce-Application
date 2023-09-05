@@ -14,7 +14,7 @@ const searchProductsByKeyword = (
       queryArgs: {
         limit: 100,
         fuzzy: true,
-        'text.en': text,
+        'text.en-Us': text,
       },
     })
     .execute();
