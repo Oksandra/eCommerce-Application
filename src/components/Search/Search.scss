@@ -4,30 +4,29 @@
 
 .search {
   position: relative;
-  right: -15rem;
 
   &__input {
     background-color: transparent;
-    border-bottom: 0.5px solid #5e5858;
-    width: 100%;
-    font-size: 1.6rem;
+    border-bottom: 0.5px solid $border-color;
+    padding-left: 2.7rem;
+    padding-bottom: 0.1rem;
+    font-size: 2rem;
     line-height: 120%;
     @extend %transition;
-    color: $light-color;
+    color: $dark-color;
 
     &::placeholder {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
     }
     &:focus {
-      border-bottom: 0.5px solid $light-color;
+      border-bottom: 1px solid black;
     }
   }
   &__icon {
-    filter: invert(100%);
     width: 2.2rem;
     height: 2.2rem;
     position: absolute;
-    left: -3rem;
-    top: 0.3rem;
+    left: 0rem;
+    top: -0.3rem;
   }
 }

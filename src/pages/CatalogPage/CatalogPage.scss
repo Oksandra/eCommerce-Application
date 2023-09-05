@@ -3,15 +3,20 @@
 @import '../../styles/abstracts/extends';
 
 .catalog {
+  @extend %flex;
+  align-items: flex-end;
+  flex-direction: column;
+  max-width: 111rem;
+  margin: 0 auto;
+  padding: 2rem 0;
   &__wrapper {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    max-width: 111rem;
+    max-width: 90rem;
     margin: 0 auto;
     grid-gap: 1rem;
-    padding: 1rem 0;
 
     @include media-laptop {
       grid-template-columns: repeat(2, 30rem);
@@ -26,4 +31,8 @@
       @extend %flex-center-cont;
     }
   }
+}
+
+.search-wrapper {
+  margin-bottom: 2rem;
 }

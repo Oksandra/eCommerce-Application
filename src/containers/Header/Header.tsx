@@ -9,7 +9,6 @@ import { Nav } from '../../components/Nav/Nav';
 import { HeaderContext } from './HeaderContext';
 import { Burger } from '../../components/Burger/Burger';
 import { useAuth } from '../../hooks/useAuth';
-import Search from '../../components/Search/Search';
 
 interface HeaderProps {
   value: string;
@@ -32,7 +31,6 @@ const Header: React.FC<HeaderProps> = ({ value }) => {
             <Link to="/">
               <img src={logo} alt="logo" />
             </Link>
-            <Search />
             <div className="header__icons">
               {user ? (
                 <Link className="header__links" to="/profile">
