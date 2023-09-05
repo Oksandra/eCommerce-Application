@@ -5,6 +5,7 @@ import { Product } from '@commercetools/platform-sdk';
 import getAllProducts from '../../api/getAllProducts';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
+import Search from '../../components/Search/Search';
 
 const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
@@ -22,6 +23,11 @@ const CatalogPage: React.FC = () => {
 
   return (
     <div className="catalog">
+      {!isLoading && (
+        <div className="search-wrapper">
+          <Search />
+        </div>
+      )}
       <div
         className={isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'}
       >
