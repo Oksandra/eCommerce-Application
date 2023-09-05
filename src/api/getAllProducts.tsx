@@ -11,7 +11,7 @@ const getAllProducts = (
     .products()
     .get({
       queryArgs: {
-        limit: 9,
+        limit: 100,
         offset: page,
         withTotal: true,
       },
