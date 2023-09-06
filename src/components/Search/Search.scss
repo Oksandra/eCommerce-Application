@@ -29,4 +29,14 @@
     left: 0rem;
     top: -0.3rem;
   }
+
+  &__delete {
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
 }
