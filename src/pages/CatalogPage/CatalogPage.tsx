@@ -44,7 +44,7 @@ const CatalogPage: React.FC = () => {
         })
         .catch((e) => console.log(e));
     }
-  }, [idCategory, searchValue]);
+  }, [idCategory]);
 
   return (
     <div className="catalog-page">
@@ -52,12 +52,17 @@ const CatalogPage: React.FC = () => {
         <Filtr
           idCategory={idCategory}
           onChangeCategory={(id: string): void => setIdCategory(id)}
+          clearSearch={(): void => setSearchValue('')}
         />
       )}
       <div className="catalog">
         {!isLoading && (
           <div className="search-wrapper">
-            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+            <Search
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              onChangeSearch={(): void => setIdCategory('')}
+            />
           </div>
         )}
         <div

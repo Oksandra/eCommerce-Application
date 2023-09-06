@@ -4,9 +4,14 @@ import './Filtr.scss';
 interface FiltrProps {
   onChangeCategory: (arg: string) => void;
   idCategory: string;
+  clearSearch: () => void;
 }
 
-const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
+const Filtr: React.FC<FiltrProps> = ({
+  onChangeCategory,
+  idCategory,
+  clearSearch,
+}) => {
   return (
     <aside className="categories">
       <div className="categories__title">CATEGORIES</div>
@@ -20,6 +25,7 @@ const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
         type="button"
         onClick={(): void => {
           onChangeCategory('0f78b7da-5e69-4600-a8a0-2083bc4d173a');
+          clearSearch();
         }}
       >
         Sparkling wines
@@ -34,6 +40,7 @@ const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
         type="button"
         onClick={(): void => {
           onChangeCategory('96e7295c-116f-409d-8b66-faeb0238964d');
+          clearSearch();
         }}
       >
         Red Wines
@@ -48,6 +55,7 @@ const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
         type="button"
         onClick={(): void => {
           onChangeCategory('6b625304-5b48-44fb-b675-ab852dd4f831');
+          clearSearch();
         }}
       >
         White Wines
@@ -62,12 +70,16 @@ const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
         type="button"
         onClick={(): void => {
           onChangeCategory('57ce0b9c-ff63-4a17-a906-4f87f9069c9c');
+          clearSearch();
         }}
       >
         Rose Wines
       </button>
       <button
-        onClick={(): void => onChangeCategory('')}
+        onClick={(): void => {
+          onChangeCategory('');
+          clearSearch();
+        }}
         className="reset-button"
         type="button"
       >
