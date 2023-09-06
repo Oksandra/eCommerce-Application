@@ -34,8 +34,22 @@
       align-items: center;
     }
   }
+  &-page {
+    @extend %flex;
+    margin: 0 auto;
+    max-width: 120rem;
+    @include media-small-laptop {
+      flex-direction: column;
+    }
+  }
 }
 
 .search-wrapper {
   margin-bottom: 2rem;
+  min-width: 63vw;
+  display: flex;
+  justify-content: flex-end;
+  @include media-big-mobile {
+    justify-content: center;
+  }
 }
