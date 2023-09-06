@@ -2,9 +2,12 @@
 @import '../../styles/abstracts/extends';
 
 .categories {
-  width: 15%;
+  @extend %flex;
+  flex-direction: column;
+  padding: 7rem 1rem 0 3rem;
+  width: 17%;
   &__title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding-left: 5px;
     margin-bottom: 2rem;
   }
@@ -13,7 +16,7 @@
     width: 15rem;
     background-color: $light-color;
     color: $border-color;
-    font-size: 1.8rem;
+    font-size: 2rem;
     text-align: left;
     margin-bottom: 1rem;
     padding: 5px;

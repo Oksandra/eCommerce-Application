@@ -34,6 +34,11 @@
       align-items: center;
     }
   }
+  &-page {
+    display: flex;
+    margin: 0 auto;
+    max-width: 120rem;
+  }
 }
 
 .search-wrapper {

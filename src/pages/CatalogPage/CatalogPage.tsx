@@ -7,6 +7,8 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import Loader from '../../components/Loader/Loader';
 import Search from '../../components/Search/Search';
 import searchProductsByKeyword from '../../api/searchProductsByKeyword';
+import getProductsByCategory from '../../api/getProductsByCategory';
+import Filtr from '../../components/Filtr/Filtr';
 
 const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
@@ -15,6 +17,9 @@ const CatalogPage: React.FC = () => {
   const [searchValue, setSearchValue] = React.useState('');
 
   React.useEffect(() => {
+    getProductsByCategory('0f78b7da-5e69-4600-a8a0-2083bc4d173a').then((data) =>
+      console.log(data)
+    );
     getAllProducts(0)
       .then((data) => {
         setAllProducts(data.body.results);
@@ -32,50 +37,55 @@ const CatalogPage: React.FC = () => {
   }, [searchValue]);
 
   return (
-    <div className="catalog">
-      {!isLoading && (
-        <div className="search-wrapper">
-          <Search searchValue={searchValue} setSearchValue={setSearchValue} />
-        </div>
-      )}
-      <div
-        className={isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'}
-      >
-        {isLoading ? (
-          <Loader />
-        ) : (
-          allProducts.map((product) => (
-            <ProductCard
-              title={product.metaTitle ? product.metaTitle['en-US'] : ''}
-              image={
-                product.masterVariant.images
-                  ? product.masterVariant.images[0].url
-                  : ''
-              }
-              desc={
-                product.metaDescription ? product.metaDescription['en-US'] : ''
-              }
-              price={
-                product.masterVariant.prices
-                  ? (
-                      product.masterVariant.prices[0].value.centAmount / 100
-                    ).toFixed(2)
-                  : ''
-              }
-              key={product.id}
-              onClick={(): void => navigate(`/catalog/${product.id}`)}
-              onSale={
-                product.masterVariant.prices &&
-                product.masterVariant.prices[0].discounted?.value
-                  ? (
-                      product.masterVariant.prices[0].discounted.value
-                        .centAmount / 100
-                    ).toFixed(2)
-                  : ''
-              }
-            />
-          ))
+    <div className="catalog-page">
+      {!isLoading && <Filtr />}
+      <div className="catalog">
+        {!isLoading && (
+          <div className="search-wrapper">
+            <Search searchValue={searchValue} setSearchValue={setSearchValue} />
+          </div>
         )}
+        <div
+          className={isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'}
+        >
+          {isLoading ? (
+            <Loader />
+          ) : (
+            allProducts.map((product) => (
+              <ProductCard
+                title={product.metaTitle ? product.metaTitle['en-US'] : ''}
+                image={
+                  product.masterVariant.images
+                    ? product.masterVariant.images[0].url
+                    : ''
+                }
+                desc={
+                  product.metaDescription
+                    ? product.metaDescription['en-US']
+                    : ''
+                }
+                price={
+                  product.masterVariant.prices
+                    ? (
+                        product.masterVariant.prices[0].value.centAmount / 100
+                      ).toFixed(2)
+                    : ''
+                }
+                key={product.id}
+                onClick={(): void => navigate(`/catalog/${product.id}`)}
+                onSale={
+                  product.masterVariant.prices &&
+                  product.masterVariant.prices[0].discounted?.value
+                    ? (
+                        product.masterVariant.prices[0].discounted.value
+                          .centAmount / 100
+                      ).toFixed(2)
+                    : ''
+                }
+              />
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
