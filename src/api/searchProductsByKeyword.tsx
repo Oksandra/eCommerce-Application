@@ -1,12 +1,12 @@
 import {
   ClientResponse,
-  ProductProjectionPagedSearchResponse,
+  ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
 import apiRoot from '../sdk/client';
 
 const searchProductsByKeyword = (
   text: string
-): Promise<ClientResponse<ProductProjectionPagedSearchResponse>> => {
+): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> => {
   return apiRoot
     .productProjections()
     .search()

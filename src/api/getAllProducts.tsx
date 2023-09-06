@@ -1,14 +1,14 @@
 import {
   ClientResponse,
-  ProductPagedQueryResponse,
+  ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
 import apiRoot from '../sdk/client';
 
 const getAllProducts = (
   page: number
-): Promise<ClientResponse<ProductPagedQueryResponse>> => {
+): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> => {
   return apiRoot
-    .products()
+    .productProjections()
     .get({
       queryArgs: {
         limit: 100,
