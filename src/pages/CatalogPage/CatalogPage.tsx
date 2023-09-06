@@ -9,6 +9,8 @@ import Search from '../../components/Search/Search';
 import searchProductsByKeyword from '../../api/searchProductsByKeyword';
 import getProductsByCategory from '../../api/getProductsByCategory';
 import Filtr from '../../components/Filtr/Filtr';
+import { ArrayObjectSelectState } from '../../interfaces/interfaces';
+import { sortProducts } from '../../api/sortProducts';
 
 const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
@@ -16,6 +18,9 @@ const CatalogPage: React.FC = () => {
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [idCategory, setIdCategory] = React.useState<string>('');
+  const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
+    selectedOption: null,
+  });
 
   React.useEffect(() => {
     if (!idCategory) {
@@ -26,7 +31,7 @@ const CatalogPage: React.FC = () => {
         })
         .catch(() => setIsloading(true));
     }
-  }, [idCategory]);
+  }, [idCategory, selectedOption.selectedOption]);
 
   React.useEffect(() => {
     searchProductsByKeyword(searchValue)
@@ -46,13 +51,30 @@ const CatalogPage: React.FC = () => {
     }
   }, [idCategory]);
 
+  React.useEffect(() => {
+    if (selectedOption.selectedOption?.value) {
+      sortProducts(selectedOption.selectedOption.value)
+        .then((data) => {
+          setAllProducts(data.body.results);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [selectedOption.selectedOption]);
+
   return (
     <div className="catalog-page">
       {!isLoading && (
         <Filtr
           idCategory={idCategory}
           onChangeCategory={(id: string): void => setIdCategory(id)}
-          clearSearch={(): void => setSearchValue('')}
+          clearSearch={(): void => {
+            setSearchValue('');
+            setSelectedOption({
+              selectedOption: null,
+            });
+          }}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
         />
       )}
       <div className="catalog">
@@ -61,7 +83,12 @@ const CatalogPage: React.FC = () => {
             <Search
               searchValue={searchValue}
               setSearchValue={setSearchValue}
-              onChangeSearch={(): void => setIdCategory('')}
+              onChangeSearch={(): void => {
+                setIdCategory('');
+                setSelectedOption({
+                  selectedOption: null,
+                });
+              }}
             />
           </div>
         )}
