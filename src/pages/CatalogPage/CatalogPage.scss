@@ -9,6 +9,7 @@
   max-width: 111rem;
   margin: 0 auto;
   padding: 1.2rem 1rem 1rem;
+  min-height: 80vh;
   &__wrapper {
     display: grid;
     justify-content: center;
@@ -29,6 +30,8 @@
     &.empty {
       display: flex;
       @extend %flex-center-cont;
+      min-height: 65vh;
+      align-items: center;
     }
   }
 }

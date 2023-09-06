@@ -15,13 +15,13 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
 
 function App(): JSX.Element {
-  React.useEffect(
-    () =>
-      alert(`Привет! 
-    Очень Просим проверить нашу работу в последний день. 
-    Заранее спасибо!!!`),
-    []
-  );
+  // React.useEffect(
+  //   () =>
+  //     alert(`Привет!
+  //   Очень Просим проверить нашу работу в последний день.
+  //   Заранее спасибо!!!`),
+  //   []
+  // );
   return (
     <AuthProvider>
       <Routes>

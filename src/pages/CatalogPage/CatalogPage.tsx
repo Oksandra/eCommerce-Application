@@ -13,7 +13,6 @@ const CatalogPage: React.FC = () => {
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [searchValue, setSearchValue] = React.useState('');
-  const [find, setFind] = useState<boolean>(true);
 
   React.useEffect(() => {
     getAllProducts(0)
@@ -27,11 +26,7 @@ const CatalogPage: React.FC = () => {
   React.useEffect(() => {
     searchProductsByKeyword(searchValue)
       .then((data) => {
-        console.log(data.body.results);
         setAllProducts(data.body.results);
-        if (allProducts.length === 0) {
-          setFind(true);
-        }
       })
       .catch(() => setIsloading(true));
   }, [searchValue]);
@@ -81,7 +76,6 @@ const CatalogPage: React.FC = () => {
             />
           ))
         )}
-        {find && <div> Таких товаров не найдено</div>}
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = ({ searchValue, setSearchValue }) => {
-  console.log(searchValue);
   return (
     <div className="search">
       <img src={search} className="search__icon" alt="search-icon" />
