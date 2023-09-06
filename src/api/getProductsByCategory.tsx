@@ -11,7 +11,7 @@ const getProductsByCategory = (
     .productProjections()
     .get({
       queryArgs: {
-        where: `productType(id="${idCategory}")`,
+        where: [`productType(id="${idCategory}")`],
         limit: 16,
         offset: 1,
         withTotal: true,

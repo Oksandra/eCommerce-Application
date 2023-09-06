@@ -1,0 +1,11 @@
+.sort-wrapper {
+  width: 20%;
+  &__text {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  &__select {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
