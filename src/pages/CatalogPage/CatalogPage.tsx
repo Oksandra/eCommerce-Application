@@ -47,7 +47,10 @@ const CatalogPage: React.FC = () => {
   return (
     <div className="catalog-page">
       {!isLoading && (
-        <Filtr onChangeCategory={(id: string): void => setIdCategory(id)} />
+        <Filtr
+          idCategory={idCategory}
+          onChangeCategory={(id: string): void => setIdCategory(id)}
+        />
       )}
       <div className="catalog">
         {!isLoading && (
