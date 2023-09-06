@@ -1,6 +1,7 @@
 import React from 'react';
 import './Search.scss';
 import search from '../../assets/svg/search-icon.svg';
+import del from '../../assets/svg/delete_icon.svg';
 
 interface SearchProps {
   searchValue: string;
@@ -18,6 +19,15 @@ const Search: React.FC<SearchProps> = ({ searchValue, setSearchValue }) => {
         placeholder="Search"
         type="text"
       />
+      {searchValue && (
+        <img
+          aria-hidden="true"
+          onClick={(): void => setSearchValue('')}
+          src={del}
+          className="search__delete"
+          alt="delete-icon"
+        />
+      )}
     </div>
   );
 };
