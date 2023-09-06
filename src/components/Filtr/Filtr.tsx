@@ -81,10 +81,6 @@ const Filtr: React.FC<FiltrProps> = ({
       >
         Rose Wines
       </button>
-      <Sort
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-      />
       <button
         onClick={(): void => {
           onChangeCategory('');
@@ -95,6 +91,10 @@ const Filtr: React.FC<FiltrProps> = ({
       >
         RESET ALL
       </button>
+      <Sort
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+      />
     </aside>
   );
 };
