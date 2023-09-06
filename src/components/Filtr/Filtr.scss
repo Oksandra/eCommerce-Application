@@ -1,0 +1,26 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.categories {
+  width: 15%;
+  &__title {
+    font-size: 2rem;
+    padding-left: 5px;
+    margin-bottom: 2rem;
+  }
+  &__button {
+    display: block;
+    width: 15rem;
+    background-color: $light-color;
+    color: $border-color;
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    padding: 5px;
+    &.active {
+      background-color: $dark-color;
+      color: $light-color;
+      @extend %transition;
+    }
+  }
+}
