@@ -21,19 +21,4 @@ const sortProductsByName = (
     .execute();
 };
 
-const sortProductsByPrice = (
-  type: string
-): Promise<ClientResponse<ProductProjectionPagedSearchResponse>> => {
-  return apiRoot
-    .productProjections()
-    .search()
-    .get({
-      queryArgs: {
-        limit: 100,
-        sort: [`price ${type}`],
-      },
-    })
-    .execute();
-};
-
-export { sortProductsByName, sortProductsByPrice };
+export default sortProductsByName;
