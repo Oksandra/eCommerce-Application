@@ -2,13 +2,22 @@
 .sort-wrapper {
   width: 100%;
   margin: 2rem 0;
+  @media (max-width: 1000px) {
+    padding-left: 4rem;
+    width: 90%;
+    margin: 2rem auto;
+  }
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+    width: 72%;
+    margin: 2rem auto;
+  }
   &__text {
     font-size: 2rem;
     margin-bottom: 1rem;
     @media (max-width: 1000px) {
       display: inline-block;
-      margin-right: 1rem;
-      margin-left: 15%;
+      width: 23%;
     }
   }
   &__select {
@@ -16,13 +25,7 @@
     margin-bottom: 1rem;
     @media (max-width: 1000px) {
       display: inline-block;
-      width: 50%;
-      margin: 0 auto;
-    }
-    @media (max-width: 768px) {
-      width: 50%;
-      display: inline-block;
-      margin: 0 auto;
+      width: 75%;
     }
   }
 }
