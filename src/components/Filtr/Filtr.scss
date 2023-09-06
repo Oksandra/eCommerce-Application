@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .categories {
   @extend %flex;
@@ -21,9 +22,17 @@
     margin-bottom: 1rem;
     padding: 5px;
     &.active {
-      background-color: $dark-color;
+      background-color: $background-color;
       color: $light-color;
       @extend %transition;
     }
   }
+}
+
+.reset-button {
+  font-size: 2rem;
+  padding: 1.5rem 2.8rem;
+  color: $light-color;
+  background-color: $button-color;
+  @include button($button-hover-color);
 }

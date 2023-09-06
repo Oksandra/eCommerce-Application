@@ -18,13 +18,15 @@ const CatalogPage: React.FC = () => {
   const [idCategory, setIdCategory] = React.useState<string>('');
 
   React.useEffect(() => {
-    getAllProducts(0)
-      .then((data) => {
-        setAllProducts(data.body.results);
-        setIsloading(false);
-      })
-      .catch(() => setIsloading(true));
-  }, []);
+    if (!idCategory) {
+      getAllProducts(0)
+        .then((data) => {
+          setAllProducts(data.body.results);
+          setIsloading(false);
+        })
+        .catch(() => setIsloading(true));
+    }
+  }, [idCategory]);
 
   React.useEffect(() => {
     searchProductsByKeyword(searchValue)

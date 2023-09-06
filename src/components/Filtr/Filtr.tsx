@@ -66,6 +66,13 @@ const Filtr: React.FC<FiltrProps> = ({ onChangeCategory, idCategory }) => {
       >
         Rose Wines
       </button>
+      <button
+        onClick={(): void => onChangeCategory('')}
+        className="reset-button"
+        type="button"
+      >
+        RESET ALL
+      </button>
     </aside>
   );
 };
