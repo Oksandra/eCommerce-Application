@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import './Filtr.scss';
+import Sort from '../Sort/Sort';
+import { ArrayObjectSelectState } from '../../interfaces/interfaces';
 
 interface FiltrProps {
   onChangeCategory: (arg: string) => void;
   idCategory: string;
   clearSearch: () => void;
+  selectedOption: ArrayObjectSelectState;
+  setSelectedOption: Dispatch<SetStateAction<ArrayObjectSelectState>>;
 }
 
 const Filtr: React.FC<FiltrProps> = ({
   onChangeCategory,
   idCategory,
   clearSearch,
+  selectedOption,
+  setSelectedOption,
 }) => {
   return (
     <aside className="categories">
@@ -85,6 +91,10 @@ const Filtr: React.FC<FiltrProps> = ({
       >
         RESET ALL
       </button>
+      <Sort
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+      />
     </aside>
   );
 };
