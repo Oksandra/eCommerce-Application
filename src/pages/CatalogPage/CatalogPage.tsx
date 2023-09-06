@@ -14,12 +14,10 @@ const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
-  const [searchValue, setSearchValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState<string>('');
+  const [idCategory, setIdCategory] = React.useState<string>('');
 
   React.useEffect(() => {
-    getProductsByCategory('0f78b7da-5e69-4600-a8a0-2083bc4d173a').then((data) =>
-      console.log(data)
-    );
     getAllProducts(0)
       .then((data) => {
         setAllProducts(data.body.results);
@@ -36,9 +34,21 @@ const CatalogPage: React.FC = () => {
       .catch(() => setIsloading(true));
   }, [searchValue]);
 
+  React.useEffect(() => {
+    if (idCategory) {
+      getProductsByCategory(idCategory)
+        .then((data) => {
+          setAllProducts(data.body.results);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [idCategory, searchValue]);
+
   return (
     <div className="catalog-page">
-      {!isLoading && <Filtr />}
+      {!isLoading && (
+        <Filtr onChangeCategory={(id: string): void => setIdCategory(id)} />
+      )}
       <div className="catalog">
         {!isLoading && (
           <div className="search-wrapper">
