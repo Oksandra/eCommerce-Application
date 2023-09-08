@@ -1,0 +1,42 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.search {
+  position: relative;
+
+  &__input {
+    background-color: transparent;
+    border-bottom: 0.5px solid $border-color;
+    padding-left: 2.7rem;
+    padding-bottom: 0.1rem;
+    font-size: 2rem;
+    line-height: 120%;
+    @extend %transition;
+    color: $dark-color;
+
+    &::placeholder {
+      font-size: 1.6rem;
+    }
+    &:focus {
+      border-bottom: 1px solid black;
+    }
+  }
+  &__icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    position: absolute;
+    left: 0rem;
+    top: -0.3rem;
+  }
+
+  &__delete {
+    width: 2rem;
+    height: 2rem;
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+}

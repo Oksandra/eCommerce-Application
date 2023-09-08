@@ -1,0 +1,130 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.products-card {
+  &__wrapper {
+    @extend %flex-center-cont;
+
+    @include media-small-laptop {
+      flex-direction: column;
+      padding: 0 2rem;
+    }
+  }
+  &__img {
+    height: 30rem;
+    &_big {
+      height: 50rem;
+      @include media-big-mobile {
+        height: 40rem;
+      }
+      @include media-mobile {
+        height: 35rem;
+      }
+    }
+  }
+  &__title {
+    @extend %flex-center-cont;
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    max-width: 90%;
+    border-bottom: $border-light;
+  }
+  &__info {
+    margin-left: 1.5rem;
+    @extend %flex;
+    flex-direction: column;
+    max-width: 60rem;
+    border: $border-light;
+    align-items: center;
+    padding-top: 2rem;
+
+    @include media-small-laptop {
+      margin: 2rem auto;
+    }
+  }
+  &__desc {
+    max-width: 90%;
+    font-size: 2rem;
+    color: $add-dark-color;
+    line-height: 150%;
+
+    @include media-small-laptop {
+      margin-bottom: 2rem;
+    }
+  }
+  &__button {
+    width: 90%;
+    font-size: 1.6rem;
+    padding: 1.5rem 2.8rem;
+    color: $light-color;
+    background-color: $background-color;
+    @include button($dark-color);
+    margin: auto 0 1rem 0;
+  }
+  &__price {
+    margin: 0 auto 1rem 0;
+    font-size: 3.2rem;
+    color: #333333;
+    padding-left: 10%;
+  }
+  &__sale {
+    position: absolute;
+    bottom: -6rem;
+    right: 0;
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+.images {
+  @extend %flex-center-cont;
+  flex-direction: column;
+
+  @include media-small-laptop {
+    flex-direction: row;
+    gap: 2rem;
+    margin: 2rem auto;
+
+    .images__additional {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @include media-mobile {
+    flex-direction: column;
+    .images__additional {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  &__main {
+    text-align: center;
+    padding: 1rem 0 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    border: $border-light;
+
+    @include media-small-laptop {
+      margin: 0;
+    }
+  }
+  &__card {
+    height: 12rem;
+    max-width: 14rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border: $border-light;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include media-small-laptop {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

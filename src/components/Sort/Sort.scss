@@ -1,0 +1,31 @@
+@import '../../styles/abstracts/constants';
+.sort-wrapper {
+  width: 100%;
+  margin: 2rem 0;
+  @media (max-width: 1000px) {
+    padding-left: 4rem;
+    width: 90%;
+    margin: 2rem auto;
+  }
+  @media (max-width: 768px) {
+    padding-left: 1rem;
+    width: 72%;
+    margin: 2rem auto;
+  }
+  &__text {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    @media (max-width: 1000px) {
+      display: inline-block;
+      width: 23%;
+    }
+  }
+  &__select {
+    width: 100%;
+    margin-bottom: 1rem;
+    @media (max-width: 1000px) {
+      display: inline-block;
+      width: 75%;
+    }
+  }
+}

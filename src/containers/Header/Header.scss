@@ -2,11 +2,10 @@
 @import '../../styles/abstracts/extends';
 
 .header {
-  margin-bottom: 5rem;
   background-color: $background-color;
   &__wrapper {
     padding: 1.2rem 1rem 0;
-    max-width: 111rem;
+    max-width: $wrapper-width;
     margin: 0 auto;
   }
   &__logo {
@@ -26,5 +25,12 @@
         transform: scale(1.1);
       }
     }
+  }
+  &.transperent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
   }
 }

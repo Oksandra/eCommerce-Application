@@ -1,0 +1,111 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+.profile {
+  width: 65%;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-top: 2rem;
+  z-index: 1;
+  &__title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+  }
+  &__address-default {
+    display: none;
+    background-color: $color-error;
+    margin-left: 5px;
+    padding: 5px;
+    &.show {
+      display: inline-block;
+    }
+  }
+  &__address-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+  .button-change {
+    padding: 10px 25px;
+  }
+  .input-error {
+    display: block;
+    width: 100%;
+    color: $color-sale;
+    font-size: 1rem;
+    text-align: left;
+    margin: 0.2rem auto 0.8rem auto;
+  }
+  &__change-password {
+    width: 34rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+    margin-bottom: 0.5rem;
+    padding: 3rem 0;
+    background-color: $light-color;
+    border: $border-dark;
+    transform: translate(-50%, -50%);
+    @extend %transition;
+    &.open {
+      display: block;
+      z-index: 5;
+      @extend %transition;
+    }
+    .profile-field__label {
+      font-size: 1.5rem;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .profile-field__input {
+      width: 53%;
+      font-size: 1.5rem;
+      display: block;
+      border: $border-dark;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      padding: 3px 0;
+    }
+    .button-save__password {
+      width: 8.8rem;
+      padding: 5px 0;
+    }
+    .button-cancel {
+      width: 8.8rem;
+      padding: 5px 0;
+      background-color: $muted-color;
+      margin-right: 5px;
+      margin-left: 23%;
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+    & > .input-error {
+      width: 53%;
+      text-align: center;
+    }
+  }
+  .button__add-address {
+    display: block;
+    padding: 5px 22px;
+    margin-bottom: 1rem;
+  }
+  .modal-overlay {
+    display: none;
+    &.open {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0, 0, 0, 0.8);
+      z-index: 2;
+    }
+  }
+}

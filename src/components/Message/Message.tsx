@@ -2,17 +2,21 @@ import React from 'react';
 
 interface MessageProps {
   type: string;
+  messageError: string;
 }
 
-const Message: React.FC<MessageProps> = ({ type }): JSX.Element => {
+const Message: React.FC<MessageProps> = ({
+  type,
+  messageError,
+}): JSX.Element => {
   const getMessage = (): string => {
     if (type === 'error') {
-      return 'User with such email is already exist! Please go to page Log in .';
+      return messageError;
     }
     if (type === 'error-server') {
-      return 'Something went wrong, should try to sign in again later!';
+      return messageError;
     }
-    return 'You have successfully registered!';
+    return messageError;
   };
   const message = getMessage();
   return <span>{message}</span>;

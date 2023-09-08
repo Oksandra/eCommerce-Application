@@ -1,0 +1,64 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
+
+.categories {
+  @extend %flex;
+  flex-direction: column;
+  padding: 7rem 1rem 0 3rem;
+  width: 17%;
+  &__title {
+    font-size: 2.5rem;
+    padding-left: 0.5trm;
+    margin-bottom: 2rem;
+    @include media-small-laptop {
+      font-size: 2rem;
+      padding-left: 0;
+      margin-bottom: 0;
+      margin-right: 0.5rem;
+    }
+  }
+  &__button {
+    display: block;
+    width: 15rem;
+    background-color: $light-color;
+    color: $border-color;
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    padding: 5px;
+    &.active {
+      background-color: $background-color;
+      color: $light-color;
+      @extend %transition;
+    }
+    @include media-small-laptop {
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 0;
+      width: 12rem;
+      flex-wrap: wrap;
+    }
+  }
+  @include media-small-laptop {
+    flex-direction: row;
+    padding: 1rem 2rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+.reset-button {
+  font-size: 2rem;
+  padding: 1.5rem 2.8rem;
+  color: $light-color;
+  background-color: $button-color;
+  @include button($button-hover-color);
+  @include media-small-laptop {
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    margin-left: 0.5rem;
+  }
+}
