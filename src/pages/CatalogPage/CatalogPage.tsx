@@ -25,7 +25,7 @@ const CatalogPage: React.FC = () => {
 
   React.useEffect(() => {
     if (!idCategory) {
-      getAllProducts(1)
+      getAllProducts(0)
         .then((data) => {
           setAllProducts(data.body.results);
           setIsloading(false);
@@ -141,7 +141,12 @@ const CatalogPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <ReactPaginate pageCount={1} />
+      <ReactPaginate
+        nextLabel=">"
+        previousLabel="<"
+        pageCount={4}
+        containerClassName="pagination"
+      />
     </>
   );
 };
