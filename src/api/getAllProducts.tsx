@@ -11,7 +11,7 @@ const getAllProducts = (
     .productProjections()
     .get({
       queryArgs: {
-        limit: 100,
+        limit: 6,
         offset: page,
         withTotal: true,
       },

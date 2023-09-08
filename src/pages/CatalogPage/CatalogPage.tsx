@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import './CatalogPage.scss';
 import { ProductProjection } from '@commercetools/platform-sdk';
@@ -24,7 +25,7 @@ const CatalogPage: React.FC = () => {
 
   React.useEffect(() => {
     if (!idCategory) {
-      getAllProducts(0)
+      getAllProducts(1)
         .then((data) => {
           setAllProducts(data.body.results);
           setIsloading(false);
@@ -34,11 +35,13 @@ const CatalogPage: React.FC = () => {
   }, [idCategory, selectedOption.selectedOption]);
 
   React.useEffect(() => {
-    searchProductsByKeyword(searchValue)
-      .then((data) => {
-        setAllProducts(data.body.results);
-      })
-      .catch(() => setIsloading(true));
+    if (searchValue) {
+      searchProductsByKeyword(searchValue)
+        .then((data) => {
+          setAllProducts(data.body.results);
+        })
+        .catch(() => setIsloading(true));
+    }
   }, [searchValue]);
 
   React.useEffect(() => {
@@ -62,79 +65,84 @@ const CatalogPage: React.FC = () => {
   }, [selectedOption.selectedOption]);
 
   return (
-    <div className="catalog-page">
-      {!isLoading && (
-        <Filtr
-          idCategory={idCategory}
-          onChangeCategory={(id: string): void => setIdCategory(id)}
-          clearSearch={(): void => {
-            setSearchValue('');
-            setSelectedOption({
-              selectedOption: null,
-            });
-          }}
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-        />
-      )}
-      <div className="catalog">
+    <>
+      <div className="catalog-page">
         {!isLoading && (
-          <div className="search-wrapper">
-            <Search
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              onChangeSearch={(): void => {
-                setIdCategory('');
-                setSelectedOption({
-                  selectedOption: null,
-                });
-              }}
-            />
-          </div>
+          <Filtr
+            idCategory={idCategory}
+            onChangeCategory={(id: string): void => setIdCategory(id)}
+            clearSearch={(): void => {
+              setSearchValue('');
+              setSelectedOption({
+                selectedOption: null,
+              });
+            }}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
         )}
-        <div
-          className={isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'}
-        >
-          {isLoading ? (
-            <Loader />
-          ) : (
-            allProducts.map((product) => (
-              <ProductCard
-                title={product.metaTitle ? product.metaTitle['en-US'] : ''}
-                image={
-                  product.masterVariant.images
-                    ? product.masterVariant.images[0].url
-                    : ''
-                }
-                desc={
-                  product.metaDescription
-                    ? product.metaDescription['en-US']
-                    : ''
-                }
-                price={
-                  product.masterVariant.prices
-                    ? (
-                        product.masterVariant.prices[0].value.centAmount / 100
-                      ).toFixed(2)
-                    : ''
-                }
-                key={product.id}
-                onClick={(): void => navigate(`/catalog/${product.id}`)}
-                onSale={
-                  product.masterVariant.prices &&
-                  product.masterVariant.prices[0].discounted?.value
-                    ? (
-                        product.masterVariant.prices[0].discounted.value
-                          .centAmount / 100
-                      ).toFixed(2)
-                    : ''
-                }
+        <div className="catalog">
+          {!isLoading && (
+            <div className="search-wrapper">
+              <Search
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                onChangeSearch={(): void => {
+                  setIdCategory('');
+                  setSelectedOption({
+                    selectedOption: null,
+                  });
+                }}
               />
-            ))
+            </div>
           )}
+          <div
+            className={
+              isLoading ? 'catalog__wrapper empty' : 'catalog__wrapper'
+            }
+          >
+            {isLoading ? (
+              <Loader />
+            ) : (
+              allProducts.map((product) => (
+                <ProductCard
+                  title={product.metaTitle ? product.metaTitle['en-US'] : ''}
+                  image={
+                    product.masterVariant.images
+                      ? product.masterVariant.images[0].url
+                      : ''
+                  }
+                  desc={
+                    product.metaDescription
+                      ? product.metaDescription['en-US']
+                      : ''
+                  }
+                  price={
+                    product.masterVariant.prices
+                      ? (
+                          product.masterVariant.prices[0].value.centAmount / 100
+                        ).toFixed(2)
+                      : ''
+                  }
+                  key={product.id}
+                  onClick={(): void => navigate(`/catalog/${product.id}`)}
+                  onSale={
+                    product.masterVariant.prices &&
+                    product.masterVariant.prices[0].discounted?.value
+                      ? (
+                          product.masterVariant.prices[0].discounted.value
+                            .centAmount / 100
+                        ).toFixed(2)
+                      : ''
+                  }
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <ReactPaginate pageCount={1} />
+    </>
   );
 };
 
