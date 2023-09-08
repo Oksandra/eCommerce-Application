@@ -7,7 +7,6 @@ const Pagination: React.FC<ReactPaginateProps> = () => {
       breakLabel="..."
       nextLabel="next >"
       previousLabel="<"
-      onPageChange={(e): void => console.log(e)}
       pageRangeDisplayed={4}
       pageCount={3}
       renderOnZeroPageCount={null}

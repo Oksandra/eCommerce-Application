@@ -13,26 +13,31 @@ import Filtr from '../../components/Filtr/Filtr';
 import { ArrayObjectSelectState } from '../../interfaces/interfaces';
 import { sortProducts } from '../../api/sortProducts';
 
+const limitProductsPerPage = 6;
+
 const CatalogPage: React.FC = () => {
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [searchValue, setSearchValue] = React.useState<string>('');
   const [idCategory, setIdCategory] = React.useState<string>('');
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [totalProducts, setTotalProducts] = React.useState<number>(1);
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
 
   React.useEffect(() => {
     if (!idCategory) {
-      getAllProducts(0)
+      getAllProducts(currentPage)
         .then((data) => {
           setAllProducts(data.body.results);
+          setTotalProducts(data.body.total as number);
           setIsloading(false);
         })
         .catch(() => setIsloading(true));
     }
-  }, [idCategory, selectedOption.selectedOption]);
+  }, [idCategory, selectedOption.selectedOption, currentPage]);
 
   React.useEffect(() => {
     if (searchValue) {
@@ -63,6 +68,10 @@ const CatalogPage: React.FC = () => {
         .catch((e) => console.log(e));
     }
   }, [selectedOption.selectedOption]);
+
+  const handlePageChange = ({ selected }: { selected: number }): void => {
+    setCurrentPage(selected * 6);
+  };
 
   return (
     <>
@@ -141,12 +150,17 @@ const CatalogPage: React.FC = () => {
           </div>
         </div>
       </div>
-      <ReactPaginate
-        nextLabel=">"
-        previousLabel="<"
-        pageCount={4}
-        containerClassName="pagination"
-      />
+      {!isLoading && (
+        <ReactPaginate
+          onPageChange={handlePageChange}
+          nextLabel=">"
+          previousLabel="<"
+          pageCount={
+            totalProducts && Math.ceil(totalProducts / limitProductsPerPage)
+          }
+          containerClassName="pagination"
+        />
+      )}
     </>
   );
 };
