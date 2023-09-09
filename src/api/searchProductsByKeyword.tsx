@@ -2,7 +2,7 @@ import {
   ClientResponse,
   ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const searchProductsByKeyword = (
   text: string
@@ -12,7 +12,7 @@ const searchProductsByKeyword = (
     .search()
     .get({
       queryArgs: {
-        limit: 100,
+        limit: 6,
         fuzzy: true,
         'text.en-US': text,
       },

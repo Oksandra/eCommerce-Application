@@ -1,5 +1,5 @@
 import { ClientResponse } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const updateCustomerName = async (
   customerName: string,

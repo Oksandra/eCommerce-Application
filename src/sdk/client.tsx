@@ -1,8 +1,14 @@
 import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk';
-import { ctpClient, projectKeyApi } from './BuildClient';
+import { anonimousClient, ctpClient, projectKeyApi } from './BuildClient';
 
 const apiRoot = createApiBuilderFromCtpClient(ctpClient).withProjectKey({
   projectKey: projectKeyApi,
 });
 
-export default apiRoot;
+const anonimousApiRoot = createApiBuilderFromCtpClient(
+  anonimousClient
+).withProjectKey({
+  projectKey: projectKeyApi,
+});
+
+export { apiRoot, anonimousApiRoot };

@@ -5,6 +5,7 @@ import {
   type HttpMiddlewareOptions,
   PasswordAuthMiddlewareOptions,
   Client,
+  type AnonymousAuthMiddlewareOptions,
 } from '@commercetools/sdk-client-v2';
 
 const oauthUri = 'https://auth.europe-west1.gcp.commercetools.com';
@@ -38,6 +39,24 @@ const ctpClient = new ClientBuilder()
   .withLoggerMiddleware()
   .build();
 
+const optionsAnonimous: AnonymousAuthMiddlewareOptions = {
+  host: oauthUri,
+  projectKey: projectKeyApi,
+  credentials: {
+    clientId: credentials.clientId,
+    clientSecret: credentials.clientSecret,
+    anonymousId: process.env.CTP_ANONYMOUS_ID, // a unique id
+  },
+  scopes,
+  fetch,
+};
+
+const anonimousClient = new ClientBuilder()
+  .withAnonymousSessionFlow(optionsAnonimous)
+  .withHttpMiddleware(httpMiddlewareOptions)
+  .withLoggerMiddleware()
+  .build();
+
 const loginRequest = (userLogin: string, userPassword: string): Client => {
   const passwordOptions: PasswordAuthMiddlewareOptions = {
     host: oauthUri,
@@ -61,4 +80,4 @@ const loginRequest = (userLogin: string, userPassword: string): Client => {
     .build();
 };
 
-export { ctpClient, projectKeyApi, loginRequest };
+export { ctpClient, projectKeyApi, loginRequest, anonimousClient };

@@ -2,7 +2,7 @@ import {
   ClientResponse,
   ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const getAllProducts = (
   page: number
@@ -11,7 +11,7 @@ const getAllProducts = (
     .productProjections()
     .get({
       queryArgs: {
-        limit: 100,
+        limit: 6,
         offset: page,
         withTotal: true,
       },

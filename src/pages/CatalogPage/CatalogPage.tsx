@@ -34,11 +34,13 @@ const CatalogPage: React.FC = () => {
   }, [idCategory, selectedOption.selectedOption]);
 
   React.useEffect(() => {
-    searchProductsByKeyword(searchValue)
-      .then((data) => {
-        setAllProducts(data.body.results);
-      })
-      .catch(() => setIsloading(true));
+    if (searchValue.length > 0) {
+      searchProductsByKeyword(searchValue)
+        .then((data) => {
+          setAllProducts(data.body.results);
+        })
+        .catch(() => setIsloading(true));
+    }
   }, [searchValue]);
 
   React.useEffect(() => {
@@ -100,6 +102,7 @@ const CatalogPage: React.FC = () => {
           ) : (
             allProducts.map((product) => (
               <ProductCard
+                idProduct={product.id}
                 title={product.metaTitle ? product.metaTitle['en-US'] : ''}
                 image={
                   product.masterVariant.images
