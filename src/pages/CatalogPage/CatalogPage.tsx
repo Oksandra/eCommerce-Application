@@ -23,12 +23,13 @@ const CatalogPage: React.FC = () => {
   const [idCategory, setIdCategory] = React.useState<string>('');
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalProducts, setTotalProducts] = React.useState<number>(1);
+  const [pageActive, setPageActive] = React.useState<number | undefined>();
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
 
   React.useEffect(() => {
-    if (!idCategory) {
+    if (!idCategory && !searchValue) {
       getAllProducts(currentPage)
         .then((data) => {
           setAllProducts(data.body.results);
@@ -37,37 +38,44 @@ const CatalogPage: React.FC = () => {
         })
         .catch(() => setIsloading(true));
     }
-  }, [idCategory, selectedOption.selectedOption, currentPage]);
+  }, [idCategory, selectedOption.selectedOption, currentPage, searchValue]);
 
   React.useEffect(() => {
     if (searchValue) {
-      searchProductsByKeyword(searchValue)
+      setCurrentPage(0);
+      setPageActive(0);
+      searchProductsByKeyword(searchValue, currentPage)
         .then((data) => {
           setAllProducts(data.body.results);
+          setTotalProducts((data.body.total as number) || 1);
         })
         .catch(() => setIsloading(true));
     }
-  }, [searchValue]);
+  }, [searchValue, currentPage]);
 
   React.useEffect(() => {
     if (idCategory) {
-      getProductsByCategory(idCategory)
+      setCurrentPage(0);
+      setPageActive(0);
+      getProductsByCategory(idCategory, currentPage)
         .then((data) => {
           setAllProducts(data.body.results);
+          setTotalProducts((data.body.total as number) || 1);
         })
         .catch((e) => console.log(e));
     }
-  }, [idCategory]);
+  }, [idCategory, currentPage]);
 
   React.useEffect(() => {
     if (selectedOption.selectedOption?.value) {
-      sortProducts(selectedOption.selectedOption.value)
+      sortProducts(selectedOption.selectedOption.value, currentPage)
         .then((data) => {
           setAllProducts(data.body.results);
+          setTotalProducts((data.body.total as number) || 1);
         })
         .catch((e) => console.log(e));
     }
-  }, [selectedOption.selectedOption]);
+  }, [selectedOption.selectedOption, currentPage]);
 
   const handlePageChange = ({ selected }: { selected: number }): void => {
     setCurrentPage(selected * 6);
@@ -159,6 +167,7 @@ const CatalogPage: React.FC = () => {
             totalProducts && Math.ceil(totalProducts / limitProductsPerPage)
           }
           containerClassName="pagination"
+          forcePage={pageActive}
         />
       )}
     </>
