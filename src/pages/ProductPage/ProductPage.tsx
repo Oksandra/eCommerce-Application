@@ -6,6 +6,7 @@ import './ProductPage.scss';
 import Loader from '../../components/Loader/Loader';
 import sale from '../../assets/images/sale-icon.png';
 import ModalProductPage from '../../components/ModalProductPage/ModalProductPage';
+import { getCart } from '../../api/getCart';
 
 interface Image {
   url: string;
@@ -24,6 +25,7 @@ const ProductPage: React.FC = () => {
   const [prices, setPrices] = useState<Price[] | undefined>();
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [imgPath, setImgPath] = useState<string | undefined>();
+  const [isInCart, setInCart] = useState(false);
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -33,6 +35,17 @@ const ProductPage: React.FC = () => {
         setPrices(data.body.masterData.current.masterVariant.prices);
         setImages(data.body.masterData.current.masterVariant.images);
         setIsloading(false);
+        const idCart = localStorage.getItem('idCartWin4ik');
+        if (idCart) {
+          getCart(idCart).then((obj) => {
+            const products = obj.body.lineItems;
+            products.forEach((item) => {
+              if (item.productId === id) {
+                setInCart(true);
+              }
+            });
+          });
+        }
       })
       .catch(() => navigate('/*'));
   }, [id]);
@@ -131,8 +144,15 @@ const ProductPage: React.FC = () => {
               <p className="products-card__desc">
                 {product && product.description && product.description['en-US']}
               </p>
-              <button className="products-card__button" type="button">
-                Buy NOW
+              <button
+                className={
+                  isInCart
+                    ? 'products-card__button in-cart'
+                    : 'products-card__button'
+                }
+                type="button"
+              >
+                {isInCart ? 'In the Cart' : 'Add to Cart'}
               </button>
             </div>
           </div>
