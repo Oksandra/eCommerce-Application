@@ -2,5 +2,58 @@
 @import '../../styles/abstracts/extends';
 
 .cart {
+  padding: 1.2rem 1rem 0;
+  max-width: 111rem;
+  margin: 0 auto;
+  &__wrapper {
+    @extend %flex-center-cont;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+  }
+}
+
+.cart-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid $border-color;
+  width: 70%;
+
+  &__head {
+    border: 1px solid $border-color;
+    height: 6rem;
+    th {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.total-table {
+  width: 20%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 2px solid $border-color;
+
+  &__head {
+    height: 6rem;
+    background-color: $muted-color;
+    border: 1px solid $border-color;
+
+    th {
+      font-size: 2rem;
+    }
+  }
+
+  &__body {
+    background: #ededed;
+  }
+}
+
+.tables__wrapper {
   @extend %flex-center-cont;
+  width: 100%;
+  gap: 2rem;
 }
