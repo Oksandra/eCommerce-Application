@@ -1,8 +1,9 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .cart {
-  padding: 1.2rem 1rem 0;
+  padding: 1.2rem 1rem;
   max-width: 111rem;
   margin: 0 auto;
   &__wrapper {
@@ -22,6 +23,9 @@
   border-spacing: 0;
   border: 2px solid $border-color;
   width: 70%;
+  @include media-tablet {
+    width: 100%;
+  }
 
   &__head {
     border: 1px solid $border-color;
@@ -57,11 +61,18 @@
   border-collapse: collapse;
   border-spacing: 0;
   border: 2px solid $border-color;
+  @include media-tablet {
+    width: 100%;
+    height: 12rem;
+  }
 
   &__head {
     height: 6rem;
     background-color: $muted-color;
     border: 1px solid $border-color;
+    @include media-tablet {
+      height: 4rem;
+    }
 
     th {
       font-size: 2rem;
@@ -73,6 +84,9 @@
     td {
       font-weight: 800;
       padding: 0 1rem;
+      @include media-tablet {
+        font-size: 1.6rem;
+      }
     }
   }
 }
@@ -81,4 +95,7 @@
   @extend %flex-center-cont;
   width: 100%;
   gap: 2rem;
+  @include media-tablet {
+    flex-direction: column;
+  }
 }
