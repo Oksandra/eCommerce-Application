@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import heart from '../../assets/svg/blackHeart.svg';
 import cart from '../../assets/svg/cart.svg';
 import './ProductCard.scss';
@@ -26,24 +26,22 @@ export const ProductCard: FC<ProductCardProps> = ({
   idProduct,
   onClick,
 }) => {
-  const [version, setVersion] = useState<number | null>();
+  const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
+  React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     if (idCartLS) {
       getCart(idCartLS).then((obj) => {
         setVersion(obj.body.version);
         const products = obj.body.lineItems;
-        Array.from(products).forEach((product) => {
-          if (product.productId === idProduct) {
+        Array.from(products).forEach((item) => {
+          if (item.productId === idProduct) {
             setIsActive(true);
           }
         });
       });
     }
   }, [isActive, version]);
-
   const addCart = (): void => {
     const id = localStorage.getItem('userWin4ik') as string;
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
