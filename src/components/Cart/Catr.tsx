@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './Cart.scss';
+import CartProductCard from './CartProductCard/CartProductCard';
+import bottle from '../../assets/GER_the_bench_cs.jpg';
 
 const Cart: React.FC = () => {
   return (
@@ -12,24 +14,31 @@ const Cart: React.FC = () => {
             <thead className="cart-table__head">
               <tr>
                 <th>Product</th>
+                <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
               </tr>
             </thead>
             <tbody className="cart-table__body">
-              <tr>
-                <td>products1</td>
-              </tr>
-              <tr>
-                <td>products2</td>
-              </tr>
-              <tr>
-                <td>products3</td>
-              </tr>
-              <tr>
-                <td>products4</td>
-              </tr>
+              <CartProductCard
+                image={bottle}
+                count={1}
+                price={50.12}
+                title="The Bench Cabernet Sauvignon"
+              />
+              <CartProductCard
+                image={bottle}
+                count={5}
+                price={120.27}
+                title="La Colombina Brunello di Montalcino DOCG"
+              />
+              <CartProductCard
+                image={bottle}
+                count={3}
+                price={99.31}
+                title="Masseria Borgo dei Trulli Vermentino IGP Puglia"
+              />
             </tbody>
           </table>
           <table className="total-table">
@@ -40,10 +49,10 @@ const Cart: React.FC = () => {
             </thead>
             <tbody className="total-table__body">
               <tr className="total-table__price">
-                <td>Total cost!</td>
+                <td>TOTAL price:</td>
               </tr>
               <tr className="total-table__count">
-                <td>Total count!</td>
+                <td>TOTAL count:</td>
               </tr>
             </tbody>
           </table>
