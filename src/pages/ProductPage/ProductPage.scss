@@ -62,6 +62,10 @@
     background-color: $background-color;
     @include button($dark-color);
     margin: auto 0 1rem 0;
+    &.in-cart {
+      background-color: $light-color;
+      color: $background-color;
+    }
   }
   &__price {
     margin: 0 auto 1rem 0;

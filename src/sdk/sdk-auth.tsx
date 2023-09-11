@@ -27,4 +27,8 @@ const getCustomerToken = async (
   return authClient.customerPasswordFlow(user, disableToken);
 };
 
-export default getCustomerToken;
+const getAnonimousToken = async (): Promise<TokenInfo> => {
+  return authClient.anonymousFlow();
+};
+
+export { getCustomerToken, getAnonimousToken };
