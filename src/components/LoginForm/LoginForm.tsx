@@ -5,7 +5,11 @@ import checkLogin from '../../helpers/checkLogin';
 import { checkPassword } from '../../helpers/checkPassword';
 import { ILoginForm, checkSubmit } from '../../helpers/checkSubmit';
 import { useAuth } from '../../hooks/useAuth';
-import loginCustomer from '../../api/loginCustomer';
+import {
+  loginCustomer,
+  getMeCustomer,
+  loginCustomerAnonimous,
+} from '../../api/loginCustomer';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -36,7 +40,7 @@ export const LoginForm: FC = () => {
     }
   }
 
-  function handleSubmit(e: FormEvent<HTMLButtonElement>): void {
+  async function handleSubmit(e: FormEvent<HTMLButtonElement>): Promise<void> {
     e.preventDefault();
 
     if (
@@ -49,12 +53,31 @@ export const LoginForm: FC = () => {
       )
     )
       return;
-
+    const token = JSON.parse(
+      localStorage.getItem('anonimTokenWin4ik') as string
+    );
+    if (!token) {
+      loginCustomerAnonimous(loginForm.login, loginForm.password)
+        .then((resp) => {
+          const user: string = resp.body.customer.id;
+          signin(user, () => navigate('/', { replace: true }));
+          localStorage.setItem('userWin4ik', user);
+          localStorage.removeItem('anonimTokenWin4ik');
+          localStorage.removeItem('tokenWin4ik');
+          getMeCustomer(loginForm.login, loginForm.password);
+        })
+        .catch(() => {
+          setSubmitError(true);
+        });
+    }
     loginCustomer(loginForm.login, loginForm.password)
       .then((resp) => {
         const user: string = resp.body.customer.id;
         signin(user, () => navigate('/', { replace: true }));
         localStorage.setItem('userWin4ik', user);
+        localStorage.removeItem('anonimTokenWin4ik');
+        localStorage.removeItem('tokenWin4ik');
+        getMeCustomer(loginForm.login, loginForm.password);
       })
       .catch(() => {
         setSubmitError(true);

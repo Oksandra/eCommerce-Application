@@ -2,7 +2,7 @@ import {
   ClientResponse,
   ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const searchProductsByKeyword = (
   text: string,

@@ -27,7 +27,6 @@ const CatalogPage: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
-
   React.useEffect(() => {
     if (!idCategory && !searchValue) {
       getAllProducts(currentPage)
@@ -123,6 +122,7 @@ const CatalogPage: React.FC = () => {
             ) : (
               allProducts.map((product) => (
                 <ProductCard
+                  idProduct={product.id}
                   title={product.metaTitle ? product.metaTitle['en-US'] : ''}
                   image={
                     product.masterVariant.images
@@ -142,7 +142,9 @@ const CatalogPage: React.FC = () => {
                       : ''
                   }
                   key={product.id}
-                  onClick={(): void => navigate(`/catalog/${product.id}`)}
+                  onClick={(): void => {
+                    navigate(`/catalog/${product.id}`);
+                  }}
                   onSale={
                     product.masterVariant.prices &&
                     product.masterVariant.prices[0].discounted?.value

@@ -2,7 +2,7 @@ import {
   ClientResponse,
   ProductTypePagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const getTypesProducts = (): Promise<
   ClientResponse<ProductTypePagedQueryResponse>

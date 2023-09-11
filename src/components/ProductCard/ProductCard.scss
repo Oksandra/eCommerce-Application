@@ -57,6 +57,19 @@
     margin-bottom: 1.2rem;
     background-color: inherit;
     border: solid 1px #d6d6d6;
+    width: 40px;
+    height: 40px;
+    &:hover,
+    &:active {
+      transform: scale(1.05);
+    }
+  }
+  &__icon .icon__marker {
+    color: green;
+    position: absolute;
+    left: 2.5rem;
+    font-size: 3rem;
+    font-weight: 700;
   }
 
   &__title {

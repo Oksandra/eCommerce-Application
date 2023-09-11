@@ -132,7 +132,7 @@ const ProductPage: React.FC = () => {
                 {product && product.description && product.description['en-US']}
               </p>
               <button className="products-card__button" type="button">
-                Buy NOW
+                Add to Cart
               </button>
             </div>
           </div>
