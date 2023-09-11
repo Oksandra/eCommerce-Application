@@ -1,8 +1,30 @@
-import { Cart, ClientResponse } from '@commercetools/platform-sdk';
-import { apiRoot } from '../sdk/client';
+import {
+  Cart,
+  ClientResponse,
+  createApiBuilderFromCtpClient,
+} from '@commercetools/platform-sdk';
+import {
+  existingTokenCustomerRequest,
+  existingTokenRequest,
+  projectKeyApi,
+} from '../sdk/BuildClient';
 
 const getCart = (id: string): Promise<ClientResponse<Cart>> => {
-  return apiRoot.carts().withId({ ID: id }).get().execute();
+  const client = existingTokenRequest();
+  const apiRootAnonimous = createApiBuilderFromCtpClient(client).withProjectKey(
+    {
+      projectKey: projectKeyApi,
+    }
+  );
+  return apiRootAnonimous.carts().withId({ ID: id }).get().execute();
 };
 
-export { getCart };
+const getCartCustomer = (): Promise<ClientResponse<Cart>> => {
+  const client = existingTokenCustomerRequest();
+  const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: projectKeyApi,
+  });
+  return apiRoot.me().activeCart().get().execute();
+};
+
+export { getCart, getCartCustomer };

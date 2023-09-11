@@ -3,9 +3,9 @@ import heart from '../../assets/svg/blackHeart.svg';
 import cart from '../../assets/svg/cart.svg';
 import './ProductCard.scss';
 import sale from '../../assets/images/sale-icon.png';
-import { createCartAnonimous } from '../../api/createCart';
-import updateCartAnonimous from '../../api/updateCart';
-import { getCart } from '../../api/getCart';
+import { createCartAnonimous, createCartCustomer } from '../../api/createCart';
+import { updateCartAnonimous, updateCart } from '../../api/updateCart';
+import { getCart, getCartCustomer } from '../../api/getCart';
 
 interface ProductCardProps {
   image: string;
@@ -30,9 +30,11 @@ export const ProductCard: FC<ProductCardProps> = ({
   const [isActive, setIsActive] = useState(false);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
-    if (idCartLS) {
+    const id = localStorage.getItem('userWin4ik') as string;
+    if (idCartLS && !id) {
       getCart(idCartLS).then((obj) => {
         setVersion(obj.body.version);
+        localStorage.setItem('versionWin4ik', `${obj.body.version}`);
         const products = obj.body.lineItems;
         Array.from(products).forEach((item) => {
           if (item.productId === idProduct) {
@@ -41,8 +43,29 @@ export const ProductCard: FC<ProductCardProps> = ({
         });
       });
     }
+    if (idCartLS && id) {
+      getCartCustomer()
+        .then((obj) => {
+          setVersion(obj.body.version);
+          localStorage.setItem('versionWin4ik', `${obj.body.version}`);
+          localStorage.setItem('idCartWin4ik', obj.body.id);
+          const products = obj.body.lineItems;
+          Array.from(products).forEach((item) => {
+            if (item.productId === idProduct) {
+              setIsActive(true);
+            }
+          });
+        })
+        .catch(() => {
+          createCartCustomer().then((resp) => {
+            setVersion(resp.body.version);
+            localStorage.setItem('versionWin4ik', `${resp.body.version}`);
+          });
+        });
+    }
   }, [isActive, version]);
-  const addCart = (): void => {
+
+  const addCart = async (): Promise<void> => {
     const id = localStorage.getItem('userWin4ik') as string;
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     if (!id && !idCartLS) {
@@ -51,17 +74,25 @@ export const ProductCard: FC<ProductCardProps> = ({
         updateCartAnonimous(obj.body.id, obj.body.version, idProduct).then(
           (resp) => {
             setVersion(resp.body.version);
+            localStorage.setItem('versionWin4ik', `${resp.body.version}`);
             setIsActive(true);
           }
         );
       });
     }
-    if (idCartLS) {
-      updateCartAnonimous(idCartLS, version as number, idProduct).then(
-        (resp) => {
-          setVersion(resp.body.version);
-        }
-      );
+    if (idCartLS && !id) {
+      const versionNumber = Number(localStorage.getItem('versionWin4ik'));
+      updateCartAnonimous(idCartLS, versionNumber, idProduct).then((resp) => {
+        setVersion(resp.body.version);
+        localStorage.setItem('versionWin4ik', `${resp.body.version}`);
+      });
+    }
+    if (id && idCartLS) {
+      const versionNumber = Number(localStorage.getItem('versionWin4ik'));
+      updateCart(idCartLS, versionNumber, idProduct).then((resp) => {
+        setVersion(resp.body.version);
+        localStorage.setItem('versionWin4ik', `${resp.body.version}`);
+      });
     }
   };
   return (

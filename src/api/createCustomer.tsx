@@ -1,13 +1,18 @@
 import {
   CustomerSignInResult,
   ClientResponse,
+  createApiBuilderFromCtpClient,
 } from '@commercetools/platform-sdk';
-import { apiRoot } from '../sdk/client';
+import { existingTokenRequest, projectKeyApi } from '../sdk/BuildClient';
 import { Customer } from '../interfaces/interfaces';
 
 const createCustomer = async (
   customer: Customer
 ): Promise<ClientResponse<CustomerSignInResult>> => {
+  const client = existingTokenRequest();
+  const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: projectKeyApi,
+  });
   return apiRoot
     .customers()
     .post({

@@ -142,7 +142,9 @@ const CatalogPage: React.FC = () => {
                       : ''
                   }
                   key={product.id}
-                  onClick={(): void => navigate(`/catalog/${product.id}`)}
+                  onClick={(): void => {
+                    navigate(`/catalog/${product.id}`);
+                  }}
                   onSale={
                     product.masterVariant.prices &&
                     product.masterVariant.prices[0].discounted?.value

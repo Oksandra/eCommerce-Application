@@ -14,6 +14,8 @@ import createCustomer from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../hooks/useAuth';
+import { getMeCustomer, loginCustomer } from '../../api/loginCustomer';
+import { getAnonimousToken } from '../../sdk/sdk-auth';
 
 const keyShipping = 'Shipping';
 const keyBilling = 'Billing';
@@ -59,7 +61,7 @@ function RegistrationForm(): JSX.Element {
     }, 4000);
   };
 
-  const submit: SubmitHandler<MyForm> = (data) => {
+  const submit: SubmitHandler<MyForm> = async (data) => {
     const countryCodeShipping = countries.find(
       (country) => country.country === selectedOption.selectedOption?.value
     )?.code as string;
@@ -108,6 +110,11 @@ function RegistrationForm(): JSX.Element {
     if (isBillingAddressDefault) {
       body.defaultBillingAddress = 1;
     }
+    let token = localStorage.getItem('tokenWin4ik') as string;
+    if (!token) {
+      token = `Bearer ${(await getAnonimousToken()).access_token}`;
+      localStorage.setItem('tokenWin4ik', token);
+    }
     createCustomer(body)
       .then((resp) => {
         setResultType('success');
@@ -115,6 +122,11 @@ function RegistrationForm(): JSX.Element {
         setMessage('You have successfully registered!');
         openModal(user);
         localStorage.setItem('userWin4ik', user);
+        loginCustomer(data.email, data.password).then(() => {
+          localStorage.removeItem('anonimTokenWin4ik');
+          localStorage.removeItem('tokenWin4ik');
+          getMeCustomer(data.email, data.password);
+        });
       })
       .catch((error: ErrorResponse) => {
         if (error.statusCode === 400) {

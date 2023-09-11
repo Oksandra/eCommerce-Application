@@ -1,12 +1,26 @@
-import { Cart, ClientResponse } from '@commercetools/platform-sdk';
-import { anonimousApiRoot } from '../sdk/client';
+import {
+  Cart,
+  ClientResponse,
+  createApiBuilderFromCtpClient,
+} from '@commercetools/platform-sdk';
+import {
+  existingTokenCustomerRequest,
+  existingTokenRequest,
+  projectKeyApi,
+} from '../sdk/BuildClient';
 
 const updateCartAnonimous = (
   id: string,
   versionNumber: number,
   idProduct: string
 ): Promise<ClientResponse<Cart>> => {
-  return anonimousApiRoot
+  const client = existingTokenRequest();
+  const apiRootAnonimous = createApiBuilderFromCtpClient(client).withProjectKey(
+    {
+      projectKey: projectKeyApi,
+    }
+  );
+  return apiRootAnonimous
     .carts()
     .withId({ ID: id })
     .post({
@@ -24,4 +38,31 @@ const updateCartAnonimous = (
     .execute();
 };
 
-export default updateCartAnonimous;
+const updateCart = (
+  id: string,
+  versionNumber: number,
+  idProduct: string
+): Promise<ClientResponse<Cart>> => {
+  const client = existingTokenCustomerRequest();
+  const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
+    projectKey: projectKeyApi,
+  });
+  return apiRoot
+    .carts()
+    .withId({ ID: id })
+    .post({
+      body: {
+        version: versionNumber,
+        actions: [
+          {
+            action: 'addLineItem',
+            productId: idProduct,
+            quantity: 1,
+          },
+        ],
+      },
+    })
+    .execute();
+};
+
+export { updateCartAnonimous, updateCart };
