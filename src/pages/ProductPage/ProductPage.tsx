@@ -6,6 +6,7 @@ import './ProductPage.scss';
 import Loader from '../../components/Loader/Loader';
 import sale from '../../assets/images/sale-icon.png';
 import ModalProductPage from '../../components/ModalProductPage/ModalProductPage';
+import { getCart, getCartCustomer } from '../../api/getCart';
 
 interface Image {
   url: string;
@@ -24,6 +25,7 @@ const ProductPage: React.FC = () => {
   const [prices, setPrices] = useState<Price[] | undefined>();
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [imgPath, setImgPath] = useState<string | undefined>();
+  const [inCart, setInCart] = useState(false);
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -35,6 +37,28 @@ const ProductPage: React.FC = () => {
         setIsloading(false);
       })
       .catch(() => navigate('/*'));
+    const idCustomer = localStorage.getItem('userWin4ik');
+    const idCart = localStorage.getItem('idCartWin4ik');
+    if (idCustomer && idCart) {
+      getCartCustomer().then((obj) => {
+        const products = obj.body.lineItems;
+        products.forEach((item) => {
+          if (item.productId === id) {
+            setInCart(true);
+          }
+        });
+      });
+    }
+    if (!idCustomer && idCart) {
+      getCart(idCart).then((resp) => {
+        const products = resp.body.lineItems;
+        products.forEach((item) => {
+          if (item.productId === id) {
+            setInCart(true);
+          }
+        });
+      });
+    }
   }, [id]);
 
   return (
@@ -131,8 +155,15 @@ const ProductPage: React.FC = () => {
               <p className="products-card__desc">
                 {product && product.description && product.description['en-US']}
               </p>
-              <button className="products-card__button" type="button">
-                Add to Cart
+              <button
+                className={
+                  inCart
+                    ? 'products-card__button in-cart'
+                    : 'products-card__button'
+                }
+                type="button"
+              >
+                {inCart ? 'Remove from Cart' : 'Add to Cart'}
               </button>
             </div>
           </div>

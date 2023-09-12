@@ -65,6 +65,7 @@
     &.in-cart {
       background-color: $light-color;
       color: $background-color;
+      border: $border-dark;
     }
   }
   &__price {
