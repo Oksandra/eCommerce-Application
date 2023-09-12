@@ -63,6 +63,27 @@ export const ProductCard: FC<ProductCardProps> = ({
           });
         });
     }
+    if (id) {
+      getCartCustomer()
+        .then((obj) => {
+          setVersion(obj.body.version);
+          localStorage.setItem('versionWin4ik', `${obj.body.version}`);
+          localStorage.setItem('idCartWin4ik', obj.body.id);
+          const products = obj.body.lineItems;
+          Array.from(products).forEach((item) => {
+            if (item.productId === idProduct) {
+              setIsActive(true);
+            }
+          });
+        })
+        .catch(() => {
+          createCartCustomer().then((resp) => {
+            setVersion(resp.body.version);
+            localStorage.setItem('versionWin4ik', `${resp.body.version}`);
+            localStorage.setItem('idCartWin4ik', resp.body.id);
+          });
+        });
+    }
   }, [isActive, version]);
 
   const addCart = async (): Promise<void> => {
