@@ -7,6 +7,12 @@ import Loader from '../../components/Loader/Loader';
 import sale from '../../assets/images/sale-icon.png';
 import ModalProductPage from '../../components/ModalProductPage/ModalProductPage';
 import { getCart, getCartCustomer } from '../../api/getCart';
+import {
+  removeProductFromCart,
+  removeProductFromCartAnonimous,
+} from '../../api/removeProductFromCart';
+import { updateCart, updateCartAnonimous } from '../../api/updateCart';
+import { createCartAnonimous, createCartCustomer } from '../../api/createCart';
 
 interface Image {
   url: string;
@@ -17,6 +23,8 @@ interface Image {
 }
 
 const ProductPage: React.FC = () => {
+  const idCustomer = localStorage.getItem('userWin4ik');
+  const idCart = localStorage.getItem('idCartWin4ik');
   const { id } = useParams();
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
@@ -26,6 +34,8 @@ const ProductPage: React.FC = () => {
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [imgPath, setImgPath] = useState<string | undefined>();
   const [inCart, setInCart] = useState(false);
+  const [lineItemId, setLineItemId] = useState('');
+  const [productPrice, setProductPrice] = useState<number | undefined>();
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -37,14 +47,14 @@ const ProductPage: React.FC = () => {
         setIsloading(false);
       })
       .catch(() => navigate('/*'));
-    const idCustomer = localStorage.getItem('userWin4ik');
-    const idCart = localStorage.getItem('idCartWin4ik');
     if (idCustomer && idCart) {
       getCartCustomer().then((obj) => {
         const products = obj.body.lineItems;
         products.forEach((item) => {
           if (item.productId === id) {
             setInCart(true);
+            setLineItemId(item.id);
+            setProductPrice(item.price.value.centAmount);
           }
         });
       });
@@ -55,11 +65,96 @@ const ProductPage: React.FC = () => {
         products.forEach((item) => {
           if (item.productId === id) {
             setInCart(true);
+            setLineItemId(item.id);
+            setProductPrice(item.price.value.centAmount);
           }
         });
       });
     }
-  }, [id]);
+  }, [id, inCart]);
+
+  const removeFromCart = (): void => {
+    const version = Number(localStorage.getItem('versionWin4ik'));
+    if (idCustomer) {
+      removeProductFromCart(
+        idCart as string,
+        version,
+        lineItemId,
+        productPrice as number
+      ).then((obj) => {
+        setInCart(false);
+        localStorage.setItem('versionWin4ik', String(obj.body.version));
+      });
+    }
+    if (!idCustomer) {
+      removeProductFromCartAnonimous(
+        idCart as string,
+        version,
+        lineItemId,
+        productPrice as number
+      ).then((resp) => {
+        setInCart(false);
+        localStorage.setItem('versionWin4ik', String(resp.body.version));
+      });
+    }
+  };
+
+  const addToCart = (): void => {
+    const version = Number(localStorage.getItem('versionWin4ik'));
+    if (idCustomer && idCart) {
+      updateCart(idCart, version, id as string).then((resp) => {
+        setInCart(true);
+        localStorage.setItem('versionWin4ik', String(resp.body.version));
+      });
+    }
+    if (!idCustomer && idCart) {
+      updateCartAnonimous(idCart, version, id as string).then((resp) => {
+        setInCart(true);
+        localStorage.setItem('versionWin4ik', String(resp.body.version));
+      });
+    }
+    if (!idCart && !idCustomer) {
+      createCartAnonimous().then((obj) => {
+        localStorage.setItem('idCartWin4ik', obj.body.id);
+        localStorage.setItem('versionWin4ik', String(obj.body.version));
+        const versionNumber = Number(localStorage.getItem('versionWin4ik'));
+        updateCartAnonimous(obj.body.id, versionNumber, id as string).then(
+          (resp) => {
+            setInCart(true);
+            localStorage.setItem('versionWin4ik', String(resp.body.version));
+          }
+        );
+      });
+    }
+    if (!idCart && idCustomer) {
+      getCartCustomer()
+        .then((obj) => {
+          localStorage.setItem('idCartWin4ik', obj.body.id);
+          updateCart(idCart as string, version, id as string).then((resp) => {
+            setInCart(true);
+            localStorage.setItem('versionWin4ik', String(resp.body.version));
+          });
+        })
+        .catch(() => {
+          createCartCustomer().then((obj) => {
+            localStorage.setItem('idCartWin4ik', obj.body.id);
+            localStorage.setItem('versionWin4ik', String(obj.body.version));
+            updateCart(obj.body.id, version, id as string).then((resp) => {
+              setInCart(true);
+              localStorage.setItem('versionWin4ik', String(resp.body.version));
+            });
+          });
+        });
+    }
+  };
+
+  const clickButton = (): void => {
+    if (inCart) {
+      removeFromCart();
+    } else {
+      addToCart();
+    }
+  };
 
   return (
     <div>
@@ -162,6 +257,7 @@ const ProductPage: React.FC = () => {
                     : 'products-card__button'
                 }
                 type="button"
+                onClick={clickButton}
               >
                 {inCart ? 'Remove from Cart' : 'Add to Cart'}
               </button>
