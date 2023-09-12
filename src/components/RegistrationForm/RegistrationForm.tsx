@@ -10,7 +10,10 @@ import {
   ArrayObjectSelectState,
 } from '../../interfaces/interfaces';
 import Addresses from '../Addresses/Adressess';
-import createCustomer from '../../api/createCustomer';
+import {
+  createCustomer,
+  createCustomerAnonimous,
+} from '../../api/createCustomer';
 import { countries } from '../Addresses/countries';
 import Modal from '../Modal/Modal';
 import { useAuth } from '../../hooks/useAuth';
@@ -114,6 +117,36 @@ function RegistrationForm(): JSX.Element {
     if (!token) {
       token = `Bearer ${(await getAnonimousToken()).access_token}`;
       localStorage.setItem('tokenWin4ik', token);
+    }
+    const anonimousToken = JSON.parse(
+      localStorage.getItem('anonimTokenWin4ik') as string
+    );
+    if (!anonimousToken) {
+      createCustomerAnonimous(body)
+        .then((resp) => {
+          setResultType('success');
+          const user: string = resp.body.customer.id;
+          setMessage('You have successfully registered!');
+          openModal(user);
+          localStorage.setItem('userWin4ik', user);
+          loginCustomer(data.email, data.password).then(() => {
+            localStorage.removeItem('anonimTokenWin4ik');
+            localStorage.removeItem('tokenWin4ik');
+            getMeCustomer(data.email, data.password);
+          });
+        })
+        .catch((error: ErrorResponse) => {
+          if (error.statusCode === 400) {
+            setResultType('error');
+            setMessage(error.message);
+          } else if (error.statusCode === 503) {
+            setResultType('error-server');
+            setMessage('Oops, something went wrong! Try again later!');
+          }
+          openModal();
+          setShippingAddressDefault(false);
+          setBillingAddressDefault(false);
+        });
     }
     createCustomer(body)
       .then((resp) => {
