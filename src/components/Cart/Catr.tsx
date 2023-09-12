@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { LineItem } from '@commercetools/platform-sdk';
 
 import './Cart.scss';
+import { getCart } from '../../api/getCart';
 import CartProductCard from './CartProductCard/CartProductCard';
-import bottle from '../../assets/GER_the_bench_cs.jpg';
 
 const Cart: React.FC = () => {
+  const [allProducts, setAllProducts] = useState<LineItem[]>([]);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalCount, setTotalCount] = useState<number | undefined>();
+  const user = localStorage.getItem('idCartWin4ik');
+
+  if (user) {
+    React.useEffect(() => {
+      getCart(user).then((data) => {
+        console.log(data.body);
+        setAllProducts(data.body.lineItems);
+        setTotalPrice(data.body.totalPrice.centAmount);
+        setTotalCount(data.body.totalLineItemQuantity);
+      });
+    }, []);
+  }
   return (
     <div className="cart">
       <div className="cart__wrapper">
@@ -21,24 +37,27 @@ const Cart: React.FC = () => {
               </tr>
             </thead>
             <tbody className="cart-table__body">
-              <CartProductCard
-                image={bottle}
-                count={1}
-                price={50.12}
-                title="The Bench Cabernet Sauvignon"
-              />
-              <CartProductCard
-                image={bottle}
-                count={5}
-                price={120.27}
-                title="La Colombina Brunello di Montalcino DOCG"
-              />
-              <CartProductCard
-                image={bottle}
-                count={3}
-                price={99.31}
-                title="Masseria Borgo dei Trulli Vermentino IGP Puglia"
-              />
+              {allProducts.map((product) => (
+                <CartProductCard
+                  title={product.name['en-US']}
+                  price={
+                    product.price.discounted
+                      ? (
+                          product.price.discounted.value.centAmount / 100
+                        ).toFixed(2)
+                      : (product.price.value.centAmount / 100).toFixed(2)
+                  }
+                  image={
+                    product.variant.images ? product.variant.images[0].url : ''
+                  }
+                  count={product.quantity}
+                  totalPriceProduct={(
+                    product.totalPrice.centAmount / 100
+                  ).toFixed(2)}
+                  discountPrice={product.price.discounted !== undefined}
+                  key={product.id}
+                />
+              ))}
             </tbody>
           </table>
           <table className="total-table">
@@ -49,10 +68,10 @@ const Cart: React.FC = () => {
             </thead>
             <tbody className="total-table__body">
               <tr className="total-table__price">
-                <td>TOTAL price:</td>
+                <td>TOTAL price: $ {(totalPrice / 100).toFixed(2)}</td>
               </tr>
               <tr className="total-table__count">
-                <td>TOTAL count:</td>
+                <td>TOTAL count: {totalCount}</td>
               </tr>
             </tbody>
           </table>

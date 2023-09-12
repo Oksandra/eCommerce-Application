@@ -1,10 +1,12 @@
 import React from 'react';
 
 interface CartProductCardProps {
-  image: string;
+  image: string | undefined;
   title: string;
-  price: number;
+  price: string;
   count: number;
+  totalPriceProduct: string;
+  discountPrice: boolean;
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
@@ -12,6 +14,8 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   title,
   price,
   count,
+  totalPriceProduct,
+  discountPrice,
 }) => {
   return (
     <tr className="cart-table__row">
@@ -19,9 +23,9 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
         <img src={image} alt="wine" />
       </td>
       <td>{title}</td>
-      <td>$ {price}</td>
+      <td className={discountPrice ? 'discount-price' : ''}>$ {price}</td>
       <td>{count}</td>
-      <td>$ {count * price}</td>
+      <td>$ {totalPriceProduct}</td>
     </tr>
   );
 };
