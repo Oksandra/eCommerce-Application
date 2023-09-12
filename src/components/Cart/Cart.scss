@@ -48,6 +48,9 @@
       font-size: 1.8rem;
       padding: 1rem 0;
       text-align: center;
+      @include media-mobile {
+        font-size: 1.5rem;
+      }
       img {
         max-height: 9rem;
       }
