@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { LineItem } from '@commercetools/platform-sdk';
 
 import './Cart.scss';
-import { getCart } from '../../api/getCart';
 import CartProductCard from './CartProductCard/CartProductCard';
 
-const Cart: React.FC = () => {
-  const [allProducts, setAllProducts] = useState<LineItem[]>([]);
-  const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [totalCount, setTotalCount] = useState<number | undefined>();
-  const user = localStorage.getItem('idCartWin4ik');
+interface CartProps {
+  allProducts: LineItem[];
+  totalPrice: number;
+  totalCount: number | undefined;
+}
 
-  if (user) {
-    React.useEffect(() => {
-      getCart(user).then((data) => {
-        console.log(data.body);
-        setAllProducts(data.body.lineItems);
-        setTotalPrice(data.body.totalPrice.centAmount);
-        setTotalCount(data.body.totalLineItemQuantity);
-      });
-    }, []);
-  }
+const Cart: React.FC<CartProps> = ({ allProducts, totalPrice, totalCount }) => {
   return (
     <div className="cart">
       <div className="cart__wrapper">

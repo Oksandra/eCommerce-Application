@@ -13,7 +13,7 @@ import HomePage from './pages/HomePage/HomePage';
 import Profile from './components/Profile/Profile';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
-import Cart from './components/Cart/Catr';
+import CartPage from './pages/CartPage/CartPage';
 
 function App(): JSX.Element {
   return (
@@ -66,7 +66,7 @@ function App(): JSX.Element {
               </RequireAuth>
             }
           />
-          <Route path="cart" element={<Cart />} />
+          <Route path="cart" element={<CartPage />} />
           <Route index element={<HomePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
