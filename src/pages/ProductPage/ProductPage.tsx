@@ -13,6 +13,7 @@ import {
 } from '../../api/removeProductFromCart';
 import { updateCart, updateCartAnonimous } from '../../api/updateCart';
 import { createCartAnonimous, createCartCustomer } from '../../api/createCart';
+import Modal from '../../components/Modal/Modal';
 
 interface Image {
   url: string;
@@ -36,6 +37,7 @@ const ProductPage: React.FC = () => {
   const [inCart, setInCart] = useState(false);
   const [lineItemId, setLineItemId] = useState('');
   const [productPrice, setProductPrice] = useState<number | undefined>();
+  const [isActive, setActive] = useState(false);
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -73,6 +75,13 @@ const ProductPage: React.FC = () => {
     }
   }, [id, inCart]);
 
+  const showMessage = (): void => {
+    setActive(true);
+    setTimeout(() => {
+      setActive(false);
+    }, 3000);
+  };
+
   const removeFromCart = (): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     if (idCustomer) {
@@ -83,6 +92,7 @@ const ProductPage: React.FC = () => {
         productPrice as number
       ).then((obj) => {
         setInCart(false);
+        showMessage();
         localStorage.setItem('versionWin4ik', String(obj.body.version));
       });
     }
@@ -94,6 +104,7 @@ const ProductPage: React.FC = () => {
         productPrice as number
       ).then((resp) => {
         setInCart(false);
+        showMessage();
         localStorage.setItem('versionWin4ik', String(resp.body.version));
       });
     }
@@ -270,6 +281,11 @@ const ProductPage: React.FC = () => {
               alt="all wine"
             />
           </ModalProductPage>
+          <Modal
+            active={isActive}
+            resultType="success"
+            message="Product is successfully removed from Cart."
+          />
         </div>
       )}
     </div>
