@@ -46,33 +46,42 @@ const ProductPage: React.FC = () => {
         setProduct(data.body.masterData.current);
         setPrices(data.body.masterData.current.masterVariant.prices);
         setImages(data.body.masterData.current.masterVariant.images);
-        setIsloading(false);
+        if (!idCustomer && !idCart) {
+          console.log(111);
+          setIsloading(false);
+        }
+      })
+      .then(() => {
+        if (idCustomer && idCart) {
+          getCartCustomer().then((obj) => {
+            const products = obj.body.lineItems;
+            products.forEach((item) => {
+              if (item.productId === id) {
+                setInCart(true);
+                setLineItemId(item.id);
+                setProductPrice(item.price.value.centAmount);
+                setIsloading(false);
+              }
+            });
+            setIsloading(false);
+          });
+        }
+        if (!idCustomer && idCart) {
+          getCart(idCart).then((resp) => {
+            const products = resp.body.lineItems;
+            products.forEach((item) => {
+              if (item.productId === id) {
+                setInCart(true);
+                setLineItemId(item.id);
+                setProductPrice(item.price.value.centAmount);
+                setIsloading(false);
+              }
+            });
+            setIsloading(false);
+          });
+        }
       })
       .catch(() => navigate('/*'));
-    if (idCustomer && idCart) {
-      getCartCustomer().then((obj) => {
-        const products = obj.body.lineItems;
-        products.forEach((item) => {
-          if (item.productId === id) {
-            setInCart(true);
-            setLineItemId(item.id);
-            setProductPrice(item.price.value.centAmount);
-          }
-        });
-      });
-    }
-    if (!idCustomer && idCart) {
-      getCart(idCart).then((resp) => {
-        const products = resp.body.lineItems;
-        products.forEach((item) => {
-          if (item.productId === id) {
-            setInCart(true);
-            setLineItemId(item.id);
-            setProductPrice(item.price.value.centAmount);
-          }
-        });
-      });
-    }
   }, [id, inCart]);
 
   const showMessage = (): void => {

@@ -20,31 +20,46 @@ const CartPage: React.FC = () => {
       setIsloading(false);
       setCartEmpty(true);
     }
-  }, [cartId, user]);
+  }, []);
 
   if (cartId && !user) {
     React.useEffect(() => {
-      getCart(cartId).then((data) => {
-        console.log(data.body);
-        setAllProducts(data.body.lineItems);
-        setTotalPrice(data.body.totalPrice.centAmount);
-        setTotalCount(data.body.totalLineItemQuantity);
-        setIsloading(false);
-        setCartEmpty(false);
-      });
+      getCart(cartId)
+        .then((data) => {
+          setAllProducts(data.body.lineItems);
+          setTotalPrice(data.body.totalPrice.centAmount);
+          setTotalCount(data.body.totalLineItemQuantity);
+          return data.body.lineItems;
+        })
+        .then((data) => {
+          if (data.length === 0) {
+            setCartEmpty(true);
+          } else {
+            setIsloading(false);
+            setCartEmpty(false);
+          }
+        });
     }, []);
   }
 
   if (user) {
     React.useEffect(() => {
-      getCartCustomer().then((data) => {
-        console.log(data.body);
-        setAllProducts(data.body.lineItems);
-        setTotalPrice(data.body.totalPrice.centAmount);
-        setTotalCount(data.body.totalLineItemQuantity);
-        setIsloading(false);
-        setCartEmpty(false);
-      });
+      getCartCustomer()
+        .then((data) => {
+          console.log(data.body);
+          setAllProducts(data.body.lineItems);
+          setTotalPrice(data.body.totalPrice.centAmount);
+          setTotalCount(data.body.totalLineItemQuantity);
+          return data.body.lineItems;
+        })
+        .then((data) => {
+          if (data.length === 0) {
+            setCartEmpty(true);
+          } else {
+            setIsloading(false);
+            setCartEmpty(false);
+          }
+        });
     }, []);
   }
 
