@@ -4,12 +4,14 @@ import { LineItem } from '@commercetools/platform-sdk';
 import Cart from '../../components/Cart/Catr';
 // import CartEmpty from '../../components/Cart/CartEmpty/CartEmpty';
 import { getCart } from '../../api/getCart';
+import Loader from '../../components/Loader/Loader';
 
 const CartPage: React.FC = () => {
-  const user = localStorage.getItem('idCartWin4ik');
+  const user: string | null = localStorage.getItem('idCartWin4ik');
   const [allProducts, setAllProducts] = useState<LineItem[]>([]);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number | undefined>();
+  const [isLoading, setIsloading] = useState<boolean>(true);
 
   if (user) {
     React.useEffect(() => {
@@ -18,15 +20,23 @@ const CartPage: React.FC = () => {
         setAllProducts(data.body.lineItems);
         setTotalPrice(data.body.totalPrice.centAmount);
         setTotalCount(data.body.totalLineItemQuantity);
+        setIsloading(false);
       });
     }, []);
   }
+
   return (
-    <Cart
-      allProducts={allProducts}
-      totalPrice={totalPrice}
-      totalCount={totalCount}
-    />
+    <div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Cart
+          allProducts={allProducts}
+          totalPrice={totalPrice}
+          totalCount={totalCount}
+        />
+      )}
+    </div>
   );
 };
 
