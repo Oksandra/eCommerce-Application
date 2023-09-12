@@ -30,7 +30,6 @@ const CartPage: React.FC = () => {
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
           return data.body.lineItems;
-          setIsloading(false);
         })
         .then((data) => {
           if (data.length === 0) {
@@ -45,14 +44,22 @@ const CartPage: React.FC = () => {
 
   if (user) {
     React.useEffect(() => {
-      getCartCustomer().then((data) => {
-        console.log(data.body);
-        setAllProducts(data.body.lineItems);
-        setTotalPrice(data.body.totalPrice.centAmount);
-        setTotalCount(data.body.totalLineItemQuantity);
-        setIsloading(false);
-        setCartEmpty(false);
-      });
+      getCartCustomer()
+        .then((data) => {
+          console.log(data.body);
+          setAllProducts(data.body.lineItems);
+          setTotalPrice(data.body.totalPrice.centAmount);
+          setTotalCount(data.body.totalLineItemQuantity);
+          return data.body.lineItems;
+        })
+        .then((data) => {
+          if (data.length === 0) {
+            setCartEmpty(true);
+          } else {
+            setIsloading(false);
+            setCartEmpty(false);
+          }
+        });
     }, []);
   }
 
