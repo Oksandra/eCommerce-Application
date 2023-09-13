@@ -14,6 +14,7 @@ import Profile from './components/Profile/Profile';
 import ProductPage from './pages/ProductPage/ProductPage';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
 import CartPage from './pages/CartPage/CartPage';
+import { AboutUs } from './pages/AboutUs/AboutUs';
 
 function App(): JSX.Element {
   return (
@@ -38,10 +39,7 @@ function App(): JSX.Element {
           />
           <Route path="catalog" element={<CatalogPage />} />
           <Route path="catalog/:id" element={<ProductPage />} />
-          <Route
-            path="about"
-            element={<div className="center-align">About Us!</div>}
-          />
+          <Route path="about" element={<AboutUs />} />
           <Route
             path="profile"
             element={

@@ -1,0 +1,44 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
+
+.about-us {
+  @extend %flex-center-cont;
+  flex-direction: column;
+  padding: 2rem;
+
+  &__title {
+    margin-bottom: 4rem;
+    color: #000;
+    text-align: center;
+    font-size: 9rem;
+  }
+
+  &__members {
+    .members {
+      &__wrap {
+        @extend %flex-center-cont;
+        gap: 10%;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  &__collaboration {
+    padding: 2rem;
+
+    .collaboration {
+      &__text {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.subtitle {
+  margin-bottom: 3rem;
+  text-align: center;
+  color: $color-sale;
+}
