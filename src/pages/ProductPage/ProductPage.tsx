@@ -36,7 +36,7 @@ const ProductPage: React.FC = () => {
   const [imgPath, setImgPath] = useState<string | undefined>();
   const [inCart, setInCart] = useState(false);
   const [lineItemId, setLineItemId] = useState('');
-  const [productPrice, setProductPrice] = useState<number | undefined>();
+  const [productQuantity, setProductQuantity] = useState<number | undefined>();
   const [isActive, setActive] = useState(false);
   React.useEffect(() => {
     setIsloading(true);
@@ -59,7 +59,7 @@ const ProductPage: React.FC = () => {
               if (item.productId === id) {
                 setInCart(true);
                 setLineItemId(item.id);
-                setProductPrice(item.price.value.centAmount);
+                setProductQuantity(item.quantity);
                 setIsloading(false);
               }
             });
@@ -73,7 +73,7 @@ const ProductPage: React.FC = () => {
               if (item.productId === id) {
                 setInCart(true);
                 setLineItemId(item.id);
-                setProductPrice(item.price.value.centAmount);
+                setProductQuantity(item.quantity);
                 setIsloading(false);
               }
             });
@@ -98,7 +98,7 @@ const ProductPage: React.FC = () => {
         idCart as string,
         version,
         lineItemId,
-        productPrice as number
+        productQuantity as number
       ).then((obj) => {
         setInCart(false);
         showMessage();
@@ -110,7 +110,7 @@ const ProductPage: React.FC = () => {
         idCart as string,
         version,
         lineItemId,
-        productPrice as number
+        productQuantity as number
       ).then((resp) => {
         setInCart(false);
         showMessage();
