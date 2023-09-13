@@ -26,6 +26,7 @@ const CartPage: React.FC = () => {
     React.useEffect(() => {
       getCart(cartId)
         .then((data) => {
+          console.log(data.body.lineItems);
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);

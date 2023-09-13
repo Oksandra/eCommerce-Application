@@ -97,7 +97,9 @@
   &__body {
     background: #ededed;
     td {
+      line-height: 130%;
       font-weight: 800;
+      font-size: 1.6rem;
       padding: 0 1rem;
       @include media-tablet {
         font-size: 1.6rem;
