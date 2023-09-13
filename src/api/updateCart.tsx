@@ -21,6 +21,7 @@ const updateCartAnonimous = (
     }
   );
   return apiRootAnonimous
+    .me()
     .carts()
     .withId({ ID: id })
     .post({
@@ -48,6 +49,7 @@ const updateCart = (
     projectKey: projectKeyApi,
   });
   return apiRoot
+    .me()
     .carts()
     .withId({ ID: id })
     .post({
