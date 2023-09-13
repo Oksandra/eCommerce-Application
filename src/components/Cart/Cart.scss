@@ -33,6 +33,9 @@
     background-color: $muted-color;
     th {
       font-size: 1.6rem;
+      &:last-child {
+        color: transparent;
+      }
     }
   }
 
@@ -54,6 +57,15 @@
       img {
         max-height: 9rem;
       }
+    }
+  }
+
+  &__delete {
+    width: 2.5rem;
+    opacity: 0.5;
+    @extend %transition;
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

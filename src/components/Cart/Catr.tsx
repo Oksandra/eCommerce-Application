@@ -24,6 +24,7 @@ const Cart: React.FC<CartProps> = ({ allProducts, totalPrice, totalCount }) => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
+                <th>Del</th>
               </tr>
             </thead>
             <tbody className="cart-table__body">
