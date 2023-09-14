@@ -23,6 +23,8 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   id,
   onClick,
 }) => {
+  const [valueInput, setValueInput] = React.useState<number>(count);
+
   return (
     <tr className="cart-table__row">
       <td className="cart-table__img">
@@ -32,17 +34,25 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
       <td className={discountPrice ? 'discount-price' : ''}>$ {price}</td>
       <td className="quantity">
         <div className="cart-quantity">
-          <button type="button" className="cart-quantity__minus">
+          <button
+            onClick={(): void => setValueInput(valueInput - 1)}
+            type="button"
+            className="cart-quantity__minus"
+          >
             -
           </button>
           <input
             className="cart-quantity__input"
-            min="1"
-            max="100"
             type="number"
-            value={count}
+            value={valueInput}
           />
-          <button type="button" className="cart-quantity__plus">
+          <button
+            onClick={(): void => {
+              setValueInput(valueInput + 1);
+            }}
+            type="button"
+            className="cart-quantity__plus"
+          >
             +
           </button>
         </div>

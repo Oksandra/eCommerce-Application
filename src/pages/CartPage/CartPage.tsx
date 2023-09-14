@@ -10,6 +10,7 @@ import {
   removeProductFromCartAnonimous,
 } from '../../api/removeProductFromCart';
 import { deleteCart } from '../../api/deleteCart';
+// import { changeCountProduct } from '../../api/changeCountProduct';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -60,6 +61,15 @@ const CartPage: React.FC = () => {
       localStorage.removeItem('idCartWin4ik')
     );
   };
+
+  // const changeProductsQuantity = (idProd: string, count: number): void => {
+  //   const versionNumber = Number(localStorage.getItem('versionWin4ik'));
+  //   const id = localStorage.getItem('idCartWin4ik');
+  //   const idLine = idProd;
+  //   changeCountProduct(id as string, versionNumber, idLine, count).then(
+  //     (data) => console.log('data', data)
+  //   );
+  // };
 
   React.useEffect(() => {
     if ((!cartId && !user) || (user && !cartId)) {
