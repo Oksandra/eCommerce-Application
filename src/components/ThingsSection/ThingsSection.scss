@@ -109,4 +109,22 @@
   @include media-big-laptop {
     background-size: contain;
   }
+  @include media-laptop {
+    height: 60rem;
+  }
+  @include media-small-laptop {
+    height: 51rem;
+  }
+  @include media-tablet {
+    height: 54rem;
+  }
+  @include media-small-tablet {
+    height: 50rem;
+  }
+  @include media-big-mobile {
+    height: 40rem;
+  }
+  @include media-mobile {
+    height: 32rem;
+  }
 }
