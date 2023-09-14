@@ -30,7 +30,23 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
       </td>
       <td>{title}</td>
       <td className={discountPrice ? 'discount-price' : ''}>$ {price}</td>
-      <td>{count}</td>
+      <td className="quantity">
+        <div className="cart-quantity">
+          <button type="button" className="cart-quantity__minus">
+            -
+          </button>
+          <input
+            className="cart-quantity__input"
+            min="1"
+            max="100"
+            type="number"
+            value={count}
+          />
+          <button type="button" className="cart-quantity__plus">
+            +
+          </button>
+        </div>
+      </td>
       <td>$ {totalPriceProduct}</td>
       <td>
         <button type="button" onClick={(): void => onClick(id, count)}>
