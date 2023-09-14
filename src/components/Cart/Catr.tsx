@@ -9,6 +9,7 @@ interface CartProps {
   totalPrice: number;
   totalCount: number | undefined;
   removeFromCart: (id: string, count: number) => void;
+  removeCart: () => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -16,12 +17,17 @@ const Cart: React.FC<CartProps> = ({
   totalPrice,
   totalCount,
   removeFromCart,
+  removeCart,
 }) => {
   return (
     <div className="cart">
       <div className="cart__wrapper">
         <div className="cart__header">
-          <button className="cart__button" type="button">
+          <button
+            onClick={(): void => removeCart()}
+            className="cart__button"
+            type="button"
+          >
             Clear Shopping Cart
           </button>
           <h2 className="cart__title">Shopping Cart</h2>

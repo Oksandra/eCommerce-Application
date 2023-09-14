@@ -9,6 +9,7 @@ import {
   removeProductFromCart,
   removeProductFromCartAnonimous,
 } from '../../api/removeProductFromCart';
+import { deleteCart } from '../../api/deleteCart';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -49,6 +50,15 @@ const CartPage: React.FC = () => {
         })
         .catch((e) => console.log(e));
     }
+  };
+
+  const removeCart = (): void => {
+    const version = Number(localStorage.getItem('versionWin4ik'));
+    const idCart = localStorage.getItem('idCartWin4ik');
+    setCartEmpty(true);
+    deleteCart(idCart as string, version).then(() =>
+      localStorage.removeItem('idCartWin4ik')
+    );
   };
 
   React.useEffect(() => {
@@ -113,6 +123,7 @@ const CartPage: React.FC = () => {
           totalPrice={totalPrice}
           totalCount={totalCount}
           removeFromCart={removeFromCart}
+          removeCart={removeCart}
         />
       ) : (
         ''
