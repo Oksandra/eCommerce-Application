@@ -9,9 +9,11 @@ import {
   projectKeyApi,
 } from '../sdk/BuildClient';
 
-const deleteCart = (
+const changeCountProduct = (
   id: string,
-  versionNumber: number
+  versionNumber: number,
+  idLine: string,
+  count: number
 ): Promise<ClientResponse<Cart>> => {
   const idCustomer = localStorage.getItem('userWin4ik');
   const client = idCustomer
@@ -24,12 +26,19 @@ const deleteCart = (
     .me()
     .carts()
     .withId({ ID: id })
-    .delete({
-      queryArgs: {
+    .post({
+      body: {
         version: versionNumber,
+        actions: [
+          {
+            action: 'changeLineItemQuantity',
+            lineItemId: `${idLine}`,
+            quantity: count,
+          },
+        ],
       },
     })
     .execute();
 };
 
-export { deleteCart };
+export { changeCountProduct };
