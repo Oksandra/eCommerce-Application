@@ -5,7 +5,7 @@ import PromocodeSection from '../../components/PromocodeSection/PromocodeSection
 const HomePage: React.FC = () => {
   return (
     <>
-      <ThingsSection />;
+      <ThingsSection />
       <PromocodeSection />
     </>
   );
