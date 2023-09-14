@@ -52,7 +52,7 @@ const CartPage: React.FC = () => {
   };
 
   React.useEffect(() => {
-    if (!cartId && !user) {
+    if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
       setCartEmpty(true);
     }
@@ -80,7 +80,7 @@ const CartPage: React.FC = () => {
     }, [totalPrice]);
   }
 
-  if (user) {
+  if (user && cartId) {
     React.useEffect(() => {
       getCartCustomer()
         .then((data) => {
