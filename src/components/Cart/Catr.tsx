@@ -8,9 +8,15 @@ interface CartProps {
   allProducts: LineItem[];
   totalPrice: number;
   totalCount: number | undefined;
+  removeFromCart: (id: string, count: number) => void;
 }
 
-const Cart: React.FC<CartProps> = ({ allProducts, totalPrice, totalCount }) => {
+const Cart: React.FC<CartProps> = ({
+  allProducts,
+  totalPrice,
+  totalCount,
+  removeFromCart,
+}) => {
   return (
     <div className="cart">
       <div className="cart__wrapper">
@@ -47,6 +53,10 @@ const Cart: React.FC<CartProps> = ({ allProducts, totalPrice, totalCount }) => {
                   ).toFixed(2)}
                   discountPrice={product.price.discounted !== undefined}
                   key={product.id}
+                  id={product.id}
+                  onClick={(): void =>
+                    removeFromCart(product.id, product.quantity)
+                  }
                 />
               ))}
             </tbody>

@@ -9,6 +9,8 @@ interface CartProductCardProps {
   count: number;
   totalPriceProduct: string;
   discountPrice: boolean;
+  id: string;
+  onClick: (id: string, count: number) => void;
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
@@ -18,6 +20,8 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   count,
   totalPriceProduct,
   discountPrice,
+  id,
+  onClick,
 }) => {
   return (
     <tr className="cart-table__row">
@@ -29,7 +33,11 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
       <td>{count}</td>
       <td>$ {totalPriceProduct}</td>
       <td>
-        <button type="button">
+        <button
+          type="button"
+          data-id={id}
+          onClick={(): void => onClick(id, count)}
+        >
           <img className="cart-table__delete" src={del} alt="delete" />
         </button>
       </td>

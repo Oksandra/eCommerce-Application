@@ -5,6 +5,10 @@ import Cart from '../../components/Cart/Catr';
 import CartEmpty from '../../components/Cart/CartEmpty/CartEmpty';
 import { getCart, getCartCustomer } from '../../api/getCart';
 import Loader from '../../components/Loader/Loader';
+import {
+  removeProductFromCart,
+  removeProductFromCartAnonimous,
+} from '../../api/removeProductFromCart';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -14,6 +18,44 @@ const CartPage: React.FC = () => {
   const [totalCount, setTotalCount] = useState<number | undefined>();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
+  // const [lineItemId, setLineItemId] = useState('');
+  // const [productQuantity, setProductQuantity] = useState<number>(0);
+
+  const removeFromCart = (id: string, count: number): void => {
+    console.log('remove start');
+    const version = Number(localStorage.getItem('versionWin4ik'));
+    const idCustomer = localStorage.getItem('userWin4ik');
+    const idCart = localStorage.getItem('idCartWin4ik');
+    const lineItemId = id;
+    const productQuantity = count;
+    if (idCustomer) {
+      removeProductFromCart(
+        idCart as string,
+        version,
+        lineItemId,
+        productQuantity
+      ).then((obj) => {
+        localStorage.setItem('versionWin4ik', String(obj.body.version));
+      });
+    }
+    if (!idCustomer) {
+      console.log('2125');
+      console.log(lineItemId);
+      console.log(productQuantity);
+      removeProductFromCartAnonimous(
+        idCart as string,
+        version,
+        lineItemId,
+        productQuantity
+      )
+        .then((resp) => {
+          console.log(resp);
+          setTotalPrice(resp.body.totalPrice.centAmount);
+          localStorage.setItem('versionWin4ik', String(resp.body.version));
+        })
+        .catch((e) => console.log(e));
+    }
+  };
 
   React.useEffect(() => {
     if (!cartId && !user) {
@@ -26,7 +68,6 @@ const CartPage: React.FC = () => {
     React.useEffect(() => {
       getCart(cartId)
         .then((data) => {
-          console.log(data.body.lineItems);
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
@@ -40,7 +81,7 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, []);
+    }, [totalPrice]);
   }
 
   if (user) {
@@ -73,6 +114,7 @@ const CartPage: React.FC = () => {
           allProducts={allProducts}
           totalPrice={totalPrice}
           totalCount={totalCount}
+          removeFromCart={removeFromCart}
         />
       ) : (
         ''
