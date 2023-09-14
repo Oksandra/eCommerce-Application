@@ -18,11 +18,8 @@ const CartPage: React.FC = () => {
   const [totalCount, setTotalCount] = useState<number | undefined>();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
-  // const [lineItemId, setLineItemId] = useState('');
-  // const [productQuantity, setProductQuantity] = useState<number>(0);
 
   const removeFromCart = (id: string, count: number): void => {
-    console.log('remove start');
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCustomer = localStorage.getItem('userWin4ik');
     const idCart = localStorage.getItem('idCartWin4ik');
@@ -35,13 +32,11 @@ const CartPage: React.FC = () => {
         lineItemId,
         productQuantity
       ).then((obj) => {
+        setTotalPrice(obj.body.totalPrice.centAmount);
         localStorage.setItem('versionWin4ik', String(obj.body.version));
       });
     }
     if (!idCustomer) {
-      console.log('2125');
-      console.log(lineItemId);
-      console.log(productQuantity);
       removeProductFromCartAnonimous(
         idCart as string,
         version,
@@ -49,7 +44,6 @@ const CartPage: React.FC = () => {
         productQuantity
       )
         .then((resp) => {
-          console.log(resp);
           setTotalPrice(resp.body.totalPrice.centAmount);
           localStorage.setItem('versionWin4ik', String(resp.body.version));
         })
@@ -102,7 +96,7 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, []);
+    }, [totalPrice]);
   }
 
   return (
