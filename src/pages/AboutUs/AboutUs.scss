@@ -35,6 +35,16 @@
       }
     }
   }
+
+  &__logo {
+    width: 20rem;
+    margin: 0 auto;
+    @extend %transition;
+
+    &:hover {
+      transform: scale(105%);
+    }
+  }
 }
 
 .subtitle {

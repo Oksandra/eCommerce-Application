@@ -56,6 +56,14 @@ export const AboutUs: FC = () => {
           work together, cope with challenges, and achieve project goals.
         </p>
       </div>
+      <a
+        className="about-us__logo"
+        href="https://rs.school/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img src="https://rs.school/images/rs_school.svg" alt="logo" />
+      </a>
     </div>
   );
 };
