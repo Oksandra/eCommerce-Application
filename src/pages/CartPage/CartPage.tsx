@@ -65,6 +65,8 @@ const CartPage: React.FC = () => {
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
+          localStorage.setItem('versionWin4ik', String(data.body.version));
+          localStorage.setItem('idCartWin4ik', data.body.id);
           return data.body.lineItems;
         })
         .then((data) => {
@@ -86,6 +88,8 @@ const CartPage: React.FC = () => {
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
+          localStorage.setItem('versionWin4ik', String(data.body.version));
+          localStorage.setItem('idCartWin4ik', data.body.id);
           return data.body.lineItems;
         })
         .then((data) => {
