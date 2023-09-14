@@ -33,11 +33,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
       <td>{count}</td>
       <td>$ {totalPriceProduct}</td>
       <td>
-        <button
-          type="button"
-          data-id={id}
-          onClick={(): void => onClick(id, count)}
-        >
+        <button type="button" onClick={(): void => onClick(id, count)}>
           <img className="cart-table__delete" src={del} alt="delete" />
         </button>
       </td>
