@@ -1,0 +1,22 @@
+@import '../../styles/abstracts/extends';
+.promocode-section {
+  margin-bottom: 6rem;
+  @extend %flex-center-cont;
+  &__info {
+    width: 35%;
+    padding: 3rem;
+    margin-top: 3rem;
+    &-text {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    &-button {
+      width: 40%;
+      @extend %flex;
+      margin: 0 auto;
+      margin-top: 8rem;
+    }
+  }
+}
