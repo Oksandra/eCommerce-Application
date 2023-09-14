@@ -20,7 +20,12 @@ const Cart: React.FC<CartProps> = ({
   return (
     <div className="cart">
       <div className="cart__wrapper">
-        <h2 className="cart__title">Shopping Cart</h2>
+        <div className="cart__header">
+          <button className="cart__button" type="button">
+            Clear Shopping Cart
+          </button>
+          <h2 className="cart__title">Shopping Cart</h2>
+        </div>
         <div className="tables__wrapper">
           <table className="cart-table">
             <thead className="cart-table__head">

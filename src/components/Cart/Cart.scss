@@ -6,14 +6,31 @@
   padding: 1.2rem 1rem;
   max-width: 111rem;
   margin: 0 auto;
+
   &__wrapper {
+    position: relative;
     @extend %flex-center-cont;
     flex-direction: column;
     align-items: center;
   }
 
   &__title {
+    margin-bottom: 1.5rem;
+  }
+
+  &__header {
+    @extend %flex;
+    flex-direction: column-reverse;
     margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  &__button {
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    color: $light-color;
+    background-color: $button-color;
+    @include button($button-hover-color);
   }
 }
 
