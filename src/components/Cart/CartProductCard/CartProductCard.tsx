@@ -11,6 +11,7 @@ interface CartProductCardProps {
   discountPrice: boolean;
   id: string;
   onClick: (id: string, count: number) => void;
+  changeCount: (idProd: string, count: number) => void;
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
@@ -22,6 +23,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   discountPrice,
   id,
   onClick,
+  changeCount,
 }) => {
   const [valueInput, setValueInput] = React.useState<number>(count);
 
@@ -35,7 +37,10 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
       <td className="quantity">
         <div className="cart-quantity">
           <button
-            onClick={(): void => setValueInput(valueInput - 1)}
+            onClick={(): void => {
+              setValueInput(valueInput - 1);
+              changeCount(id, valueInput - 1);
+            }}
             type="button"
             className="cart-quantity__minus"
           >
@@ -45,10 +50,14 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             className="cart-quantity__input"
             type="number"
             value={valueInput}
+            onChange={(event): void =>
+              setValueInput(Number(event.target.value))
+            }
           />
           <button
             onClick={(): void => {
               setValueInput(valueInput + 1);
+              changeCount(id, valueInput + 1);
             }}
             type="button"
             className="cart-quantity__plus"
