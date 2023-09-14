@@ -47,7 +47,6 @@ const ProductPage: React.FC = () => {
         setPrices(data.body.masterData.current.masterVariant.prices);
         setImages(data.body.masterData.current.masterVariant.images);
         if (!idCustomer && !idCart) {
-          console.log(111);
           setIsloading(false);
         }
       })

@@ -5,6 +5,10 @@ import Cart from '../../components/Cart/Catr';
 import CartEmpty from '../../components/Cart/CartEmpty/CartEmpty';
 import { getCart, getCartCustomer } from '../../api/getCart';
 import Loader from '../../components/Loader/Loader';
+import {
+  removeProductFromCart,
+  removeProductFromCartAnonimous,
+} from '../../api/removeProductFromCart';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -15,8 +19,40 @@ const CartPage: React.FC = () => {
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
 
+  const removeFromCart = (id: string, count: number): void => {
+    const version = Number(localStorage.getItem('versionWin4ik'));
+    const idCustomer = localStorage.getItem('userWin4ik');
+    const idCart = localStorage.getItem('idCartWin4ik');
+    const lineItemId = id;
+    const productQuantity = count;
+    if (idCustomer) {
+      removeProductFromCart(
+        idCart as string,
+        version,
+        lineItemId,
+        productQuantity
+      ).then((obj) => {
+        setTotalPrice(obj.body.totalPrice.centAmount);
+        localStorage.setItem('versionWin4ik', String(obj.body.version));
+      });
+    }
+    if (!idCustomer) {
+      removeProductFromCartAnonimous(
+        idCart as string,
+        version,
+        lineItemId,
+        productQuantity
+      )
+        .then((resp) => {
+          setTotalPrice(resp.body.totalPrice.centAmount);
+          localStorage.setItem('versionWin4ik', String(resp.body.version));
+        })
+        .catch((e) => console.log(e));
+    }
+  };
+
   React.useEffect(() => {
-    if (!cartId && !user) {
+    if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
       setCartEmpty(true);
     }
@@ -29,6 +65,8 @@ const CartPage: React.FC = () => {
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
+          localStorage.setItem('versionWin4ik', String(data.body.version));
+          localStorage.setItem('idCartWin4ik', data.body.id);
           return data.body.lineItems;
         })
         .then((data) => {
@@ -39,10 +77,10 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, []);
+    }, [totalPrice]);
   }
 
-  if (user) {
+  if (user && cartId) {
     React.useEffect(() => {
       getCartCustomer()
         .then((data) => {
@@ -50,6 +88,8 @@ const CartPage: React.FC = () => {
           setAllProducts(data.body.lineItems);
           setTotalPrice(data.body.totalPrice.centAmount);
           setTotalCount(data.body.totalLineItemQuantity);
+          localStorage.setItem('versionWin4ik', String(data.body.version));
+          localStorage.setItem('idCartWin4ik', data.body.id);
           return data.body.lineItems;
         })
         .then((data) => {
@@ -60,7 +100,7 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, []);
+    }, [totalPrice]);
   }
 
   return (
@@ -72,6 +112,7 @@ const CartPage: React.FC = () => {
           allProducts={allProducts}
           totalPrice={totalPrice}
           totalCount={totalCount}
+          removeFromCart={removeFromCart}
         />
       ) : (
         ''
