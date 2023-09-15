@@ -22,14 +22,14 @@ const Cart: React.FC<CartProps> = ({
   removeCart,
   changeCount,
 }) => {
-  const [modalActive, setModalActive] = useState<boolean>(true);
+  const [modalActive, setModalActive] = useState<boolean>(false);
 
   return (
     <div className="cart">
       <div className="cart__wrapper">
         <div className="cart__header">
           <button
-            onClick={(): void => removeCart()}
+            onClick={(): void => setModalActive(true)}
             className="cart__button"
             type="button"
           >
@@ -100,10 +100,21 @@ const Cart: React.FC<CartProps> = ({
           Are you sure you want to empty the cart completely?
         </p>
         <div className="modal-buttons">
-          <button className="modal-buttons__button" type="button">
+          <button
+            onClick={(): void => {
+              removeCart();
+              setModalActive(false);
+            }}
+            className="modal-buttons__button"
+            type="button"
+          >
             Yes
           </button>
-          <button className="modal-buttons__button" type="button">
+          <button
+            onClick={(): void => setModalActive(false)}
+            className="modal-buttons__button"
+            type="button"
+          >
             Exit
           </button>
         </div>
