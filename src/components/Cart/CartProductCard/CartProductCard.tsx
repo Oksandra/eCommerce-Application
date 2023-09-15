@@ -50,9 +50,9 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             className="cart-quantity__input"
             type="number"
             value={valueInput}
-            onChange={(event): void =>
-              setValueInput(Number(event.target.value))
-            }
+            onChange={(): null => {
+              return null;
+            }}
           />
           <button
             onClick={(): void => {
