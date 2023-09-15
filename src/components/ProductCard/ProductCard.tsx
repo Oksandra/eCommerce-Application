@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import heart from '../../assets/svg/blackHeart.svg';
 import cart from '../../assets/svg/cart.svg';
 import './ProductCard.scss';
@@ -6,6 +6,7 @@ import sale from '../../assets/images/sale-icon.png';
 import { createCartAnonimous, createCartCustomer } from '../../api/createCart';
 import { updateCartAnonimous, updateCart } from '../../api/updateCart';
 import { getCart, getCartCustomer } from '../../api/getCart';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 interface ProductCardProps {
   image: string;
@@ -28,11 +29,13 @@ export const ProductCard: FC<ProductCardProps> = ({
 }) => {
   const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
+  const { setCount } = useContext(QuantityContext);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     const id = localStorage.getItem('userWin4ik') as string;
     if (idCartLS && !id) {
       getCart(idCartLS).then((obj) => {
+        setCount(obj.body.totalLineItemQuantity as number);
         setVersion(obj.body.version);
         localStorage.setItem('versionWin4ik', `${obj.body.version}`);
         const products = obj.body.lineItems;
@@ -46,6 +49,7 @@ export const ProductCard: FC<ProductCardProps> = ({
     if (idCartLS && id) {
       getCartCustomer()
         .then((obj) => {
+          setCount(obj.body.totalLineItemQuantity as number);
           setVersion(obj.body.version);
           localStorage.setItem('versionWin4ik', `${obj.body.version}`);
           localStorage.setItem('idCartWin4ik', obj.body.id);
@@ -66,6 +70,7 @@ export const ProductCard: FC<ProductCardProps> = ({
     if (id) {
       getCartCustomer()
         .then((obj) => {
+          setCount(obj.body.totalLineItemQuantity as number);
           setVersion(obj.body.version);
           localStorage.setItem('versionWin4ik', `${obj.body.version}`);
           localStorage.setItem('idCartWin4ik', obj.body.id);

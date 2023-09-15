@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Price, ProductData } from '@commercetools/platform-sdk';
 import getProduct from '../../api/getProduct';
@@ -14,6 +14,7 @@ import {
 import { updateCart, updateCartAnonimous } from '../../api/updateCart';
 import { createCartAnonimous, createCartCustomer } from '../../api/createCart';
 import Modal from '../../components/Modal/Modal';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 interface Image {
   url: string;
@@ -38,6 +39,7 @@ const ProductPage: React.FC = () => {
   const [lineItemId, setLineItemId] = useState('');
   const [productQuantity, setProductQuantity] = useState<number | undefined>();
   const [isActive, setActive] = useState(false);
+  const { setCount } = useContext(QuantityContext);
   React.useEffect(() => {
     setIsloading(true);
     setPrices(undefined);
@@ -54,6 +56,7 @@ const ProductPage: React.FC = () => {
         if (idCustomer && idCart) {
           getCartCustomer().then((obj) => {
             const products = obj.body.lineItems;
+            setCount(obj.body.totalLineItemQuantity as number);
             products.forEach((item) => {
               if (item.productId === id) {
                 setInCart(true);
@@ -67,6 +70,7 @@ const ProductPage: React.FC = () => {
         }
         if (!idCustomer && idCart) {
           getCart(idCart).then((resp) => {
+            setCount(resp.body.totalLineItemQuantity as number);
             const products = resp.body.lineItems;
             products.forEach((item) => {
               if (item.productId === id) {
