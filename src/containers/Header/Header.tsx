@@ -43,7 +43,10 @@ const Header: React.FC<HeaderProps> = ({ value }) => {
                 <img src={heart} alt="Favorites" />
               </Link>
               <Link className="header__links" to="/cart">
-                <img src={cart} alt="Cart" />
+                <div className="cart-container">
+                  <img src={cart} alt="Cart" />
+                  <span className="cart-counter">1</span>
+                </div>
               </Link>
               {screenWidth < 455 && <Burger state={setIsBurgerActive} />}
             </div>
