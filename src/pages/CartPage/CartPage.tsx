@@ -10,6 +10,7 @@ import {
   removeProductFromCartAnonimous,
 } from '../../api/removeProductFromCart';
 import { deleteCart } from '../../api/deleteCart';
+import { changeCountProduct } from '../../api/changeCountProduct';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -61,6 +62,18 @@ const CartPage: React.FC = () => {
     );
   };
 
+  const changeProductsQuantity = (idProd: string, count: number): void => {
+    const versionNumber = Number(localStorage.getItem('versionWin4ik'));
+    const id = localStorage.getItem('idCartWin4ik');
+    const idLine = idProd;
+    changeCountProduct(id as string, versionNumber, idLine, count).then(
+      (data) => {
+        localStorage.setItem('versionWin4ik', String(data.body.version));
+        setTotalCount(data.body.totalLineItemQuantity);
+      }
+    );
+  };
+
   React.useEffect(() => {
     if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
@@ -87,7 +100,7 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, [totalPrice]);
+    }, [totalPrice, totalCount]);
   }
 
   if (user && cartId) {
@@ -110,7 +123,7 @@ const CartPage: React.FC = () => {
             setCartEmpty(false);
           }
         });
-    }, [totalPrice]);
+    }, [totalPrice, totalCount]);
   }
 
   return (
@@ -124,6 +137,7 @@ const CartPage: React.FC = () => {
           totalCount={totalCount}
           removeFromCart={removeFromCart}
           removeCart={removeCart}
+          changeCount={changeProductsQuantity}
         />
       ) : (
         ''

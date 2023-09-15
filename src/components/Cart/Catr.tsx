@@ -10,6 +10,7 @@ interface CartProps {
   totalCount: number | undefined;
   removeFromCart: (id: string, count: number) => void;
   removeCart: () => void;
+  changeCount: (idProd: string, count: number) => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -18,6 +19,7 @@ const Cart: React.FC<CartProps> = ({
   totalCount,
   removeFromCart,
   removeCart,
+  changeCount,
 }) => {
   return (
     <div className="cart">
@@ -68,6 +70,7 @@ const Cart: React.FC<CartProps> = ({
                   onClick={(): void =>
                     removeFromCart(product.id, product.quantity)
                   }
+                  changeCount={changeCount}
                 />
               ))}
             </tbody>
