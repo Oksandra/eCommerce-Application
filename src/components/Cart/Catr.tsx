@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LineItem } from '@commercetools/platform-sdk';
 
 import './Cart.scss';
 import CartProductCard from './CartProductCard/CartProductCard';
+import ModalPage from '../ModalPage/ModalPage';
 
 interface CartProps {
   allProducts: LineItem[];
@@ -21,6 +22,8 @@ const Cart: React.FC<CartProps> = ({
   removeCart,
   changeCount,
 }) => {
+  const [modalActive, setModalActive] = useState<boolean>(true);
+
   return (
     <div className="cart">
       <div className="cart__wrapper">
@@ -92,6 +95,12 @@ const Cart: React.FC<CartProps> = ({
           </table>
         </div>
       </div>
+      <ModalPage active={modalActive} setActive={setModalActive}>
+        <div className="modal-buttons">
+          <button type="button">HHHh</button>
+          <button type="button">HHHh</button>
+        </div>
+      </ModalPage>
     </div>
   );
 };

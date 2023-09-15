@@ -5,7 +5,7 @@ import getProduct from '../../api/getProduct';
 import './ProductPage.scss';
 import Loader from '../../components/Loader/Loader';
 import sale from '../../assets/images/sale-icon.png';
-import ModalProductPage from '../../components/ModalProductPage/ModalProductPage';
+import ModalPage from '../../components/ModalPage/ModalPage';
 import { getCart, getCartCustomer } from '../../api/getCart';
 import {
   removeProductFromCart,
@@ -282,13 +282,13 @@ const ProductPage: React.FC = () => {
               </button>
             </div>
           </div>
-          <ModalProductPage active={modalActive} setActive={setModalActive}>
+          <ModalPage active={modalActive} setActive={setModalActive}>
             <img
               src={imgPath}
               className="products-card__img_big"
               alt="all wine"
             />
-          </ModalProductPage>
+          </ModalPage>
           <Modal
             active={isActive}
             resultType="success"
