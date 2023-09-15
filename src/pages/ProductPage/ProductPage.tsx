@@ -37,7 +37,6 @@ const ProductPage: React.FC = () => {
   const [imgPath, setImgPath] = useState<string | undefined>();
   const [inCart, setInCart] = useState(false);
   const [lineItemId, setLineItemId] = useState('');
-  const [productQuantity, setProductQuantity] = useState<number | undefined>();
   const [isActive, setActive] = useState(false);
   const { setCount } = useContext(QuantityContext);
   React.useEffect(() => {
@@ -61,7 +60,6 @@ const ProductPage: React.FC = () => {
               if (item.productId === id) {
                 setInCart(true);
                 setLineItemId(item.id);
-                setProductQuantity(item.quantity);
                 setIsloading(false);
               }
             });
@@ -76,7 +74,6 @@ const ProductPage: React.FC = () => {
               if (item.productId === id) {
                 setInCart(true);
                 setLineItemId(item.id);
-                setProductQuantity(item.quantity);
                 setIsloading(false);
               }
             });
@@ -97,23 +94,19 @@ const ProductPage: React.FC = () => {
   const removeFromCart = (): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     if (idCustomer) {
-      removeProductFromCart(
-        idCart as string,
-        version,
-        lineItemId,
-        productQuantity as number
-      ).then((obj) => {
-        setInCart(false);
-        showMessage();
-        localStorage.setItem('versionWin4ik', String(obj.body.version));
-      });
+      removeProductFromCart(idCart as string, version, lineItemId).then(
+        (obj) => {
+          setInCart(false);
+          showMessage();
+          localStorage.setItem('versionWin4ik', String(obj.body.version));
+        }
+      );
     }
     if (!idCustomer) {
       removeProductFromCartAnonimous(
         idCart as string,
         version,
-        lineItemId,
-        productQuantity as number
+        lineItemId
       ).then((resp) => {
         setInCart(false);
         showMessage();

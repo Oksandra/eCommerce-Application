@@ -23,30 +23,21 @@ const CartPage: React.FC = () => {
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
   const { setCount } = useContext(QuantityContext);
 
-  const removeFromCart = (id: string, count: number): void => {
+  const removeFromCart = (id: string): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCustomer = localStorage.getItem('userWin4ik');
     const idCart = localStorage.getItem('idCartWin4ik');
     const lineItemId = id;
-    const productQuantity = count;
     if (idCustomer) {
-      removeProductFromCart(
-        idCart as string,
-        version,
-        lineItemId,
-        productQuantity
-      ).then((obj) => {
-        setTotalPrice(obj.body.totalPrice.centAmount);
-        localStorage.setItem('versionWin4ik', String(obj.body.version));
-      });
+      removeProductFromCart(idCart as string, version, lineItemId).then(
+        (obj) => {
+          setTotalPrice(obj.body.totalPrice.centAmount);
+          localStorage.setItem('versionWin4ik', String(obj.body.version));
+        }
+      );
     }
     if (!idCustomer) {
-      removeProductFromCartAnonimous(
-        idCart as string,
-        version,
-        lineItemId,
-        productQuantity
-      )
+      removeProductFromCartAnonimous(idCart as string, version, lineItemId)
         .then((resp) => {
           setTotalPrice(resp.body.totalPrice.centAmount);
           localStorage.setItem('versionWin4ik', String(resp.body.version));
