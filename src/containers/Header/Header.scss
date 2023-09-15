@@ -1,5 +1,6 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
 
 .header {
   background-color: $background-color;
@@ -39,6 +40,9 @@
 .cart-container {
   position: relative;
   display: inline;
+  @include media-big-mobile {
+    margin-right: 1rem;
+  }
 }
 
 .cart-counter {
