@@ -3,17 +3,34 @@
 @import '../../styles/abstracts/mixins';
 
 .cart {
-  padding: 1.2rem 1rem;
+  padding: 2rem 1rem;
   max-width: 111rem;
   margin: 0 auto;
+
   &__wrapper {
+    position: relative;
     @extend %flex-center-cont;
     flex-direction: column;
     align-items: center;
   }
 
   &__title {
+    margin-bottom: 1.5rem;
+  }
+
+  &__header {
+    @extend %flex;
+    flex-direction: column-reverse;
     margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  &__button {
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    color: $light-color;
+    background-color: $button-color;
+    @include button($button-hover-color);
   }
 }
 
@@ -114,5 +131,56 @@
   gap: 2rem;
   @include media-tablet {
     flex-direction: column;
+  }
+}
+
+.cart-quantity {
+  @extend %flex;
+  width: 14rem;
+  height: 2.8rem;
+
+  & button {
+    background: #ededed;
+    @extend %transition;
+    width: 2rem;
+
+    &:hover {
+      background: #c4c4c4;
+    }
+  }
+
+  &__minus {
+    border: solid #d6d6d6;
+    border-width: 1px 0 1px 1px;
+    border-radius: 14px 0 0 14px;
+    background: #9d3636;
+  }
+
+  &__plus {
+    border: solid #d6d6d6;
+    border-width: 1px 1px 1px 0;
+    border-radius: 0 14px 14px 0;
+  }
+
+  &__input {
+    font-size: 1.8rem;
+    width: 6rem;
+    height: 100%;
+    line-height: 118%;
+    text-align: center;
+    border: solid #d6d6d6;
+    border-width: 1px 0 1px 0;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+    @include media-small-laptop {
+      font-size: 1.6rem;
+      width: 5rem;
+    }
   }
 }

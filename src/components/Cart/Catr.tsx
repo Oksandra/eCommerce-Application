@@ -9,6 +9,8 @@ interface CartProps {
   totalPrice: number;
   totalCount: number | undefined;
   removeFromCart: (id: string, count: number) => void;
+  removeCart: () => void;
+  changeCount: (idProd: string, count: number) => void;
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -16,11 +18,22 @@ const Cart: React.FC<CartProps> = ({
   totalPrice,
   totalCount,
   removeFromCart,
+  removeCart,
+  changeCount,
 }) => {
   return (
     <div className="cart">
       <div className="cart__wrapper">
-        <h2 className="cart__title">Shopping Cart</h2>
+        <div className="cart__header">
+          <button
+            onClick={(): void => removeCart()}
+            className="cart__button"
+            type="button"
+          >
+            Clear Shopping Cart
+          </button>
+          <h2 className="cart__title">Shopping Cart</h2>
+        </div>
         <div className="tables__wrapper">
           <table className="cart-table">
             <thead className="cart-table__head">
@@ -57,6 +70,7 @@ const Cart: React.FC<CartProps> = ({
                   onClick={(): void =>
                     removeFromCart(product.id, product.quantity)
                   }
+                  changeCount={changeCount}
                 />
               ))}
             </tbody>
