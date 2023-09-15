@@ -96,9 +96,16 @@ const Cart: React.FC<CartProps> = ({
         </div>
       </div>
       <ModalPage active={modalActive} setActive={setModalActive}>
+        <p className="modal-text">
+          Are you sure you want to empty the cart completely?
+        </p>
         <div className="modal-buttons">
-          <button type="button">HHHh</button>
-          <button type="button">HHHh</button>
+          <button className="modal-buttons__button" type="button">
+            Yes
+          </button>
+          <button className="modal-buttons__button" type="button">
+            Exit
+          </button>
         </div>
       </ModalPage>
     </div>

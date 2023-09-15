@@ -58,3 +58,24 @@
     right: -1.7rem;
   }
 }
+
+.modal {
+  &-buttons {
+    @extend %flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+
+    &__button {
+      font-size: 2rem;
+      padding: 1.3rem 6rem;
+      color: $light-color;
+      background-color: $button-color;
+      @include button($button-hover-color);
+    }
+  }
+
+  &-text {
+    font-size: 2rem;
+    font-style: italic;
+  }
+}
