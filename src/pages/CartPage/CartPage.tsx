@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { LineItem } from '@commercetools/platform-sdk';
 
 import Cart from '../../components/Cart/Catr';
@@ -11,6 +11,7 @@ import {
 } from '../../api/removeProductFromCart';
 import { deleteCart } from '../../api/deleteCart';
 import { changeCountProduct } from '../../api/changeCountProduct';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -20,6 +21,7 @@ const CartPage: React.FC = () => {
   const [totalCount, setTotalCount] = useState<number | undefined>();
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
+  const { setCount } = useContext(QuantityContext);
 
   const removeFromCart = (id: string, count: number): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
@@ -56,6 +58,7 @@ const CartPage: React.FC = () => {
   const removeCart = (): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCart = localStorage.getItem('idCartWin4ik');
+    setCount(undefined);
     setCartEmpty(true);
     deleteCart(idCart as string, version).then(() =>
       localStorage.removeItem('idCartWin4ik')
@@ -78,6 +81,7 @@ const CartPage: React.FC = () => {
     if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
       setCartEmpty(true);
+      setCount(undefined);
     }
   }, []);
 
@@ -90,6 +94,7 @@ const CartPage: React.FC = () => {
           setTotalCount(data.body.totalLineItemQuantity);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
+          setCount(data.body.totalLineItemQuantity as number);
           return data.body.lineItems;
         })
         .then((data) => {
@@ -113,6 +118,7 @@ const CartPage: React.FC = () => {
           setTotalCount(data.body.totalLineItemQuantity);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
+          setCount(data.body.totalLineItemQuantity as number);
           return data.body.lineItems;
         })
         .then((data) => {
