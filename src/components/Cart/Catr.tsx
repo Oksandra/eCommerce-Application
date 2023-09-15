@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LineItem } from '@commercetools/platform-sdk';
 
 import './Cart.scss';
 import CartProductCard from './CartProductCard/CartProductCard';
+import ModalPage from '../ModalPage/ModalPage';
 
 interface CartProps {
   allProducts: LineItem[];
@@ -21,12 +22,14 @@ const Cart: React.FC<CartProps> = ({
   removeCart,
   changeCount,
 }) => {
+  const [modalActive, setModalActive] = useState<boolean>(false);
+
   return (
     <div className="cart">
       <div className="cart__wrapper">
         <div className="cart__header">
           <button
-            onClick={(): void => removeCart()}
+            onClick={(): void => setModalActive(true)}
             className="cart__button"
             type="button"
           >
@@ -92,6 +95,30 @@ const Cart: React.FC<CartProps> = ({
           </table>
         </div>
       </div>
+      <ModalPage active={modalActive} setActive={setModalActive}>
+        <p className="modal-text">
+          Are you sure you want to empty the cart completely?
+        </p>
+        <div className="modal-buttons">
+          <button
+            onClick={(): void => {
+              removeCart();
+              setModalActive(false);
+            }}
+            className="modal-buttons__button"
+            type="button"
+          >
+            Yes
+          </button>
+          <button
+            onClick={(): void => setModalActive(false)}
+            className="modal-buttons__button"
+            type="button"
+          >
+            Exit
+          </button>
+        </div>
+      </ModalPage>
     </div>
   );
 };
