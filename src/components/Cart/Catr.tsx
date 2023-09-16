@@ -4,6 +4,7 @@ import { LineItem } from '@commercetools/platform-sdk';
 import './Cart.scss';
 import CartProductCard from './CartProductCard/CartProductCard';
 import ModalPage from '../ModalPage/ModalPage';
+import Promocode from '../Promocode/Promocode';
 
 interface CartProps {
   allProducts: LineItem[];
@@ -77,6 +78,9 @@ const Cart: React.FC<CartProps> = ({
                 />
               ))}
             </tbody>
+            <tfoot>
+              <Promocode />
+            </tfoot>
           </table>
           <table className="total-table">
             <thead className="total-table__head">
