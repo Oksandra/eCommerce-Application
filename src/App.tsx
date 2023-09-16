@@ -15,60 +15,63 @@ import ProductPage from './pages/ProductPage/ProductPage';
 import CatalogPage from './pages/CatalogPage/CatalogPage';
 import CartPage from './pages/CartPage/CartPage';
 import { AboutUs } from './pages/AboutUs/AboutUs';
+import { QuantityProvider } from './hoc/QuantityProvider';
 
 function App(): JSX.Element {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path="/" element={<LayoutPage />}>
-          <Route
-            path="login"
-            element={
-              <AccessLimitAuth>
-                <LoginForm />
-              </AccessLimitAuth>
-            }
-          />
-          <Route
-            path="registration"
-            element={
-              <AccessLimitAuth>
-                <RegistrationForm />
-              </AccessLimitAuth>
-            }
-          />
-          <Route path="catalog" element={<CatalogPage />} />
-          <Route path="catalog/:id" element={<ProductPage />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route
-            path="profile"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="logout"
-            element={
-              <RequireAuth>
-                <LogOutPage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="favorites"
-            element={
-              <RequireAuth>
-                <div className="center-align">My favorites products</div>
-              </RequireAuth>
-            }
-          />
-          <Route path="cart" element={<CartPage />} />
-          <Route index element={<HomePage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Route>
-      </Routes>
+      <QuantityProvider>
+        <Routes>
+          <Route path="/" element={<LayoutPage />}>
+            <Route
+              path="login"
+              element={
+                <AccessLimitAuth>
+                  <LoginForm />
+                </AccessLimitAuth>
+              }
+            />
+            <Route
+              path="registration"
+              element={
+                <AccessLimitAuth>
+                  <RegistrationForm />
+                </AccessLimitAuth>
+              }
+            />
+            <Route path="catalog" element={<CatalogPage />} />
+            <Route path="catalog/:id" element={<ProductPage />} />
+            <Route path="about" element={<AboutUs />} />
+            <Route
+              path="profile"
+              element={
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="logout"
+              element={
+                <RequireAuth>
+                  <LogOutPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="favorites"
+              element={
+                <RequireAuth>
+                  <div className="center-align">My favorites products</div>
+                </RequireAuth>
+              }
+            />
+            <Route path="cart" element={<CartPage />} />
+            <Route index element={<HomePage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </QuantityProvider>
     </AuthProvider>
   );
 }

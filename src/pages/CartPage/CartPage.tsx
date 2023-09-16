@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
 import { DiscountCodeInfo, LineItem } from '@commercetools/platform-sdk';
+import React, { useContext, useState } from 'react';
 
 import Cart from '../../components/Cart/Catr';
 import CartEmpty from '../../components/Cart/CartEmpty/CartEmpty';
@@ -13,6 +13,7 @@ import { deleteCart } from '../../api/deleteCart';
 import { changeCountProduct } from '../../api/changeCountProduct';
 import { addPromocode } from '../../api/addPromocode';
 import Modal from '../../components/Modal/Modal';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 const CartPage: React.FC = () => {
   const cartId: string | null = localStorage.getItem('idCartWin4ik');
@@ -29,31 +30,23 @@ const CartPage: React.FC = () => {
     DiscountCodeInfo[] | undefined
   >();
   const [isActive, setActive] = useState<boolean>(false);
+  const { setCount } = useContext(QuantityContext);
 
-  const removeFromCart = (id: string, count: number): void => {
+  const removeFromCart = (id: string): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCustomer = localStorage.getItem('userWin4ik');
     const idCart = localStorage.getItem('idCartWin4ik');
     const lineItemId = id;
-    const productQuantity = count;
     if (idCustomer) {
-      removeProductFromCart(
-        idCart as string,
-        version,
-        lineItemId,
-        productQuantity
-      ).then((obj) => {
-        setTotalPrice(obj.body.totalPrice.centAmount);
-        localStorage.setItem('versionWin4ik', String(obj.body.version));
-      });
+      removeProductFromCart(idCart as string, version, lineItemId).then(
+        (obj) => {
+          setTotalPrice(obj.body.totalPrice.centAmount);
+          localStorage.setItem('versionWin4ik', String(obj.body.version));
+        }
+      );
     }
     if (!idCustomer) {
-      removeProductFromCartAnonimous(
-        idCart as string,
-        version,
-        lineItemId,
-        productQuantity
-      )
+      removeProductFromCartAnonimous(idCart as string, version, lineItemId)
         .then((resp) => {
           setTotalPrice(resp.body.totalPrice.centAmount);
           localStorage.setItem('versionWin4ik', String(resp.body.version));
@@ -65,6 +58,7 @@ const CartPage: React.FC = () => {
   const removeCart = (): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCart = localStorage.getItem('idCartWin4ik');
+    setCount(undefined);
     setCartEmpty(true);
     deleteCart(idCart as string, version).then(() =>
       localStorage.removeItem('idCartWin4ik')
@@ -87,6 +81,7 @@ const CartPage: React.FC = () => {
     if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
       setCartEmpty(true);
+      setCount(undefined);
     }
   }, []);
 
@@ -100,6 +95,7 @@ const CartPage: React.FC = () => {
           setDiscountCode(data.body.discountCodes);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
+          setCount(data.body.totalLineItemQuantity as number);
           return data.body.lineItems;
         })
         .then((data) => {
@@ -123,6 +119,7 @@ const CartPage: React.FC = () => {
           setTotalCount(data.body.totalLineItemQuantity);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
+          setCount(data.body.totalLineItemQuantity as number);
           return data.body.lineItems;
         })
         .then((data) => {
