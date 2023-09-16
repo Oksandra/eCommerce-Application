@@ -5,13 +5,13 @@
 .about-us {
   @extend %flex-center-cont;
   flex-direction: column;
-  padding: 2rem;
+  padding: 5rem 2rem 2rem;
 
   &__title {
     margin-bottom: 4rem;
     color: #000;
     text-align: center;
-    font-size: 9rem;
+    font-size: 7rem;
   }
 
   &__members {
@@ -32,6 +32,7 @@
       &__text {
         margin-bottom: 2rem;
         font-size: 2rem;
+        line-height: 120%;
       }
     }
   }
