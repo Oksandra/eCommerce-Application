@@ -16,6 +16,7 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import CartPage from './pages/CartPage/CartPage';
 import { AboutUs } from './pages/AboutUs/AboutUs';
 import { QuantityProvider } from './hoc/QuantityProvider';
+import FavoritesPage from './pages/FavoritesPage/FavoritesPage';
 
 function App(): JSX.Element {
   return (
@@ -58,14 +59,7 @@ function App(): JSX.Element {
                 </RequireAuth>
               }
             />
-            <Route
-              path="favorites"
-              element={
-                <RequireAuth>
-                  <div className="center-align">My favorites products</div>
-                </RequireAuth>
-              }
-            />
+            <Route path="favorites" element={<FavoritesPage />} />
             <Route path="cart" element={<CartPage />} />
             <Route index element={<HomePage />} />
             <Route path="*" element={<NotFoundPage />} />
