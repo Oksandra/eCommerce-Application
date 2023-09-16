@@ -1,5 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import heart from '../../assets/svg/blackHeart.svg';
+import heartRed from '../../assets/images/red-heart.png';
 import cart from '../../assets/svg/cart.svg';
 import './ProductCard.scss';
 import sale from '../../assets/images/sale-icon.png';
@@ -29,6 +30,7 @@ export const ProductCard: FC<ProductCardProps> = ({
 }) => {
   const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
+  const [heartInFavorites, setHeartInFavorites] = useState(false);
   const { setCount } = useContext(QuantityContext);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
@@ -146,8 +148,16 @@ export const ProductCard: FC<ProductCardProps> = ({
           <img className="icon__image" src={cart} alt="icon cart" />
           {isActive && <span className="icon__marker">&#10003;</span>}
         </button>
-        <button className="product-card__icon" type="button">
-          <img className="icon__image" src={heart} alt="icon heart" />
+        <button
+          onClick={(): void => setHeartInFavorites((prev) => !prev)}
+          className="product-card__icon"
+          type="button"
+        >
+          <img
+            className="icon__image"
+            src={heartInFavorites ? heartRed : heart}
+            alt="icon heart"
+          />
         </button>
       </div>
       <h2 className="product-card__title">{title}</h2>
