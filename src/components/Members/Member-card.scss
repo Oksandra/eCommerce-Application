@@ -63,7 +63,7 @@
 
   &__bio {
     text-align: center;
-    line-height: 2.2rem;
+    line-height: 120%;
   }
 
   &__modal {
@@ -86,7 +86,7 @@
       max-width: 50%;
       color: $light-color;
       font-size: 2rem;
-      line-height: 2.7rem;
+      line-height: 150%;
       text-decoration: underline;
       text-align: center;
     }

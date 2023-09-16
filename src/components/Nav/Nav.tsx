@@ -38,6 +38,11 @@ export const Nav: React.FC = () => {
           </NavLink>
         </li>
         <li className="nav__item">
+          <NavLink className="nav__link" to="/cart">
+            CART
+          </NavLink>
+        </li>
+        <li className="nav__item">
           <NavLink className="nav__link" to={logLink}>
             {user ? 'LOG OUT' : 'LOG IN | SIGN UP'}
           </NavLink>
