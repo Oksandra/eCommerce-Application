@@ -1,3 +1,9 @@
 @import '../../styles/abstracts/constants';
 @import '../../styles/abstracts/extends';
 @import '../../styles/abstracts/mixins';
+
+.favorites-page {
+  max-width: 120rem;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
