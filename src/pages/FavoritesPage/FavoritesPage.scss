@@ -6,4 +6,22 @@
   max-width: 120rem;
   padding: 2rem 1rem;
   margin: 0 auto;
+
+  &.grid {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 90rem;
+    margin: 0 auto;
+    grid-gap: 1rem;
+
+    @include media-laptop {
+      grid-template-columns: repeat(2, 30rem);
+      column-gap: 8%;
+    }
+    @include media-big-mobile {
+      grid-template-columns: repeat(1, 30rem);
+    }
+  }
 }

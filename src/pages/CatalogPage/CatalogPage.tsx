@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import './CatalogPage.scss';
@@ -12,10 +12,12 @@ import getProductsByCategory from '../../api/getProductsByCategory';
 import Filtr from '../../components/Filtr/Filtr';
 import { ArrayObjectSelectState } from '../../interfaces/interfaces';
 import { sortProducts } from '../../api/sortProducts';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 const limitProductsPerPage = 6;
 
 const CatalogPage: React.FC = () => {
+  const { setNewAllProductsWine } = useContext(QuantityContext);
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
@@ -34,7 +36,9 @@ const CatalogPage: React.FC = () => {
           setAllProducts(data.body.results);
           setTotalProducts(data.body.total as number);
           setIsloading(false);
+          return data;
         })
+        .then((data) => setNewAllProductsWine(data.body.results))
         .catch(() => setIsloading(true));
     }
   }, [idCategory, selectedOption.selectedOption, currentPage, searchValue]);

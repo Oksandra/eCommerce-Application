@@ -31,10 +31,11 @@ export const ProductCard: FC<ProductCardProps> = ({
   const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
   const [heartInFavorites, setHeartInFavorites] = useState(false);
-  const { setCount } = useContext(QuantityContext);
+  const { setCount, allProductsWine, favorites } = useContext(QuantityContext);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     const id = localStorage.getItem('userWin4ik') as string;
+    console.log('all', allProductsWine);
     if (idCartLS && !id) {
       getCart(idCartLS).then((obj) => {
         setCount(obj.body.totalLineItemQuantity as number);
@@ -93,6 +94,18 @@ export const ProductCard: FC<ProductCardProps> = ({
     }
   }, [isActive, version]);
 
+  const findElementById = (id: string): void => {
+    const elementSelected = allProductsWine.filter((item) => item.id === id);
+    const repeatElementIndex = favorites.findIndex(
+      (item) => item.id === elementSelected[0].id
+    );
+    if (repeatElementIndex === -1) {
+      favorites.push(...elementSelected);
+    } else {
+      favorites.splice(repeatElementIndex, 1);
+    }
+  };
+
   const addCart = async (): Promise<void> => {
     const id = localStorage.getItem('userWin4ik') as string;
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
@@ -149,7 +162,10 @@ export const ProductCard: FC<ProductCardProps> = ({
           {isActive && <span className="icon__marker">&#10003;</span>}
         </button>
         <button
-          onClick={(): void => setHeartInFavorites((prev) => !prev)}
+          onClick={(): void => {
+            findElementById(idProduct);
+            setHeartInFavorites((prev) => !prev);
+          }}
           className="product-card__icon"
           type="button"
         >
