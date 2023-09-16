@@ -5,6 +5,7 @@ export interface ButtonOptions {
   textContent: string;
   type: 'button' | 'submit';
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export interface AuthContextProps {

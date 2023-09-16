@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { LineItem } from '@commercetools/platform-sdk';
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import { DiscountCodeInfo, LineItem } from '@commercetools/platform-sdk';
 
 import './Cart.scss';
 import CartProductCard from './CartProductCard/CartProductCard';
@@ -13,6 +13,12 @@ interface CartProps {
   removeFromCart: (id: string, count: number) => void;
   removeCart: () => void;
   changeCount: (idProd: string, count: number) => void;
+  promocode: string;
+  setPromocode: Dispatch<SetStateAction<string>>;
+  isDisabled: boolean;
+  setDisabled: Dispatch<SetStateAction<boolean>>;
+  clickApply: () => void;
+  discountCode: DiscountCodeInfo[];
 }
 
 const Cart: React.FC<CartProps> = ({
@@ -22,6 +28,12 @@ const Cart: React.FC<CartProps> = ({
   removeFromCart,
   removeCart,
   changeCount,
+  promocode,
+  setPromocode,
+  isDisabled,
+  setDisabled,
+  clickApply,
+  discountCode,
 }) => {
   const [modalActive, setModalActive] = useState<boolean>(false);
 
@@ -75,11 +87,26 @@ const Cart: React.FC<CartProps> = ({
                     removeFromCart(product.id, product.quantity)
                   }
                   changeCount={changeCount}
+                  discountCodeValue={
+                    product.discountedPricePerQuantity.length > 0
+                      ? (
+                          product.discountedPricePerQuantity[0].discountedPrice
+                            .value.centAmount / 100
+                        ).toFixed(2)
+                      : ''
+                  }
+                  discountCode={discountCode}
                 />
               ))}
             </tbody>
             <tfoot>
-              <Promocode />
+              <Promocode
+                promocode={promocode}
+                setPromocode={setPromocode}
+                isDisabled={isDisabled}
+                setDisabled={setDisabled}
+                clickApply={clickApply}
+              />
             </tfoot>
           </table>
           <table className="total-table">

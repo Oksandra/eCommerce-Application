@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { DiscountCodeInfo } from '@commercetools/platform-sdk';
 import del from '../../../assets/svg/delete-icon.svg';
 
 interface CartProductCardProps {
@@ -12,6 +12,8 @@ interface CartProductCardProps {
   id: string;
   onClick: (id: string, count: number) => void;
   changeCount: (idProd: string, count: number) => void;
+  discountCodeValue: string | number;
+  discountCode: DiscountCodeInfo[];
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
@@ -24,6 +26,8 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   id,
   onClick,
   changeCount,
+  discountCodeValue,
+  discountCode,
 }) => {
   const [valueInput, setValueInput] = React.useState<number>(count);
 
@@ -33,7 +37,16 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
         <img src={image} alt="wine" />
       </td>
       <td>{title}</td>
-      <td className={discountPrice ? 'discount-price' : ''}>$ {price}</td>
+      <td className={discountPrice ? 'discount-price' : ''}>
+        {discountCode.length !== 0 ? (
+          <>
+            <div>{discountCodeValue}</div>
+            <div className="crossed">{price}</div>
+          </>
+        ) : (
+          price
+        )}
+      </td>
       <td className="quantity">
         <div className="cart-quantity">
           <button

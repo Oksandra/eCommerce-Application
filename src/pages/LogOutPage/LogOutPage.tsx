@@ -17,6 +17,7 @@ const LogOutPage: React.FC = () => {
           localStorage.removeItem('userWin4ik');
           localStorage.removeItem('idCartWin4ik');
           localStorage.removeItem('tokenWin4ik');
+          localStorage.removeItem('promocodeWin4ik');
         }}
       >
         Log Out

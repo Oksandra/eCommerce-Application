@@ -7,12 +7,14 @@ export const Button: FC<ButtonOptions> = ({
   textContent,
   type,
   onClick,
+  disabled,
 }) => {
   return (
     <button
       className={`button ${className}`}
       type={type === 'button' ? 'button' : 'submit'}
       onClick={onClick}
+      disabled={disabled}
     >
       {textContent}
     </button>
