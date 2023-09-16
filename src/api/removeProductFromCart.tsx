@@ -12,8 +12,7 @@ import {
 const removeProductFromCartAnonimous = (
   id: string,
   versionNumber: number,
-  idLine: string,
-  count: number
+  idLine: string
 ): Promise<ClientResponse<Cart>> => {
   const client = existingTokenRequest();
   const apiRootAnonimous = createApiBuilderFromCtpClient(client).withProjectKey(
@@ -31,7 +30,7 @@ const removeProductFromCartAnonimous = (
           {
             action: 'changeLineItemQuantity',
             lineItemId: `${idLine}`,
-            quantity: count - 1,
+            quantity: 0,
           },
         ],
       },
@@ -42,8 +41,7 @@ const removeProductFromCartAnonimous = (
 const removeProductFromCart = (
   id: string,
   versionNumber: number,
-  lineItemId: string,
-  count: number
+  lineItemId: string
 ): Promise<ClientResponse<Cart>> => {
   const client = existingTokenCustomerRequest();
   const apiRoot = createApiBuilderFromCtpClient(client).withProjectKey({
@@ -59,7 +57,7 @@ const removeProductFromCart = (
           {
             action: 'changeLineItemQuantity',
             lineItemId: `${lineItemId}`,
-            quantity: count - 1,
+            quantity: 0,
           },
         ],
       },

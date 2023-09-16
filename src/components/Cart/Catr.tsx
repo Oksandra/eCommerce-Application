@@ -9,7 +9,7 @@ interface CartProps {
   allProducts: LineItem[];
   totalPrice: number;
   totalCount: number | undefined;
-  removeFromCart: (id: string, count: number) => void;
+  removeFromCart: (id: string) => void;
   removeCart: () => void;
   changeCount: (idProd: string, count: number) => void;
 }
@@ -70,9 +70,7 @@ const Cart: React.FC<CartProps> = ({
                   discountPrice={product.price.discounted !== undefined}
                   key={product.id}
                   id={product.id}
-                  onClick={(): void =>
-                    removeFromCart(product.id, product.quantity)
-                  }
+                  onClick={(): void => removeFromCart(product.id)}
                   changeCount={changeCount}
                 />
               ))}
