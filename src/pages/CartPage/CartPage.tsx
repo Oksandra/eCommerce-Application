@@ -60,9 +60,10 @@ const CartPage: React.FC = () => {
     const idCart = localStorage.getItem('idCartWin4ik');
     setCount(undefined);
     setCartEmpty(true);
-    deleteCart(idCart as string, version).then(() =>
-      localStorage.removeItem('idCartWin4ik')
-    );
+    deleteCart(idCart as string, version).then(() => {
+      localStorage.removeItem('idCartWin4ik');
+      localStorage.removeItem('promocodeWin4ik');
+    });
   };
 
   const changeProductsQuantity = (idProd: string, count: number): void => {
