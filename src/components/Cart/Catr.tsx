@@ -97,7 +97,7 @@ const Cart: React.FC<CartProps> = ({
                 />
               ))}
             </tbody>
-            <tfoot>
+            <tfoot className="cart-table__foot">
               <Promocode
                 promocode={promocode}
                 setPromocode={setPromocode}

@@ -24,24 +24,22 @@ const Promocode: React.FC<PromocodeProps> = ({
   }
   return (
     <tr className="promocode">
-      <td>
-        <input
-          value={promocode}
-          className="promocode__input"
-          placeholder="Enter: WIN4IK, RSSCHOOL"
-          onChange={(event): void => {
-            setPromocode(event.target.value.toUpperCase());
-            setDisabled(false);
-          }}
-        />
-        <Button
-          className="promocode__button"
-          type="button"
-          textContent="Apply promocode"
-          disabled={isDisabled}
-          onClick={clickApply}
-        />
-      </td>
+      <input
+        value={promocode}
+        className="promocode__input"
+        placeholder="Enter: WIN4IK, RSSCHOOL"
+        onChange={(event): void => {
+          setPromocode(event.target.value.toUpperCase());
+          setDisabled(false);
+        }}
+      />
+      <Button
+        className="promocode__button"
+        type="button"
+        textContent="Apply promocode"
+        disabled={isDisabled}
+        onClick={clickApply}
+      />
     </tr>
   );
 };

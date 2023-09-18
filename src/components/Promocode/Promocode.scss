@@ -1,13 +1,25 @@
 .promocode {
+  width: 72rem;
   display: flex;
-  width: 720px;
   align-items: center;
   height: 60px;
+  @media (max-width: 900px) {
+    width: 59rem;
+  }
+  @media (max-width: 768px) {
+    width: 80rem;
+  }
+  @media (max-width: 585px) {
+    width: 59rem;
+  }
+  @media (max-width: 445px) {
+    width: 49rem;
+  }
   &__input {
     font-size: 16px;
     line-height: 20px;
     padding-left: 20px;
-    width: 260px;
+    width: 40%;
     height: 40px;
     margin-left: 22px;
     margin-right: 10px;
@@ -15,7 +27,7 @@
     border: 1px solid #d6d6d6;
   }
   &__button {
-    width: 225px;
+    width: 40%;
     height: 40px;
     font-size: 16px;
     line-height: 20px;
