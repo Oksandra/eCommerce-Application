@@ -1,3 +1,5 @@
+import fotoOksana from '../../assets/images/oksana-photo.jpg';
+
 export interface IMemberInfo {
   name: string;
   role: string;
@@ -11,8 +13,8 @@ export const MEMBERS: IMemberInfo[] = [
   {
     name: 'Oksana Golovina',
     role: 'Team Lead',
-    bio: 'Birthdate: June 15, 1980. Birthplace: New York City, New York. Education: Bachelor of Science in Computer Science, Major Professor. Occupation: Software Engineer. Career: Worked as a software engineer for 10 years, currently working at Amazon Web Services. Personal life: Married to Jane Smith, has two children. Hobbies: Playing guitar, cooking, traveling',
-    photo: 'https://bazametrov.ru/uploads/new-agency/default_logo_user.jpg',
+    bio: 'I started my journey in IT from RSSchool JS/Front-end/stage#0 last summer. All this time I have been actively improving my knowledge and skills. In this project, I coordinated the work on the project as a whole. Implemented routing for all pages of the application, pagination, a product page with its detailed description and modal windows. Uploaded all products to commercetools. Participated in the implementation of the catalog page and shopping cart.',
+    photo: fotoOksana,
     gh: 'https://github.com/Oksandra',
     contr:
       '👨‍💼🚀 A magnificent organizer and master of navigation! The first member of our team demonstrated the best qualities of a leader, coordinating and organizing our work on the project. His unparalleled skills allowed us to create a flawless navigation system that makes the user experience as convenient as possible. In addition, he put tremendous effort into developing and implementing complex login and messaging functionality between pages. Thanks to his talents and professionalism, users of our project can easily move around and interact, creating a harmonious and productive atmosphere. 💪💻✨',
