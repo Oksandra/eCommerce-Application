@@ -38,12 +38,12 @@ const CartPage: React.FC = () => {
     const idCart = localStorage.getItem('idCartWin4ik');
     const lineItemId = id;
     if (idCustomer) {
-      removeProductFromCart(idCart as string, version, lineItemId).then(
-        (obj) => {
+      removeProductFromCart(idCart as string, version, lineItemId)
+        .then((obj) => {
           setTotalPrice(obj.body.totalPrice.centAmount);
           localStorage.setItem('versionWin4ik', String(obj.body.version));
-        }
-      );
+        })
+        .catch((e) => console.log(e));
     }
     if (!idCustomer) {
       removeProductFromCartAnonimous(idCart as string, version, lineItemId)
@@ -60,22 +60,24 @@ const CartPage: React.FC = () => {
     const idCart = localStorage.getItem('idCartWin4ik');
     setCount(undefined);
     setCartEmpty(true);
-    deleteCart(idCart as string, version).then(() => {
-      localStorage.removeItem('idCartWin4ik');
-      localStorage.removeItem('promocodeWin4ik');
-    });
+    deleteCart(idCart as string, version)
+      .then(() => {
+        localStorage.removeItem('idCartWin4ik');
+        localStorage.removeItem('promocodeWin4ik');
+      })
+      .catch((e) => console.log(e));
   };
 
   const changeProductsQuantity = (idProd: string, count: number): void => {
     const versionNumber = Number(localStorage.getItem('versionWin4ik'));
     const id = localStorage.getItem('idCartWin4ik');
     const idLine = idProd;
-    changeCountProduct(id as string, versionNumber, idLine, count).then(
-      (data) => {
+    changeCountProduct(id as string, versionNumber, idLine, count)
+      .then((data) => {
         localStorage.setItem('versionWin4ik', String(data.body.version));
         setTotalCount(data.body.totalLineItemQuantity);
-      }
-    );
+      })
+      .catch((e) => console.log(e));
   };
 
   React.useEffect(() => {
