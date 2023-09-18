@@ -1,7 +1,7 @@
 import React from 'react';
 import promocodeImage from '../../assets/images/promocode_img.png';
 import coupon from '../../assets/images/coupon.png';
-import rss from '../../assets/images/RSShool.png';
+import rss from '../../assets/images/rss.png';
 import './PromocodeSection.scss';
 
 const PromocodeSection = (): JSX.Element => {
@@ -20,7 +20,7 @@ const PromocodeSection = (): JSX.Element => {
         </p>
         <p className="promocode-section__info-text">
           Get <strong>10%</strong> off with our WIN4IK promocode or{' '}
-          <strong>20%</strong> with promocode RSSHOOl.
+          <strong>20%</strong> with promocode RSSCHOOl.
         </p>
         <button className="promocode-section__info-button" type="button">
           <img src={coupon} width="200" alt="coupon" />
