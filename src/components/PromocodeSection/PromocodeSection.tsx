@@ -18,7 +18,8 @@ const PromocodeSection = (): JSX.Element => {
           collection!
         </p>
         <p className="promocode-section__info-text">
-          Get <strong>20%</strong> off with our Christmas promocode.
+          Get <strong>10%</strong> off with our WIN4IK promocode or{' '}
+          <strong>20%</strong> with promocode RSSHOOl.
         </p>
         <button className="promocode-section__info-button" type="button">
           <img src={coupon} width="200" alt="coupon" />
