@@ -1,6 +1,7 @@
 import React from 'react';
 import promocodeImage from '../../assets/images/promocode_img.png';
 import coupon from '../../assets/images/coupon.png';
+import rss from '../../assets/images/RSShool.png';
 import './PromocodeSection.scss';
 
 const PromocodeSection = (): JSX.Element => {
@@ -23,6 +24,9 @@ const PromocodeSection = (): JSX.Element => {
         </p>
         <button className="promocode-section__info-button" type="button">
           <img src={coupon} width="200" alt="coupon" />
+        </button>
+        <button className="promocode-section__info-button" type="button">
+          <img src={rss} width="200" alt="coupon" />
         </button>
       </div>
     </section>

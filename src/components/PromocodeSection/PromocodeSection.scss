@@ -19,8 +19,8 @@
   }
   &__info {
     width: 35%;
-    padding: 3rem;
-    margin-top: 3rem;
+    padding: 2rem;
+    margin-top: 1rem;
     @include media-laptop {
       width: 40%;
       padding: 2rem;
@@ -50,12 +50,12 @@
       width: 40%;
       @extend %flex;
       margin: 0 auto;
-      margin-top: 8rem;
+      margin-top: 2rem;
       @include media-laptop {
-        margin-top: 5rem;
+        margin-top: 0.5rem;
       }
       @include media-big-mobile {
-        margin-top: 4rem;
+        margin-top: 0.5rem;
       }
     }
   }
