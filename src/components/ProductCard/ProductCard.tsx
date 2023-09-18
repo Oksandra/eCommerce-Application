@@ -17,6 +17,7 @@ interface ProductCardProps {
   onSale: string | undefined;
   idProduct: string;
   onClick: () => void;
+  isFavorites: boolean;
 }
 
 export const ProductCard: FC<ProductCardProps> = ({
@@ -27,11 +28,13 @@ export const ProductCard: FC<ProductCardProps> = ({
   onSale,
   idProduct,
   onClick,
+  isFavorites,
 }) => {
   const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
-  const [heartInFavorites, setHeartInFavorites] = useState(false);
   const { setCount, allProductsWine, favorites } = useContext(QuantityContext);
+  const [isFavoritesProduct, seIsFavoritesProduct] =
+    useState<boolean>(isFavorites);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     const id = localStorage.getItem('userWin4ik') as string;
@@ -164,14 +167,14 @@ export const ProductCard: FC<ProductCardProps> = ({
         <button
           onClick={(): void => {
             findElementById(idProduct);
-            setHeartInFavorites((prev) => !prev);
+            seIsFavoritesProduct((prev) => !prev);
           }}
           className="product-card__icon"
           type="button"
         >
           <img
             className="icon__image"
-            src={heartInFavorites ? heartRed : heart}
+            src={isFavoritesProduct ? heartRed : heart}
             alt="icon heart"
           />
         </button>

@@ -52,6 +52,7 @@ const FavoritesPage: React.FC = () => {
                   ).toFixed(2)
                 : ''
             }
+            isFavorites
           />
         ))
       )}
