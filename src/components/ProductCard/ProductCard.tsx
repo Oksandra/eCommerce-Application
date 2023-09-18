@@ -1,5 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
+import { ProductProjection } from '@commercetools/platform-sdk';
 import heart from '../../assets/svg/blackHeart.svg';
+import heartRed from '../../assets/images/red-heart.png';
 import cart from '../../assets/svg/cart.svg';
 import './ProductCard.scss';
 import sale from '../../assets/images/sale-icon.png';
@@ -16,6 +18,7 @@ interface ProductCardProps {
   onSale: string | undefined;
   idProduct: string;
   onClick: () => void;
+  isFavorites: boolean;
 }
 
 export const ProductCard: FC<ProductCardProps> = ({
@@ -26,10 +29,13 @@ export const ProductCard: FC<ProductCardProps> = ({
   onSale,
   idProduct,
   onClick,
+  isFavorites,
 }) => {
   const [version, setVersion] = useState<number>();
   const [isActive, setIsActive] = useState(false);
-  const { setCount } = useContext(QuantityContext);
+  const { setCount, allProductsWine, favorites } = useContext(QuantityContext);
+  const [isFavoritesProduct, seIsFavoritesProduct] =
+    useState<boolean>(isFavorites);
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     const id = localStorage.getItem('userWin4ik') as string;
@@ -91,6 +97,23 @@ export const ProductCard: FC<ProductCardProps> = ({
     }
   }, [isActive, version]);
 
+  const findElementById = (
+    id: string,
+    allProductsWine1: ProductProjection[],
+    favorites1: ProductProjection[]
+  ): void => {
+    const elementSelected = allProductsWine1.filter((item) => item.id === id);
+    const repeatElementIndex = favorites1.findIndex(
+      (item) => item.id === elementSelected[0].id
+    );
+    if (repeatElementIndex === -1) {
+      favorites.push(...elementSelected);
+    } else {
+      favorites.splice(repeatElementIndex, 1);
+    }
+    localStorage.setItem('favoritesWin4ik', JSON.stringify(favorites));
+  };
+
   const addCart = async (): Promise<void> => {
     const id = localStorage.getItem('userWin4ik') as string;
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
@@ -146,8 +169,19 @@ export const ProductCard: FC<ProductCardProps> = ({
           <img className="icon__image" src={cart} alt="icon cart" />
           {isActive && <span className="icon__marker">&#10003;</span>}
         </button>
-        <button className="product-card__icon" type="button">
-          <img className="icon__image" src={heart} alt="icon heart" />
+        <button
+          onClick={(): void => {
+            findElementById(idProduct, allProductsWine, favorites);
+            seIsFavoritesProduct((prev) => !prev);
+          }}
+          className="product-card__icon"
+          type="button"
+        >
+          <img
+            className="icon__image"
+            src={isFavoritesProduct ? heartRed : heart}
+            alt="icon heart"
+          />
         </button>
       </div>
       <h2 className="product-card__title">{title}</h2>

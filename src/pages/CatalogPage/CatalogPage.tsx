@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import './CatalogPage.scss';
@@ -12,10 +12,13 @@ import getProductsByCategory from '../../api/getProductsByCategory';
 import Filtr from '../../components/Filtr/Filtr';
 import { ArrayObjectSelectState } from '../../interfaces/interfaces';
 import { sortProducts } from '../../api/sortProducts';
+import { QuantityContext } from '../../hoc/QuantityProvider';
+import getProducts from '../../api/getProducts';
 
 const limitProductsPerPage = 6;
 
 const CatalogPage: React.FC = () => {
+  const { setNewAllProductsWine, favorites } = useContext(QuantityContext);
   const [allProducts, setAllProducts] = useState<ProductProjection[]>([]);
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState<boolean>(true);
@@ -27,6 +30,16 @@ const CatalogPage: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
+
+  React.useEffect(() => {
+    getProducts()
+      .then((data) => {
+        return data;
+      })
+      .then((data) => setNewAllProductsWine(data.body.results))
+      .catch((e) => console.log(e));
+  }, []);
+
   React.useEffect(() => {
     if (!idCategory && !searchValue) {
       getAllProducts(currentPage)
@@ -78,6 +91,10 @@ const CatalogPage: React.FC = () => {
 
   const handlePageChange = ({ selected }: { selected: number }): void => {
     setCurrentPage(selected * 6);
+  };
+
+  const isFavotites = (id: string): boolean => {
+    return !!favorites.filter((item) => item.id === id).length;
   };
 
   return (
@@ -154,6 +171,7 @@ const CatalogPage: React.FC = () => {
                         ).toFixed(2)
                       : ''
                   }
+                  isFavorites={isFavotites(product.id)}
                 />
               ))
             )}
