@@ -28,7 +28,11 @@ export const QuantityProvider: React.FC<QuantityProviderProps> = ({
   children,
 }) => {
   const [quantity, setQuantity] = useState<undefined | number>();
-  const [favorites, setFavotites] = useState<ProductProjection[]>([]);
+  const [favorites, setFavotites] = useState<ProductProjection[]>(
+    localStorage.getItem('favoritesWin4ik')
+      ? JSON.parse(localStorage.getItem('favoritesWin4ik') as string)
+      : []
+  );
   const [allProductsWine, setAllProductsWine] = useState<ProductProjection[]>(
     []
   );

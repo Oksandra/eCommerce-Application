@@ -48,7 +48,6 @@ const CatalogPage: React.FC = () => {
           setAllProducts(data.body.results);
           setTotalProducts(data.body.total as number);
           setIsloading(false);
-          return data;
         })
         .catch(() => setIsloading(true));
     }

@@ -1,4 +1,5 @@
 import React, { FC, useContext, useState } from 'react';
+import { ProductProjection } from '@commercetools/platform-sdk';
 import heart from '../../assets/svg/blackHeart.svg';
 import heartRed from '../../assets/images/red-heart.png';
 import cart from '../../assets/svg/cart.svg';
@@ -97,9 +98,15 @@ export const ProductCard: FC<ProductCardProps> = ({
     }
   }, [isActive, version]);
 
-  const findElementById = (id: string): void => {
-    const elementSelected = allProductsWine.filter((item) => item.id === id);
-    const repeatElementIndex = favorites.findIndex(
+  const findElementById = (
+    id: string,
+    allProductsWine1: ProductProjection[],
+    favorites1: ProductProjection[]
+  ): void => {
+    console.log('addd');
+    console.log('allAD', allProductsWine1);
+    const elementSelected = allProductsWine1.filter((item) => item.id === id);
+    const repeatElementIndex = favorites1.findIndex(
       (item) => item.id === elementSelected[0].id
     );
     if (repeatElementIndex === -1) {
@@ -107,6 +114,7 @@ export const ProductCard: FC<ProductCardProps> = ({
     } else {
       favorites.splice(repeatElementIndex, 1);
     }
+    localStorage.setItem('favoritesWin4ik', JSON.stringify(favorites));
   };
 
   const addCart = async (): Promise<void> => {
@@ -166,7 +174,7 @@ export const ProductCard: FC<ProductCardProps> = ({
         </button>
         <button
           onClick={(): void => {
-            findElementById(idProduct);
+            findElementById(idProduct, allProductsWine, favorites);
             seIsFavoritesProduct((prev) => !prev);
           }}
           className="product-card__icon"
