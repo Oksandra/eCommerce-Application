@@ -9,7 +9,6 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 const FavoritesPage: React.FC = () => {
   const { favorites } = useContext(QuantityContext);
   const navigate = useNavigate();
-  console.log('favorites', favorites.length);
 
   return (
     <div

@@ -30,7 +30,6 @@ const CatalogPage: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<ArrayObjectSelectState>({
     selectedOption: null,
   });
-  console.log('fav', favorites);
 
   React.useEffect(() => {
     getProducts()

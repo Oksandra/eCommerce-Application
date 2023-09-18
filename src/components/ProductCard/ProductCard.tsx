@@ -39,7 +39,6 @@ export const ProductCard: FC<ProductCardProps> = ({
   React.useEffect(() => {
     const idCartLS = localStorage.getItem('idCartWin4ik') as string;
     const id = localStorage.getItem('userWin4ik') as string;
-    console.log('all', allProductsWine);
     if (idCartLS && !id) {
       getCart(idCartLS).then((obj) => {
         setCount(obj.body.totalLineItemQuantity as number);
@@ -103,8 +102,6 @@ export const ProductCard: FC<ProductCardProps> = ({
     allProductsWine1: ProductProjection[],
     favorites1: ProductProjection[]
   ): void => {
-    console.log('addd');
-    console.log('allAD', allProductsWine1);
     const elementSelected = allProductsWine1.filter((item) => item.id === id);
     const repeatElementIndex = favorites1.findIndex(
       (item) => item.id === elementSelected[0].id
