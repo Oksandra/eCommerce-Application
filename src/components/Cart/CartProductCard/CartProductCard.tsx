@@ -5,7 +5,7 @@ import del from '../../../assets/svg/delete-icon.svg';
 interface CartProductCardProps {
   image: string | undefined;
   title: string;
-  price: string;
+  price: number | string;
   count: number;
   totalPriceProduct: string;
   discountPrice: boolean;
@@ -79,7 +79,18 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
           </button>
         </div>
       </td>
-      <td>$ {totalPriceProduct}</td>
+      <td>
+        {discountCode.length !== 0 ? (
+          <>
+            <div>{totalPriceProduct}</div>
+            <div className="crossed">
+              {((price as number) * count).toFixed(2)}
+            </div>
+          </>
+        ) : (
+          totalPriceProduct
+        )}
+      </td>
       <td>
         <button type="button" onClick={(): void => onClick(id, count)}>
           <img className="cart-table__delete" src={del} alt="delete" />
