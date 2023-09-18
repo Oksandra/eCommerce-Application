@@ -22,7 +22,7 @@ export const MEMBERS: IMemberInfo[] = [
   {
     name: 'Anastasiya Alisenok',
     role: 'Master of backend',
-    bio: 'Birthdate: June 15, 1980. Birthplace: New York City, New York. Education: Bachelor of Science in Computer Science, Major Professor. Occupation: Software Engineer. Career: Worked as a software engineer for 10 years, currently working at Amazon Web Services. Personal life: Married to Jane Smith, has two children. Hobbies: Playing guitar, cooking, traveling',
+    bio: 'I was born in Minsk. I finished Belorussian state economic university, faculty Banking and finance. I work in bank for 12 years. In december I began to study JavaScript with RSSchool JS/Front-end/stage#0. 9 months of hard work and learning and so I completed the final task JS/Front-end/stage#2. In this task I made all requests to the commertools API, created registration form and profile of customer. Also I participated in the implementation of the catalog page and shopping cart.',
     photo: 'https://bazametrov.ru/uploads/new-agency/default_logo_user.jpg',
     gh: 'https://github.com/AnastasiyaAlisenok',
     contr:
