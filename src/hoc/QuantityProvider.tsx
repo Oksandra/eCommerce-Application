@@ -60,7 +60,7 @@ export const QuantityProvider: React.FC<QuantityProviderProps> = ({
       allProductsWine,
       setNewAllProductsWine,
     };
-  }, [quantity]);
+  }, [quantity, allProductsWine]);
 
   return (
     <QuantityContext.Provider value={value}>
