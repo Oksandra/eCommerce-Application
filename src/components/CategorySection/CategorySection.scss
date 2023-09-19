@@ -4,6 +4,7 @@
 
 .category {
   background-color: $add-dark-color;
+  margin-bottom: 2rem;
 
   &__wrapper {
     @extend %flex-center-cont;
@@ -12,6 +13,9 @@
     padding: 8rem 1rem 6rem;
     max-width: $wrapper-width;
     margin: 0 auto;
+    @include media-tablet {
+      padding: 6rem 1rem 1rem;
+    }
   }
 
   &__title {
@@ -31,11 +35,24 @@
       row-gap: 2.5rem;
       justify-content: center;
     }
+    @include media-tablet {
+      row-gap: 1.5rem;
+    }
   }
 
   &__item {
     width: 265px;
     height: 404px;
+    @include media-small-laptop {
+      width: 150px;
+      height: 220px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    @include media-tablet {
+      width: 120px;
+      height: 200px;
+    }
     &_red {
       background-image: url('../../assets/images/red-main.png');
     }

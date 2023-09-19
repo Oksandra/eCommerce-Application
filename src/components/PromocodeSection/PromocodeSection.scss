@@ -1,34 +1,36 @@
 @import '../../styles/abstracts/extends';
 @import '../../styles/abstracts/mixins';
 .promocode-section {
-  padding-bottom: 4rem;
+  padding: 4rem 0;
   @extend %flex-center-cont;
   &__main-image {
     max-width: 50%;
     height: 50%;
     @include media-laptop {
-      max-width: 40%;
+      max-width: 45%;
     }
     @include media-tablet {
-      max-width: 40%;
+      max-width: 45%;
     }
     @include media-small-tablet {
-      max-width: 40%;
       max-height: auto;
     }
   }
   &__info {
     width: 35%;
-    padding: 2rem;
+    padding: 0.5rem 2rem;
     margin-top: 1rem;
     @include media-laptop {
       width: 40%;
-      padding: 2rem;
+      padding: 0.5rem 2rem;
       margin-top: 0;
+    }
+    @include media-tablet {
+      padding: 2rem;
     }
     @include media-small-tablet {
       width: 40%;
-      padding: 2rem;
+      padding: 0.5rem 2rem;
       margin-top: 0;
     }
     &-text {
@@ -38,6 +40,10 @@
       letter-spacing: 0.05em;
       @include media-laptop {
         font-size: 2.5rem;
+      }
+      @include media-big-tablet {
+        font-size: 2rem;
+        margin-bottom: 1rem;
       }
       @include media-big-mobile {
         font-size: 2rem;
