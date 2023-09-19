@@ -1,0 +1,50 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.category {
+  background-color: $add-dark-color;
+
+  &__wrapper {
+    @extend %flex-center-cont;
+    align-items: center;
+    flex-direction: column;
+    padding: 8rem 1rem 6rem;
+    max-width: $wrapper-width;
+    margin: 0 auto;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    color: $light-color;
+    font-weight: 400;
+    margin-bottom: 4rem;
+  }
+
+  &__items {
+    @extend %flex-j-cont;
+    max-width: $wrapper-width;
+    padding: 0 1rem;
+    gap: 2.5rem;
+  }
+
+  &__item {
+    width: 268px;
+    height: 404px;
+    &_red {
+      background-image: url('../../assets/images/red-main.png');
+    }
+
+    &_white {
+      background-image: url('../../assets/images/white-main.png');
+    }
+
+    &_sparkling {
+      background-image: url('../../assets/images/sparkling-main.png');
+    }
+
+    &_rose {
+      background-image: url('../../assets/images/rose-main.png');
+    }
+  }
+}
