@@ -1,7 +1,7 @@
 @import '../../styles/abstracts/extends';
 @import '../../styles/abstracts/mixins';
 .promocode-section {
-  margin-bottom: 6rem;
+  padding-bottom: 4rem;
   @extend %flex-center-cont;
   &__main-image {
     max-width: 50%;
