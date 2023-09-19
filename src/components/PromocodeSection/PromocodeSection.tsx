@@ -22,12 +22,14 @@ const PromocodeSection = (): JSX.Element => {
           Get <strong>10%</strong> off with our WIN4IK promocode or{' '}
           <strong>20%</strong> with promocode RSSCHOOl.
         </p>
-        <button className="promocode-section__info-button" type="button">
-          <img src={coupon} width="200" alt="coupon" />
-        </button>
-        <button className="promocode-section__info-button" type="button">
-          <img src={rss} width="200" alt="coupon" />
-        </button>
+        <div className="promocode-section__buttons">
+          <button className="promocode-section__info-button" type="button">
+            <img src={coupon} width="200" alt="coupon" />
+          </button>
+          <button className="promocode-section__info-button" type="button">
+            <img src={rss} width="200" alt="coupon" />
+          </button>
+        </div>
       </div>
     </section>
   );

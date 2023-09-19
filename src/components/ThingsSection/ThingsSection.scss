@@ -39,7 +39,7 @@
       margin: 12rem 0 1rem 0;
     }
     @include media-small-tablet {
-      margin: 11rem 0 1rem 0;
+      margin: 12rem 0 1rem 0;
     }
     @include media-big-mobile {
       max-width: 50rem;
@@ -106,9 +106,7 @@
       margin-top: 4rem;
     }
   }
-  @include media-big-laptop {
-    background-size: contain;
-  }
+
   @include media-laptop {
     height: 60rem;
   }
