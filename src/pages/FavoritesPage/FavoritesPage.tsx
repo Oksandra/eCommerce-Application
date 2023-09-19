@@ -5,10 +5,20 @@ import './FavoritesPage.scss';
 import FavoritesPageEmpty from '../../components/FavoritesPageEmpty/FavoritesPageEmpty';
 import { QuantityContext } from '../../hoc/QuantityProvider';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
+import getProducts from '../../api/getProducts';
 
 const FavoritesPage: React.FC = () => {
-  const { favorites } = useContext(QuantityContext);
+  const { favorites, setNewAllProductsWine } = useContext(QuantityContext);
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    getProducts()
+      .then((data) => {
+        return data;
+      })
+      .then((data) => setNewAllProductsWine(data.body.results))
+      .catch((e) => console.log(e));
+  }, []);
 
   return (
     <div
