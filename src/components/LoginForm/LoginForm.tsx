@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState, FC } from 'react';
+import React, { ChangeEvent, FormEvent, useState, FC, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import checkLogin from '../../helpers/checkLogin';
@@ -10,6 +10,8 @@ import {
   getMeCustomer,
   loginCustomerAnonimous,
 } from '../../api/loginCustomer';
+import { getCartCustomer } from '../../api/getCart';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 const loginFormInit: ILoginForm = {
   login: '',
@@ -24,6 +26,7 @@ export const LoginForm: FC = () => {
   const { signin } = useAuth();
   const navigate = useNavigate();
   const [submitError, setSubmitError] = useState<boolean>(false);
+  const { setCount } = useContext(QuantityContext);
 
   function handleChange(e: ChangeEvent<HTMLInputElement>): void {
     setSubmitError(false);
@@ -64,7 +67,14 @@ export const LoginForm: FC = () => {
           localStorage.setItem('userWin4ik', user);
           localStorage.removeItem('anonimTokenWin4ik');
           localStorage.removeItem('tokenWin4ik');
-          getMeCustomer(loginForm.login, loginForm.password);
+          getMeCustomer(loginForm.login, loginForm.password).then(() => {
+            getCartCustomer()
+              .then((obj) => {
+                localStorage.setItem('idCartWin4ik', obj.body.id);
+                setCount(obj.body.totalLineItemQuantity);
+              })
+              .catch((error) => console.log(error));
+          });
         })
         .catch(() => {
           setSubmitError(true);
@@ -77,7 +87,14 @@ export const LoginForm: FC = () => {
         localStorage.setItem('userWin4ik', user);
         localStorage.removeItem('anonimTokenWin4ik');
         localStorage.removeItem('tokenWin4ik');
-        getMeCustomer(loginForm.login, loginForm.password);
+        getMeCustomer(loginForm.login, loginForm.password).then(() => {
+          getCartCustomer()
+            .then((obj) => {
+              localStorage.setItem('idCartWin4ik', obj.body.id);
+              setCount(obj.body.totalLineItemQuantity);
+            })
+            .catch((error) => console.log(error));
+        });
       })
       .catch(() => {
         setSubmitError(true);
