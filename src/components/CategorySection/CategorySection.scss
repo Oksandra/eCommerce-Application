@@ -43,6 +43,7 @@
   &__item {
     width: 265px;
     height: 404px;
+    position: relative;
     @include media-small-laptop {
       width: 150px;
       height: 220px;
@@ -67,6 +68,29 @@
 
     &_rose {
       background-image: url('../../assets/images/rose-main.png');
+    }
+  }
+
+  &__text {
+    color: $add-dark-color;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 3rem;
+    padding: 2rem 0;
+    width: 20rem;
+    background-color: $light-color;
+    border: 1px solid $add-dark-color;
+    text-align: center;
+    @include media-small-laptop {
+      width: 13rem;
+      font-size: 1.5rem;
+      left: 1rem;
+      padding: 1rem 0;
+    }
+    @include media-tablet {
+      bottom: 4rem;
+      left: 2rem;
     }
   }
 }
