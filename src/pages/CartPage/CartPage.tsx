@@ -24,7 +24,7 @@ const CartPage: React.FC = () => {
   const [isLoading, setIsloading] = useState<boolean>(true);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
   const promocodeApplied = localStorage.getItem('promocodeWin4ik') as string;
-  const [promocode, setPromocode] = useState(promocodeApplied);
+  const [promocode, setPromocode] = useState(promocodeApplied || '');
   const [isDisabled, setDisabled] = useState(true);
   const [discountCode, setDiscountCode] = useState<
     DiscountCodeInfo[] | undefined
@@ -72,6 +72,7 @@ const CartPage: React.FC = () => {
     const versionNumber = Number(localStorage.getItem('versionWin4ik'));
     const id = localStorage.getItem('idCartWin4ik');
     const idLine = idProd;
+    if (count < 0) return;
     changeCountProduct(id as string, versionNumber, idLine, count)
       .then((data) => {
         localStorage.setItem('versionWin4ik', String(data.body.version));
