@@ -7,7 +7,7 @@ type QuantityProviderProps = {
 };
 
 export const QuantityContext = createContext<QuantityContextProps>({
-  quantity: undefined,
+  quantity: null,
   setCount: () => {},
   favorites: [],
   setNewFavotites: () => {},
@@ -16,8 +16,8 @@ export const QuantityContext = createContext<QuantityContextProps>({
 });
 
 export interface QuantityContextProps {
-  quantity: number | undefined;
-  setCount: (newQuantity: number | undefined) => void;
+  quantity: number | null;
+  setCount: (newQuantity: number | null) => void;
   favorites: ProductProjection[];
   setNewFavotites: (newFavotites: ProductProjection[]) => void;
   allProductsWine: ProductProjection[];
@@ -27,7 +27,11 @@ export interface QuantityContextProps {
 export const QuantityProvider: React.FC<QuantityProviderProps> = ({
   children,
 }) => {
-  const [quantity, setQuantity] = useState<undefined | number>();
+  const [quantity, setQuantity] = useState<null | number>(
+    Number(localStorage.getItem('countProductsWin4ik'))
+      ? Number(localStorage.getItem('countProductsWin4ik'))
+      : null
+  );
   const [favorites, setFavotites] = useState<ProductProjection[]>(
     localStorage.getItem('favoritesWin4ik')
       ? JSON.parse(localStorage.getItem('favoritesWin4ik') as string)
@@ -37,8 +41,9 @@ export const QuantityProvider: React.FC<QuantityProviderProps> = ({
     []
   );
 
-  const setCount = (newQuantity: number | undefined): void => {
+  const setCount = (newQuantity: number | null): void => {
     setQuantity(newQuantity);
+    localStorage.setItem('countProductsWin4ik', String(newQuantity));
   };
 
   const setNewFavotites = (newFavotites: ProductProjection[]): void => {

@@ -71,7 +71,7 @@ export const LoginForm: FC = () => {
             getCartCustomer()
               .then((obj) => {
                 localStorage.setItem('idCartWin4ik', obj.body.id);
-                setCount(obj.body.totalLineItemQuantity);
+                setCount(obj.body.totalLineItemQuantity as number);
               })
               .catch((error) => console.log(error));
           });
@@ -91,7 +91,7 @@ export const LoginForm: FC = () => {
           getCartCustomer()
             .then((obj) => {
               localStorage.setItem('idCartWin4ik', obj.body.id);
-              setCount(obj.body.totalLineItemQuantity);
+              setCount(obj.body.totalLineItemQuantity as number);
             })
             .catch((error) => console.log(error));
         });
