@@ -41,6 +41,11 @@ const CartPage: React.FC = () => {
       removeProductFromCart(idCart as string, version, lineItemId)
         .then((obj) => {
           setTotalPrice(obj.body.totalPrice.centAmount);
+          if (obj.body.totalLineItemQuantity) {
+            setCount(obj.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           localStorage.setItem('versionWin4ik', String(obj.body.version));
         })
         .catch((e) => console.log(e));
@@ -49,6 +54,11 @@ const CartPage: React.FC = () => {
       removeProductFromCartAnonimous(idCart as string, version, lineItemId)
         .then((resp) => {
           setTotalPrice(resp.body.totalPrice.centAmount);
+          if (resp.body.totalLineItemQuantity) {
+            setCount(resp.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           localStorage.setItem('versionWin4ik', String(resp.body.version));
         })
         .catch((e) => console.log(e));
@@ -58,12 +68,13 @@ const CartPage: React.FC = () => {
   const removeCart = (): void => {
     const version = Number(localStorage.getItem('versionWin4ik'));
     const idCart = localStorage.getItem('idCartWin4ik');
-    setCount(undefined);
+    setCount(null);
     setCartEmpty(true);
     deleteCart(idCart as string, version)
       .then(() => {
         localStorage.removeItem('idCartWin4ik');
         localStorage.removeItem('promocodeWin4ik');
+        localStorage.removeItem('countProductsWin4ik');
       })
       .catch((e) => console.log(e));
   };
@@ -85,7 +96,7 @@ const CartPage: React.FC = () => {
     if ((!cartId && !user) || (user && !cartId)) {
       setIsloading(false);
       setCartEmpty(true);
-      setCount(undefined);
+      setCount(null);
     }
   }, []);
 
@@ -99,7 +110,11 @@ const CartPage: React.FC = () => {
           setDiscountCode(data.body.discountCodes);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
-          setCount(data.body.totalLineItemQuantity as number);
+          if (data.body.totalLineItemQuantity) {
+            setCount(data.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           return data.body.lineItems;
         })
         .then((data) => {
@@ -123,7 +138,11 @@ const CartPage: React.FC = () => {
           setTotalCount(data.body.totalLineItemQuantity);
           localStorage.setItem('versionWin4ik', String(data.body.version));
           localStorage.setItem('idCartWin4ik', data.body.id);
-          setCount(data.body.totalLineItemQuantity as number);
+          if (data.body.totalLineItemQuantity) {
+            setCount(data.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           return data.body.lineItems;
         })
         .then((data) => {

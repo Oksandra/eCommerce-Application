@@ -55,7 +55,11 @@ const ProductPage: React.FC = () => {
         if (idCustomer && idCart) {
           getCartCustomer().then((obj) => {
             const products = obj.body.lineItems;
-            setCount(obj.body.totalLineItemQuantity as number);
+            if (obj.body.totalLineItemQuantity) {
+              setCount(obj.body.totalLineItemQuantity);
+            } else {
+              setCount(null);
+            }
             products.forEach((item) => {
               if (item.productId === id) {
                 setInCart(true);
@@ -68,7 +72,11 @@ const ProductPage: React.FC = () => {
         }
         if (!idCustomer && idCart) {
           getCart(idCart).then((resp) => {
-            setCount(resp.body.totalLineItemQuantity as number);
+            if (resp.body.totalLineItemQuantity) {
+              setCount(resp.body.totalLineItemQuantity);
+            } else {
+              setCount(null);
+            }
             const products = resp.body.lineItems;
             products.forEach((item) => {
               if (item.productId === id) {

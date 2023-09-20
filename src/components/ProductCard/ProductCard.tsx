@@ -41,7 +41,11 @@ export const ProductCard: FC<ProductCardProps> = ({
     const id = localStorage.getItem('userWin4ik') as string;
     if (idCartLS && !id) {
       getCart(idCartLS).then((obj) => {
-        setCount(obj.body.totalLineItemQuantity as number);
+        if (obj.body.totalLineItemQuantity) {
+          setCount(obj.body.totalLineItemQuantity);
+        } else {
+          setCount(null);
+        }
         setVersion(obj.body.version);
         localStorage.setItem('versionWin4ik', `${obj.body.version}`);
         const products = obj.body.lineItems;
@@ -55,7 +59,11 @@ export const ProductCard: FC<ProductCardProps> = ({
     if (idCartLS && id) {
       getCartCustomer()
         .then((obj) => {
-          setCount(obj.body.totalLineItemQuantity as number);
+          if (obj.body.totalLineItemQuantity) {
+            setCount(obj.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           setVersion(obj.body.version);
           localStorage.setItem('versionWin4ik', `${obj.body.version}`);
           localStorage.setItem('idCartWin4ik', obj.body.id);
@@ -76,7 +84,11 @@ export const ProductCard: FC<ProductCardProps> = ({
     if (id) {
       getCartCustomer()
         .then((obj) => {
-          setCount(obj.body.totalLineItemQuantity as number);
+          if (obj.body.totalLineItemQuantity) {
+            setCount(obj.body.totalLineItemQuantity);
+          } else {
+            setCount(null);
+          }
           setVersion(obj.body.version);
           localStorage.setItem('versionWin4ik', `${obj.body.version}`);
           localStorage.setItem('idCartWin4ik', obj.body.id);
