@@ -5,6 +5,7 @@ export interface ButtonOptions {
   textContent: string;
   type: 'button' | 'submit';
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export interface AuthContextProps {
@@ -53,6 +54,7 @@ export interface Customer {
   defaultBillingAddress?: number;
   defaultShippingAddress?: number;
 }
+
 export interface UserLogin {
   username: string;
   password: string;

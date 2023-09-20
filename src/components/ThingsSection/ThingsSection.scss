@@ -3,7 +3,7 @@
 @import '../../styles/abstracts/extends';
 
 .things {
-  height: 90rem;
+  height: 80rem;
   background: url(../../assets/images/things_bg.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -39,7 +39,7 @@
       margin: 12rem 0 1rem 0;
     }
     @include media-small-tablet {
-      margin: 11rem 0 1rem 0;
+      margin: 12rem 0 1rem 0;
     }
     @include media-big-mobile {
       max-width: 50rem;
@@ -106,7 +106,23 @@
       margin-top: 4rem;
     }
   }
-  @include media-big-laptop {
-    background-size: contain;
+
+  @include media-laptop {
+    height: 60rem;
+  }
+  @include media-small-laptop {
+    height: 51rem;
+  }
+  @include media-tablet {
+    height: 54rem;
+  }
+  @include media-small-tablet {
+    height: 50rem;
+  }
+  @include media-big-mobile {
+    height: 40rem;
+  }
+  @include media-mobile {
+    height: 32rem;
   }
 }

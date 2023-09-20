@@ -1,0 +1,19 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.favorites-empty {
+  @extend %flex-center-cont;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+
+  & h2 {
+    margin-bottom: 2rem;
+  }
+
+  &__text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+  }
+}

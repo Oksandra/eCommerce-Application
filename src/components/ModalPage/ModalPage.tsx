@@ -1,5 +1,5 @@
 import React from 'react';
-import './ModalProductPage.scss';
+import './ModalPage.scss';
 
 interface ModalProductPageProps {
   active: boolean;

@@ -2,17 +2,19 @@ import {
   ClientResponse,
   ProductProjectionPagedQueryResponse,
 } from '@commercetools/platform-sdk';
-import apiRoot from '../sdk/client';
+import { apiRoot } from '../sdk/client';
 
 const searchProductsByKeyword = (
-  text: string
+  text: string,
+  page: number
 ): Promise<ClientResponse<ProductProjectionPagedQueryResponse>> => {
   return apiRoot
     .productProjections()
     .search()
     .get({
       queryArgs: {
-        limit: 100,
+        limit: 6,
+        offset: page,
         fuzzy: true,
         'text.en-US': text,
       },

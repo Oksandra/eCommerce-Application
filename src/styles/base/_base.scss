@@ -33,6 +33,12 @@ h1 {
   }
 }
 
+h2 {
+  font-size: 4.5rem;
+  color: $add-dark-color;
+  font-weight: 800;
+}
+
 h3 {
   font-size: 4rem;
   color: $add-dark-color;
@@ -52,4 +58,8 @@ h3 {
 
 .crossed {
   text-decoration: line-through;
+}
+
+.discount-price {
+  color: $color-sale;
 }

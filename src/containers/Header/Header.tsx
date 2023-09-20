@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Header.scss';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/svg/logo.svg';
@@ -9,6 +9,7 @@ import { Nav } from '../../components/Nav/Nav';
 import { HeaderContext } from './HeaderContext';
 import { Burger } from '../../components/Burger/Burger';
 import { useAuth } from '../../hooks/useAuth';
+import { QuantityContext } from '../../hoc/QuantityProvider';
 
 interface HeaderProps {
   value: string;
@@ -16,6 +17,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ value }) => {
   const { user } = useAuth();
+  const { quantity } = useContext(QuantityContext);
   const [screenWidth, setScreenWidth] = useState<number>(
     window.screen.availWidth
   );
@@ -43,7 +45,10 @@ const Header: React.FC<HeaderProps> = ({ value }) => {
                 <img src={heart} alt="Favorites" />
               </Link>
               <Link className="header__links" to="/cart">
-                <img src={cart} alt="Cart" />
+                <div className="cart-container">
+                  <img src={cart} alt="Cart" />
+                  {quantity && <span className="cart-counter">{quantity}</span>}
+                </div>
               </Link>
               {screenWidth < 455 && <Burger state={setIsBurgerActive} />}
             </div>

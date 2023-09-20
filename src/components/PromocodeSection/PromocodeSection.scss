@@ -1,0 +1,68 @@
+@import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
+.promocode-section {
+  padding: 4rem 0;
+  @extend %flex-center-cont;
+  &__main-image {
+    max-width: 50%;
+    height: 50%;
+    @include media-laptop {
+      max-width: 45%;
+    }
+    @include media-tablet {
+      max-width: 45%;
+    }
+    @include media-small-tablet {
+      max-height: auto;
+    }
+  }
+  &__info {
+    width: 35%;
+    padding: 0.5rem 2rem;
+    margin-top: 1rem;
+    @include media-laptop {
+      width: 40%;
+      padding: 0.5rem 2rem;
+      margin-top: 0;
+    }
+    @include media-tablet {
+      padding: 2rem;
+    }
+    @include media-small-tablet {
+      width: 40%;
+      padding: 0.5rem 2rem;
+      margin-top: 0;
+    }
+    &-text {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+      @include media-laptop {
+        font-size: 2.5rem;
+      }
+      @include media-big-tablet {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      @include media-big-mobile {
+        font-size: 2rem;
+      }
+      @include media-mobile {
+        font-size: 1.5rem;
+      }
+    }
+    &-button {
+      width: 40%;
+      @extend %flex;
+      margin: 0 auto;
+      margin-top: 2rem;
+      @include media-laptop {
+        margin-top: 0.5rem;
+      }
+      @include media-big-mobile {
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

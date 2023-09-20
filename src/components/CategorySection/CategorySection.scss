@@ -1,0 +1,96 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.category {
+  background-color: $add-dark-color;
+  margin-bottom: 2rem;
+
+  &__wrapper {
+    @extend %flex-center-cont;
+    align-items: center;
+    flex-direction: column;
+    padding: 8rem 1rem 6rem;
+    max-width: $wrapper-width;
+    margin: 0 auto;
+    @include media-tablet {
+      padding: 6rem 1rem 1rem;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    color: $light-color;
+    font-weight: 400;
+    margin-bottom: 4rem;
+  }
+
+  &__items {
+    @extend %flex-j-cont;
+    max-width: $wrapper-width;
+    padding: 0 1rem;
+    column-gap: 2.5rem;
+    @include media-laptop {
+      flex-wrap: wrap;
+      row-gap: 2.5rem;
+      justify-content: center;
+    }
+    @include media-tablet {
+      row-gap: 1.5rem;
+    }
+  }
+
+  &__item {
+    width: 265px;
+    height: 404px;
+    position: relative;
+    @include media-small-laptop {
+      width: 150px;
+      height: 220px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    @include media-tablet {
+      width: 120px;
+      height: 200px;
+    }
+    &_red {
+      background-image: url('../../assets/images/red-main.png');
+    }
+
+    &_white {
+      background-image: url('../../assets/images/white-main.png');
+    }
+
+    &_sparkling {
+      background-image: url('../../assets/images/sparkling-main.png');
+    }
+
+    &_rose {
+      background-image: url('../../assets/images/rose-main.png');
+    }
+  }
+
+  &__text {
+    color: $add-dark-color;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 3rem;
+    padding: 2rem 0;
+    width: 20rem;
+    background-color: $light-color;
+    border: 1px solid $add-dark-color;
+    text-align: center;
+    @include media-small-laptop {
+      width: 13rem;
+      font-size: 1.5rem;
+      left: 1rem;
+      padding: 1rem 0;
+    }
+    @include media-tablet {
+      bottom: 4rem;
+      left: 2rem;
+    }
+  }
+}
