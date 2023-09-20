@@ -1,0 +1,27 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.logout {
+  @extend %flex-center-cont;
+  align-items: center;
+  font-size: 2.8rem;
+  margin: 0 auto;
+  &__title {
+    margin-right: 1rem;
+  }
+  &__button {
+    font-size: 1.6rem;
+    padding: 1.3rem 2.8rem;
+    color: $light-color;
+    background-color: $background-color;
+    @include button($dark-color);
+    @include media-small-tablet {
+      padding: 1rem;
+      font-size: 1.4rem;
+    }
+  }
+  @include media-small-tablet {
+    font-size: 2rem;
+  }
+}

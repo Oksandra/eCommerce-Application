@@ -1,0 +1,65 @@
+@import '../abstracts/extends';
+@import '../../styles/abstracts/mixins';
+
+body {
+  font-family: 'Marcellus', Georgia, serif;
+}
+
+html {
+  font-size: 10px;
+  @include media-tablet {
+    font-size: 7px;
+  }
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  @extend %flex-j-cont;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 9.6rem;
+  color: $light-color;
+  @include media-laptop {
+    font-size: 8rem;
+  }
+  @include media-small-laptop {
+    font-size: 6rem;
+  }
+  @include media-big-mobile {
+    font-size: 3rem;
+  }
+}
+
+h2 {
+  font-size: 4.5rem;
+  color: $add-dark-color;
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 4rem;
+  color: $add-dark-color;
+  font-weight: 800;
+}
+
+.sale-price {
+  color: $color-sale;
+  font-size: 3.5rem;
+  margin-left: 3rem;
+  &_card {
+    font-size: 2.2rem;
+    margin-left: 2rem;
+    color: $color-sale;
+  }
+}
+
+.crossed {
+  text-decoration: line-through;
+}
+
+.discount-price {
+  color: $color-sale;
+}

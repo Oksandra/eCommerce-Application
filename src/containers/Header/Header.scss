@@ -1,0 +1,61 @@
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+@import '../../styles/abstracts/mixins';
+
+.header {
+  background-color: $background-color;
+  &__wrapper {
+    padding: 1.2rem 1.5rem 0;
+    max-width: $wrapper-width;
+    margin: 0 auto;
+  }
+  &__logo {
+    @extend %flex-j-cont;
+    padding-bottom: 1rem;
+    align-items: center;
+  }
+  &__links {
+    margin-right: 1.2rem;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+    & img {
+      width: 2.5rem;
+      transition: all 0.3s ease-out;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  &.transperent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+  }
+}
+
+.cart-container {
+  position: relative;
+  display: inline;
+  @include media-big-mobile {
+    margin-right: 1rem;
+  }
+}
+
+.cart-counter {
+  @extend %flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  color: #ffffff;
+  position: absolute;
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: $button-color;
+  border-radius: 50%;
+  left: 70%;
+  top: 80%;
+}

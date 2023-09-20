@@ -1,0 +1,128 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.things {
+  height: 80rem;
+  background: url(../../assets/images/things_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  &__wrapper {
+    @extend %flex-center-cont;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.2rem 1rem 0;
+    max-width: $wrapper-width;
+    margin: 0 auto;
+  }
+  &__title {
+    max-width: 70rem;
+    line-height: 140%;
+    text-align: right;
+    margin: 20rem 0 4rem 0;
+    @include media-big-laptop {
+      margin: 10rem 0 4rem 0;
+    }
+    @include media-laptop {
+      margin: 10rem 0 3rem 0;
+      line-height: 130%;
+    }
+    @include media-small-laptop {
+      margin: 12rem 0 1rem 0;
+      max-width: 60rem;
+      line-height: 120%;
+    }
+    @include media-big-tablet {
+      margin: 10rem 0 1rem 0;
+    }
+    @include media-tablet {
+      margin: 12rem 0 1rem 0;
+    }
+    @include media-small-tablet {
+      margin: 12rem 0 1rem 0;
+    }
+    @include media-big-mobile {
+      max-width: 50rem;
+      margin: 12rem 0 1rem 0;
+    }
+    @include media-mobile {
+      margin: 8rem 0 1rem 0;
+    }
+  }
+  &__text {
+    font-size: 3.2rem;
+    color: $muted-color;
+    text-align: right;
+    width: 70rem;
+    @include media-laptop {
+      font-size: 2.8rem;
+    }
+    @include media-small-laptop {
+      font-size: 2.3rem;
+      width: 60rem;
+    }
+    @include media-big-mobile {
+      font-size: 2rem;
+      width: auto;
+    }
+  }
+  &__button {
+    font-size: 1.6rem;
+    font-family: 'Montserrat', Georgia, serif;
+    width: 20rem;
+    height: 6rem;
+    color: $light-color;
+    background-color: $button-color;
+    @include button($button-hover-color);
+    @include media-laptop {
+      width: 18rem;
+      height: 5rem;
+    }
+    @include media-small-laptop {
+      width: 17rem;
+      height: 4.5rem;
+    }
+    @include media-big-mobile {
+      width: 15rem;
+      height: 4rem;
+    }
+  }
+  &__buttons {
+    @extend %flex-j-cont;
+    max-width: 57rem;
+    width: 100%;
+    margin-top: 6rem;
+    @include media-laptop {
+      margin-top: 3rem;
+    }
+    @include media-small-laptop {
+      margin-top: 1.5rem;
+    }
+    @include media-big-mobile {
+      max-width: 40rem;
+      margin-top: 2rem;
+    }
+    @include media-mobile {
+      margin-top: 4rem;
+    }
+  }
+
+  @include media-laptop {
+    height: 60rem;
+  }
+  @include media-small-laptop {
+    height: 51rem;
+  }
+  @include media-tablet {
+    height: 54rem;
+  }
+  @include media-small-tablet {
+    height: 50rem;
+  }
+  @include media-big-mobile {
+    height: 40rem;
+  }
+  @include media-mobile {
+    height: 32rem;
+  }
+}

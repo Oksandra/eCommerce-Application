@@ -1,0 +1,55 @@
+@import '../../styles/abstracts/mixins';
+@import '../../styles/abstracts/constants';
+@import '../../styles/abstracts/extends';
+
+.catalog {
+  @extend %flex;
+  align-items: flex-end;
+  flex-direction: column;
+  max-width: 111rem;
+  margin: 0 auto;
+  padding: 1.2rem 1rem 1rem;
+  min-height: 80vh;
+  &__wrapper {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 90rem;
+    margin: 0 auto;
+    grid-gap: 1rem;
+
+    @include media-laptop {
+      grid-template-columns: repeat(2, 30rem);
+      column-gap: 8%;
+    }
+    @include media-big-mobile {
+      grid-template-columns: repeat(1, 30rem);
+    }
+
+    &.empty {
+      display: flex;
+      @extend %flex-center-cont;
+      min-height: 65vh;
+      align-items: center;
+    }
+  }
+  &-page {
+    @extend %flex;
+    margin: 0 auto;
+    max-width: 120rem;
+    @include media-small-laptop {
+      flex-direction: column;
+    }
+  }
+}
+
+.search-wrapper {
+  margin-bottom: 2rem;
+  min-width: 63vw;
+  display: flex;
+  justify-content: flex-end;
+  @include media-big-mobile {
+    justify-content: center;
+  }
+}
