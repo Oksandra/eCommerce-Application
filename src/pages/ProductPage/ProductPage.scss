@@ -15,6 +15,7 @@
     height: 30rem;
     &_big {
       height: 50rem;
+      margin: 0 auto;
       @include media-big-mobile {
         height: 40rem;
       }

@@ -13,11 +13,11 @@ import {
 const oauthUri = 'https://auth.europe-west1.gcp.commercetools.com';
 const baseUri = 'https://api.europe-west1.gcp.commercetools.com';
 const credentials = {
-  clientId: 'U_dKA1aIeI2QrDLPSYglNmQ4',
-  clientSecret: 'ddPY7bXFPhdMw3v_v06R_pIqDmooV-Ia',
+  clientId: 'X991W_0pKsACOTd3Xf-Fz51Q',
+  clientSecret: 'dIR2AiYDJZKvmQDggqvxDFBgz2r2piSf',
 };
-const projectKeyApi = 'ecommerce-application3';
-const scopesAll = ['manage_project:ecommerce-application3'];
+const projectKeyApi = 'code-da-win4ik';
+const scopesAll = ['manage_project:code-da-win4ik'];
 
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: oauthUri,

@@ -22,60 +22,60 @@ const Filtr: React.FC<FiltrProps> = ({
     <aside className="categories">
       <div className="categories__title">CATEGORIES</div>
       <button
-        id="0f78b7da-5e69-4600-a8a0-2083bc4d173a"
+        id="ce4b4eb5-225b-4ca2-8906-6cb9a056a72b"
         className={
-          idCategory === '0f78b7da-5e69-4600-a8a0-2083bc4d173a'
+          idCategory === 'ce4b4eb5-225b-4ca2-8906-6cb9a056a72b'
             ? 'categories__button active'
             : 'categories__button'
         }
         type="button"
         onClick={(): void => {
-          onChangeCategory('0f78b7da-5e69-4600-a8a0-2083bc4d173a');
+          onChangeCategory('ce4b4eb5-225b-4ca2-8906-6cb9a056a72b');
           clearSearch();
         }}
       >
         Sparkling wines
       </button>
       <button
-        id="96e7295c-116f-409d-8b66-faeb0238964d"
+        id="783c7a0b-1e1f-4260-bcf9-f220447d3ca9"
         className={
-          idCategory === '96e7295c-116f-409d-8b66-faeb0238964d'
+          idCategory === '783c7a0b-1e1f-4260-bcf9-f220447d3ca9'
             ? 'categories__button active'
             : 'categories__button'
         }
         type="button"
         onClick={(): void => {
-          onChangeCategory('96e7295c-116f-409d-8b66-faeb0238964d');
+          onChangeCategory('783c7a0b-1e1f-4260-bcf9-f220447d3ca9');
           clearSearch();
         }}
       >
         Red Wines
       </button>
       <button
-        id="6b625304-5b48-44fb-b675-ab852dd4f831"
+        id="18557a81-7049-48c9-83a5-1face36a1af8"
         className={
-          idCategory === '6b625304-5b48-44fb-b675-ab852dd4f831'
+          idCategory === '18557a81-7049-48c9-83a5-1face36a1af8'
             ? 'categories__button active'
             : 'categories__button'
         }
         type="button"
         onClick={(): void => {
-          onChangeCategory('6b625304-5b48-44fb-b675-ab852dd4f831');
+          onChangeCategory('18557a81-7049-48c9-83a5-1face36a1af8');
           clearSearch();
         }}
       >
         White Wines
       </button>
       <button
-        id="57ce0b9c-ff63-4a17-a906-4f87f9069c9c"
+        id="1a98660a-7154-4ea9-b0f0-571e82f216c1"
         className={
-          idCategory === '57ce0b9c-ff63-4a17-a906-4f87f9069c9c'
+          idCategory === '1a98660a-7154-4ea9-b0f0-571e82f216c1'
             ? 'categories__button active'
             : 'categories__button'
         }
         type="button"
         onClick={(): void => {
-          onChangeCategory('57ce0b9c-ff63-4a17-a906-4f87f9069c9c');
+          onChangeCategory('1a98660a-7154-4ea9-b0f0-571e82f216c1');
           clearSearch();
         }}
       >

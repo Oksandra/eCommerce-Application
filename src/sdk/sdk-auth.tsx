@@ -13,10 +13,10 @@ const authClient = new SdkAuth({
   projectKey: projectKeyApi,
   disableRefreshToken: false,
   credentials: {
-    clientId: 'U_dKA1aIeI2QrDLPSYglNmQ4',
-    clientSecret: 'ddPY7bXFPhdMw3v_v06R_pIqDmooV-Ia',
+    clientId: 'X991W_0pKsACOTd3Xf-Fz51Q',
+    clientSecret: 'dIR2AiYDJZKvmQDggqvxDFBgz2r2piSf',
   },
-  scopes: ['manage_project:ecommerce-application3'],
+  scopes: ['manage_project:code-da-win4ik'],
   fetch,
 });
 
